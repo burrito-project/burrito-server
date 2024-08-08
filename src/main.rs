@@ -1,101 +1,46 @@
-use bus_stops::BusStopInfo;
-use rocket::fs::{FileServer, relative};
-use rocket::serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use std::sync::Mutex;
-use std::time::SystemTime;
-use rocket::{Request, Response};
-use rocket::http::Header;
-use rocket::fairing::{Fairing, Info, Kind};
+use serde_json::json;
+use bus_stops::BusStopInfo;
+use entities::burrito_state_record::BurritoStateRecord;
 
 #[macro_use] extern crate rocket;
 
-use rocket_dyn_templates::Template;
-
-mod velocity;
-mod position;
 mod bus_stops;
-
-#[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
-}
-
-#[get("/mainpage")]
-fn longlaoshi_main_page() -> Template {
-    // Status::NoContent
-    let mut context = HashMap::new();
-    context.insert("hi","These are the static files c:");
-    Template::render("index", &context)
-}
-
-#[derive(Debug, Deserialize, Serialize, Clone)]
-pub struct Message {
-    lt: f64,
-    lg: f64,
-    sts: i32,
-    #[serde(skip_deserializing)]
-    timestamp: Option<SystemTime>,
-    #[serde(skip_deserializing)]
-    velocity: f64,
-}
+mod routes;
+mod cors;
+mod entities;
+mod utils;
 
 #[derive(Default)]
-pub struct BurritoState {
-    messages: Mutex<Vec<Message>>,
+pub struct AppState {
+    messages: Mutex<Vec<BurritoStateRecord>>,
     last_stop: Mutex<Option<BusStopInfo>>,
 }
 
-#[get("/loaderio-d0a8891a0d5f032a78809dc8605c4530")]
-fn testing() -> String{
-    "loaderio-d0a8891a0d5f032a78809dc8605c4530".to_string()
+#[get("/")]
+fn index() -> serde_json::Value {
+    let routes = vec!["/status/?count=<n>"];
+
+    json!({
+        "message": "Welcome to the UNMSM burrito tracker API",
+        "routes": routes,
+    })
 }
 
-// CORS thing
-pub struct CORS;
-
-#[rocket::async_trait]
-impl Fairing for CORS {
-    fn info(&self) -> Info {
-        Info {
-            name: "Add CORS headers to responses",
-            kind: Kind::Response
-        }
-    }
-
-    async fn on_response<'r>(&self, _request: &'r Request<'_>, response: &mut Response<'r>) {
-        response.set_header(Header::new("Access-Control-Allow-Origin", "*"));
-        response.set_header(Header::new("Access-Control-Allow-Methods", "POST, GET, PATCH, OPTIONS"));
-        response.set_header(Header::new("Access-Control-Allow-Headers", "*"));
-        response.set_header(Header::new("Access-Control-Allow-Credentials", "true"));
-    }
+#[catch(404)]
+fn not_found() -> serde_json::Value {
+    json!({
+        "message": "That's a certified 404 classic. Lost? Try /help",
+    })
 }
 
-#[cfg(feature = "shuttle")]
-#[shuttle_runtime::main]
-async fn main() -> shuttle_rocket::ShuttleRocket {
-    let rocket = rocket::build()
-        .mount("/", routes![index, testing, longlaoshi_main_page])
-        .mount("/", position::routes())
-        .mount("/", velocity::routes())
-        .mount("/static", FileServer::from(relative!("static")))
-        .attach(CORS)
-        .attach(Template::fairing())
-        .manage(BurritoState::default());
-
-    Ok(rocket.into())
-}
-
-// Run without shuttle:
-#[cfg(not(feature = "shuttle"))]
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-    .mount("/", routes![index, testing, longlaoshi_main_page])
-    .mount("/", position::routes())
-    .mount("/", velocity::routes())
-    .mount("/static", FileServer::from(relative!("static")))
-    .attach(CORS)
-    .attach(Template::fairing())
-    .manage(BurritoState::default())
+        .mount("/", routes![index])
+        .mount("/", routes::status::routes())
+        .register("/", catchers![not_found])
+        .mount("/help", routes![index])
+        .attach(cors::Cors)
+        .manage(AppState::default())
 }

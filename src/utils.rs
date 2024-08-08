@@ -1,17 +1,9 @@
 use std::time::Duration;
 use geo::GeodesicDistance;
-use rocket::{http::Status, Route};
-use crate::Message;
-use rocket::State;
-use rocket::serde::json::{json, Value};
 
-use crate::BurritoState;
+use crate::BurritoStateRecord;
 
-pub fn routes() -> Vec<Route> {
-    routes![get_velocity]
-}
-
-pub fn calculate_velocity_kmph(positions: &[Message]) -> f64 {
+pub fn calculate_velocity_kmph(positions: &[BurritoStateRecord]) -> f64 {
     if positions.len() < 2 {
         return 0.0;
     }
@@ -48,17 +40,4 @@ pub fn calculate_velocity_kmph(positions: &[Message]) -> f64 {
     // km/h
     let velocity = total_distance / total_time.as_secs() as f64;
     velocity * 3.6
-}
-
-#[get("/get-velocity")]
-fn get_velocity(state: &State<BurritoState>) -> Result<Value, Status> {
-    let messages = state.messages.lock().unwrap();
-    if messages.is_empty() {
-        return Err(Status::InternalServerError);
-    }
-
-    let velocity = calculate_velocity_kmph(&messages);
-    Ok(json!({
-        "velocity": velocity,
-    }))
 }

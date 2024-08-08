@@ -4,17 +4,22 @@ use rocket::http::Status;
 use rocket::serde::json::Json;
 use rocket::{Route, State};
 
+use crate::utils;
+use crate::AppState;
+use crate::BurritoStateRecord;
+use crate::entities::service_state::BusServiceState;
 use crate::bus_stops::{get_bus_stop_for_point, get_distance_to_bus_stop, get_next_bus_stop, LatLng};
-use crate::BurritoState;
-use crate::Message;
-use crate::velocity::calculate_velocity_kmph;
 
 pub fn routes() -> Vec<Route> {
-    routes![get_position, give_position, handle_options_request]
+    routes![get_position, give_position]
 }
 
-#[get("/get-position/<count>")]
-fn get_position(count: usize, state: &State<BurritoState>) -> Result<Value, Status> {
+const DEFAULT_COUNT: usize = 100;
+
+#[get("/?<count>")]
+fn get_position(count: Option<usize>, state: &State<AppState>) -> Result<Value, Status> {
+    let count = count.unwrap_or(DEFAULT_COUNT);
+
     let messages = state.messages.lock().unwrap();
     let last_stop = state.last_stop.lock().unwrap();
 
@@ -22,42 +27,33 @@ fn get_position(count: usize, state: &State<BurritoState>) -> Result<Value, Stat
 
     match messages.last() {
         Some(last) => {
-            /*
-            status {
-                0: en ruta
-                1: fuera de servicio
-                2: en descanso
-                3: accidente
-                4: apagado
-            }
-            */
             let is_off = last.sts == 1 || last.sts == 2 || last.sts == 3;
 
             // If the burrito didn't report itself as 1,2 or 3 and it hasn't reported in the last 60 seconds,
             // then we consider it as off
             if !is_off && last.timestamp.unwrap().elapsed().unwrap() > std::time::Duration::from_secs(60) {
                 // We create an 'off' message on the fly
-                let off_message = Message {
+                let off_message = BurritoStateRecord {
                     lt: 0.0,
                     lg: 0.0,
-                    sts: 4, // 4 means OFF
+                    sts: BusServiceState::Off.into(),
                     timestamp: last.timestamp,
                     velocity: 0.0,
                 };
                 let mut messages_cpy = messages.clone();
                 messages_cpy.push(off_message);
                 return Ok(json!({
-                    "positions": messages_cpy.iter().rev().take(n).cloned().collect::<Vec<Message>>(),
+                    "positions": messages_cpy.iter().rev().take(n).cloned().collect::<Vec<BurritoStateRecord>>(),
                     "last_stop": null,
                 }));
             }
         },
         None => {
             return Ok(json!({
-                "positions": vec![Message {
+                "positions": vec![BurritoStateRecord {
                     lt: 0.0,
                     lg: 0.0,
-                    sts: 4, // 4 means OFF
+                    sts: BusServiceState::Off.into(),
                     timestamp: Some(SystemTime::now()),
                     velocity: 0.0,
                 }],
@@ -66,7 +62,7 @@ fn get_position(count: usize, state: &State<BurritoState>) -> Result<Value, Stat
         },
     }
 
-    let recent_messages: Vec<Message> = messages.iter().rev().take(n).cloned().collect();
+    let recent_messages: Vec<BurritoStateRecord> = messages.iter().rev().take(n).cloned().collect();
 
     Ok(json!({
         "positions": recent_messages,
@@ -74,8 +70,8 @@ fn get_position(count: usize, state: &State<BurritoState>) -> Result<Value, Stat
     }))
 }
 
-#[post("/give-position", format = "json", data = "<message_json>")]
-fn give_position(message_json: Json<Message>, state: &State<BurritoState>) -> Status {
+#[post("/", format = "json", data = "<message_json>")]
+fn give_position(message_json: Json<BurritoStateRecord>, state: &State<AppState>) -> Status {
     let mut messages = state.messages.lock().unwrap();
     let mut message = message_json.into_inner();
 
@@ -84,12 +80,6 @@ fn give_position(message_json: Json<Message>, state: &State<BurritoState>) -> St
             let mut last_stop = state.last_stop.lock().unwrap();
             // If there's already last_stop we update it
             *last_stop = Some(this_stop);
-            // if let Some(last_stop) = last_stop.as_mut() {
-            //     if last_stop.number != this_stop.number {
-            //         *last_stop = this_stop;
-            //     }
-            // } else {
-            // }
         },
         None => {
             // If the burrito is not in a bus stop and we have a last_stop (has_reached=true),
@@ -123,17 +113,11 @@ fn give_position(message_json: Json<Message>, state: &State<BurritoState>) -> St
     let mut messages_copy = messages.clone();
     messages_copy.push(message.clone());
 
-    message.velocity = calculate_velocity_kmph(messages_copy.as_slice());
+    message.velocity = utils::calculate_velocity_kmph(messages_copy.as_slice());
 
     messages.push(message);
     if messages.len() > 100 {
         messages.remove(0); // Keep only the latest 100 positions
     }
     Status::Ok
-}
-
-// NO BORRAR POR FAVOR, SI NO, NO FUNCIONA (CORS'S THING)
-#[options("/give-position")]
-fn handle_options_request() -> Status {
-    Status::NoContent
 }
