@@ -1,4 +1,2 @@
 /target
 /.vscode
-.shuttle-storage
-Secrets*.toml
