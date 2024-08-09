@@ -40,8 +40,12 @@ fn get_position(count: Option<usize>, state: &State<AppState>) -> Result<Value, 
                     timestamp: last.timestamp,
                     velocity: 0.0,
                 };
+
                 let mut messages_cpy = messages.clone();
                 messages_cpy.push(off_message);
+                // set last_stop to None
+                *state.last_stop.lock().unwrap() = None;
+
                 return Ok(json!({
                     "positions": messages_cpy.iter().rev().take(n).cloned().collect::<Vec<BurritoStateRecord>>(),
                     "last_stop": null,
@@ -85,6 +89,7 @@ fn give_position(message_json: Json<BurritoStateRecord>, state: &State<AppState>
             // If the burrito is not in a bus stop and we have a last_stop (has_reached=true),
             // we interpret as it has left that bus stop, so we choose the next one as has_reached=false
             let mut last_stop = state.last_stop.lock().unwrap();
+
             if last_stop.is_some() {
                 if last_stop.as_ref().unwrap().has_reached {
                     let last_stop = last_stop.as_mut().unwrap();

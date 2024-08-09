@@ -39,8 +39,8 @@ fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![index])
         .mount("/status", routes::status::routes())
-        .register("/", catchers![not_found])
         .mount("/help", routes![index])
+        .register("/", catchers![not_found])
         .attach(cors::Cors)
         .manage(AppState::default())
 }
