@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  server:
+  burrito_server:
     build:
       context: .
       dockerfile: ./Dockerfile

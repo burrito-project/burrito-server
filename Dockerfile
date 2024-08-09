@@ -33,7 +33,6 @@ musl
 
 COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/burrito-server /app/
 
-ENV ROCKET_ENV=production
 ENV ROCKET_PORT=6969
 ENV ROCKET_ADDRESS=0.0.0.0
 
