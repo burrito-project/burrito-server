@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Deploy burrito server to VPS
 on:
   push:
     branches:
@@ -9,6 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
       - name: Run tests
         run: cargo test --all-features
 
@@ -22,9 +23,13 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          debug: true
+          envs: REPO_PATH
           script: |
-            cd ${{ secrets.SSH_REPO_PATH }}
+            cd $REPO_PATH
             git reset --hard
             git clean -df
             git pull origin $GITHUB_REF
             docker compose up -d --build --no-deps --force-recreate burrito_server
+        env:
+          REPO_PATH: ${{ secrets.SSH_REPO_PATH }}
