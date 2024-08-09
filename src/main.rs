@@ -1,4 +1,4 @@
-use std::sync::Mutex;
+use std::sync::RwLock;
 use serde_json::json;
 use bus_stops::BusStopInfo;
 use entities::burrito_state_record::BurritoStateRecord;
@@ -13,8 +13,8 @@ mod utils;
 
 #[derive(Default)]
 pub struct AppState {
-    messages: Mutex<Vec<BurritoStateRecord>>,
-    last_stop: Mutex<Option<BusStopInfo>>,
+    messages: RwLock<Vec<BurritoStateRecord>>,
+    last_stop: RwLock<Option<BusStopInfo>>,
 }
 
 #[get("/")]
