@@ -43,6 +43,10 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
 
                 let mut messages_cpy = messages.clone();
                 messages_cpy.push(off_message);
+
+                drop(messages);
+                drop(last_stop);
+
                 *state.last_stop.write().unwrap() = None;
 
                 return Ok(json!({
