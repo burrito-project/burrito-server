@@ -38,7 +38,7 @@ fn not_found() -> serde_json::Value {
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![index])
-        .mount("/", routes::status::routes())
+        .mount("/status", routes::status::routes())
         .register("/", catchers![not_found])
         .mount("/help", routes![index])
         .attach(cors::Cors)
