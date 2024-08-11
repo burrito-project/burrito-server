@@ -32,6 +32,7 @@ libstdc++ \
 musl
 
 COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/burrito-server /app/
+COPY --from=builder /app/.env /app/.env
 
 ENV ROCKET_PORT=6969
 ENV ROCKET_ADDRESS=0.0.0.0
