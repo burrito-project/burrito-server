@@ -1,17 +1,20 @@
+use rocket::response;
 use std::time::SystemTime;
 use rocket::serde::json::{json, Value};
 use rocket::http::Status;
 use rocket::serde::json::Json;
 use rocket::{Route, State};
 
+use crate::responders::RawResponse;
 use crate::utils;
 use crate::AppState;
+use crate::auth::WithAuth;
 use crate::BurritoStateRecord;
 use crate::entities::service_state::BusServiceState;
 use crate::bus_stops::{get_bus_stop_for_point, get_distance_to_bus_stop, get_next_bus_stop, LatLng};
 
 pub fn routes() -> Vec<Route> {
-    routes![get_status, post_status]
+    routes![get_status, post_status, post_status_unauthorized]
 }
 
 const DEFAULT_COUNT: usize = 100;
@@ -78,7 +81,7 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
 }
 
 #[post("/", format = "json", data = "<message_json>")]
-fn post_status(message_json: Json<BurritoStateRecord>, state: &State<AppState>) -> Status {
+fn post_status(message_json: Json<BurritoStateRecord>, state: &State<AppState>, _z: WithAuth) -> Status {
     let messages = state.messages.read().unwrap();
     let mut message = message_json.into_inner();
 
@@ -131,4 +134,14 @@ fn post_status(message_json: Json<BurritoStateRecord>, state: &State<AppState>) 
         messages.remove(0); // Keep only the latest 100 positions
     }
     Status::Ok
+}
+
+#[post("/", rank = 2)]
+fn post_status_unauthorized<'r>() -> RawResponse<'r> {
+    let mut response = response::Response::new();
+
+    response.set_status(Status::Unauthorized);
+    response.set_raw_header("x-message", "Cálmate. Tú no eres así.");
+
+    RawResponse::from(response)
 }
