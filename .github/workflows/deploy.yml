@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - name: Checkout code
+      - name: Pull and deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -30,6 +30,8 @@ jobs:
             git reset --hard
             git clean -df
             git pull origin $GITHUB_REF
+            echo $APP_ENV_FILE > .env
             docker compose up -d --build --no-deps --force-recreate burrito_server
         env:
           REPO_PATH: ${{ secrets.SSH_REPO_PATH }}
+          APP_ENV_FILE: ${{ secrets.ENV_FILE }}
