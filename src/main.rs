@@ -1,3 +1,4 @@
+use dotenvy::dotenv;
 use std::sync::RwLock;
 use serde_json::json;
 use bus_stops::BusStopInfo;
@@ -5,10 +6,12 @@ use entities::burrito_state_record::BurritoStateRecord;
 
 #[macro_use] extern crate rocket;
 
-mod bus_stops;
-mod routes;
-mod cors;
 mod entities;
+mod auth;
+mod bus_stops;
+mod cors;
+mod routes;
+mod responders;
 mod utils;
 
 #[derive(Default)]
@@ -36,6 +39,8 @@ fn not_found() -> serde_json::Value {
 
 #[launch]
 fn rocket() -> _ {
+    dotenv().expect("No .env file");
+
     rocket::build()
         .mount("/", routes![index])
         .mount("/status", routes::status::routes())
