@@ -17,7 +17,7 @@ impl<'r> FromRequest<'r> for WithAuth {
         let pass = std::env::var("AUTH_DRIVER_PASSPHRASE").unwrap_or_default();
 
         if auth != pass {
-            return rocket::request::Outcome::Error((Status::Unauthorized, ()));
+            return rocket::request::Outcome::Forward(Status::Unauthorized);
         }
 
         rocket::request::Outcome::Success(WithAuth{})

@@ -1,4 +1,5 @@
 use dotenvy::dotenv;
+use rocket::{config::Ident, Config};
 use std::sync::RwLock;
 use serde_json::json;
 use bus_stops::BusStopInfo;
@@ -40,8 +41,15 @@ fn not_found() -> serde_json::Value {
 #[launch]
 fn rocket() -> _ {
     dotenv().expect("No .env file");
+    let config = Config {
+        port: 6969,
+        address: [0, 0, 0 ,0].into(),
+        ident: Ident::none(),
+        ..Default::default()
+    };
 
     rocket::build()
+        .configure(config)
         .mount("/", routes![index])
         .mount("/status", routes::status::routes())
         .mount("/help", routes![index])
