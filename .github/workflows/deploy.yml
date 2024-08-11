@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           debug: true
-          envs: REPO_PATH
+          envs: REPO_PATH,APP_ENV_FILE
           script: |
             cd $REPO_PATH
             git reset --hard
