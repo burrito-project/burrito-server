@@ -12,8 +12,8 @@ pub fn calculate_velocity_kmph(positions: &[BurritoStateRecord]) -> f64 {
     let mut total_distance = 0.0;
     let mut total_time = Duration::new(0, 0);
 
-    // we only use the last 5 positions to calculate the velocity
-    let start = std::cmp::max(positions.len().saturating_sub(5), 1);
+    // we only use the last 3 positions to calculate the velocity
+    let start = std::cmp::max(positions.len().saturating_sub(3), 1);
 
     for i in start..positions.len() {
         let pos1 = &positions[i - 1];
@@ -33,11 +33,12 @@ pub fn calculate_velocity_kmph(positions: &[BurritoStateRecord]) -> f64 {
         total_time += time_diff;
     }
 
-    if total_time.as_secs() == 0 {
+    let total_time = total_time.as_secs_f64();
+    if total_time == 0.0 {
         return 0.0;
     }
 
     // km/h
-    let velocity = total_distance / total_time.as_secs() as f64;
+    let velocity = total_distance / total_time;
     velocity * 3.6
 }
