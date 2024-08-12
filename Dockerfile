@@ -20,16 +20,19 @@ COPY . .
 
 RUN : \
     && touch -a -m ./src/main.rs \
-    && cargo build --target x86_64-unknown-linux-musl --release
+    && cargo build --target x86_64-unknown-linux-musl --release \
+    && :
 
 FROM alpine:3.20.2
 
 WORKDIR /app
 
-RUN apk add --no-cache \
-libgcc \
-libstdc++ \
-musl
+RUN : \
+    apk add --no-cache \
+        libgcc \
+        libstdc++ \
+        musl \
+    && :
 
 COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/burrito-server /app/
 COPY --from=builder /app/.env /app/.env
