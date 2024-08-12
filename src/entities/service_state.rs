@@ -9,14 +9,14 @@ pub enum BusServiceState {
 
 impl BusServiceState {
     /// When the burrito stops reporting, we need to infer its state based on the last state it
-    /// reported. Basically we consider it off if is was previously off or on route.
+    /// reported. Basically we consider it off if is was previously off, on accident or on route.
     pub fn inherit_from_inactive<S: Into<BusServiceState>>(other: S) -> BusServiceState {
         match other.into() {
             BusServiceState::Off => BusServiceState::Off,
             BusServiceState::OnRoute => BusServiceState::Off,
+            BusServiceState::Accident => BusServiceState::Off,
             BusServiceState::OutOfService => BusServiceState::OutOfService,
             BusServiceState::Resting => BusServiceState::Resting,
-            BusServiceState::Accident => BusServiceState::Accident,
         }
     }
 }
