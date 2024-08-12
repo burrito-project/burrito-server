@@ -51,24 +51,10 @@ fn feature_to_polygon(feature: &geojson::Feature) -> geo::Polygon {
 pub fn get_bus_stop_for_point(lat: f64, lng: f64) -> Option<BusStopInfo> {
     BUS_STOPS.features.iter().find_map(|f| {
         let poly = feature_to_polygon(f);
+        let props = f.properties.as_ref().unwrap();
 
-        let name = f
-            .properties
-            .as_ref()
-            .unwrap()
-            .get("name")
-            .unwrap()
-            .as_str()
-            .unwrap()
-            .to_string();
-        let number = f
-            .properties
-            .as_ref()
-            .unwrap()
-            .get("num")
-            .unwrap()
-            .as_i64()
-            .unwrap() as i32;
+        let name = props.get("name").unwrap().as_str().unwrap().to_string();
+        let number = props.get("num").unwrap().as_i64().unwrap() as i32;
 
         if poly.contains(&geo::Point::new(lng, lat)) {
             let distance = poly
@@ -90,7 +76,7 @@ pub fn get_bus_stop_for_point(lat: f64, lng: f64) -> Option<BusStopInfo> {
 }
 
 pub fn get_next_bus_stop(current: &BusStopInfo, current_post: LatLng) -> BusStopInfo {
-    let next = match current.number {
+    let next_stop_num = match current.number {
         1..=8 => current.number + 1,
         9 => 1,
         _ => unreachable!(),
@@ -100,33 +86,14 @@ pub fn get_next_bus_stop(current: &BusStopInfo, current_post: LatLng) -> BusStop
         .features
         .iter()
         .find(|f| {
-            f.properties
-                .as_ref()
-                .unwrap()
-                .get("num")
-                .unwrap()
-                .as_i64()
-                .unwrap() as i32
-                == next
+            let props = f.properties.as_ref().unwrap();
+            props.get("num").unwrap().as_i64().unwrap() as i32 == next_stop_num
         })
         .unwrap();
-    let name = next_stop
-        .properties
-        .as_ref()
-        .unwrap()
-        .get("name")
-        .unwrap()
-        .as_str()
-        .unwrap()
-        .to_string();
-    let number = next_stop
-        .properties
-        .as_ref()
-        .unwrap()
-        .get("num")
-        .unwrap()
-        .as_i64()
-        .unwrap() as i32;
+
+    let props = next_stop.properties.as_ref().unwrap();
+    let name = props.get("name").unwrap().as_str().unwrap().to_string();
+    let number = props.get("num").unwrap().as_i64().unwrap() as i32;
 
     let poly = feature_to_polygon(next_stop);
     let distance = poly
@@ -149,14 +116,8 @@ pub fn get_distance_to_bus_stop(current: &BusStopInfo, current_post: LatLng) -> 
             .features
             .iter()
             .find(|f| {
-                f.properties
-                    .as_ref()
-                    .unwrap()
-                    .get("num")
-                    .unwrap()
-                    .as_i64()
-                    .unwrap() as i32
-                    == current.number
+                let props = f.properties.as_ref().unwrap();
+                props.get("num").unwrap().as_i64().unwrap() as i32 == current.number
             })
             .unwrap(),
     );
