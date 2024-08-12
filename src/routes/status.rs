@@ -43,7 +43,7 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
                 let off_message = BurritoStateRecord {
                     lt: 0.0,
                     lg: 0.0,
-                    sts: BusServiceState::Off.into(),
+                    sts: BusServiceState::inherit_from_inactive(last.sts).into(),
                     timestamp: last.timestamp,
                     velocity: 0.0,
                 };
