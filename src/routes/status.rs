@@ -144,7 +144,7 @@ fn post_status(
     let mut messages = state.messages.write().unwrap();
 
     messages.push(message);
-    if messages.len() > 100 {
+    if messages.len() > 10000 {
         messages.remove(0); // Keep only the latest 100 positions
     }
     Status::Ok
