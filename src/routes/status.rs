@@ -1,17 +1,19 @@
-use rocket::response;
-use std::time::SystemTime;
-use rocket::serde::json::{json, Value};
 use rocket::http::Status;
+use rocket::response;
 use rocket::serde::json::Json;
+use rocket::serde::json::{json, Value};
 use rocket::{Route, State};
+use std::time::SystemTime;
 
+use crate::auth::WithAuth;
+use crate::bus_stops::{
+    get_bus_stop_for_point, get_distance_to_bus_stop, get_next_bus_stop, LatLng,
+};
+use crate::entities::service_state::BusServiceState;
 use crate::responders::RawResponse;
 use crate::utils;
 use crate::AppState;
-use crate::auth::WithAuth;
 use crate::BurritoStateRecord;
-use crate::entities::service_state::BusServiceState;
-use crate::bus_stops::{get_bus_stop_for_point, get_distance_to_bus_stop, get_next_bus_stop, LatLng};
 
 pub fn routes() -> Vec<Route> {
     routes![get_status, post_status, post_status_unauthorized]
@@ -34,7 +36,9 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
 
             // If the burrito didn't report itself as 1,2 or 3 and it hasn't reported in the last 60 seconds,
             // then we consider it as off
-            if !is_off && last.timestamp.unwrap().elapsed().unwrap() > std::time::Duration::from_secs(60) {
+            if !is_off
+                && last.timestamp.unwrap().elapsed().unwrap() > std::time::Duration::from_secs(60)
+            {
                 // We create an 'off' message on the fly
                 let off_message = BurritoStateRecord {
                     lt: 0.0,
@@ -57,7 +61,7 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
                     "last_stop": null,
                 }));
             }
-        },
+        }
         None => {
             return Ok(json!({
                 "positions": vec![BurritoStateRecord {
@@ -69,7 +73,7 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
                 }],
                 "last_stop": last_stop.clone(),
             }));
-        },
+        }
     }
 
     let recent_messages: Vec<BurritoStateRecord> = messages.iter().rev().take(n).cloned().collect();
@@ -81,7 +85,11 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
 }
 
 #[post("/", format = "json", data = "<message_json>")]
-fn post_status(message_json: Json<BurritoStateRecord>, state: &State<AppState>, _z: WithAuth) -> Status {
+fn post_status(
+    message_json: Json<BurritoStateRecord>,
+    state: &State<AppState>,
+    _z: WithAuth,
+) -> Status {
     let messages = state.messages.read().unwrap();
     let mut message = message_json.into_inner();
 
@@ -90,7 +98,7 @@ fn post_status(message_json: Json<BurritoStateRecord>, state: &State<AppState>, 
             let mut last_stop = state.last_stop.write().unwrap();
             // If there's already last_stop we update it
             *last_stop = Some(this_stop);
-        },
+        }
         None => {
             // If the burrito is not in a bus stop and we have a last_stop (has_reached=true),
             // we interpret as it has left that bus stop, so we choose the next one as has_reached=false
@@ -103,7 +111,10 @@ fn post_status(message_json: Json<BurritoStateRecord>, state: &State<AppState>, 
                     let last_message = messages.last().unwrap();
                     let next_stop = get_next_bus_stop(
                         last_stop,
-                        LatLng { lat: last_message.lt, lng: last_message.lg },
+                        LatLng {
+                            lat: last_message.lt,
+                            lng: last_message.lg,
+                        },
                     );
                     *last_stop = next_stop;
                 } else {
@@ -111,13 +122,16 @@ fn post_status(message_json: Json<BurritoStateRecord>, state: &State<AppState>, 
                     if let Some(last_stop) = last_stop.as_mut() {
                         last_stop.distance = get_distance_to_bus_stop(
                             last_stop,
-                            LatLng { lat: message.lt, lng: message.lg },
+                            LatLng {
+                                lat: message.lt,
+                                lng: message.lg,
+                            },
                         );
                         last_stop.timestamp = SystemTime::now();
                     }
                 }
             }
-        },
+        }
     }
 
     message.timestamp = Some(SystemTime::now()); // Add the current timestamp

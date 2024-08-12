@@ -1,4 +1,7 @@
-use rocket::{response::{self, Responder}, Request};
+use rocket::{
+    response::{self, Responder},
+    Request,
+};
 
 pub struct RawResponse<'r> {
     response: response::Response<'r>,

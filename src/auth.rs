@@ -6,12 +6,14 @@ pub struct WithAuth();
 impl<'r> FromRequest<'r> for WithAuth {
     type Error = ();
 
-    async fn from_request(request: &'r rocket::Request<'_>) -> rocket::request::Outcome<Self, Self::Error> {
+    async fn from_request(
+        request: &'r rocket::Request<'_>,
+    ) -> rocket::request::Outcome<Self, Self::Error> {
         let auth = match request.headers().get("authorization").next() {
             Some(auth) => auth,
             None => {
                 return rocket::request::Outcome::Forward(Status::Unauthorized);
-            },
+            }
         };
 
         let pass = std::env::var("AUTH_DRIVER_PASSPHRASE").unwrap_or_default();
@@ -20,6 +22,6 @@ impl<'r> FromRequest<'r> for WithAuth {
             return rocket::request::Outcome::Forward(Status::Unauthorized);
         }
 
-        rocket::request::Outcome::Success(WithAuth{})
+        rocket::request::Outcome::Success(WithAuth {})
     }
 }

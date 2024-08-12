@@ -1,18 +1,19 @@
-use dotenvy::dotenv;
-use rocket::{config::Ident, Config};
-use std::sync::RwLock;
-use serde_json::json;
 use bus_stops::BusStopInfo;
+use dotenvy::dotenv;
 use entities::burrito_state_record::BurritoStateRecord;
+use rocket::{config::Ident, Config};
+use serde_json::json;
+use std::sync::RwLock;
 
-#[macro_use] extern crate rocket;
+#[macro_use]
+extern crate rocket;
 
-mod entities;
 mod auth;
 mod bus_stops;
 mod cors;
-mod routes;
+mod entities;
 mod responders;
+mod routes;
 mod utils;
 
 #[derive(Default)]
@@ -43,7 +44,7 @@ fn rocket() -> _ {
     dotenv().expect("No .env file");
     let config = Config {
         port: 6969,
-        address: [0, 0, 0 ,0].into(),
+        address: [0, 0, 0, 0].into(),
         ident: Ident::none(),
         ..Default::default()
     };

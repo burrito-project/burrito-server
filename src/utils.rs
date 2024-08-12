@@ -1,5 +1,5 @@
-use std::time::Duration;
 use geo::GeodesicDistance;
+use std::time::Duration;
 
 use crate::BurritoStateRecord;
 
@@ -29,7 +29,11 @@ pub fn calculate_velocity_kmph(positions: &[BurritoStateRecord]) -> f64 {
 
         total_distance += distance;
 
-        let time_diff = pos2.timestamp.unwrap().duration_since(pos1.timestamp.unwrap()).unwrap_or(Duration::new(0, 0));
+        let time_diff = pos2
+            .timestamp
+            .unwrap()
+            .duration_since(pos1.timestamp.unwrap())
+            .unwrap_or(Duration::new(0, 0));
         total_time += time_diff;
     }
 

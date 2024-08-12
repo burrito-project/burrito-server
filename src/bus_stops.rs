@@ -1,8 +1,8 @@
-use std::time::SystemTime;
 use geo::{Centroid, Contains, GeodesicDistance, Polygon};
 use geojson::{FeatureCollection, GeoJson};
 use lazy_static::lazy_static;
 use serde::{Deserialize, Serialize};
+use std::time::SystemTime;
 
 pub struct LatLng {
     pub lat: f64,
@@ -32,9 +32,17 @@ pub struct BusStopInfo {
 fn feature_to_polygon(feature: &geojson::Feature) -> geo::Polygon {
     match feature.geometry.as_ref().map(|g| &g.value) {
         Some(geojson::Value::Polygon(p)) => {
-            let points = p.first().unwrap().iter().map(|pair| geo::Coord { x: pair[0], y: pair[1] }).collect::<Vec<_>>();
+            let points = p
+                .first()
+                .unwrap()
+                .iter()
+                .map(|pair| geo::Coord {
+                    x: pair[0],
+                    y: pair[1],
+                })
+                .collect::<Vec<_>>();
             Polygon::new(geo::LineString::new(points), vec![])
-        },
+        }
         _ => unreachable!(),
     }
 }
@@ -44,14 +52,37 @@ pub fn get_bus_stop_for_point(lat: f64, lng: f64) -> Option<BusStopInfo> {
     BUS_STOPS.features.iter().find_map(|f| {
         let poly = feature_to_polygon(f);
 
-        let name = f.properties.as_ref().unwrap().get("name").unwrap().as_str().unwrap().to_string();
-        let number = f.properties.as_ref().unwrap().get("num").unwrap().as_i64().unwrap() as i32;
+        let name = f
+            .properties
+            .as_ref()
+            .unwrap()
+            .get("name")
+            .unwrap()
+            .as_str()
+            .unwrap()
+            .to_string();
+        let number = f
+            .properties
+            .as_ref()
+            .unwrap()
+            .get("num")
+            .unwrap()
+            .as_i64()
+            .unwrap() as i32;
 
         if poly.contains(&geo::Point::new(lng, lat)) {
-            let distance = poly.centroid().unwrap().geodesic_distance(&geo::Point::new(lng, lat));
+            let distance = poly
+                .centroid()
+                .unwrap()
+                .geodesic_distance(&geo::Point::new(lng, lat));
 
-            Some(BusStopInfo { name, number, has_reached: true, timestamp: SystemTime::now(), distance })
-
+            Some(BusStopInfo {
+                name,
+                number,
+                has_reached: true,
+                timestamp: SystemTime::now(),
+                distance,
+            })
         } else {
             None
         }
@@ -65,22 +96,70 @@ pub fn get_next_bus_stop(current: &BusStopInfo, current_post: LatLng) -> BusStop
         _ => unreachable!(),
     };
 
-    let next_stop = BUS_STOPS.features.iter().find(|f| {
-        f.properties.as_ref().unwrap().get("num").unwrap().as_i64().unwrap() as i32 == next
-    }).unwrap();
-    let name = next_stop.properties.as_ref().unwrap().get("name").unwrap().as_str().unwrap().to_string();
-    let number = next_stop.properties.as_ref().unwrap().get("num").unwrap().as_i64().unwrap() as i32;
+    let next_stop = BUS_STOPS
+        .features
+        .iter()
+        .find(|f| {
+            f.properties
+                .as_ref()
+                .unwrap()
+                .get("num")
+                .unwrap()
+                .as_i64()
+                .unwrap() as i32
+                == next
+        })
+        .unwrap();
+    let name = next_stop
+        .properties
+        .as_ref()
+        .unwrap()
+        .get("name")
+        .unwrap()
+        .as_str()
+        .unwrap()
+        .to_string();
+    let number = next_stop
+        .properties
+        .as_ref()
+        .unwrap()
+        .get("num")
+        .unwrap()
+        .as_i64()
+        .unwrap() as i32;
 
     let poly = feature_to_polygon(next_stop);
-    let distance = poly.centroid().unwrap().geodesic_distance(&geo::Point::new(current_post.lng, current_post.lat));
+    let distance = poly
+        .centroid()
+        .unwrap()
+        .geodesic_distance(&geo::Point::new(current_post.lng, current_post.lat));
 
-    BusStopInfo { name, number, has_reached: false, timestamp: SystemTime::now(), distance }
+    BusStopInfo {
+        name,
+        number,
+        has_reached: false,
+        timestamp: SystemTime::now(),
+        distance,
+    }
 }
 
 pub fn get_distance_to_bus_stop(current: &BusStopInfo, current_post: LatLng) -> f64 {
-    let poly = feature_to_polygon(BUS_STOPS.features.iter().find(|f| {
-        f.properties.as_ref().unwrap().get("num").unwrap().as_i64().unwrap() as i32 == current.number
-    }).unwrap());
+    let poly = feature_to_polygon(
+        BUS_STOPS
+            .features
+            .iter()
+            .find(|f| {
+                f.properties
+                    .as_ref()
+                    .unwrap()
+                    .get("num")
+                    .unwrap()
+                    .as_i64()
+                    .unwrap() as i32
+                    == current.number
+            })
+            .unwrap(),
+    );
 
     let centroid = poly.centroid().unwrap();
 
