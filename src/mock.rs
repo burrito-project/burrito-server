@@ -35,11 +35,11 @@ pub fn initialize_mocks() {
         return;
     }
 
-    println!("🐢 Initializing mocked route");
-
     if s_mock_records.is_empty() {
         return;
     }
+
+    println!("🐢 Initializing mocked route");
 
     let client = reqwest::Client::new();
     let mut record_idx = 0;

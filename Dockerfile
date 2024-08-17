@@ -6,6 +6,8 @@ RUN : \
     && apk add --no-cache \
         musl-dev \
         pkgconfig \
+        perl \
+        make \
     && :
 
 COPY Cargo.toml Cargo.lock ./
