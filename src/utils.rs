@@ -46,3 +46,9 @@ pub fn calculate_velocity_kmph(positions: &[BurritoStateRecord]) -> f64 {
     let velocity = total_distance / total_time;
     velocity * 3.6
 }
+
+#[allow(dead_code)]
+pub fn get_uptime() -> std::time::Duration {
+    let now = std::time::SystemTime::now();
+    now.duration_since(*crate::startup).unwrap()
+}
