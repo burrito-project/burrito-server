@@ -3,7 +3,7 @@ use rocket::response;
 use rocket::serde::json::Json;
 use rocket::serde::json::{json, Value};
 use rocket::{Route, State};
-use std::time::SystemTime;
+use std::time;
 
 use crate::auth::WithAuth;
 use crate::bus_stops::{
@@ -61,27 +61,23 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
                     "last_stop": null,
                 }));
             }
-        }
-        None => {
-            return Ok(json!({
-                "positions": vec![BurritoStateRecord {
-                    lt: 0.0,
-                    lg: 0.0,
-                    sts: BusServiceState::Off.into(),
-                    timestamp: Some(SystemTime::now()),
-                    velocity: 0.0,
-                }],
+
+            Ok(json!({
+                "positions": messages.iter().rev().take(n).cloned().collect::<Vec<BurritoStateRecord>>(),
                 "last_stop": last_stop.clone(),
-            }));
+            }))
         }
+        None => Ok(json!({
+            "positions": vec![BurritoStateRecord {
+                lt: 0.0,
+                lg: 0.0,
+                sts: BusServiceState::Off.into(),
+                timestamp: Some(time::SystemTime::now()),
+                velocity: 0.0,
+            }],
+            "last_stop": last_stop.clone(),
+        })),
     }
-
-    let recent_messages: Vec<BurritoStateRecord> = messages.iter().rev().take(n).cloned().collect();
-
-    Ok(json!({
-        "positions": recent_messages,
-        "last_stop": last_stop.clone(),
-    }))
 }
 
 #[post("/", format = "json", data = "<message_json>")]
@@ -127,14 +123,14 @@ fn post_status(
                                 lng: message.lg,
                             },
                         );
-                        last_stop.timestamp = SystemTime::now();
+                        last_stop.timestamp = time::SystemTime::now();
                     }
                 }
             }
         }
     }
 
-    message.timestamp = Some(SystemTime::now()); // Add the current timestamp
+    message.timestamp = Some(time::SystemTime::now()); // Add the current timestamp
     let mut messages_copy = messages.clone();
     messages_copy.push(message.clone());
 
