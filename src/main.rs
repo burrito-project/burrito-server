@@ -46,6 +46,9 @@ lazy_static! {
     pub static ref startup: std::time::SystemTime = std::time::SystemTime::now();
 }
 
+pub const PORT: u16 = 6969;
+pub const SELF_URL: &str = "http://localhost:6969";
+
 #[rocket::main]
 async fn main() -> Result<(), rocket::Error> {
     let _ = *startup;
@@ -53,11 +56,13 @@ async fn main() -> Result<(), rocket::Error> {
     dotenv().expect("No .env file");
 
     let config = Config {
-        port: 6969,
+        port: PORT,
         address: [0, 0, 0, 0].into(),
         ident: Ident::none(),
         ..Default::default()
     };
+
+    crate::mock::initialize_mocks();
 
     rocket::build()
         .configure(config)
