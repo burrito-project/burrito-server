@@ -1,0 +1,4192 @@
+[
+  {
+    "lg": -77.0800858,
+    "lt": -12.058648,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218987454,
+      "secs_since_epoch": 1723499832
+    },
+    "velocity": 5.197755930890251
+  },
+  {
+    "lg": -77.0800959,
+    "lt": -12.0586543,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 198765714,
+      "secs_since_epoch": 1723499831
+    },
+    "velocity": 6.422645846994571
+  },
+  {
+    "lg": -77.080109,
+    "lt": -12.0586604,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 266848159,
+      "secs_since_epoch": 1723499830
+    },
+    "velocity": 7.280463611053902
+  },
+  {
+    "lg": -77.0801242,
+    "lt": -12.0586694,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226561092,
+      "secs_since_epoch": 1723499829
+    },
+    "velocity": 7.2018680178356815
+  },
+  {
+    "lg": -77.0801432,
+    "lt": -12.058679,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218675951,
+      "secs_since_epoch": 1723499828
+    },
+    "velocity": 5.462725163663868
+  },
+  {
+    "lg": -77.0801637,
+    "lt": -12.058689,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226588456,
+      "secs_since_epoch": 1723499827
+    },
+    "velocity": 3.8309340325675
+  },
+  {
+    "lg": -77.0801766,
+    "lt": -12.0586987,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 278768410,
+      "secs_since_epoch": 1723499826
+    },
+    "velocity": 5.358152968018856
+  },
+  {
+    "lg": -77.0801834,
+    "lt": -12.0587055,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226504644,
+      "secs_since_epoch": 1723499825
+    },
+    "velocity": 9.265114958169946
+  },
+  {
+    "lg": -77.0801748,
+    "lt": -12.0587026,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218501744,
+      "secs_since_epoch": 1723499824
+    },
+    "velocity": 12.643661648899293
+  },
+  {
+    "lg": -77.0801496,
+    "lt": -12.0586992,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218218607,
+      "secs_since_epoch": 1723499823
+    },
+    "velocity": 14.607212750503535
+  },
+  {
+    "lg": -77.0801152,
+    "lt": -12.0587005,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 266565847,
+      "secs_since_epoch": 1723499822
+    },
+    "velocity": 15.587612475777442
+  },
+  {
+    "lg": -77.0800807,
+    "lt": -12.0587045,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226638722,
+      "secs_since_epoch": 1723499821
+    },
+    "velocity": 14.842335504584696
+  },
+  {
+    "lg": -77.0800406,
+    "lt": -12.0587012,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218709917,
+      "secs_since_epoch": 1723499820
+    },
+    "velocity": 13.390161039904845
+  },
+  {
+    "lg": -77.0799986,
+    "lt": -12.0586939,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 258977529,
+      "secs_since_epoch": 1723499819
+    },
+    "velocity": 10.53466370791482
+  },
+  {
+    "lg": -77.0799715,
+    "lt": -12.0586846,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 266560671,
+      "secs_since_epoch": 1723499818
+    },
+    "velocity": 9.13806964773092
+  },
+  {
+    "lg": -77.0799412,
+    "lt": -12.0586699,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226613572,
+      "secs_since_epoch": 1723499817
+    },
+    "velocity": 6.039119651556705
+  },
+  {
+    "lg": -77.07992,
+    "lt": -12.058654,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 239277019,
+      "secs_since_epoch": 1723499816
+    },
+    "velocity": 4.331500850768131
+  },
+  {
+    "lg": -77.0799031,
+    "lt": -12.058637,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218876638,
+      "secs_since_epoch": 1723499815
+    },
+    "velocity": 4.2536078934243475
+  },
+  {
+    "lg": -77.079903,
+    "lt": -12.058611,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 256222268,
+      "secs_since_epoch": 1723499814
+    },
+    "velocity": 6.239562645224834
+  },
+  {
+    "lg": -77.0799076,
+    "lt": -12.0585754,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 239148114,
+      "secs_since_epoch": 1723499813
+    },
+    "velocity": 8.089764811674241
+  },
+  {
+    "lg": -77.0799212,
+    "lt": -12.0585324,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226672068,
+      "secs_since_epoch": 1723499812
+    },
+    "velocity": 9.616223216091191
+  },
+  {
+    "lg": -77.0799382,
+    "lt": -12.0584807,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 266725903,
+      "secs_since_epoch": 1723499811
+    },
+    "velocity": 11.424085413227287
+  },
+  {
+    "lg": -77.0799573,
+    "lt": -12.0584214,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 234992822,
+      "secs_since_epoch": 1723499810
+    },
+    "velocity": 12.952631244887911
+  },
+  {
+    "lg": -77.0799797,
+    "lt": -12.0583465,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226519568,
+      "secs_since_epoch": 1723499809
+    },
+    "velocity": 13.906973701126839
+  },
+  {
+    "lg": -77.0800088,
+    "lt": -12.0582598,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 234435639,
+      "secs_since_epoch": 1723499808
+    },
+    "velocity": 13.4760146124348
+  },
+  {
+    "lg": -77.0800358,
+    "lt": -12.0581692,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 234598362,
+      "secs_since_epoch": 1723499807
+    },
+    "velocity": 12.251738303206952
+  },
+  {
+    "lg": -77.0800642,
+    "lt": -12.0580752,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219216958,
+      "secs_since_epoch": 1723499806
+    },
+    "velocity": 11.62589372545905
+  },
+  {
+    "lg": -77.0800878,
+    "lt": -12.0579794,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 223212654,
+      "secs_since_epoch": 1723499805
+    },
+    "velocity": 10.882713335966073
+  },
+  {
+    "lg": -77.0801007,
+    "lt": -12.0578871,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 231322200,
+      "secs_since_epoch": 1723499804
+    },
+    "velocity": 11.111191913913876
+  },
+  {
+    "lg": -77.0801225,
+    "lt": -12.0577996,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 263048566,
+      "secs_since_epoch": 1723499803
+    },
+    "velocity": 10.828848295226344
+  },
+  {
+    "lg": -77.0801429,
+    "lt": -12.0577165,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 223175075,
+      "secs_since_epoch": 1723499802
+    },
+    "velocity": 10.644520409754334
+  },
+  {
+    "lg": -77.0801623,
+    "lt": -12.0576373,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 223256761,
+      "secs_since_epoch": 1723499801
+    },
+    "velocity": 10.740581508200965
+  },
+  {
+    "lg": -77.0801828,
+    "lt": -12.057559,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 263171622,
+      "secs_since_epoch": 1723499800
+    },
+    "velocity": 10.183394804816656
+  },
+  {
+    "lg": -77.0802027,
+    "lt": -12.0574827,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 223534018,
+      "secs_since_epoch": 1723499799
+    },
+    "velocity": 10.149971590696861
+  },
+  {
+    "lg": -77.0802228,
+    "lt": -12.0574072,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 251146569,
+      "secs_since_epoch": 1723499798
+    },
+    "velocity": 9.596228350958594
+  },
+  {
+    "lg": -77.0802413,
+    "lt": -12.057335,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 223376771,
+      "secs_since_epoch": 1723499797
+    },
+    "velocity": 9.250152647922643
+  },
+  {
+    "lg": -77.0802588,
+    "lt": -12.0572612,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 259214812,
+      "secs_since_epoch": 1723499796
+    },
+    "velocity": 8.41012668869032
+  },
+  {
+    "lg": -77.0802755,
+    "lt": -12.0571855,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219241367,
+      "secs_since_epoch": 1723499795
+    },
+    "velocity": 7.7422754541227565
+  },
+  {
+    "lg": -77.0802899,
+    "lt": -12.0571153,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219329090,
+      "secs_since_epoch": 1723499794
+    },
+    "velocity": 6.800712276675056
+  },
+  {
+    "lg": -77.080302,
+    "lt": -12.0570526,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219576168,
+      "secs_since_epoch": 1723499793
+    },
+    "velocity": 6.361965715813184
+  },
+  {
+    "lg": -77.0803136,
+    "lt": -12.0569968,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 267410123,
+      "secs_since_epoch": 1723499792
+    },
+    "velocity": 5.910259339620838
+  },
+  {
+    "lg": -77.0803237,
+    "lt": -12.0569468,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227317256,
+      "secs_since_epoch": 1723499791
+    },
+    "velocity": 6.037761674707021
+  },
+  {
+    "lg": -77.0803338,
+    "lt": -12.0568947,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 217150895,
+      "secs_since_epoch": 1723499790
+    },
+    "velocity": 6.2634128580785
+  },
+  {
+    "lg": -77.0803414,
+    "lt": -12.0568402,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 217350277,
+      "secs_since_epoch": 1723499789
+    },
+    "velocity": 7.263607500914543
+  },
+  {
+    "lg": -77.0803477,
+    "lt": -12.0567815,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 275393754,
+      "secs_since_epoch": 1723499788
+    },
+    "velocity": 8.460276614763027
+  },
+  {
+    "lg": -77.0803587,
+    "lt": -12.0567189,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218557492,
+      "secs_since_epoch": 1723499787
+    },
+    "velocity": 10.548963728308717
+  },
+  {
+    "lg": -77.0803759,
+    "lt": -12.0566591,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220915858,
+      "secs_since_epoch": 1723499786
+    },
+    "velocity": 12.584568226431392
+  },
+  {
+    "lg": -77.0803977,
+    "lt": -12.0566084,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227246000,
+      "secs_since_epoch": 1723499785
+    },
+    "velocity": 15.697461519202264
+  },
+  {
+    "lg": -77.0804278,
+    "lt": -12.0565673,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 253254057,
+      "secs_since_epoch": 1723499784
+    },
+    "velocity": 18.02398993113561
+  },
+  {
+    "lg": -77.0804644,
+    "lt": -12.056525,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 223821515,
+      "secs_since_epoch": 1723499783
+    },
+    "velocity": 19.45316029082557
+  },
+  {
+    "lg": -77.0805117,
+    "lt": -12.0564832,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219190853,
+      "secs_since_epoch": 1723499782
+    },
+    "velocity": 19.61108899700591
+  },
+  {
+    "lg": -77.0805609,
+    "lt": -12.0564471,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 223516077,
+      "secs_since_epoch": 1723499781
+    },
+    "velocity": 20.515061241721366
+  },
+  {
+    "lg": -77.0806061,
+    "lt": -12.0564324,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 261383361,
+      "secs_since_epoch": 1723499780
+    },
+    "velocity": 21.45208146342551
+  },
+  {
+    "lg": -77.0806572,
+    "lt": -12.0564269,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221183981,
+      "secs_since_epoch": 1723499779
+    },
+    "velocity": 21.156931230048002
+  },
+  {
+    "lg": -77.0807141,
+    "lt": -12.056421,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219360444,
+      "secs_since_epoch": 1723499778
+    },
+    "velocity": 18.28756316225442
+  },
+  {
+    "lg": -77.0807673,
+    "lt": -12.0564073,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 239157301,
+      "secs_since_epoch": 1723499777
+    },
+    "velocity": 15.528157963017682
+  },
+  {
+    "lg": -77.0808116,
+    "lt": -12.0563815,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 279141129,
+      "secs_since_epoch": 1723499776
+    },
+    "velocity": 14.098811453080799
+  },
+  {
+    "lg": -77.080849,
+    "lt": -12.0563478,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228055562,
+      "secs_since_epoch": 1723499775
+    },
+    "velocity": 12.712815582010801
+  },
+  {
+    "lg": -77.0808817,
+    "lt": -12.0563131,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 225635878,
+      "secs_since_epoch": 1723499774
+    },
+    "velocity": 10.800451157067894
+  },
+  {
+    "lg": -77.0809128,
+    "lt": -12.0562769,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 317500901,
+      "secs_since_epoch": 1723499773
+    },
+    "velocity": 8.189238185317418
+  },
+  {
+    "lg": -77.0809411,
+    "lt": -12.056243,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 223428682,
+      "secs_since_epoch": 1723499772
+    },
+    "velocity": 6.909993533764411
+  },
+  {
+    "lg": -77.0809594,
+    "lt": -12.0562205,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 233360692,
+      "secs_since_epoch": 1723499771
+    },
+    "velocity": 7.019769018309423
+  },
+  {
+    "lg": -77.0809738,
+    "lt": -12.0562021,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 213260193,
+      "secs_since_epoch": 1723499770
+    },
+    "velocity": 7.3689344333754825
+  },
+  {
+    "lg": -77.0809899,
+    "lt": -12.0561832,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280380576,
+      "secs_since_epoch": 1723499769
+    },
+    "velocity": 7.251766495554485
+  },
+  {
+    "lg": -77.0810094,
+    "lt": -12.0561671,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 287648959,
+      "secs_since_epoch": 1723499768
+    },
+    "velocity": 7.583828823660333
+  },
+  {
+    "lg": -77.0810273,
+    "lt": -12.0561567,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 239471890,
+      "secs_since_epoch": 1723499767
+    },
+    "velocity": 8.210132538106983
+  },
+  {
+    "lg": -77.0810446,
+    "lt": -12.0561538,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221605761,
+      "secs_since_epoch": 1723499766
+    },
+    "velocity": 8.74509639721164
+  },
+  {
+    "lg": -77.081066,
+    "lt": -12.056153,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 279546501,
+      "secs_since_epoch": 1723499765
+    },
+    "velocity": 8.435618855034868
+  },
+  {
+    "lg": -77.0810888,
+    "lt": -12.0561558,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227925251,
+      "secs_since_epoch": 1723499764
+    },
+    "velocity": 7.62865572617613
+  },
+  {
+    "lg": -77.0811097,
+    "lt": -12.0561613,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227737055,
+      "secs_since_epoch": 1723499763
+    },
+    "velocity": 5.875825866680315
+  },
+  {
+    "lg": -77.0811298,
+    "lt": -12.0561746,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227383887,
+      "secs_since_epoch": 1723499762
+    },
+    "velocity": 3.6549814176568636
+  },
+  {
+    "lg": -77.0811439,
+    "lt": -12.056195,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 273773637,
+      "secs_since_epoch": 1723499761
+    },
+    "velocity": 1.8216384188301817
+  },
+  {
+    "lg": -77.0811511,
+    "lt": -12.0562172,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226117506,
+      "secs_since_epoch": 1723499760
+    },
+    "velocity": 0.7030267709511084
+  },
+  {
+    "lg": -77.0811533,
+    "lt": -12.0562314,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 211338252,
+      "secs_since_epoch": 1723499759
+    },
+    "velocity": 0.18255859479705513
+  },
+  {
+    "lg": -77.0811532,
+    "lt": -12.0562369,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219609676,
+      "secs_since_epoch": 1723499758
+    },
+    "velocity": 0.05962769546657978
+  },
+  {
+    "lg": -77.0811532,
+    "lt": -12.0562368,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 299291192,
+      "secs_since_epoch": 1723499757
+    },
+    "velocity": 0.231895749686425
+  },
+  {
+    "lg": -77.0811531,
+    "lt": -12.0562367,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219673600,
+      "secs_since_epoch": 1723499756
+    },
+    "velocity": 0.8852757378714649
+  },
+  {
+    "lg": -77.0811528,
+    "lt": -12.0562362,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220288807,
+      "secs_since_epoch": 1723499755
+    },
+    "velocity": 1.3210630668334948
+  },
+  {
+    "lg": -77.0811515,
+    "lt": -12.0562345,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219442910,
+      "secs_since_epoch": 1723499754
+    },
+    "velocity": 1.3400084505887038
+  },
+  {
+    "lg": -77.0811467,
+    "lt": -12.056232,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 265609225,
+      "secs_since_epoch": 1723499753
+    },
+    "velocity": 1.1566222049215964
+  },
+  {
+    "lg": -77.0811431,
+    "lt": -12.0562288,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221473143,
+      "secs_since_epoch": 1723499752
+    },
+    "velocity": 1.692244164387896
+  },
+  {
+    "lg": -77.0811416,
+    "lt": -12.0562287,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219323690,
+      "secs_since_epoch": 1723499751
+    },
+    "velocity": 2.577895494946679
+  },
+  {
+    "lg": -77.0811409,
+    "lt": -12.0562436,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 285793162,
+      "secs_since_epoch": 1723499750
+    },
+    "velocity": 3.0186873626181576
+  },
+  {
+    "lg": -77.0811365,
+    "lt": -12.0562711,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 260569646,
+      "secs_since_epoch": 1723499749
+    },
+    "velocity": 2.8905394993534888
+  },
+  {
+    "lg": -77.0811311,
+    "lt": -12.0562981,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 246614598,
+      "secs_since_epoch": 1723499748
+    },
+    "velocity": 2.7556476058532455
+  },
+  {
+    "lg": -77.0811268,
+    "lt": -12.0563248,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220820993,
+      "secs_since_epoch": 1723499747
+    },
+    "velocity": 3.0257452120077786
+  },
+  {
+    "lg": -77.0811245,
+    "lt": -12.0563516,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218534241,
+      "secs_since_epoch": 1723499746
+    },
+    "velocity": 4.142503789240242
+  },
+  {
+    "lg": -77.0811221,
+    "lt": -12.0563793,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 268184042,
+      "secs_since_epoch": 1723499745
+    },
+    "velocity": 6.175113339565844
+  },
+  {
+    "lg": -77.0811148,
+    "lt": -12.0564058,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236709762,
+      "secs_since_epoch": 1723499744
+    },
+    "velocity": 9.399168658710916
+  },
+  {
+    "lg": -77.0811013,
+    "lt": -12.0564319,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 234811171,
+      "secs_since_epoch": 1723499743
+    },
+    "velocity": 11.968285182425772
+  },
+  {
+    "lg": -77.0810791,
+    "lt": -12.0564541,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218440025,
+      "secs_since_epoch": 1723499742
+    },
+    "velocity": 13.624979363894754
+  },
+  {
+    "lg": -77.0810475,
+    "lt": -12.0564668,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 278510732,
+      "secs_since_epoch": 1723499741
+    },
+    "velocity": 13.977765154882725
+  },
+  {
+    "lg": -77.0810122,
+    "lt": -12.0564678,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220113794,
+      "secs_since_epoch": 1723499740
+    },
+    "velocity": 14.472209094339108
+  },
+  {
+    "lg": -77.0809778,
+    "lt": -12.0564612,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 225687490,
+      "secs_since_epoch": 1723499739
+    },
+    "velocity": 14.079704694389825
+  },
+  {
+    "lg": -77.0809414,
+    "lt": -12.0564508,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 224808973,
+      "secs_since_epoch": 1723499738
+    },
+    "velocity": 13.555412705712952
+  },
+  {
+    "lg": -77.0809067,
+    "lt": -12.0564375,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 283889735,
+      "secs_since_epoch": 1723499737
+    },
+    "velocity": 13.423923185763822
+  },
+  {
+    "lg": -77.0808734,
+    "lt": -12.0564232,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 235537860,
+      "secs_since_epoch": 1723499736
+    },
+    "velocity": 13.031444269370088
+  },
+  {
+    "lg": -77.0808417,
+    "lt": -12.0564098,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 256364648,
+      "secs_since_epoch": 1723499735
+    },
+    "velocity": 13.49261369051276
+  },
+  {
+    "lg": -77.0808068,
+    "lt": -12.0563961,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280172124,
+      "secs_since_epoch": 1723499734
+    },
+    "velocity": 15.353651357284194
+  },
+  {
+    "lg": -77.0807769,
+    "lt": -12.0563837,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 246979823,
+      "secs_since_epoch": 1723499733
+    },
+    "velocity": 18.469448467096484
+  },
+  {
+    "lg": -77.0807401,
+    "lt": -12.0563716,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219293958,
+      "secs_since_epoch": 1723499732
+    },
+    "velocity": 20.820317190881415
+  },
+  {
+    "lg": -77.0806901,
+    "lt": -12.0563699,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219449496,
+      "secs_since_epoch": 1723499731
+    },
+    "velocity": 21.04793574412694
+  },
+  {
+    "lg": -77.0806386,
+    "lt": -12.0563721,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 235326782,
+      "secs_since_epoch": 1723499730
+    },
+    "velocity": 20.24560249461281
+  },
+  {
+    "lg": -77.0805852,
+    "lt": -12.0563866,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227282162,
+      "secs_since_epoch": 1723499729
+    },
+    "velocity": 18.644993353879688
+  },
+  {
+    "lg": -77.0805339,
+    "lt": -12.0564156,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227201148,
+      "secs_since_epoch": 1723499728
+    },
+    "velocity": 16.202829087972138
+  },
+  {
+    "lg": -77.0804883,
+    "lt": -12.0564519,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227427915,
+      "secs_since_epoch": 1723499727
+    },
+    "velocity": 13.985843673018637
+  },
+  {
+    "lg": -77.0804499,
+    "lt": -12.0564962,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 259504227,
+      "secs_since_epoch": 1723499726
+    },
+    "velocity": 11.80283122519214
+  },
+  {
+    "lg": -77.0804167,
+    "lt": -12.0565497,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219336353,
+      "secs_since_epoch": 1723499725
+    },
+    "velocity": 10.475826901259722
+  },
+  {
+    "lg": -77.080391,
+    "lt": -12.0566166,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219169471,
+      "secs_since_epoch": 1723499724
+    },
+    "velocity": 9.182556547164657
+  },
+  {
+    "lg": -77.080374,
+    "lt": -12.0566863,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 259822625,
+      "secs_since_epoch": 1723499723
+    },
+    "velocity": 8.762289204042974
+  },
+  {
+    "lg": -77.0803571,
+    "lt": -12.0567614,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 279447926,
+      "secs_since_epoch": 1723499722
+    },
+    "velocity": 8.161527416791321
+  },
+  {
+    "lg": -77.0803431,
+    "lt": -12.0568352,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219510583,
+      "secs_since_epoch": 1723499721
+    },
+    "velocity": 7.743241600035294
+  },
+  {
+    "lg": -77.0803299,
+    "lt": -12.0569071,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219977759,
+      "secs_since_epoch": 1723499720
+    },
+    "velocity": 7.299732687483114
+  },
+  {
+    "lg": -77.0803185,
+    "lt": -12.0569744,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 259362534,
+      "secs_since_epoch": 1723499719
+    },
+    "velocity": 7.048153358405179
+  },
+  {
+    "lg": -77.0803075,
+    "lt": -12.0570357,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 247321115,
+      "secs_since_epoch": 1723499718
+    },
+    "velocity": 7.1586476916605815
+  },
+  {
+    "lg": -77.0802941,
+    "lt": -12.0570897,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219449044,
+      "secs_since_epoch": 1723499717
+    },
+    "velocity": 6.996162554917052
+  },
+  {
+    "lg": -77.0802801,
+    "lt": -12.0571381,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219304992,
+      "secs_since_epoch": 1723499716
+    },
+    "velocity": 6.7035279119101645
+  },
+  {
+    "lg": -77.0802657,
+    "lt": -12.0571852,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 239351532,
+      "secs_since_epoch": 1723499715
+    },
+    "velocity": 6.158525333776598
+  },
+  {
+    "lg": -77.0802528,
+    "lt": -12.057229,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 247409006,
+      "secs_since_epoch": 1723499714
+    },
+    "velocity": 5.861563335794005
+  },
+  {
+    "lg": -77.0802419,
+    "lt": -12.0572793,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 239379743,
+      "secs_since_epoch": 1723499713
+    },
+    "velocity": 5.592021754572436
+  },
+  {
+    "lg": -77.0802326,
+    "lt": -12.0573278,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227608978,
+      "secs_since_epoch": 1723499712
+    },
+    "velocity": 5.584154774528747
+  },
+  {
+    "lg": -77.080224,
+    "lt": -12.0573736,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 276641225,
+      "secs_since_epoch": 1723499711
+    },
+    "velocity": 5.60002059052519
+  },
+  {
+    "lg": -77.0802145,
+    "lt": -12.0574204,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 235296239,
+      "secs_since_epoch": 1723499710
+    },
+    "velocity": 5.531951555870811
+  },
+  {
+    "lg": -77.0802036,
+    "lt": -12.0574617,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219352489,
+      "secs_since_epoch": 1723499709
+    },
+    "velocity": 5.678686113724711
+  },
+  {
+    "lg": -77.080192,
+    "lt": -12.057498,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220650665,
+      "secs_since_epoch": 1723499708
+    },
+    "velocity": 4.405232890514769
+  },
+  {
+    "lg": -77.0801818,
+    "lt": -12.0575304,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 259647371,
+      "secs_since_epoch": 1723499707
+    },
+    "velocity": 3.2891300865518236
+  },
+  {
+    "lg": -77.0801682,
+    "lt": -12.0575646,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227461707,
+      "secs_since_epoch": 1723499706
+    },
+    "velocity": 2.0870213434156812
+  },
+  {
+    "lg": -77.0801663,
+    "lt": -12.0575842,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 219728512,
+      "secs_since_epoch": 1723499705
+    },
+    "velocity": 1.6184138588601917
+  },
+  {
+    "lg": -77.0801622,
+    "lt": -12.0575917,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227984173,
+      "secs_since_epoch": 1723499704
+    },
+    "velocity": 1.2845724743670095
+  },
+  {
+    "lg": -77.0801561,
+    "lt": -12.0575968,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 259311928,
+      "secs_since_epoch": 1723499703
+    },
+    "velocity": 0.8244393547363283
+  },
+  {
+    "lg": -77.0801573,
+    "lt": -12.0575942,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 247481591,
+      "secs_since_epoch": 1723499702
+    },
+    "velocity": 1.2080956029548167
+  },
+  {
+    "lg": -77.0801591,
+    "lt": -12.0575898,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227416609,
+      "secs_since_epoch": 1723499701
+    },
+    "velocity": 2.150317449707327
+  },
+  {
+    "lg": -77.0801614,
+    "lt": -12.0575823,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221512737,
+      "secs_since_epoch": 1723499700
+    },
+    "velocity": 3.24438796108671
+  },
+  {
+    "lg": -77.0801572,
+    "lt": -12.0575856,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 199388389,
+      "secs_since_epoch": 1723499699
+    },
+    "velocity": 4.1668725494010035
+  },
+  {
+    "lg": -77.080149,
+    "lt": -12.0576008,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 239269476,
+      "secs_since_epoch": 1723499698
+    },
+    "velocity": 4.396394978431101
+  },
+  {
+    "lg": -77.0801399,
+    "lt": -12.0576279,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 239244238,
+      "secs_since_epoch": 1723499697
+    },
+    "velocity": 4.826256584152236
+  },
+  {
+    "lg": -77.0801322,
+    "lt": -12.0576582,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 299305013,
+      "secs_since_epoch": 1723499696
+    },
+    "velocity": 5.962175983321535
+  },
+  {
+    "lg": -77.0801248,
+    "lt": -12.0576952,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 287215710,
+      "secs_since_epoch": 1723499695
+    },
+    "velocity": 7.785759937330774
+  },
+  {
+    "lg": -77.080114,
+    "lt": -12.0577405,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227455265,
+      "secs_since_epoch": 1723499694
+    },
+    "velocity": 10.253997417409234
+  },
+  {
+    "lg": -77.0800994,
+    "lt": -12.0577994,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227199249,
+      "secs_since_epoch": 1723499693
+    },
+    "velocity": 11.11413565443022
+  },
+  {
+    "lg": -77.0800798,
+    "lt": -12.0578674,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 227100232,
+      "secs_since_epoch": 1723499692
+    },
+    "velocity": 11.819787570532409
+  },
+  {
+    "lg": -77.0800527,
+    "lt": -12.0579421,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236553185,
+      "secs_since_epoch": 1723499691
+    },
+    "velocity": 12.051307320781275
+  },
+  {
+    "lg": -77.0800327,
+    "lt": -12.0580199,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220230919,
+      "secs_since_epoch": 1723499690
+    },
+    "velocity": 12.671507098003296
+  },
+  {
+    "lg": -77.0800098,
+    "lt": -12.0581012,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 248930547,
+      "secs_since_epoch": 1723499689
+    },
+    "velocity": 12.780990466280764
+  },
+  {
+    "lg": -77.0799816,
+    "lt": -12.0581915,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220548756,
+      "secs_since_epoch": 1723499688
+    },
+    "velocity": 12.854725293200023
+  },
+  {
+    "lg": -77.0799598,
+    "lt": -12.0582862,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228622385,
+      "secs_since_epoch": 1723499687
+    },
+    "velocity": 12.980428283064118
+  },
+  {
+    "lg": -77.079938,
+    "lt": -12.0583845,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228850290,
+      "secs_since_epoch": 1723499686
+    },
+    "velocity": 13.025869542930359
+  },
+  {
+    "lg": -77.0799139,
+    "lt": -12.0584832,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280443222,
+      "secs_since_epoch": 1723499685
+    },
+    "velocity": 12.413870544047601
+  },
+  {
+    "lg": -77.0798889,
+    "lt": -12.0585767,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 248927195,
+      "secs_since_epoch": 1723499684
+    },
+    "velocity": 12.445102231031894
+  },
+  {
+    "lg": -77.0798644,
+    "lt": -12.0586653,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 242600616,
+      "secs_since_epoch": 1723499683
+    },
+    "velocity": 12.088949437339725
+  },
+  {
+    "lg": -77.079841,
+    "lt": -12.0587521,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220703378,
+      "secs_since_epoch": 1723499682
+    },
+    "velocity": 11.63576172613001
+  },
+  {
+    "lg": -77.0798172,
+    "lt": -12.0588383,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 260296164,
+      "secs_since_epoch": 1723499681
+    },
+    "velocity": 10.98623705003954
+  },
+  {
+    "lg": -77.0797943,
+    "lt": -12.0589223,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228762762,
+      "secs_since_epoch": 1723499680
+    },
+    "velocity": 10.710975995555462
+  },
+  {
+    "lg": -77.079774,
+    "lt": -12.0589992,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220670838,
+      "secs_since_epoch": 1723499679
+    },
+    "velocity": 10.136383273989674
+  },
+  {
+    "lg": -77.0797538,
+    "lt": -12.0590731,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 248563208,
+      "secs_since_epoch": 1723499678
+    },
+    "velocity": 8.871598141510498
+  },
+  {
+    "lg": -77.0797338,
+    "lt": -12.0591464,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280711294,
+      "secs_since_epoch": 1723499677
+    },
+    "velocity": 7.703818891806387
+  },
+  {
+    "lg": -77.0797161,
+    "lt": -12.0592155,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228767653,
+      "secs_since_epoch": 1723499676
+    },
+    "velocity": 6.2920786959927995
+  },
+  {
+    "lg": -77.079704,
+    "lt": -12.0592719,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220655261,
+      "secs_since_epoch": 1723499675
+    },
+    "velocity": 5.341738230763887
+  },
+  {
+    "lg": -77.079693,
+    "lt": -12.059322,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 323770097,
+      "secs_since_epoch": 1723499674
+    },
+    "velocity": 4.120242732678875
+  },
+  {
+    "lg": -77.0796844,
+    "lt": -12.0593672,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 261505815,
+      "secs_since_epoch": 1723499673
+    },
+    "velocity": 3.642824969758161
+  },
+  {
+    "lg": -77.079678,
+    "lt": -12.0594052,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240137073,
+      "secs_since_epoch": 1723499672
+    },
+    "velocity": 3.407683309906346
+  },
+  {
+    "lg": -77.0796748,
+    "lt": -12.0594375,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220570487,
+      "secs_since_epoch": 1723499671
+    },
+    "velocity": 2.7608514910873185
+  },
+  {
+    "lg": -77.0796704,
+    "lt": -12.0594699,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280599809,
+      "secs_since_epoch": 1723499670
+    },
+    "velocity": 1.92374057698338
+  },
+  {
+    "lg": -77.079664,
+    "lt": -12.059497,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 268747437,
+      "secs_since_epoch": 1723499669
+    },
+    "velocity": 0.7759036288168956
+  },
+  {
+    "lg": -77.0796614,
+    "lt": -12.0595052,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240071758,
+      "secs_since_epoch": 1723499668
+    },
+    "velocity": 0.3559601886541469
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220841554,
+      "secs_since_epoch": 1723499667
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 248356307,
+      "secs_since_epoch": 1723499666
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 248792068,
+      "secs_since_epoch": 1723499665
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220367257,
+      "secs_since_epoch": 1723499664
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240693359,
+      "secs_since_epoch": 1723499663
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228574821,
+      "secs_since_epoch": 1723499662
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 248155808,
+      "secs_since_epoch": 1723499661
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228258474,
+      "secs_since_epoch": 1723499660
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228322889,
+      "secs_since_epoch": 1723499659
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280558341,
+      "secs_since_epoch": 1723499658
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220271180,
+      "secs_since_epoch": 1723499657
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228655695,
+      "secs_since_epoch": 1723499656
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 260820983,
+      "secs_since_epoch": 1723499655
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 289069554,
+      "secs_since_epoch": 1723499654
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241054518,
+      "secs_since_epoch": 1723499653
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240594601,
+      "secs_since_epoch": 1723499652
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 281472648,
+      "secs_since_epoch": 1723499651
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228784338,
+      "secs_since_epoch": 1723499650
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240790614,
+      "secs_since_epoch": 1723499649
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221000695,
+      "secs_since_epoch": 1723499648
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280736202,
+      "secs_since_epoch": 1723499647
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228617830,
+      "secs_since_epoch": 1723499646
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220579278,
+      "secs_since_epoch": 1723499645
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220748572,
+      "secs_since_epoch": 1723499644
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 248886912,
+      "secs_since_epoch": 1723499643
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 200905914,
+      "secs_since_epoch": 1723499642
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228783217,
+      "secs_since_epoch": 1723499641
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220718217,
+      "secs_since_epoch": 1723499640
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 288647053,
+      "secs_since_epoch": 1723499639
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228689115,
+      "secs_since_epoch": 1723499638
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218841833,
+      "secs_since_epoch": 1723499637
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220550313,
+      "secs_since_epoch": 1723499636
+    },
+    "velocity": 0.0
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 222594782,
+      "secs_since_epoch": 1723499635
+    },
+    "velocity": 0.003002569961854623
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 244158167,
+      "secs_since_epoch": 1723499634
+    },
+    "velocity": 0.01216673238328432
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594986,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221748038,
+      "secs_since_epoch": 1723499633
+    },
+    "velocity": 0.045224794275692454
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.0594987,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228743878,
+      "secs_since_epoch": 1723499632
+    },
+    "velocity": 0.2726832701951423
+  },
+  {
+    "lg": -77.0796636,
+    "lt": -12.059499,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 288805347,
+      "secs_since_epoch": 1723499631
+    },
+    "velocity": 0.5491088552630832
+  },
+  {
+    "lg": -77.0796635,
+    "lt": -12.0595,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 249384907,
+      "secs_since_epoch": 1723499630
+    },
+    "velocity": 0.9192231263536775
+  },
+  {
+    "lg": -77.0796625,
+    "lt": -12.0595062,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 248877052,
+      "secs_since_epoch": 1723499629
+    },
+    "velocity": 1.4897501524002277
+  },
+  {
+    "lg": -77.0796605,
+    "lt": -12.0595104,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240892602,
+      "secs_since_epoch": 1723499628
+    },
+    "velocity": 2.4742272439492803
+  },
+  {
+    "lg": -77.0796576,
+    "lt": -12.0595132,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 238654542,
+      "secs_since_epoch": 1723499627
+    },
+    "velocity": 4.234395195766856
+  },
+  {
+    "lg": -77.079652,
+    "lt": -12.0595225,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240806160,
+      "secs_since_epoch": 1723499626
+    },
+    "velocity": 5.93372881331065
+  },
+  {
+    "lg": -77.0796431,
+    "lt": -12.0595392,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220816870,
+      "secs_since_epoch": 1723499625
+    },
+    "velocity": 7.5780477655648255
+  },
+  {
+    "lg": -77.0796287,
+    "lt": -12.0595652,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 281583954,
+      "secs_since_epoch": 1723499624
+    },
+    "velocity": 7.449486214494817
+  },
+  {
+    "lg": -77.079612,
+    "lt": -12.0596084,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228419427,
+      "secs_since_epoch": 1723499623
+    },
+    "velocity": 7.9170841096413245
+  },
+  {
+    "lg": -77.079595,
+    "lt": -12.059669,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220879092,
+      "secs_since_epoch": 1723499622
+    },
+    "velocity": 9.417691984041321
+  },
+  {
+    "lg": -77.0795901,
+    "lt": -12.0597357,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220536355,
+      "secs_since_epoch": 1723499621
+    },
+    "velocity": 12.915881270147885
+  },
+  {
+    "lg": -77.0796033,
+    "lt": -12.0598056,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 288880820,
+      "secs_since_epoch": 1723499620
+    },
+    "velocity": 16.64320110048868
+  },
+  {
+    "lg": -77.0796327,
+    "lt": -12.0598769,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 250235988,
+      "secs_since_epoch": 1723499619
+    },
+    "velocity": 19.81036031003258
+  },
+  {
+    "lg": -77.0796724,
+    "lt": -12.0599416,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228262579,
+      "secs_since_epoch": 1723499618
+    },
+    "velocity": 24.181499412736795
+  },
+  {
+    "lg": -77.079717,
+    "lt": -12.0599988,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 340421208,
+      "secs_since_epoch": 1723499617
+    },
+    "velocity": 27.610611104584432
+  },
+  {
+    "lg": -77.0797764,
+    "lt": -12.060045,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228544792,
+      "secs_since_epoch": 1723499616
+    },
+    "velocity": 32.297999988108714
+  },
+  {
+    "lg": -77.0798497,
+    "lt": -12.0600837,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228358637,
+      "secs_since_epoch": 1723499615
+    },
+    "velocity": 34.92151515864649
+  },
+  {
+    "lg": -77.0799278,
+    "lt": -12.0601105,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 248310644,
+      "secs_since_epoch": 1723499614
+    },
+    "velocity": 36.183853616241606
+  },
+  {
+    "lg": -77.080014,
+    "lt": -12.0601362,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 260427633,
+      "secs_since_epoch": 1723499613
+    },
+    "velocity": 37.89487372471909
+  },
+  {
+    "lg": -77.0801045,
+    "lt": -12.0601628,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 288891062,
+      "secs_since_epoch": 1723499612
+    },
+    "velocity": 39.62439862714747
+  },
+  {
+    "lg": -77.0801991,
+    "lt": -12.0601904,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 228442160,
+      "secs_since_epoch": 1723499611
+    },
+    "velocity": 40.12067983154214
+  },
+  {
+    "lg": -77.0802985,
+    "lt": -12.0602194,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236706913,
+      "secs_since_epoch": 1723499610
+    },
+    "velocity": 40.084252396010385
+  },
+  {
+    "lg": -77.0803989,
+    "lt": -12.0602476,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 296711640,
+      "secs_since_epoch": 1723499609
+    },
+    "velocity": 39.03509088261304
+  },
+  {
+    "lg": -77.0804984,
+    "lt": -12.0602758,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 224206039,
+      "secs_since_epoch": 1723499608
+    },
+    "velocity": 40.62157282120359
+  },
+  {
+    "lg": -77.0805971,
+    "lt": -12.0603042,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236831402,
+      "secs_since_epoch": 1723499607
+    },
+    "velocity": 39.700067261310224
+  },
+  {
+    "lg": -77.0806955,
+    "lt": -12.0603333,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236622846,
+      "secs_since_epoch": 1723499606
+    },
+    "velocity": 38.33221938869317
+  },
+  {
+    "lg": -77.0807957,
+    "lt": -12.0603621,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 276633503,
+      "secs_since_epoch": 1723499605
+    },
+    "velocity": 36.88679771627834
+  },
+  {
+    "lg": -77.0808919,
+    "lt": -12.0603889,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 246327394,
+      "secs_since_epoch": 1723499604
+    },
+    "velocity": 36.1807039678661
+  },
+  {
+    "lg": -77.080983,
+    "lt": -12.060413,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 216526555,
+      "secs_since_epoch": 1723499603
+    },
+    "velocity": 35.594652489634
+  },
+  {
+    "lg": -77.0810742,
+    "lt": -12.0604365,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236856731,
+      "secs_since_epoch": 1723499602
+    },
+    "velocity": 34.131575857752374
+  },
+  {
+    "lg": -77.0811609,
+    "lt": -12.0604613,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 252856547,
+      "secs_since_epoch": 1723499601
+    },
+    "velocity": 33.28560969199784
+  },
+  {
+    "lg": -77.0812475,
+    "lt": -12.0604862,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 224357626,
+      "secs_since_epoch": 1723499600
+    },
+    "velocity": 31.916686616506468
+  },
+  {
+    "lg": -77.0813302,
+    "lt": -12.0605094,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 216379700,
+      "secs_since_epoch": 1723499599
+    },
+    "velocity": 30.299170680884448
+  },
+  {
+    "lg": -77.0814102,
+    "lt": -12.0605343,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236312283,
+      "secs_since_epoch": 1723499598
+    },
+    "velocity": 29.096054592724045
+  },
+  {
+    "lg": -77.081483,
+    "lt": -12.0605558,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 252456911,
+      "secs_since_epoch": 1723499597
+    },
+    "velocity": 28.23915131382581
+  },
+  {
+    "lg": -77.0815538,
+    "lt": -12.0605743,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 244223626,
+      "secs_since_epoch": 1723499596
+    },
+    "velocity": 25.177045647657103
+  },
+  {
+    "lg": -77.0816264,
+    "lt": -12.0605924,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 244588529,
+      "secs_since_epoch": 1723499595
+    },
+    "velocity": 20.860566755270217
+  },
+  {
+    "lg": -77.0816884,
+    "lt": -12.0606078,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 324551766,
+      "secs_since_epoch": 1723499594
+    },
+    "velocity": 15.820318457541871
+  },
+  {
+    "lg": -77.0817392,
+    "lt": -12.06062,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280232728,
+      "secs_since_epoch": 1723499593
+    },
+    "velocity": 11.70053495067667
+  },
+  {
+    "lg": -77.0817823,
+    "lt": -12.0606303,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236615221,
+      "secs_since_epoch": 1723499592
+    },
+    "velocity": 7.873862992090124
+  },
+  {
+    "lg": -77.0818098,
+    "lt": -12.0606362,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236311635,
+      "secs_since_epoch": 1723499591
+    },
+    "velocity": 7.549787549833836
+  },
+  {
+    "lg": -77.0818277,
+    "lt": -12.0606404,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236349580,
+      "secs_since_epoch": 1723499590
+    },
+    "velocity": 10.533972717713894
+  },
+  {
+    "lg": -77.081841,
+    "lt": -12.060644,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 236353913,
+      "secs_since_epoch": 1723499589
+    },
+    "velocity": 17.072630125722547
+  },
+  {
+    "lg": -77.0818663,
+    "lt": -12.0606492,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 224637717,
+      "secs_since_epoch": 1723499588
+    },
+    "velocity": 23.55255087357935
+  },
+  {
+    "lg": -77.0819065,
+    "lt": -12.0606572,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226482557,
+      "secs_since_epoch": 1723499587
+    },
+    "velocity": 29.780536826832517
+  },
+  {
+    "lg": -77.081966,
+    "lt": -12.0606675,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 291198668,
+      "secs_since_epoch": 1723499586
+    },
+    "velocity": 34.7047136736811
+  },
+  {
+    "lg": -77.0820415,
+    "lt": -12.0606812,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 232565821,
+      "secs_since_epoch": 1723499585
+    },
+    "velocity": 38.185271636175585
+  },
+  {
+    "lg": -77.0821283,
+    "lt": -12.0606935,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 231212012,
+      "secs_since_epoch": 1723499584
+    },
+    "velocity": 39.374048341507184
+  },
+  {
+    "lg": -77.0822263,
+    "lt": -12.0607066,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 275083469,
+      "secs_since_epoch": 1723499583
+    },
+    "velocity": 38.638125787077065
+  },
+  {
+    "lg": -77.0823275,
+    "lt": -12.0607187,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221151164,
+      "secs_since_epoch": 1723499582
+    },
+    "velocity": 38.537882857106766
+  },
+  {
+    "lg": -77.082425,
+    "lt": -12.0607294,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 201646634,
+      "secs_since_epoch": 1723499581
+    },
+    "velocity": 37.075633821086406
+  },
+  {
+    "lg": -77.0825201,
+    "lt": -12.0607376,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 218251221,
+      "secs_since_epoch": 1723499580
+    },
+    "velocity": 34.791253031537316
+  },
+  {
+    "lg": -77.0826122,
+    "lt": -12.0607436,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 251542924,
+      "secs_since_epoch": 1723499579
+    },
+    "velocity": 32.040325327411864
+  },
+  {
+    "lg": -77.0826981,
+    "lt": -12.0607507,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240819889,
+      "secs_since_epoch": 1723499578
+    },
+    "velocity": 31.33263944582645
+  },
+  {
+    "lg": -77.0827778,
+    "lt": -12.0607616,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240686339,
+      "secs_since_epoch": 1723499577
+    },
+    "velocity": 30.616756431928955
+  },
+  {
+    "lg": -77.0828529,
+    "lt": -12.0607746,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230984637,
+      "secs_since_epoch": 1723499576
+    },
+    "velocity": 30.970991914812394
+  },
+  {
+    "lg": -77.0829279,
+    "lt": -12.0607885,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 291212327,
+      "secs_since_epoch": 1723499575
+    },
+    "velocity": 31.291673023904387
+  },
+  {
+    "lg": -77.0830062,
+    "lt": -12.0608021,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240202326,
+      "secs_since_epoch": 1723499574
+    },
+    "velocity": 34.02305677579756
+  },
+  {
+    "lg": -77.0830833,
+    "lt": -12.0608124,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 239149603,
+      "secs_since_epoch": 1723499573
+    },
+    "velocity": 34.49280674771066
+  },
+  {
+    "lg": -77.0831645,
+    "lt": -12.0608202,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 250994470,
+      "secs_since_epoch": 1723499572
+    },
+    "velocity": 36.033763889805
+  },
+  {
+    "lg": -77.083255,
+    "lt": -12.0608256,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 300544741,
+      "secs_since_epoch": 1723499571
+    },
+    "velocity": 35.75332026236162
+  },
+  {
+    "lg": -77.0833406,
+    "lt": -12.0608373,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240423245,
+      "secs_since_epoch": 1723499570
+    },
+    "velocity": 36.765957645110184
+  },
+  {
+    "lg": -77.0834334,
+    "lt": -12.0608505,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 250813643,
+      "secs_since_epoch": 1723499569
+    },
+    "velocity": 34.943907741371525
+  },
+  {
+    "lg": -77.0835226,
+    "lt": -12.0608639,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 290968961,
+      "secs_since_epoch": 1723499568
+    },
+    "velocity": 33.52661164928985
+  },
+  {
+    "lg": -77.0836102,
+    "lt": -12.0608795,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 291555279,
+      "secs_since_epoch": 1723499567
+    },
+    "velocity": 33.160033790743995
+  },
+  {
+    "lg": -77.0836958,
+    "lt": -12.060892,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 231008750,
+      "secs_since_epoch": 1723499566
+    },
+    "velocity": 32.7079617555983
+  },
+  {
+    "lg": -77.0837777,
+    "lt": -12.0609043,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 231062879,
+      "secs_since_epoch": 1723499565
+    },
+    "velocity": 31.38504861697999
+  },
+  {
+    "lg": -77.0838576,
+    "lt": -12.0609168,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 291394585,
+      "secs_since_epoch": 1723499564
+    },
+    "velocity": 29.350556023775844
+  },
+  {
+    "lg": -77.0839358,
+    "lt": -12.0609305,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280131664,
+      "secs_since_epoch": 1723499563
+    },
+    "velocity": 27.143632947478924
+  },
+  {
+    "lg": -77.0840111,
+    "lt": -12.0609433,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240213151,
+      "secs_since_epoch": 1723499562
+    },
+    "velocity": 24.179473077868106
+  },
+  {
+    "lg": -77.0840795,
+    "lt": -12.0609529,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 250904990,
+      "secs_since_epoch": 1723499561
+    },
+    "velocity": 19.916092208738565
+  },
+  {
+    "lg": -77.0841406,
+    "lt": -12.0609487,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 246401913,
+      "secs_since_epoch": 1723499560
+    },
+    "velocity": 15.611615085081407
+  },
+  {
+    "lg": -77.0841922,
+    "lt": -12.060929,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 226288970,
+      "secs_since_epoch": 1723499559
+    },
+    "velocity": 9.628703216347278
+  },
+  {
+    "lg": -77.0842297,
+    "lt": -12.0609013,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 205770767,
+      "secs_since_epoch": 1723499558
+    },
+    "velocity": 5.788815633615458
+  },
+  {
+    "lg": -77.0842544,
+    "lt": -12.0608698,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 273552948,
+      "secs_since_epoch": 1723499557
+    },
+    "velocity": 3.923131458697034
+  },
+  {
+    "lg": -77.0842577,
+    "lt": -12.0608348,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 213309468,
+      "secs_since_epoch": 1723499556
+    },
+    "velocity": 5.219644131197682
+  },
+  {
+    "lg": -77.0842545,
+    "lt": -12.0607976,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 214221897,
+      "secs_since_epoch": 1723499555
+    },
+    "velocity": 6.71833775961183
+  },
+  {
+    "lg": -77.0842607,
+    "lt": -12.0607513,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 254364228,
+      "secs_since_epoch": 1723499554
+    },
+    "velocity": 7.98338517911554
+  },
+  {
+    "lg": -77.0842729,
+    "lt": -12.0606938,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 233327907,
+      "secs_since_epoch": 1723499553
+    },
+    "velocity": 8.499400166191943
+  },
+  {
+    "lg": -77.0842875,
+    "lt": -12.0606324,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 233266256,
+      "secs_since_epoch": 1723499552
+    },
+    "velocity": 8.059510810479555
+  },
+  {
+    "lg": -77.0843021,
+    "lt": -12.0605583,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241541022,
+      "secs_since_epoch": 1723499551
+    },
+    "velocity": 7.614864576459999
+  },
+  {
+    "lg": -77.084317,
+    "lt": -12.0604912,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241656688,
+      "secs_since_epoch": 1723499550
+    },
+    "velocity": 6.903958898705213
+  },
+  {
+    "lg": -77.0843273,
+    "lt": -12.0604311,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 233371519,
+      "secs_since_epoch": 1723499549
+    },
+    "velocity": 6.836275461493047
+  },
+  {
+    "lg": -77.0843397,
+    "lt": -12.0603746,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 297718280,
+      "secs_since_epoch": 1723499548
+    },
+    "velocity": 6.121059083059144
+  },
+  {
+    "lg": -77.0843519,
+    "lt": -12.0603205,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 225490681,
+      "secs_since_epoch": 1723499547
+    },
+    "velocity": 5.462208183648761
+  },
+  {
+    "lg": -77.0843638,
+    "lt": -12.0602728,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 243268147,
+      "secs_since_epoch": 1723499546
+    },
+    "velocity": 4.7521026627040746
+  },
+  {
+    "lg": -77.084374,
+    "lt": -12.0602311,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 213148940,
+      "secs_since_epoch": 1723499545
+    },
+    "velocity": 4.391248831248959
+  },
+  {
+    "lg": -77.0843821,
+    "lt": -12.0601969,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 213338702,
+      "secs_since_epoch": 1723499544
+    },
+    "velocity": 3.830966501848497
+  },
+  {
+    "lg": -77.0843903,
+    "lt": -12.0601674,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 242465576,
+      "secs_since_epoch": 1723499543
+    },
+    "velocity": 2.649295000238754
+  },
+  {
+    "lg": -77.0843987,
+    "lt": -12.0601379,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 253049308,
+      "secs_since_epoch": 1723499542
+    },
+    "velocity": 1.6637647694040334
+  },
+  {
+    "lg": -77.084404,
+    "lt": -12.0601166,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241407841,
+      "secs_since_epoch": 1723499541
+    },
+    "velocity": 0.7278084758271749
+  },
+  {
+    "lg": -77.0844056,
+    "lt": -12.060111,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 233172226,
+      "secs_since_epoch": 1723499540
+    },
+    "velocity": 0.44928161607642786
+  },
+  {
+    "lg": -77.0844089,
+    "lt": -12.0601086,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 233472646,
+      "secs_since_epoch": 1723499539
+    },
+    "velocity": 0.008961788576858115
+  },
+  {
+    "lg": -77.0844089,
+    "lt": -12.0601086,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 273315728,
+      "secs_since_epoch": 1723499538
+    },
+    "velocity": 0.06367318997008575
+  },
+  {
+    "lg": -77.0844089,
+    "lt": -12.0601086,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 242453576,
+      "secs_since_epoch": 1723499537
+    },
+    "velocity": 0.203366929405985
+  },
+  {
+    "lg": -77.0844089,
+    "lt": -12.0601089,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 225366961,
+      "secs_since_epoch": 1723499536
+    },
+    "velocity": 0.5829012484619142
+  },
+  {
+    "lg": -77.0844086,
+    "lt": -12.0601102,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 213367696,
+      "secs_since_epoch": 1723499535
+    },
+    "velocity": 0.8691258849164064
+  },
+  {
+    "lg": -77.0844088,
+    "lt": -12.0601146,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 300439721,
+      "secs_since_epoch": 1723499534
+    },
+    "velocity": 1.4753447200733358
+  },
+  {
+    "lg": -77.0844112,
+    "lt": -12.0601203,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 371605999,
+      "secs_since_epoch": 1723499533
+    },
+    "velocity": 2.1152286779346148
+  },
+  {
+    "lg": -77.0844136,
+    "lt": -12.0601257,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 250262029,
+      "secs_since_epoch": 1723499532
+    },
+    "velocity": 3.2173078266538417
+  },
+  {
+    "lg": -77.0844195,
+    "lt": -12.0601226,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 210091129,
+      "secs_since_epoch": 1723499531
+    },
+    "velocity": 3.689346016789801
+  },
+  {
+    "lg": -77.0844271,
+    "lt": -12.0601106,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 201083923,
+      "secs_since_epoch": 1723499530
+    },
+    "velocity": 4.322654163125131
+  },
+  {
+    "lg": -77.0844346,
+    "lt": -12.0600815,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 261100772,
+      "secs_since_epoch": 1723499529
+    },
+    "velocity": 4.746692116849008
+  },
+  {
+    "lg": -77.0844404,
+    "lt": -12.0600496,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 249072367,
+      "secs_since_epoch": 1723499528
+    },
+    "velocity": 5.702661292919468
+  },
+  {
+    "lg": -77.0844493,
+    "lt": -12.0600109,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 269135206,
+      "secs_since_epoch": 1723499527
+    },
+    "velocity": 6.370852357362085
+  },
+  {
+    "lg": -77.0844582,
+    "lt": -12.0599663,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 300054365,
+      "secs_since_epoch": 1723499526
+    },
+    "velocity": 7.545267276204205
+  },
+  {
+    "lg": -77.0844681,
+    "lt": -12.0599041,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 229199826,
+      "secs_since_epoch": 1723499525
+    },
+    "velocity": 8.482886081971985
+  },
+  {
+    "lg": -77.0844802,
+    "lt": -12.059846,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 229138834,
+      "secs_since_epoch": 1723499524
+    },
+    "velocity": 9.453592389908586
+  },
+  {
+    "lg": -77.0844956,
+    "lt": -12.0597815,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 321377349,
+      "secs_since_epoch": 1723499523
+    },
+    "velocity": 9.944791079317971
+  },
+  {
+    "lg": -77.0845131,
+    "lt": -12.0597094,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 261270893,
+      "secs_since_epoch": 1723499522
+    },
+    "velocity": 10.783657158854119
+  },
+  {
+    "lg": -77.0845321,
+    "lt": -12.0596322,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 229388171,
+      "secs_since_epoch": 1723499521
+    },
+    "velocity": 11.09707407635257
+  },
+  {
+    "lg": -77.0845521,
+    "lt": -12.0595509,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230220650,
+      "secs_since_epoch": 1723499520
+    },
+    "velocity": 10.68171319549848
+  },
+  {
+    "lg": -77.084574,
+    "lt": -12.0594684,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230201852,
+      "secs_since_epoch": 1723499519
+    },
+    "velocity": 9.658863873237708
+  },
+  {
+    "lg": -77.0845945,
+    "lt": -12.0593903,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 238321376,
+      "secs_since_epoch": 1723499518
+    },
+    "velocity": 8.109796264475236
+  },
+  {
+    "lg": -77.084613,
+    "lt": -12.0593191,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221420382,
+      "secs_since_epoch": 1723499517
+    },
+    "velocity": 6.634245640188126
+  },
+  {
+    "lg": -77.084626,
+    "lt": -12.0592523,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 270287051,
+      "secs_since_epoch": 1723499516
+    },
+    "velocity": 5.905390264150913
+  },
+  {
+    "lg": -77.084632,
+    "lt": -12.0591905,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 301018981,
+      "secs_since_epoch": 1723499515
+    },
+    "velocity": 5.536836241420788
+  },
+  {
+    "lg": -77.0846304,
+    "lt": -12.0591268,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241118689,
+      "secs_since_epoch": 1723499514
+    },
+    "velocity": 5.320425366290986
+  },
+  {
+    "lg": -77.0846242,
+    "lt": -12.0590659,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 251491455,
+      "secs_since_epoch": 1723499513
+    },
+    "velocity": 5.5203492691983085
+  },
+  {
+    "lg": -77.0846199,
+    "lt": -12.0590117,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241363424,
+      "secs_since_epoch": 1723499512
+    },
+    "velocity": 7.241073406379791
+  },
+  {
+    "lg": -77.0846165,
+    "lt": -12.0589613,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 250503752,
+      "secs_since_epoch": 1723499511
+    },
+    "velocity": 10.453783908787841
+  },
+  {
+    "lg": -77.0846301,
+    "lt": -12.0589177,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240221515,
+      "secs_since_epoch": 1723499510
+    },
+    "velocity": 13.496467359215254
+  },
+  {
+    "lg": -77.0846539,
+    "lt": -12.0588808,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 261289431,
+      "secs_since_epoch": 1723499509
+    },
+    "velocity": 15.942554773556683
+  },
+  {
+    "lg": -77.0846882,
+    "lt": -12.0588546,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 301044011,
+      "secs_since_epoch": 1723499508
+    },
+    "velocity": 16.113812651634515
+  },
+  {
+    "lg": -77.0847283,
+    "lt": -12.0588319,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 250350113,
+      "secs_since_epoch": 1723499507
+    },
+    "velocity": 15.126894859640789
+  },
+  {
+    "lg": -77.0847724,
+    "lt": -12.0588097,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 246422926,
+      "secs_since_epoch": 1723499506
+    },
+    "velocity": 11.567830493454851
+  },
+  {
+    "lg": -77.0848096,
+    "lt": -12.0587776,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241167159,
+      "secs_since_epoch": 1723499505
+    },
+    "velocity": 8.365955341282056
+  },
+  {
+    "lg": -77.0848363,
+    "lt": -12.05874,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 321021781,
+      "secs_since_epoch": 1723499504
+    },
+    "velocity": 6.35054846689892
+  },
+  {
+    "lg": -77.084854,
+    "lt": -12.0587005,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 270409403,
+      "secs_since_epoch": 1723499503
+    },
+    "velocity": 6.713307747085992
+  },
+  {
+    "lg": -77.0848642,
+    "lt": -12.0586533,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241110263,
+      "secs_since_epoch": 1723499502
+    },
+    "velocity": 10.215174277074022
+  },
+  {
+    "lg": -77.0848731,
+    "lt": -12.0586046,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 250377361,
+      "secs_since_epoch": 1723499501
+    },
+    "velocity": 15.916902857502288
+  },
+  {
+    "lg": -77.0848918,
+    "lt": -12.05856,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 281180632,
+      "secs_since_epoch": 1723499500
+    },
+    "velocity": 21.928437328615292
+  },
+  {
+    "lg": -77.0849318,
+    "lt": -12.0585194,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240315023,
+      "secs_since_epoch": 1723499499
+    },
+    "velocity": 26.127659659040322
+  },
+  {
+    "lg": -77.0849886,
+    "lt": -12.0584824,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230300495,
+      "secs_since_epoch": 1723499498
+    },
+    "velocity": 28.540300028974364
+  },
+  {
+    "lg": -77.0850545,
+    "lt": -12.0584477,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 261317914,
+      "secs_since_epoch": 1723499497
+    },
+    "velocity": 29.788560729353797
+  },
+  {
+    "lg": -77.0851241,
+    "lt": -12.0584104,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 258482765,
+      "secs_since_epoch": 1723499496
+    },
+    "velocity": 31.311482344828853
+  },
+  {
+    "lg": -77.085198,
+    "lt": -12.0583691,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 260085813,
+      "secs_since_epoch": 1723499495
+    },
+    "velocity": 32.57662567936816
+  },
+  {
+    "lg": -77.0852767,
+    "lt": -12.0583271,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241483471,
+      "secs_since_epoch": 1723499494
+    },
+    "velocity": 33.34763132326648
+  },
+  {
+    "lg": -77.0853575,
+    "lt": -12.0582866,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241668081,
+      "secs_since_epoch": 1723499493
+    },
+    "velocity": 30.35222915186403
+  },
+  {
+    "lg": -77.085438,
+    "lt": -12.0582479,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 280377521,
+      "secs_since_epoch": 1723499492
+    },
+    "velocity": 27.506183095878093
+  },
+  {
+    "lg": -77.0855152,
+    "lt": -12.0582118,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 350401130,
+      "secs_since_epoch": 1723499491
+    },
+    "velocity": 23.667036403395816
+  },
+  {
+    "lg": -77.0855836,
+    "lt": -12.0581776,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230515302,
+      "secs_since_epoch": 1723499490
+    },
+    "velocity": 20.1984982201641
+  },
+  {
+    "lg": -77.0856448,
+    "lt": -12.058139,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 237585005,
+      "secs_since_epoch": 1723499489
+    },
+    "velocity": 15.31981516544145
+  },
+  {
+    "lg": -77.0856962,
+    "lt": -12.0580919,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 241154540,
+      "secs_since_epoch": 1723499488
+    },
+    "velocity": 11.144143722769835
+  },
+  {
+    "lg": -77.0857314,
+    "lt": -12.0580412,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220990696,
+      "secs_since_epoch": 1723499487
+    },
+    "velocity": 8.109797216801692
+  },
+  {
+    "lg": -77.0857539,
+    "lt": -12.0579907,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230644624,
+      "secs_since_epoch": 1723499486
+    },
+    "velocity": 6.855420429034141
+  },
+  {
+    "lg": -77.0857696,
+    "lt": -12.0579394,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 298502256,
+      "secs_since_epoch": 1723499485
+    },
+    "velocity": 7.077455335367485
+  },
+  {
+    "lg": -77.0857769,
+    "lt": -12.0578771,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230633831,
+      "secs_since_epoch": 1723499484
+    },
+    "velocity": 9.426106862785408
+  },
+  {
+    "lg": -77.0857673,
+    "lt": -12.0578208,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 240897838,
+      "secs_since_epoch": 1723499483
+    },
+    "velocity": 12.252837321357914
+  },
+  {
+    "lg": -77.0857504,
+    "lt": -12.0577545,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230132054,
+      "secs_since_epoch": 1723499482
+    },
+    "velocity": 14.395065006482717
+  },
+  {
+    "lg": -77.085723,
+    "lt": -12.0576842,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 250480955,
+      "secs_since_epoch": 1723499481
+    },
+    "velocity": 14.9401241162542
+  },
+  {
+    "lg": -77.085692,
+    "lt": -12.0576089,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310428518,
+      "secs_since_epoch": 1723499480
+    },
+    "velocity": 14.95098327396159
+  },
+  {
+    "lg": -77.0856582,
+    "lt": -12.057527,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 290131911,
+      "secs_since_epoch": 1723499479
+    },
+    "velocity": 15.075937615544856
+  },
+  {
+    "lg": -77.0856248,
+    "lt": -12.0574409,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230451990,
+      "secs_since_epoch": 1723499478
+    },
+    "velocity": 15.414246391889213
+  },
+  {
+    "lg": -77.0855924,
+    "lt": -12.0573526,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220974932,
+      "secs_since_epoch": 1723499477
+    },
+    "velocity": 15.652244112122178
+  },
+  {
+    "lg": -77.0855592,
+    "lt": -12.0572642,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221050291,
+      "secs_since_epoch": 1723499476
+    },
+    "velocity": 16.293381233055705
+  },
+  {
+    "lg": -77.0855259,
+    "lt": -12.0571748,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 221222223,
+      "secs_since_epoch": 1723499475
+    },
+    "velocity": 16.46964612884618
+  },
+  {
+    "lg": -77.0854925,
+    "lt": -12.0570848,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230482161,
+      "secs_since_epoch": 1723499474
+    },
+    "velocity": 17.463948013576726
+  },
+  {
+    "lg": -77.0854587,
+    "lt": -12.0569942,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 329303088,
+      "secs_since_epoch": 1723499473
+    },
+    "velocity": 15.496060937798969
+  },
+  {
+    "lg": -77.0854233,
+    "lt": -12.0569053,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 317471913,
+      "secs_since_epoch": 1723499472
+    },
+    "velocity": 13.967347836189166
+  },
+  {
+    "lg": -77.0853864,
+    "lt": -12.0568217,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 437493260,
+      "secs_since_epoch": 1723499471
+    },
+    "velocity": 11.80754827882405
+  },
+  {
+    "lg": -77.0853559,
+    "lt": -12.0567528,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 317407100,
+      "secs_since_epoch": 1723499470
+    },
+    "velocity": 11.260182005268522
+  },
+  {
+    "lg": -77.0853286,
+    "lt": -12.0566862,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 249317846,
+      "secs_since_epoch": 1723499469
+    },
+    "velocity": 10.80092770411486
+  },
+  {
+    "lg": -77.0853055,
+    "lt": -12.0566221,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 290744177,
+      "secs_since_epoch": 1723499468
+    },
+    "velocity": 9.858711941429403
+  },
+  {
+    "lg": -77.0852843,
+    "lt": -12.0565597,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 331447369,
+      "secs_since_epoch": 1723499467
+    },
+    "velocity": 9.282900831114265
+  },
+  {
+    "lg": -77.0852598,
+    "lt": -12.0565091,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 289359592,
+      "secs_since_epoch": 1723499466
+    },
+    "velocity": 8.363665970666846
+  },
+  {
+    "lg": -77.0852396,
+    "lt": -12.0564674,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 249144162,
+      "secs_since_epoch": 1723499465
+    },
+    "velocity": 6.813160172776203
+  },
+  {
+    "lg": -77.0852204,
+    "lt": -12.0564293,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 290540166,
+      "secs_since_epoch": 1723499464
+    },
+    "velocity": 5.8746796309281315
+  },
+  {
+    "lg": -77.0852053,
+    "lt": -12.0563976,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 409424225,
+      "secs_since_epoch": 1723499463
+    },
+    "velocity": 5.963015891099819
+  },
+  {
+    "lg": -77.0851934,
+    "lt": -12.0563659,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 209132542,
+      "secs_since_epoch": 1723499462
+    },
+    "velocity": 4.918946755767246
+  },
+  {
+    "lg": -77.0851813,
+    "lt": -12.0563351,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 249411679,
+      "secs_since_epoch": 1723499461
+    },
+    "velocity": 3.031954091024363
+  },
+  {
+    "lg": -77.0851637,
+    "lt": -12.0563162,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 317668789,
+      "secs_since_epoch": 1723499460
+    },
+    "velocity": 0.6379832680958852
+  },
+  {
+    "lg": -77.0851592,
+    "lt": -12.0563131,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 220785568,
+      "secs_since_epoch": 1723499459
+    },
+    "velocity": 0.03262918692262426
+  },
+  {
+    "lg": -77.0851591,
+    "lt": -12.0563128,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230692497,
+      "secs_since_epoch": 1723499458
+    },
+    "velocity": 0.02098685051775158
+  },
+  {
+    "lg": -77.0851592,
+    "lt": -12.0563128,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310635768,
+      "secs_since_epoch": 1723499457
+    },
+    "velocity": 0.008950774249348247
+  },
+  {
+    "lg": -77.0851592,
+    "lt": -12.0563129,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 230588603,
+      "secs_since_epoch": 1723499456
+    },
+    "velocity": 0.009620304026321054
+  },
+  {
+    "lg": -77.0851592,
+    "lt": -12.056313,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 459408745,
+      "secs_since_epoch": 1723499455
+    },
+    "velocity": 0.005795644921381167
+  },
+  {
+    "lg": -77.0851592,
+    "lt": -12.0563131,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 299000407,
+      "secs_since_epoch": 1723499454
+    },
+    "velocity": 0.006012683481146745
+  },
+  {
+    "lg": -77.0851592,
+    "lt": -12.0563132,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 428549482,
+      "secs_since_epoch": 1723499453
+    },
+    "velocity": 0.005763755696155905
+  },
+  {
+    "lg": -77.0851592,
+    "lt": -12.0563132,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 358635816,
+      "secs_since_epoch": 1723499452
+    },
+    "velocity": 0.019404981347046574
+  },
+  {
+    "lg": -77.0851592,
+    "lt": -12.0563133,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310155447,
+      "secs_since_epoch": 1723499451
+    },
+    "velocity": 0.01972107918453695
+  },
+  {
+    "lg": -77.0851592,
+    "lt": -12.0563134,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310620856,
+      "secs_since_epoch": 1723499450
+    },
+    "velocity": 0.02003762933199826
+  },
+  {
+    "lg": -77.0851593,
+    "lt": -12.0563133,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310308123,
+      "secs_since_epoch": 1723499449
+    },
+    "velocity": 0.1283208763528412
+  },
+  {
+    "lg": -77.0851593,
+    "lt": -12.0563134,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310687641,
+      "secs_since_epoch": 1723499448
+    },
+    "velocity": 0.16158630792969453
+  },
+  {
+    "lg": -77.0851593,
+    "lt": -12.0563135,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 358538007,
+      "secs_since_epoch": 1723499447
+    },
+    "velocity": 0.24883608580773556
+  },
+  {
+    "lg": -77.0851584,
+    "lt": -12.0563136,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 350630779,
+      "secs_since_epoch": 1723499446
+    },
+    "velocity": 0.3293376982326699
+  },
+  {
+    "lg": -77.0851586,
+    "lt": -12.0563127,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310289103,
+      "secs_since_epoch": 1723499445
+    },
+    "velocity": 0.3897941239868999
+  },
+  {
+    "lg": -77.0851593,
+    "lt": -12.0563124,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310535140,
+      "secs_since_epoch": 1723499444
+    },
+    "velocity": 0.5053002660576768
+  },
+  {
+    "lg": -77.0851608,
+    "lt": -12.0563129,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310740294,
+      "secs_since_epoch": 1723499443
+    },
+    "velocity": 0.6637695423872643
+  },
+  {
+    "lg": -77.0851615,
+    "lt": -12.0563123,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 299530092,
+      "secs_since_epoch": 1723499442
+    },
+    "velocity": 1.4544424996329066
+  },
+  {
+    "lg": -77.0851605,
+    "lt": -12.0563092,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 579585247,
+      "secs_since_epoch": 1723499441
+    },
+    "velocity": 2.156371601488849
+  },
+  {
+    "lg": -77.0851577,
+    "lt": -12.056304,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 306850571,
+      "secs_since_epoch": 1723499440
+    },
+    "velocity": 2.9868261163511853
+  },
+  {
+    "lg": -77.0851515,
+    "lt": -12.0562943,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310593961,
+      "secs_since_epoch": 1723499439
+    },
+    "velocity": 2.6918831042660663
+  },
+  {
+    "lg": -77.0851438,
+    "lt": -12.0562825,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 273363222,
+      "secs_since_epoch": 1723499438
+    },
+    "velocity": 1.907327533839599
+  },
+  {
+    "lg": -77.0851365,
+    "lt": -12.0562737,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310521665,
+      "secs_since_epoch": 1723499437
+    },
+    "velocity": 0.9049274885457254
+  },
+  {
+    "lg": -77.0851324,
+    "lt": -12.0562666,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310209394,
+      "secs_since_epoch": 1723499436
+    },
+    "velocity": 0.32099638461162594
+  },
+  {
+    "lg": -77.0851302,
+    "lt": -12.0562637,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 270597820,
+      "secs_since_epoch": 1723499435
+    },
+    "velocity": 0.013911182056051642
+  },
+  {
+    "lg": -77.0851302,
+    "lt": -12.0562637,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 339309747,
+      "secs_since_epoch": 1723499434
+    },
+    "velocity": 0.026742042050204896
+  },
+  {
+    "lg": -77.0851303,
+    "lt": -12.0562638,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310329097,
+      "secs_since_epoch": 1723499433
+    },
+    "velocity": 0.04180737906238769
+  },
+  {
+    "lg": -77.0851303,
+    "lt": -12.0562638,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 310261957,
+      "secs_since_epoch": 1723499432
+    },
+    "velocity": 0.055911194105559156
+  },
+  {
+    "lg": -77.0851304,
+    "lt": -12.0562639,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 259382633,
+      "secs_since_epoch": 1723499431
+    },
+    "velocity": 0.0709741002480047
+  },
+  {
+    "lg": -77.0851306,
+    "lt": -12.056264,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 390712391,
+      "secs_since_epoch": 1723499430
+    },
+    "velocity": 0.1289160900475177
+  },
+  {
+    "lg": -77.0851307,
+    "lt": -12.0562641,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 390573124,
+      "secs_since_epoch": 1723499429
+    },
+    "velocity": 0.36457442700265763
+  },
+  {
+    "lg": -77.0851309,
+    "lt": -12.0562645,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 298999730,
+      "secs_since_epoch": 1723499428
+    },
+    "velocity": 0.6138344030319759
+  },
+  {
+    "lg": -77.0851315,
+    "lt": -12.0562657,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 339287731,
+      "secs_since_epoch": 1723499427
+    },
+    "velocity": 0.6692591449180814
+  },
+  {
+    "lg": -77.0851332,
+    "lt": -12.0562699,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 283610027,
+      "secs_since_epoch": 1723499426
+    },
+    "velocity": 1.7683955414565238
+  },
+  {
+    "lg": -77.0851347,
+    "lt": -12.0562742,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 430627214,
+      "secs_since_epoch": 1723499425
+    },
+    "velocity": 4.10888021725922
+  },
+  {
+    "lg": -77.0851334,
+    "lt": -12.0562731,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 308638169,
+      "secs_since_epoch": 1723499424
+    },
+    "velocity": 7.752584408531687
+  },
+  {
+    "lg": -77.0851238,
+    "lt": -12.0562608,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 308516847,
+      "secs_since_epoch": 1723499423
+    },
+    "velocity": 10.301997438424188
+  },
+  {
+    "lg": -77.0851046,
+    "lt": -12.0562328,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 349178403,
+      "secs_since_epoch": 1723499422
+    },
+    "velocity": 12.342257793412507
+  },
+  {
+    "lg": -77.0850796,
+    "lt": -12.0561946,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 374507423,
+      "secs_since_epoch": 1723499421
+    },
+    "velocity": 13.318866747716662
+  },
+  {
+    "lg": -77.0850527,
+    "lt": -12.0561511,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 374172307,
+      "secs_since_epoch": 1723499420
+    },
+    "velocity": 13.953445157645502
+  },
+  {
+    "lg": -77.0850177,
+    "lt": -12.0560967,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 350952099,
+      "secs_since_epoch": 1723499419
+    },
+    "velocity": 13.33648111656722
+  },
+  {
+    "lg": -77.0849864,
+    "lt": -12.0560487,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 394857639,
+      "secs_since_epoch": 1723499418
+    },
+    "velocity": 12.14669445665796
+  },
+  {
+    "lg": -77.0849547,
+    "lt": -12.0560029,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 394409231,
+      "secs_since_epoch": 1723499417
+    },
+    "velocity": 10.193425456377925
+  },
+  {
+    "lg": -77.0849236,
+    "lt": -12.0559529,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 354029765,
+      "secs_since_epoch": 1723499416
+    },
+    "velocity": 18.47520992764452
+  },
+  {
+    "lg": -77.084901,
+    "lt": -12.0559049,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 371393877,
+      "secs_since_epoch": 1723499415
+    },
+    "velocity": 23.364389543642726
+  },
+  {
+    "lg": -77.084884,
+    "lt": -12.0558569,
+    "sts": 0,
+    "timestamp": {
+      "nanos_since_epoch": 312369328,
+      "secs_since_epoch": 1723499414
+    },
+    "velocity": 51.24900891629341
+  }
+]
