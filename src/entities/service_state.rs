@@ -1,4 +1,4 @@
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum BusServiceState {
     OnRoute,
     OutOfService,
@@ -66,5 +66,54 @@ impl From<BusServiceState> for i32 {
             BusServiceState::Accident => 3,
             BusServiceState::Off => 4,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_try_from() {
+        assert_eq!(BusServiceState::try_from(0), Ok(BusServiceState::OnRoute));
+        assert_eq!(
+            BusServiceState::try_from(1),
+            Ok(BusServiceState::OutOfService)
+        );
+        assert_eq!(BusServiceState::try_from(2), Ok(BusServiceState::Resting));
+        assert_eq!(BusServiceState::try_from(3), Ok(BusServiceState::Accident));
+        assert_eq!(BusServiceState::try_from(4), Ok(BusServiceState::Off));
+        assert_eq!(BusServiceState::try_from(5), Err(()));
+    }
+
+    #[test]
+    fn test_from_json() {
+        let raw_json = r#"[0,1,2,3,4]"#;
+
+        let states: Vec<BusServiceState> = serde_json::from_str(&raw_json).unwrap();
+        assert_eq!(
+            states,
+            vec![
+                BusServiceState::OnRoute,
+                BusServiceState::OutOfService,
+                BusServiceState::Resting,
+                BusServiceState::Accident,
+                BusServiceState::Off
+            ]
+        );
+    }
+
+    #[test]
+    fn test_to_json() {
+        let states = vec![
+            BusServiceState::OnRoute,
+            BusServiceState::OutOfService,
+            BusServiceState::Resting,
+            BusServiceState::Accident,
+            BusServiceState::Off,
+        ];
+
+        let raw_json = serde_json::to_string(&states).unwrap();
+        assert_eq!(raw_json, r#"[0,1,2,3,4]"#);
     }
 }
