@@ -14,6 +14,7 @@ mod bus_stops;
 mod cors;
 mod entities;
 mod env;
+mod mock;
 mod responders;
 mod routes;
 mod utils;
@@ -45,8 +46,8 @@ lazy_static! {
     pub static ref startup: std::time::SystemTime = std::time::SystemTime::now();
 }
 
-#[launch]
-fn rocket() -> _ {
+#[rocket::main]
+async fn main() -> Result<(), rocket::Error> {
     let _ = *startup;
 
     dotenv().expect("No .env file");
@@ -66,4 +67,8 @@ fn rocket() -> _ {
         .register("/", catchers![not_found])
         .attach(cors::Cors)
         .manage(AppState::default())
+        .launch()
+        .await?;
+
+    Ok(())
 }
