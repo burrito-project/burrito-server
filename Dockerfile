@@ -4,7 +4,8 @@ WORKDIR /app
 
 RUN : \
     && apk add --no-cache \
-    musl-dev \
+        musl-dev \
+        pkgconfig \
     && :
 
 COPY Cargo.toml Cargo.lock ./
@@ -29,9 +30,9 @@ WORKDIR /app
 
 RUN : \
     apk add --no-cache \
-    libgcc \
-    libstdc++ \
-    musl \
+        libgcc \
+        libstdc++ \
+        musl \
     && :
 
 COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/burrito-server /app/
