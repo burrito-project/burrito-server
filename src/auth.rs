@@ -16,9 +16,7 @@ impl<'r> FromRequest<'r> for WithAuth {
             }
         };
 
-        let pass = std::env::var("AUTH_DRIVER_PASSPHRASE").unwrap_or_default();
-
-        if auth != pass {
+        if auth != crate::env::AUTH_DRIVER_PASSPHRASE.as_str() {
             return rocket::request::Outcome::Forward(Status::Unauthorized);
         }
 

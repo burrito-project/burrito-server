@@ -1,6 +1,7 @@
 use bus_stops::BusStopInfo;
 use dotenvy::dotenv;
 use entities::burrito_state_record::BurritoStateRecord;
+use lazy_static::lazy_static;
 use rocket::{config::Ident, Config};
 use serde_json::json;
 use std::sync::RwLock;
@@ -12,6 +13,7 @@ mod auth;
 mod bus_stops;
 mod cors;
 mod entities;
+mod env;
 mod responders;
 mod routes;
 mod utils;
@@ -39,9 +41,16 @@ fn not_found() -> serde_json::Value {
     })
 }
 
+lazy_static! {
+    pub static ref startup: std::time::SystemTime = std::time::SystemTime::now();
+}
+
 #[launch]
 fn rocket() -> _ {
+    let _ = *startup;
+
     dotenv().expect("No .env file");
+
     let config = Config {
         port: 6969,
         address: [0, 0, 0, 0].into(),
