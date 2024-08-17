@@ -30,8 +30,9 @@ jobs:
             git reset --hard
             git clean -df
             git pull origin $GITHUB_REF
-            echo $APP_ENV_FILE > .env
+            echo "$APP_ENV_FILE" > .env
             docker compose up -d --build --no-deps --force-recreate --remove-orphans burrito_server
         env:
           REPO_PATH: ${{ secrets.SSH_REPO_PATH }}
-          APP_ENV_FILE: ${{ secrets.ENV_FILE }}
+          APP_ENV_FILE: |
+            ${{ secrets.ENV_FILE }}
