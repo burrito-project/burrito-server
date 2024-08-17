@@ -47,7 +47,7 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
                 let off_message = BurritoStateRecord {
                     lt: 0.0,
                     lg: 0.0,
-                    sts: BusServiceState::inherit_from_inactive(last.sts).into(),
+                    sts: BusServiceState::inherit_from_inactive(last.sts),
                     timestamp: last.timestamp,
                     velocity: 0.0,
                 };
@@ -75,7 +75,7 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
             "positions": vec![BurritoStateRecord {
                 lt: 0.0,
                 lg: 0.0,
-                sts: BusServiceState::Off.into(),
+                sts: BusServiceState::Off,
                 timestamp: time::SystemTime::now(),
                 velocity: 0.0,
             }],
@@ -90,6 +90,10 @@ fn post_status(
     state: &State<AppState>,
     _z: WithAuth,
 ) -> Status {
+    if *crate::env::IS_MOCKED {
+        return Status::Ok;
+    }
+
     let mut messages = state.messages.write().unwrap();
     let payload = message_json.into_inner();
 
@@ -137,7 +141,7 @@ fn post_status(
     messages.push(BurritoStateRecord {
         lt: payload.lt,
         lg: payload.lg,
-        sts: BusServiceState::from(payload.sts),
+        sts: payload.sts,
         timestamp: time::SystemTime::now(), // Add the current timestamp,
         velocity: 0.0,                      // pending to calculate
     });
