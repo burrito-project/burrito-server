@@ -90,10 +90,6 @@ fn post_status(
     state: &State<AppState>,
     _z: WithAuth,
 ) -> Status {
-    if *crate::env::IS_MOCKED {
-        return Status::Ok;
-    }
-
     let mut messages = state.messages.write().unwrap();
     let payload = message_json.into_inner();
 
