@@ -12,7 +12,7 @@ geojson = "0.24.1"
 geo = "0.28.0"
 lazy_static = "1.5.0"
 dotenvy = "0.15.7"
-reqwest = "0.12.5"
+reqwest = {version = "0.12.5", features = ["native-tls-vendored"]}
 
 [features]
 shuttle = []
