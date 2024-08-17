@@ -9,6 +9,7 @@ use std::sync::RwLock;
 #[macro_use]
 extern crate rocket;
 
+mod api;
 mod auth;
 mod bus_stops;
 mod cors;
@@ -16,7 +17,6 @@ mod entities;
 mod env;
 mod mock;
 mod responders;
-mod routes;
 mod utils;
 
 #[derive(Default)]
@@ -67,7 +67,7 @@ async fn main() -> Result<(), rocket::Error> {
     rocket::build()
         .configure(config)
         .mount("/", routes![index])
-        .mount("/status", routes::status::routes())
+        .mount("/status", api::status::routes())
         .mount("/help", routes![index])
         .register("/", catchers![not_found])
         .attach(cors::Cors)

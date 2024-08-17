@@ -9,6 +9,7 @@ use crate::auth::WithAuth;
 use crate::bus_stops::{
     get_bus_stop_for_point, get_distance_to_bus_stop, get_next_bus_stop, LatLng,
 };
+use crate::entities::burrito_state_record::BurritoRecordPayload;
 use crate::entities::service_state::BusServiceState;
 use crate::responders::RawResponse;
 use crate::utils;
@@ -32,13 +33,16 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
 
     match messages.last() {
         Some(last) => {
-            let is_off = last.sts == 1 || last.sts == 2 || last.sts == 3;
+            let is_off = matches!(
+                last.sts,
+                BusServiceState::OutOfService
+                    | BusServiceState::Resting
+                    | BusServiceState::Accident
+            );
 
-            // If the burrito didn't report itself as 1,2 or 3 and it hasn't reported in the last 60 seconds,
+            // If the burrito didn't report itself as 1, 2 or 3 and it hasn't reported in the last 60 seconds,
             // then we consider it as off
-            if !is_off
-                && last.timestamp.unwrap().elapsed().unwrap() > std::time::Duration::from_secs(60)
-            {
+            if !is_off && last.timestamp.elapsed().unwrap() > std::time::Duration::from_secs(60) {
                 // We create an 'off' message on the fly
                 let off_message = BurritoStateRecord {
                     lt: 0.0,
@@ -72,7 +76,7 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
                 lt: 0.0,
                 lg: 0.0,
                 sts: BusServiceState::Off.into(),
-                timestamp: Some(time::SystemTime::now()),
+                timestamp: time::SystemTime::now(),
                 velocity: 0.0,
             }],
             "last_stop": last_stop.clone(),
@@ -82,14 +86,14 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
 
 #[post("/", format = "json", data = "<message_json>")]
 fn post_status(
-    message_json: Json<BurritoStateRecord>,
+    message_json: Json<BurritoRecordPayload>,
     state: &State<AppState>,
     _z: WithAuth,
 ) -> Status {
-    let messages = state.messages.read().unwrap();
-    let mut message = message_json.into_inner();
+    let mut messages = state.messages.write().unwrap();
+    let payload = message_json.into_inner();
 
-    match get_bus_stop_for_point(message.lt, message.lg) {
+    match get_bus_stop_for_point(payload.lt, payload.lg) {
         Some(this_stop) => {
             let mut last_stop = state.last_stop.write().unwrap();
             // If there's already last_stop we update it
@@ -119,8 +123,8 @@ fn post_status(
                         last_stop.distance = get_distance_to_bus_stop(
                             last_stop,
                             LatLng {
-                                lat: message.lt,
-                                lng: message.lg,
+                                lat: payload.lt,
+                                lng: payload.lg,
                             },
                         );
                         last_stop.timestamp = time::SystemTime::now();
@@ -130,16 +134,16 @@ fn post_status(
         }
     }
 
-    message.timestamp = Some(time::SystemTime::now()); // Add the current timestamp
-    let mut messages_copy = messages.clone();
-    messages_copy.push(message.clone());
+    messages.push(BurritoStateRecord {
+        lt: payload.lt,
+        lg: payload.lg,
+        sts: BusServiceState::from(payload.sts),
+        timestamp: time::SystemTime::now(), // Add the current timestamp,
+        velocity: 0.0,                      // pending to calculate
+    });
 
-    message.velocity = utils::calculate_velocity_kmph(messages_copy.as_slice());
+    messages.last_mut().unwrap().velocity = utils::calculate_velocity_kmph(&messages);
 
-    drop(messages);
-    let mut messages = state.messages.write().unwrap();
-
-    messages.push(message);
     if messages.len() > 10000 {
         messages.remove(0); // Keep only the latest 100 positions
     }

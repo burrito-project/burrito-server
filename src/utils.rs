@@ -31,8 +31,7 @@ pub fn calculate_velocity_kmph(positions: &[BurritoStateRecord]) -> f64 {
 
         let time_diff = pos2
             .timestamp
-            .unwrap()
-            .duration_since(pos1.timestamp.unwrap())
+            .duration_since(pos1.timestamp)
             .unwrap_or(Duration::new(0, 0));
         total_time += time_diff;
     }

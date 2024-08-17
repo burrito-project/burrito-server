@@ -1,11 +1,11 @@
 use lazy_static::lazy_static;
 use std::time;
 
-use crate::entities::burrito_state_record::RawBurritoStateRecord;
+use crate::entities::burrito_state_record::BurritoStateRecord;
 
 lazy_static! {
-    static ref s_mock_records: Vec<RawBurritoStateRecord> =
-        serde_json::from_str::<Vec<RawBurritoStateRecord>>(include_str!(
+    static ref s_mock_records: Vec<BurritoStateRecord> =
+        serde_json::from_str::<Vec<BurritoStateRecord>>(include_str!(
             "../static/mocks/route1.json"
         ))
         .unwrap()
@@ -20,7 +20,6 @@ lazy_static! {
             .last()
             .unwrap()
             .timestamp
-            .unwrap()
     };
     static ref MOCK_START_TIME: time::SystemTime = {
         s_mock_records
@@ -28,7 +27,6 @@ lazy_static! {
             .next()
             .unwrap()
             .timestamp
-            .unwrap()
     };
 }
 
@@ -66,7 +64,6 @@ pub fn initialize_mocks() {
 
             let fake_elapsed = current_record
                 .timestamp
-                .unwrap()
                 .duration_since(*MOCK_START_TIME)
                 .unwrap();
 

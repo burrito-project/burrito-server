@@ -1,10 +1,31 @@
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub enum BusServiceState {
     OnRoute,
     OutOfService,
     Resting,
     Accident,
     Off,
+}
+
+impl<'de> serde::Deserialize<'de> for BusServiceState {
+    fn deserialize<D>(deserializer: D) -> Result<BusServiceState, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let i = i32::deserialize(deserializer)?;
+        BusServiceState::try_from(i).map_err(|_| {
+            serde::de::Error::custom(format!("Invalid value for BusServiceState: {}", i))
+        })
+    }
+}
+
+impl serde::Serialize for BusServiceState {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        i32::from(*self).serialize(serializer)
+    }
 }
 
 impl BusServiceState {
@@ -21,15 +42,17 @@ impl BusServiceState {
     }
 }
 
-impl From<i32> for BusServiceState {
-    fn from(i: i32) -> Self {
+impl TryFrom<i32> for BusServiceState {
+    type Error = ();
+
+    fn try_from(i: i32) -> Result<Self, ()> {
         match i {
-            0 => BusServiceState::OnRoute,
-            1 => BusServiceState::OutOfService,
-            2 => BusServiceState::Resting,
-            3 => BusServiceState::Accident,
-            4 => BusServiceState::Off,
-            _ => BusServiceState::Off,
+            0 => Ok(BusServiceState::OnRoute),
+            1 => Ok(BusServiceState::OutOfService),
+            2 => Ok(BusServiceState::Resting),
+            3 => Ok(BusServiceState::Accident),
+            4 => Ok(BusServiceState::Off),
+            _ => Err(()),
         }
     }
 }
