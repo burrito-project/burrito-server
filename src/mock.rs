@@ -1,7 +1,7 @@
 use lazy_static::lazy_static;
 use std::time;
 
-use crate::entities::burrito_state_record::BurritoStateRecord;
+use crate::entities::BurritoStateRecord;
 
 lazy_static! {
     static ref s_mock_records: Vec<BurritoStateRecord> =
