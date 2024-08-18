@@ -144,8 +144,8 @@ fn post_status(
 
     messages.last_mut().unwrap().velocity = utils::calculate_velocity_kmph(&messages);
 
-    if messages.len() > 10000 {
-        messages.remove(0); // Keep only the latest 100 positions
+    if messages.len() > 1000 {
+        messages.remove(0); // Keep only the latest 1000 positions
     }
     Status::Ok
 }
