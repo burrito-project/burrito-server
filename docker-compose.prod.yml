@@ -10,3 +10,12 @@ services:
     environment:
       - ROCKET_PORT=6969
       - ROCKET_ADDRESS=0.0.0.0
+
+  burrito_db:
+    image: postgres:16.4-bullseye
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=burrito_app
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}

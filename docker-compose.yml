@@ -1,5 +1,7 @@
 name: burrito_dev
 
+# 🕯️ Made for development purposes and MUST NOT BE SHIPPED
+
 services:
   burrito_server:
     build:
@@ -23,4 +25,4 @@ services:
     environment:
       - POSTGRES_DB=burrito_app
       - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=dontship
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
