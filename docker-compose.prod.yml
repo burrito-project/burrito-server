@@ -1,0 +1,14 @@
+name: burrito_prod
+
+services:
+  burrito_server:
+    build:
+      context: .
+      dockerfile: ./docker/prod/Dockerfile
+    ports:
+      - 6969:6969
+    volumes:
+      - $HOME/.ssh:/root/.ssh:ro
+    environment:
+      - ROCKET_PORT=6969
+      - ROCKET_ADDRESS=0.0.0.0

@@ -1,10 +1,10 @@
-name: burrito_app
+name: burrito_dev
 
 services:
   burrito_server:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker/dev/Dockerfile
     ports:
       - 6969:6969
     volumes:
@@ -12,6 +12,7 @@ services:
     environment:
       - ROCKET_PORT=6969
       - ROCKET_ADDRESS=0.0.0.0
+
   burrito_db:
     image: postgres:16.4-bullseye
     env_file:
