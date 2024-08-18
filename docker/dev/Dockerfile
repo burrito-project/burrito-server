@@ -21,7 +21,7 @@ COPY Cargo.toml Cargo.lock ./
 RUN : \
     && mkdir -p src \
     && echo 'fn main() {}' > src/main.rs \
-    && cargo build --target x86_64-unknown-linux-musl --release \
+    && cargo build --target x86_64-unknown-linux-musl \
     && rm -rf src \
     && :
 

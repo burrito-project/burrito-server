@@ -5,10 +5,11 @@ services:
     build:
       context: .
       dockerfile: ./docker/dev/Dockerfile
+    tty: true
     ports:
       - 6969:6969
     volumes:
-      - $HOME/.ssh:/root/.ssh:ro
+      - .:/app
     environment:
       - ROCKET_PORT=6969
       - ROCKET_ADDRESS=0.0.0.0
@@ -17,6 +18,8 @@ services:
     image: postgres:16.4-bullseye
     env_file:
       - .env
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_DB=burrito_app
       - POSTGRES_USER=admin
