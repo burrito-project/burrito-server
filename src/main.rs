@@ -1,10 +1,9 @@
-use bus_stops::BusStopInfo;
 use dotenvy::dotenv;
-use entities::burrito_state_record::BurritoStateRecord;
 use lazy_static::lazy_static;
 use rocket::{config::Ident, Config};
 use serde_json::json;
-use std::sync::RwLock;
+
+use entities::BurritoStateRecord;
 
 #[macro_use]
 extern crate rocket;
@@ -13,17 +12,12 @@ mod api;
 mod auth;
 mod bus_stops;
 mod cors;
+mod db;
 mod entities;
 mod env;
 mod mock;
 mod responders;
 mod utils;
-
-#[derive(Default)]
-pub struct AppState {
-    messages: RwLock<Vec<BurritoStateRecord>>,
-    last_stop: RwLock<Option<BusStopInfo>>,
-}
 
 #[get("/")]
 fn index() -> serde_json::Value {
@@ -59,8 +53,10 @@ async fn main() -> Result<(), rocket::Error> {
         port: PORT,
         address: [0, 0, 0, 0].into(),
         ident: Ident::none(),
-        ..Default::default()
+        ..Config::default()
     };
+
+    let pool = crate::db::create_pool().await.unwrap();
 
     crate::mock::initialize_mocks();
 
@@ -71,7 +67,7 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/help", routes![index])
         .register("/", catchers![not_found])
         .attach(cors::Cors)
-        .manage(AppState::default())
+        .manage(crate::entities::AppState::from_db(pool))
         .launch()
         .await?;
 
