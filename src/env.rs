@@ -11,10 +11,10 @@ lazy_static! {
         env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
     // The max bus state records that we should keep in memory
-    pub static ref MAX_MEMORY_MESSAGES: usize = env::var("MAX_MEMORY_MESSAGES")
+    pub static ref MAX_MEMORY_RECORDS: usize = env::var("MAX_MEMORY_RECORDS")
         .unwrap_or("1000".into())
         .parse::<usize>()
-        .expect("MAX_MEMORY_MESSAGES must be a number");
+        .expect("MAX_MEMORY_RECORDS must be a number");
 
     /// Whether we should use a mocked bus route to showcase the system. See mock.rs
     pub static ref IS_MOCKED: bool = env::var("IS_MOCKED").unwrap_or("false".into()) == "true";

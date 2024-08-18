@@ -9,12 +9,9 @@ use crate::auth::WithAuth;
 use crate::bus_stops::{
     get_bus_stop_for_point, get_distance_to_bus_stop, get_next_bus_stop, LatLng,
 };
-use crate::entities::burrito_state_record::BurritoRecordPayload;
-use crate::entities::service_state::BusServiceState;
+use crate::entities::{AppState, BurritoRecordPayload, BurritoStateRecord, BusServiceState};
 use crate::responders::RawResponse;
 use crate::utils;
-use crate::AppState;
-use crate::BurritoStateRecord;
 
 pub fn routes() -> Vec<Route> {
     routes![get_status, post_status, post_status_unauthorized]
@@ -144,7 +141,7 @@ fn post_status(
 
     messages.last_mut().unwrap().velocity = utils::calculate_velocity_kmph(&messages);
 
-    if messages.len() > 1000 {
+    if messages.len() > *crate::env::MAX_MEMORY_RECORDS {
         messages.remove(0); // Keep only the latest 1000 positions
     }
     Status::Ok
