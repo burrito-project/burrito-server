@@ -19,16 +19,6 @@ mod mock;
 mod responders;
 mod utils;
 
-#[get("/")]
-fn index() -> serde_json::Value {
-    let routes = vec!["/status/?count=<n>"];
-
-    json!({
-        "message": "Welcome to the UNMSM burrito tracker API",
-        "routes": routes,
-    })
-}
-
 #[catch(404)]
 fn not_found() -> serde_json::Value {
     json!({
@@ -62,9 +52,9 @@ async fn main() -> Result<(), rocket::Error> {
 
     rocket::build()
         .configure(config)
-        .mount("/", routes![index])
+        .mount("/", api::index::routes())
         .mount("/status", api::status::routes())
-        .mount("/help", routes![index])
+        .mount("/help", routes![api::index::help_index])
         .register("/", catchers![not_found])
         .attach(cors::Cors)
         .manage(crate::entities::AppState::from_db(pool))
