@@ -10,7 +10,9 @@ RUN : \
         make \
     && :
 
-COPY Cargo.toml Cargo.lock ./
+COPY Cargo.toml Cargo.lock .sqlx ./
+
+ENV SQLX_OFFLINE=true
 
 RUN : \
     && mkdir -p src \
