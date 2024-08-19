@@ -13,7 +13,9 @@ geo = "0.28.0"
 lazy_static = "1.5.0"
 dotenvy = "0.15.7"
 reqwest = { version = "0.12.5", features = ["native-tls-vendored"] }
-sqlx = { version = "0.8.0", features = ["runtime-tokio", "postgres", "time"] }
+sqlx = { version = "0.8.0", features = ["runtime-tokio", "postgres", "chrono"] }
+chrono = { version = "0.4.38", features = ["serde"] }
+regex = "1.10.6"
 
 [profile.dev.package.sqlx-macros]
 opt-level = 3
