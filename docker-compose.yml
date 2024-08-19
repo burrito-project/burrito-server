@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/dev/Dockerfile
+    profiles:
+      - with_server
     tty: true
     ports:
       - 6969:6969
@@ -25,4 +27,4 @@ services:
     environment:
       - POSTGRES_DB=burrito_app
       - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD=dontship
