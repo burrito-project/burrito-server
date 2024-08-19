@@ -32,7 +32,7 @@ jobs:
             git clean -df
             git pull origin $GITHUB_REF
             echo "$APP_ENV_FILE" > .env
-            docker compose -f docker-compose.prod.yml up -d --build --no-deps --force-recreate --remove-orphans burrito_server
+            docker compose -f docker-compose.prod.yml up -d --build --no-deps --force-recreate --remove-orphans
         env:
           REPO_PATH: ${{ secrets.SSH_REPO_PATH }}
           APP_ENV_FILE: |
