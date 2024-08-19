@@ -11,6 +11,7 @@ extern crate rocket;
 mod api;
 mod auth;
 mod bus_stops;
+mod core;
 mod cors;
 mod db;
 mod entities;
@@ -53,6 +54,7 @@ async fn main() -> Result<(), rocket::Error> {
     rocket::build()
         .configure(config)
         .mount("/", api::index::routes())
+        .mount("/pending_updates", api::pending_updates::routes())
         .mount("/status", api::status::routes())
         .mount("/help", routes![api::index::help_index])
         .register("/", catchers![not_found])
