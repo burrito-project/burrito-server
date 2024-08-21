@@ -1,0 +1,2 @@
+DROP FUNCTION IF EXISTS trigger_set_timestamps CASCADE;
+DROP SCHEMA IF EXISTS internal CASCADE;
