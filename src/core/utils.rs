@@ -1,7 +1,7 @@
 use geo::GeodesicDistance;
 use std::time::Duration;
 
-use crate::BurritoStateRecord;
+use crate::entities::BurritoStateRecord;
 
 pub fn calculate_velocity_kmph(positions: &[BurritoStateRecord]) -> f64 {
     if positions.len() < 2 {
