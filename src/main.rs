@@ -3,8 +3,6 @@ use lazy_static::lazy_static;
 use rocket::{config::Ident, Config};
 use serde_json::json;
 
-use entities::BurritoStateRecord;
-
 #[macro_use]
 extern crate rocket;
 
@@ -18,7 +16,7 @@ mod entities;
 mod env;
 mod mock;
 mod responders;
-mod utils;
+mod schemas;
 
 #[catch(404)]
 fn not_found() -> serde_json::Value {
@@ -54,8 +52,9 @@ async fn main() -> Result<(), rocket::Error> {
     rocket::build()
         .configure(config)
         .mount("/", api::index::routes())
-        .mount("/pending_updates", api::pending_updates::routes())
         .mount("/status", api::status::routes())
+        .mount("/versions", api::versions::routes())
+        .mount("/pending_updates", api::pending_updates::routes())
         .mount("/help", routes![api::index::help_index])
         .register("/", catchers![not_found])
         .attach(cors::Cors)
