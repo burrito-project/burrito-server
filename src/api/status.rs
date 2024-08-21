@@ -9,9 +9,9 @@ use crate::auth::WithAuth;
 use crate::bus_stops::{
     get_bus_stop_for_point, get_distance_to_bus_stop, get_next_bus_stop, LatLng,
 };
+use crate::core::utils;
 use crate::entities::{AppState, BurritoRecordPayload, BurritoStateRecord, BusServiceState};
 use crate::responders::RawResponse;
-use crate::utils;
 
 pub fn routes() -> Vec<Route> {
     routes![get_status, post_status, post_status_unauthorized]
