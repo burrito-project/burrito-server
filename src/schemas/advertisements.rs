@@ -39,7 +39,7 @@ pub struct Advertisement {
 }
 
 #[derive(Debug, Deserialize)]
-pub struct AdvertisementsPayload {
+pub struct AdvertisementPayload {
     #[serde(default)]
     pub is_active: bool,
     pub ad_title: Option<String>,

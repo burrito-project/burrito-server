@@ -1,19 +1,14 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, PartialEq, PartialOrd, sqlx::Type, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, PartialEq, PartialOrd, sqlx::Type, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[sqlx(type_name = "platform_t", rename_all = "lowercase")]
 pub enum PlatformType {
     Android,
-    IOS,
+    Ios,
     Web,
+    #[default]
     All,
-}
-
-impl Default for PlatformType {
-    fn default() -> Self {
-        PlatformType::All
-    }
 }
 
 impl TryFrom<&str> for PlatformType {
@@ -22,7 +17,7 @@ impl TryFrom<&str> for PlatformType {
     fn try_from(value: &str) -> Result<Self, String> {
         match value {
             "android" => Ok(PlatformType::Android),
-            "ios" => Ok(PlatformType::IOS),
+            "ios" => Ok(PlatformType::Ios),
             "web" => Ok(PlatformType::Web),
             "all" | "any" => Ok(PlatformType::All),
             _ => Err(format!("Invalid platform: {}", value)),

@@ -54,6 +54,7 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/", api::index::routes())
         .mount("/status", api::status::routes())
         .mount("/versions", api::versions::routes())
+        .mount("/advertisements", api::advertisements::routes())
         .mount("/pending_updates", api::pending_updates::routes())
         .mount("/help", routes![api::index::help_index])
         .register("/", catchers![not_found])

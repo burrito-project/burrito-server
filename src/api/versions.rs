@@ -23,7 +23,7 @@ async fn list_app_versions(state: &State<AppState>) -> Result<Value, status::Cus
             )
         })?;
 
-    return Ok(json!(versions));
+    Ok(json!(versions))
 }
 
 #[post("/", format = "json", data = "<payload>")]
@@ -66,5 +66,5 @@ async fn post_app_versions(
         ),
     })?;
 
-    return Ok(json!(new_version));
+    Ok(json!(new_version))
 }

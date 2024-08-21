@@ -2,5 +2,5 @@ use serde::Serialize;
 use serde_json::json;
 
 pub fn error_response(message: impl Into<String> + Serialize) -> serde_json::Value {
-    return json!({ "message": message });
+    json!({ "message": message })
 }

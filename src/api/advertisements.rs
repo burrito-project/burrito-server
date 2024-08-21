@@ -25,7 +25,7 @@ async fn list_advertisements(state: &State<AppState>) -> Result<Value, status::C
 
 #[post("/", format = "json", data = "<payload>")]
 async fn post_advertisements(
-    payload: Result<Json<schemas::AdvertisementsPayload>, rocket::serde::json::Error<'_>>,
+    payload: Result<Json<schemas::AdvertisementPayload>, rocket::serde::json::Error<'_>>,
     state: &State<AppState>,
 ) -> Result<Value, status::Custom<Value>> {
     if let Err(e) = payload {
