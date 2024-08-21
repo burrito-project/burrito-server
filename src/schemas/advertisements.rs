@@ -23,7 +23,7 @@ impl TryFrom<&str> for AdType {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Advertisements {
+pub struct Advertisement {
     pub id: i32,
     pub is_active: bool,
     pub ad_title: Option<String>,
