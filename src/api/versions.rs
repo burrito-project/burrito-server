@@ -13,10 +13,11 @@ pub fn routes() -> Vec<Route> {
 
 #[get("/")]
 async fn list_app_versions(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
-    let versions = sqlx::query_as_unchecked!(schemas::AppVersion, "SELECT * FROM app_versions;")
+    let versions = sqlx::query_as!(schemas::AppVersion, "SELECT * FROM app_versions;")
         .fetch_all(&state.pool)
         .await
-        .map_err(|_| {
+        .map_err(|e| {
+            println!("{:#?}", e);
             status::Custom(
                 Status::InternalServerError,
                 responses::error_response("No versions found"),
@@ -40,7 +41,7 @@ async fn post_app_versions(
 
     let payload = payload.unwrap().into_inner();
 
-    let new_version = sqlx::query_as_unchecked!(
+    let new_version = sqlx::query_as!(
         schemas::AppVersion,
         "INSERT INTO app_versions
         (semver, banner_url, is_mandatory, platform, release_date, release_notes)
@@ -49,7 +50,7 @@ async fn post_app_versions(
         payload.semver,
         payload.banner_url,
         payload.is_mandatory,
-        payload.platform,
+        payload.platform.to_string(),
         payload.release_date,
         payload.release_notes,
     )
@@ -60,9 +61,9 @@ async fn post_app_versions(
             Status::BadRequest,
             responses::error_response(db_err.to_string()),
         ),
-        _ => status::Custom(
+        e => status::Custom(
             Status::InternalServerError,
-            responses::error_response("Failed to create version"),
+            responses::error_response(format!("Failed to create version: {e}")),
         ),
     })?;
 

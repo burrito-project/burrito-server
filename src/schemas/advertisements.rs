@@ -1,24 +1,19 @@
 use serde::{Deserialize, Serialize};
+use strum_macros::{Display, EnumString};
 
-#[derive(Clone, Debug, PartialEq, PartialOrd, sqlx::Type, Deserialize, Serialize)]
+#[derive(Debug, sqlx::Type, Default, Deserialize, Serialize, EnumString, Display)]
 #[serde(rename_all = "snake_case")]
-#[sqlx(type_name = "platform_t", rename_all = "lowercase")]
+#[strum(serialize_all = "snake_case")]
 pub enum AdType {
+    #[default]
     Banner,
     Post,
     Popup,
 }
 
-impl TryFrom<&str> for AdType {
-    type Error = String;
-
-    fn try_from(value: &str) -> Result<Self, String> {
-        match value {
-            "banner" => Ok(AdType::Banner),
-            "post" => Ok(AdType::Post),
-            "popup" => Ok(AdType::Popup),
-            _ => Err(format!("Invalid advertisement type: {}", value)),
-        }
+impl From<String> for AdType {
+    fn from(value: String) -> Self {
+        AdType::try_from(value.to_lowercase().as_str()).unwrap_or_default()
     }
 }
 
@@ -33,14 +28,13 @@ pub struct Advertisement {
     pub target_url: Option<String>,
     pub begin_at: Option<chrono::DateTime<chrono::Utc>>,
     pub end_at: Option<chrono::DateTime<chrono::Utc>>,
-    pub ad_content: String,
+    pub ad_content: Option<String>,
     pub created_at: chrono::DateTime<chrono::Utc>,
     pub updated_at: chrono::DateTime<chrono::Utc>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct AdvertisementPayload {
-    #[serde(default)]
     pub is_active: bool,
     pub ad_title: Option<String>,
     pub ad_type: AdType,

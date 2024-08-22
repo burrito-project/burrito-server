@@ -1,8 +1,9 @@
 use serde::{Deserialize, Serialize};
+use strum_macros::{Display, EnumString};
 
-#[derive(Clone, Debug, Default, PartialEq, PartialOrd, sqlx::Type, Deserialize, Serialize)]
+#[derive(Debug, sqlx::Type, Default, Deserialize, Serialize, EnumString, Display)]
 #[serde(rename_all = "snake_case")]
-#[sqlx(type_name = "platform_t", rename_all = "lowercase")]
+#[strum(serialize_all = "snake_case")]
 pub enum PlatformType {
     Android,
     Ios,
@@ -11,17 +12,9 @@ pub enum PlatformType {
     All,
 }
 
-impl TryFrom<&str> for PlatformType {
-    type Error = String;
-
-    fn try_from(value: &str) -> Result<Self, String> {
-        match value {
-            "android" => Ok(PlatformType::Android),
-            "ios" => Ok(PlatformType::Ios),
-            "web" => Ok(PlatformType::Web),
-            "all" | "any" => Ok(PlatformType::All),
-            _ => Err(format!("Invalid platform: {}", value)),
-        }
+impl From<String> for PlatformType {
+    fn from(value: String) -> Self {
+        PlatformType::try_from(value.to_lowercase().as_str()).unwrap_or_default()
     }
 }
 

@@ -41,7 +41,7 @@ async fn pending_updates(
     };
 
     let user_platform: schemas::PlatformType = match platform {
-        Some(p) => match schemas::PlatformType::try_from(p.as_str()) {
+        Some(p) => match schemas::PlatformType::try_from(p) {
             Ok(p) => p,
             Err(_) => {
                 return Err(status::Custom(
