@@ -1,10 +1,3 @@
-DO $$
-BEGIN
-    CREATE TYPE ad_type_t AS ENUM ('banner', 'post', 'popup');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
-
 -- Advertisement types
 
 -- banner: a 3:1 image with optional title and target URL
@@ -24,20 +17,21 @@ CREATE TABLE IF NOT EXISTS advertisements (
     id serial PRIMARY KEY,
     is_active boolean NOT NULL DEFAULT FALSE,
     ad_title varchar(1024),
-    ad_type ad_type_t NOT NULL,
+    ad_type varchar(8) NOT NULL,
     priority integer NOT NULL DEFAULT 0, -- order, from lowest to highest
     image_url varchar(2084), -- banner images should have a 3:1 aspect ratio, null image will be interpreted as drafts
     target_url varchar(2084), -- URL to redirect to when the ad is clicked
     -- scheduling
-    begin_at timestamp,
-    end_at timestamp,
+    begin_at timestamptz,
+    end_at timestamptz,
     -- When type is post or popup, the following fields are required
     ad_content varchar(4096),
     -- Metadata
-    created_at timestamp NOT NULL DEFAULT now(),
-    updated_at timestamp NOT NULL DEFAULT now(),
+    created_at timestamptz NOT NULL DEFAULT now(),
+    updated_at timestamptz NOT NULL DEFAULT now(),
     CHECK (priority >= 0),
     CHECK (begin_at IS NULL OR end_at IS NULL OR begin_at < end_at),
+    CONSTRAINT valid_ad_type CHECK (ad_type IN ('banner', 'post', 'popup')),
     CONSTRAINT banner_has_image CHECK ((ad_type = 'banner' AND image_url IS NOT NULL) OR ad_type != 'banner'),
     CONSTRAINT post_has_title CHECK ((ad_type = 'post' AND ad_title IS NOT NULL) OR ad_type != 'post'),
     CONSTRAINT post_has_content CHECK ((ad_type = 'post' AND ad_content IS NOT NULL) OR ad_type != 'post'),
