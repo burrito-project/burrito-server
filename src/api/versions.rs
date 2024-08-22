@@ -20,7 +20,7 @@ async fn list_app_versions(state: &State<AppState>) -> Result<Value, status::Cus
             println!("{:#?}", e);
             status::Custom(
                 Status::InternalServerError,
-                responses::error_response("No versions found"),
+                responses::error_response("Error retrieveing versions"),
             )
         })?;
 

@@ -62,21 +62,21 @@ async fn pending_updates(
         }
     };
 
-    let app_versions = sqlx::query_as_unchecked!(
+    let app_versions = sqlx::query_as!(
         schemas::AppVersion,
         r#"SELECT *
         FROM app_versions
         WHERE semver > $1 AND (platform = 'all' OR platform = $2) AND should_notify = true
         ORDER BY release_date ASC"#,
         user_version,
-        user_platform,
+        user_platform.to_string(),
     )
     .fetch_all(&state.pool)
     .await
     .map_err(|_| {
         status::Custom(
             Status::InternalServerError,
-            responses::error_response("No versions found"),
+            responses::error_response("Error retrieveing versions"),
         )
     })?;
 

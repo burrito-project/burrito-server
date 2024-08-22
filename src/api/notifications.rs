@@ -11,7 +11,7 @@ pub fn routes() -> Vec<Route> {
 async fn list_notifications(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
     let notifications = sqlx::query_as!(
         schemas::Notification,
-        "SELECT * FROM notifications ORDER BY priority ASC;",
+        "SELECT * FROM notification_ads ORDER BY priority ASC;",
     )
     .fetch_all(&state.pool)
     .await
@@ -41,7 +41,7 @@ async fn post_notifications(
 
     let new_notification = sqlx::query_as!(
         schemas::Notification,
-        "INSERT INTO notifications
+        "INSERT INTO notification_ads
         (is_active, ad_title, ad_type, priority, image_url, target_url, ad_content, begin_at, end_at)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
         RETURNING *;",
