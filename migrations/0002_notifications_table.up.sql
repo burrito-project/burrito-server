@@ -1,4 +1,4 @@
--- Advertisement types
+-- Notifications types
 
 -- banner: a 3:1 image with optional title and target URL
 -- post: classic news post with title, content, and optional 1:1 image
@@ -13,7 +13,7 @@
 -- if begin_at is null, the ad is immediately active
 -- if end_at is null, the ad is active indefinitely
 
-CREATE TABLE IF NOT EXISTS advertisements (
+CREATE TABLE IF NOT EXISTS notifications (
     id serial PRIMARY KEY,
     is_active boolean NOT NULL DEFAULT FALSE,
     ad_title varchar(1024),
@@ -39,4 +39,4 @@ CREATE TABLE IF NOT EXISTS advertisements (
     CONSTRAINT popup_has_content CHECK ((ad_type = 'popup' AND ad_content IS NOT NULL) OR ad_type != 'popup')
 );
 
-CREATE OR REPLACE TRIGGER update_modified_time BEFORE UPDATE ON advertisements FOR EACH ROW EXECUTE PROCEDURE trigger_set_timestamps();
+CREATE OR REPLACE TRIGGER update_modified_time BEFORE UPDATE ON notifications FOR EACH ROW EXECUTE PROCEDURE trigger_set_timestamps();

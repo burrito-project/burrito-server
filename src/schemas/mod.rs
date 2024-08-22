@@ -1,5 +1,5 @@
-mod advertisements;
-mod app_versions;
+mod app_version;
+mod notification;
 
-pub use advertisements::*;
-pub use app_versions::*;
+pub use app_version::*;
+pub use notification::*;

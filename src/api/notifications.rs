@@ -4,30 +4,30 @@ use serde_json::{json, Value};
 use crate::{core::responses, entities::AppState, schemas};
 
 pub fn routes() -> Vec<Route> {
-    routes![list_advertisements, post_advertisements,]
+    routes![list_notifications, post_notifications,]
 }
 
 #[get("/")]
-async fn list_advertisements(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
-    let advertisements = sqlx::query_as!(
-        schemas::Advertisement,
-        "SELECT * FROM advertisements ORDER BY priority ASC;",
+async fn list_notifications(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
+    let notifications = sqlx::query_as!(
+        schemas::Notification,
+        "SELECT * FROM notifications ORDER BY priority ASC;",
     )
     .fetch_all(&state.pool)
     .await
     .map_err(|_| {
         status::Custom(
             Status::InternalServerError,
-            responses::error_response("No advertisements found"),
+            responses::error_response("No notifications found"),
         )
     })?;
 
-    Ok(json!(advertisements))
+    Ok(json!(notifications))
 }
 
 #[post("/", format = "json", data = "<payload>")]
-async fn post_advertisements(
-    payload: Result<Json<schemas::AdvertisementPayload>, json::Error<'_>>,
+async fn post_notifications(
+    payload: Result<Json<schemas::NotificationPayload>, json::Error<'_>>,
     state: &State<AppState>,
 ) -> Result<Value, status::Custom<Value>> {
     if let Err(e) = payload {
@@ -39,9 +39,9 @@ async fn post_advertisements(
 
     let payload = payload.unwrap().into_inner();
 
-    let new_advertisement = sqlx::query_as!(
-        schemas::Advertisement,
-        "INSERT INTO advertisements
+    let new_notification = sqlx::query_as!(
+        schemas::Notification,
+        "INSERT INTO notifications
         (is_active, ad_title, ad_type, priority, image_url, target_url, ad_content, begin_at, end_at)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
         RETURNING *;",
@@ -64,9 +64,9 @@ async fn post_advertisements(
         ),
         e => status::Custom(
             Status::InternalServerError,
-            responses::error_response(format!("Failed to create advertisement: {}", e)),
+            responses::error_response(format!("Failed to create notification: {}", e)),
         ),
     })?;
 
-    Ok(json!(new_advertisement))
+    Ok(json!(new_notification))
 }

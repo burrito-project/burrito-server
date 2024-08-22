@@ -18,7 +18,7 @@ impl From<String> for AdType {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Advertisement {
+pub struct Notification {
     pub id: i32,
     pub is_active: bool,
     pub ad_title: Option<String>,
@@ -34,7 +34,7 @@ pub struct Advertisement {
 }
 
 #[derive(Debug, Deserialize)]
-pub struct AdvertisementPayload {
+pub struct NotificationPayload {
     pub is_active: bool,
     pub ad_title: Option<String>,
     pub ad_type: AdType,
