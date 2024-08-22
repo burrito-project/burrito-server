@@ -67,7 +67,7 @@ async fn pending_updates(
         r#"SELECT *
         FROM app_versions
         WHERE semver > $1 AND (platform = 'all' OR platform = $2) AND should_notify = true
-        ORDER BY release_date ASC"#,
+        ORDER BY (semver, release_date) DESC;"#, // first is newer
         user_version,
         user_platform.to_string(),
     )
