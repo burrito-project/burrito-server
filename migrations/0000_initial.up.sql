@@ -27,7 +27,7 @@ CREATE SCHEMA IF NOT EXISTS public;
 
 CREATE OR REPLACE FUNCTION trigger_set_timestamps() RETURNS TRIGGER AS $$
 BEGIN
-    NEW.created_at = (CASE WHEN PG_OP = 'INSERT' THEN now() ELSE OLD.created_at END);
+    NEW.created_at = (CASE WHEN TG_OP = 'INSERT' THEN now() ELSE OLD.created_at END);
     NEW.updated_at = (CASE WHEN TG_OP = 'UPDATE' AND OLD.updated_at >= now() THEN OLD.updated_at + interval '1 millisecond' ELSE now() END);
     RETURN NEW;
 END;
