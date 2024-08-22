@@ -8,6 +8,9 @@ RUN : \
         pkgconfig \
         perl \
         make \
+        libgcc \
+        libstdc++ \
+        musl \
     && :
 
 COPY Cargo.toml Cargo.lock .sqlx ./
@@ -26,21 +29,9 @@ COPY . .
 RUN : \
     && touch -a -m ./src/main.rs \
     && cargo build --target x86_64-unknown-linux-musl --release \
+    && cargo install sqlx-cli --no-default-features --features postgres \
+    && mv /app/target/x86_64-unknown-linux-musl/release/burrito-server /app/burrito-server \
     && :
-
-FROM alpine:3.20.2
-
-WORKDIR /app
-
-RUN : \
-    apk add --no-cache \
-        libgcc \
-        libstdc++ \
-        musl \
-    && :
-
-COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/burrito-server /app/
-COPY --from=builder /app/.env /app/.env
 
 ENV SQLX_OFFLINE=false
 
