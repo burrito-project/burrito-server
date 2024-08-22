@@ -23,6 +23,7 @@ pub struct AppVersion {
     pub id: i32,
     pub semver: String,
     pub platform: PlatformType,
+    pub should_notify: bool,
     pub is_mandatory: bool,
     pub banner_url: Option<String>,
     pub release_notes: Option<String>,
@@ -32,10 +33,12 @@ pub struct AppVersion {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(unused)]
 pub struct AppVersionPayload {
     pub semver: String,
     #[serde(default)]
     pub platform: PlatformType,
+    pub should_notify: bool,
     pub is_mandatory: bool,
     pub banner_url: Option<String>,
     pub release_notes: Option<String>,

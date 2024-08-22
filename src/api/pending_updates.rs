@@ -66,7 +66,7 @@ async fn pending_updates(
         schemas::AppVersion,
         r#"SELECT *
         FROM app_versions
-        WHERE semver > $1 AND (platform = 'all' OR platform = $2)
+        WHERE semver > $1 AND (platform = 'all' OR platform = $2) AND should_notify = true
         ORDER BY release_date ASC"#,
         user_version,
         user_platform,

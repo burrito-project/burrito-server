@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS app_versions (
     semver varchar(16) NOT NULL,
     platform varchar(16) NOT NULL DEFAULT 'all',
     is_mandatory boolean NOT NULL,
+    should_notify boolean NOT NULL DEFAULT TRUE,
     banner_url text,
     release_notes text, -- text in markdown format
     release_date timestamptz NOT NULL DEFAULT now(),
