@@ -4,7 +4,12 @@ use serde_json::{json, Value};
 use crate::{core::responses, entities::AppState, schemas};
 
 pub fn routes() -> Vec<Route> {
-    routes![list_app_versions, post_app_versions, patch_app_version,]
+    routes![
+        list_app_versions,
+        post_app_versions,
+        patch_app_version,
+        delete_app_version,
+    ]
 }
 
 #[get("/")]
@@ -119,4 +124,30 @@ async fn patch_app_version(
         })?;
 
     Ok(json!(updated_version))
+}
+
+#[delete("/<id>")]
+async fn delete_app_version(
+    id: i32,
+    state: &State<AppState>,
+) -> Result<Value, status::Custom<Value>> {
+    let deleted_version = sqlx::query_as!(
+        schemas::AppVersion,
+        "DELETE FROM app_versions WHERE id = $1 RETURNING *;",
+        id,
+    )
+    .fetch_one(&state.pool)
+    .await
+    .map_err(|e| match e {
+        sqlx::Error::Database(db_err) => status::Custom(
+            Status::BadRequest,
+            responses::error_response(db_err.to_string()),
+        ),
+        e => status::Custom(
+            Status::InternalServerError,
+            responses::error_response(format!("Failed to delete version: {e}")),
+        ),
+    })?;
+
+    Ok(json!(deleted_version))
 }
