@@ -1,0 +1,67 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "INSERT INTO user_identities (fingerprint, last_ip, last_version, platform, session_count)\n        VALUES ($1, $2, $3, $4, 1)\n        ON CONFLICT (fingerprint)\n        DO UPDATE SET\n            last_ip = EXCLUDED.last_ip,\n            last_version = EXCLUDED.last_version,\n            platform = EXCLUDED.platform,\n            session_count = user_identities.session_count + 1\n        RETURNING *;",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "fingerprint",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "last_ip",
+        "type_info": "Inet"
+      },
+      {
+        "ordinal": 3,
+        "name": "last_version",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "session_count",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 5,
+        "name": "platform",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 6,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 7,
+        "name": "updated_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Varchar",
+        "Inet",
+        "Varchar",
+        "Varchar"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "62345f0a62a10c3a0e5817c4b847f1ccd974363612eef357fd8f538e9fd9ded2"
+}

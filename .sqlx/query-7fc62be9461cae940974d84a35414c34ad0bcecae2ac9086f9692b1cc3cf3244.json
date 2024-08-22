@@ -1,0 +1,86 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT * FROM notification_ads ORDER BY priority ASC;",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "is_active",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 2,
+        "name": "ad_title",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "ad_type",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "priority",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 5,
+        "name": "image_url",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 6,
+        "name": "target_url",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 7,
+        "name": "begin_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 8,
+        "name": "end_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 9,
+        "name": "ad_content",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 10,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 11,
+        "name": "updated_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "7fc62be9461cae940974d84a35414c34ad0bcecae2ac9086f9692b1cc3cf3244"
+}

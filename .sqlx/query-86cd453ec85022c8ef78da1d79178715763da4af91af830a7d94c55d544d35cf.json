@@ -1,0 +1,83 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE app_versions\n        SET semver = COALESCE($2, semver),\n            banner_url = COALESCE($3, banner_url),\n            is_mandatory = COALESCE($4, is_mandatory),\n            should_notify = COALESCE($5, should_notify),\n            platform = COALESCE($6, platform),\n            release_date = COALESCE($7, release_date),\n            release_notes = COALESCE($8, release_notes)\n        WHERE id = $1\n        RETURNING *;",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "semver",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "platform",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "is_mandatory",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 4,
+        "name": "should_notify",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 5,
+        "name": "banner_url",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "release_notes",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 7,
+        "name": "release_date",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 8,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 9,
+        "name": "updated_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Varchar",
+        "Text",
+        "Bool",
+        "Bool",
+        "Varchar",
+        "Timestamptz",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "86cd453ec85022c8ef78da1d79178715763da4af91af830a7d94c55d544d35cf"
+}
