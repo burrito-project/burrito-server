@@ -4,7 +4,7 @@ use serde_json::{json, Value};
 use crate::{core::responses, entities::AppState, schemas};
 
 pub fn routes() -> Vec<Route> {
-    routes![list_notifications, post_notifications,]
+    routes![list_notifications, post_notifications, delete_notification,]
 }
 
 #[get("/")]
@@ -69,4 +69,26 @@ async fn post_notifications(
     })?;
 
     Ok(json!(new_notification))
+}
+
+#[delete("/<id>")]
+async fn delete_notification(
+    id: i32,
+    state: &State<AppState>,
+) -> Result<Value, status::Custom<Value>> {
+    let deleted_notification = sqlx::query_as!(
+        schemas::Notification,
+        "DELETE FROM notification_ads WHERE id = $1 RETURNING *;",
+        id,
+    )
+    .fetch_one(&state.pool)
+    .await
+    .map_err(|_| {
+        status::Custom(
+            Status::InternalServerError,
+            responses::error_response("Failed to delete notification"),
+        )
+    })?;
+
+    Ok(json!(deleted_notification))
 }

@@ -1,14 +1,10 @@
 use rocket::{http::Status, response::status, serde::json::Json, Route, State};
 use serde_json::{json, Value};
 
-use crate::{
-    core::responses,
-    entities::AppState,
-    schemas::{self, AppVersionPayload},
-};
+use crate::{core::responses, entities::AppState, schemas};
 
 pub fn routes() -> Vec<Route> {
-    routes![list_app_versions, post_app_versions,]
+    routes![list_app_versions, post_app_versions, patch_app_version,]
 }
 
 #[get("/")]
@@ -29,7 +25,7 @@ async fn list_app_versions(state: &State<AppState>) -> Result<Value, status::Cus
 
 #[post("/", format = "json", data = "<payload>")]
 async fn post_app_versions(
-    payload: Result<Json<AppVersionPayload>, rocket::serde::json::Error<'_>>,
+    payload: Result<Json<schemas::AppVersionPayload>, rocket::serde::json::Error<'_>>,
     state: &State<AppState>,
 ) -> Result<Value, status::Custom<Value>> {
     if let Err(e) = payload {
@@ -68,4 +64,59 @@ async fn post_app_versions(
     })?;
 
     Ok(json!(new_version))
+}
+
+#[patch("/<id>", format = "json", data = "<payload>")]
+async fn patch_app_version(
+    id: i32,
+    payload: Result<Json<schemas::AppVersionPatchPayload>, rocket::serde::json::Error<'_>>,
+    state: &State<AppState>,
+) -> Result<Value, status::Custom<Value>> {
+    if let Err(e) = payload {
+        return Err(status::Custom(
+            Status::BadRequest,
+            responses::error_response(e.to_string()),
+        ));
+    }
+
+    let payload = payload.unwrap().into_inner();
+
+    // we only set the fields that are not None
+    let updated_version = sqlx::query_as!(
+        schemas::AppVersion,
+        "UPDATE app_versions
+        SET semver = COALESCE($2, semver),
+            banner_url = COALESCE($3, banner_url),
+            is_mandatory = COALESCE($4, is_mandatory),
+            should_notify = COALESCE($5, should_notify),
+            platform = COALESCE($6, platform),
+            release_date = COALESCE($7, release_date),
+            release_notes = COALESCE($8, release_notes)
+        WHERE id = $1
+        RETURNING *;",
+        id,
+        payload.semver,
+        payload.banner_url,
+        payload.is_mandatory,
+        payload.should_notify,
+        payload.platform.map(|p| p.to_string()),
+        payload.release_date,
+        payload.release_notes,
+    );
+
+    let updated_version = updated_version
+        .fetch_one(&state.pool)
+        .await
+        .map_err(|e| match e {
+            sqlx::Error::Database(db_err) => status::Custom(
+                Status::BadRequest,
+                responses::error_response(db_err.to_string()),
+            ),
+            e => status::Custom(
+                Status::InternalServerError,
+                responses::error_response(format!("Failed to update version: {e}")),
+            ),
+        })?;
+
+    Ok(json!(updated_version))
 }

@@ -45,3 +45,14 @@ pub struct AppVersionPayload {
     #[serde(default = "chrono::Utc::now")]
     pub release_date: chrono::DateTime<chrono::Utc>,
 }
+
+#[derive(Debug, Deserialize)]
+pub struct AppVersionPatchPayload {
+    pub semver: Option<String>,
+    pub platform: Option<PlatformType>,
+    pub should_notify: Option<bool>,
+    pub is_mandatory: Option<bool>,
+    pub banner_url: Option<String>,
+    pub release_notes: Option<String>,
+    pub release_date: Option<chrono::DateTime<chrono::Utc>>,
+}
