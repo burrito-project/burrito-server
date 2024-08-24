@@ -12,7 +12,7 @@ use sqlx::types::ipnetwork::IpNetwork;
 use crate::{core::responses, entities::AppState, schemas};
 
 pub fn routes() -> Vec<Route> {
-    routes![post_notifications]
+    routes![post_notifications, options]
 }
 
 #[post("/", format = "json", data = "<payload>")]
