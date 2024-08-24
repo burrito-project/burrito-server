@@ -62,3 +62,8 @@ pub async fn post_notifications(
 
     Ok(json!(new_notification))
 }
+
+#[options("/")]
+pub fn options() -> status::NoContent {
+    status::NoContent
+}

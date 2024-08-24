@@ -15,7 +15,6 @@ mod db;
 mod entities;
 mod env;
 mod mock;
-mod responders;
 mod schemas;
 
 #[catch(404)]
