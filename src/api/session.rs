@@ -1,5 +1,3 @@
-use std::net::SocketAddr;
-
 use rocket::{
     http::Status,
     response::status,
@@ -9,7 +7,11 @@ use rocket::{
 use serde_json::{json, Value};
 use sqlx::types::ipnetwork::IpNetwork;
 
-use crate::{core::responses, entities::AppState, schemas};
+use crate::{
+    core::{guards::ForwardedIp, responses},
+    entities::AppState,
+    schemas,
+};
 
 pub fn routes() -> Vec<Route> {
     routes![post_notifications, options]
@@ -17,8 +19,8 @@ pub fn routes() -> Vec<Route> {
 
 #[post("/", format = "json", data = "<payload>")]
 pub async fn post_notifications(
+    remote_addr: ForwardedIp,
     payload: Result<Json<schemas::UserIdentityPayload>, json::Error<'_>>,
-    remote_addr: SocketAddr,
     state: &State<AppState>,
 ) -> Result<Value, status::Custom<Value>> {
     if let Err(e) = payload {
@@ -29,7 +31,7 @@ pub async fn post_notifications(
     }
 
     let payload = payload.unwrap().into_inner();
-    let user_ip = IpNetwork::new(remote_addr.ip(), 32).unwrap();
+    let user_ip = IpNetwork::new(remote_addr.into(), 32).unwrap();
 
     let new_notification = sqlx::query_as!(
         schemas::UserIdentity,
