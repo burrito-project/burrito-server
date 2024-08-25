@@ -18,3 +18,5 @@ CREATE TABLE IF NOT EXISTS user_identities (
 CREATE INDEX IF NOT EXISTS idx_fingerprint ON user_identities(fingerprint);
 CREATE INDEX IF NOT EXISTS idx_updated_at ON user_identities(updated_at);
 CREATE INDEX IF NOT EXISTS idx_last_ip ON user_identities(last_ip);
+
+CREATE OR REPLACE TRIGGER update_modified_time BEFORE UPDATE ON user_identities FOR EACH ROW EXECUTE PROCEDURE trigger_set_timestamps();
