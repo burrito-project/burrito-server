@@ -5,7 +5,7 @@ ENV DOMAIN_NAME=${DOMAIN_NAME:?}
 ENV TZ=America/Lima
 
 RUN rm /etc/nginx/conf.d/default.conf
-COPY ./docker/production/nginx/nginx.conf /tmp/nginx.conf.tpl
+COPY ./docker/prod/nginx/nginx.conf /tmp/nginx.conf.tpl
 
 RUN : \
     && envsubst \
