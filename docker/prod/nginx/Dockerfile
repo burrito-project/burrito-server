@@ -1,4 +1,4 @@
-FROM 1.27.1-alpine
+FROM nginx:1.27.1-alpine
 
 ARG DOMAIN_NAME
 ENV DOMAIN_NAME=${DOMAIN_NAME:?}
