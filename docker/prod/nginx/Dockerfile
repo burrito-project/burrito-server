@@ -11,5 +11,5 @@ RUN : \
     && envsubst \
         '${DOMAIN_NAME}' \
         < /tmp/nginx.conf.tpl \
-        > /etc/nginx/conf.d/nginx.confs \
+        > /etc/nginx/conf.d/nginx.conf \
     && :
