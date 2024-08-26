@@ -5,13 +5,15 @@ services:
     build:
       context: .
       dockerfile: ./docker/prod/Dockerfile
-    ports:
-      - 6969:6969
+    expose:
+      - 6969
     environment:
       - ROCKET_PORT=6969
       - ROCKET_ADDRESS=0.0.0.0
     depends_on:
       - burrito_db
+      - burrito_nginx
+    restart: always
 
   burrito_db:
     image: postgres:16.4-bullseye
@@ -21,3 +23,16 @@ services:
       - POSTGRES_DB=burrito_app
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    restart: always
+
+  burrito_nginx:
+    build:
+      context: .
+      args:
+        - DOMAIN_NAME=api.contigosanmarcos.com
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    restart: always
