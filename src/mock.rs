@@ -48,6 +48,11 @@ pub fn initialize_mocks() {
     tokio::task::spawn(async move {
         let mut interval = tokio::time::interval(std::time::Duration::from_millis(300));
 
+        // wait for the server to start
+        interval.tick().await;
+        interval.tick().await;
+        interval.tick().await;
+
         loop {
             interval.tick().await;
 
