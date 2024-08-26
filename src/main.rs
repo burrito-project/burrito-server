@@ -33,7 +33,7 @@ pub const SELF_URL: &str = "http://localhost:6969";
 
 #[rocket::main]
 async fn main() -> Result<(), rocket::Error> {
-    let _ = *startup;
+    let _ = *startup; // forcing evaluation
 
     dotenv().expect("No .env file");
 
@@ -51,12 +51,13 @@ async fn main() -> Result<(), rocket::Error> {
     rocket::build()
         .configure(config)
         .mount("/", api::index::routes())
+        .mount("/help", routes![api::index::help_index])
         .mount("/status", api::status::routes())
+        .mount("/session", api::session::routes())
         .mount("/versions", api::versions::routes())
         .mount("/notifications", api::notifications::routes())
-        .mount("/session", api::session::routes())
         .mount("/pending_updates", api::pending_updates::routes())
-        .mount("/help", routes![api::index::help_index])
+        .mount("/ws", api::ws::routes())
         .register("/", catchers![not_found])
         .attach(cors::Cors)
         .manage(crate::entities::AppState::from_db(pool))

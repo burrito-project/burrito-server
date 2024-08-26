@@ -1,4 +1,4 @@
-use std::sync::RwLock;
+use parking_lot::RwLock;
 
 use crate::bus_stops::BusStopInfo;
 use crate::entities::state_record::BurritoStateRecord;

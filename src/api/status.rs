@@ -22,9 +22,8 @@ const DEFAULT_COUNT: usize = 100;
 #[get("/?<count>")]
 fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, Status> {
     let count = count.unwrap_or(DEFAULT_COUNT);
-
-    let messages = state.messages.read().unwrap();
-    let last_stop = state.last_stop.read().unwrap();
+    let messages = state.messages.read();
+    let last_stop = state.last_stop.read();
 
     let n = std::cmp::min(count, messages.len());
 
@@ -55,7 +54,7 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
                 drop(messages);
                 drop(last_stop);
 
-                *state.last_stop.write().unwrap() = None;
+                *state.last_stop.write() = None;
 
                 return Ok(json!({
                     "positions": messages_cpy.iter().rev().take(n).cloned().collect::<Vec<BurritoStateRecord>>(),
@@ -87,19 +86,19 @@ fn post_status(
     state: &State<AppState>,
     _z: WithAuth,
 ) -> Status {
-    let mut messages = state.messages.write().unwrap();
+    let mut messages = state.messages.write();
     let payload = message_json.into_inner();
 
     match get_bus_stop_for_point(payload.lt, payload.lg) {
         Some(this_stop) => {
-            let mut last_stop = state.last_stop.write().unwrap();
+            let mut last_stop = state.last_stop.write();
             // If there's already last_stop we update it
             *last_stop = Some(this_stop);
         }
         None => {
             // If the burrito is not in a bus stop and we have a last_stop (has_reached=true),
             // we interpret as it has left that bus stop, so we choose the next one as has_reached=false
-            let mut last_stop = state.last_stop.write().unwrap();
+            let mut last_stop = state.last_stop.write();
 
             if last_stop.is_some() {
                 if last_stop.as_ref().unwrap().has_reached {
