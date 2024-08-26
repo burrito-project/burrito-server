@@ -22,7 +22,7 @@ const DEFAULT_COUNT: usize = 100;
 #[get("/?<count>")]
 fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, Status> {
     let count = count.unwrap_or(DEFAULT_COUNT);
-    let messages = state.messages.read();
+    let messages = state.records.read();
     let last_stop = state.last_stop.read();
 
     let n = std::cmp::min(count, messages.len());
@@ -86,7 +86,7 @@ fn post_status(
     state: &State<AppState>,
     _z: WithAuth,
 ) -> Status {
-    let mut messages = state.messages.write();
+    let mut messages = state.records.write();
     let payload = message_json.into_inner();
 
     match get_bus_stop_for_point(payload.lt, payload.lg) {
