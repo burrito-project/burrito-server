@@ -48,11 +48,6 @@ pub fn initialize_mocks() {
     tokio::task::spawn(async move {
         let mut interval = tokio::time::interval(std::time::Duration::from_millis(300));
 
-        // wait for the server to start
-        interval.tick().await;
-        interval.tick().await;
-        interval.tick().await;
-
         loop {
             interval.tick().await;
 
@@ -73,7 +68,7 @@ pub fn initialize_mocks() {
                 .unwrap();
 
             if elapsed > fake_elapsed {
-                client
+                let _ = client
                     .post(format!("{}/status", crate::SELF_URL))
                     .body(
                         serde_json::json!({
@@ -86,8 +81,7 @@ pub fn initialize_mocks() {
                     .header("content-type", "application/json")
                     .header("authorization", crate::env::AUTH_DRIVER_PASSPHRASE.clone())
                     .send()
-                    .await
-                    .unwrap();
+                    .await;
 
                 record_idx += 1;
             }
