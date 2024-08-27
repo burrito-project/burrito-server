@@ -67,7 +67,7 @@ pub async fn driver_message_impl(
     // Otherwise, we can gather the next bus stop information by
     // reading the last_stop
     if bus_stop.is_none() && last_stop.is_some() {
-        bus_stop = bus_stop.for_new_position(LatLng {
+        bus_stop = last_stop.for_new_position(LatLng {
             lat: payload.lt,
             lng: payload.lg,
         });
