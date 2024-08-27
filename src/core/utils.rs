@@ -1,5 +1,6 @@
 use geo::GeodesicDistance;
-use std::time::Duration;
+use rocket::Route;
+use std::{iter, time::Duration};
 
 use crate::entities::BurritoStateRecord;
 
@@ -50,4 +51,17 @@ pub fn calculate_velocity_kmph(positions: &[BurritoStateRecord]) -> f64 {
 pub fn get_uptime() -> std::time::Duration {
     let now = std::time::SystemTime::now();
     now.duration_since(*crate::startup).unwrap()
+}
+
+/// For prepending a base route to a Vec<Route>
+pub fn with_base(
+    routes: Vec<Route>,
+    base: &'static str,
+) -> iter::Map<impl Iterator<Item = Route>, impl FnMut(Route) -> Route> {
+    routes.into_iter().map(move |route| {
+        let route = route.clone();
+        route
+            .map_base(|base_| format!("{}/{}", base, base_))
+            .unwrap()
+    })
 }

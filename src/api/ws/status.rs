@@ -12,17 +12,19 @@ fn ws_status_streaming(ws: ws::WebSocket, state: &State<AppState>) -> ws::Channe
 
     ws.channel(move |mut stream| {
         Box::pin(async move {
-            let mut interval = tokio::time::interval(std::time::Duration::from_millis(300));
+            let channel = state.channel.clone();
+            let mut tx = channel.subscribe();
+            drop(channel);
 
             loop {
-                interval.tick().await;
-                let messages = state.records.read();
-                let last_message = messages.last().cloned();
-                drop(messages); // we release the lock ASAFP
+                let driver_message = tx
+                    .recv()
+                    .await
+                    .map_err(|_| ws::result::Error::AttackAttempt)?;
 
                 let _ = stream
                     .send(ws::Message::Text(
-                        serde_json::to_string(&last_message).unwrap(),
+                        serde_json::to_string(&driver_message).unwrap(),
                     ))
                     .await;
             }
