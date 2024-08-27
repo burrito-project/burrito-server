@@ -80,6 +80,7 @@ pub fn initialize_mocks() {
                     )
                     .header("content-type", "application/json")
                     .header("authorization", crate::env::AUTH_DRIVER_PASSPHRASE.clone())
+                    .header("x-bus-id", "burrito_mock")
                     .send()
                     .await;
 
