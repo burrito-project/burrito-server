@@ -10,6 +10,7 @@ services:
     environment:
       - ROCKET_PORT=6969
       - ROCKET_ADDRESS=0.0.0.0
+      - ROCKET_LOG_LEVEL=debug
     depends_on:
       - burrito_db
       - burrito_nginx

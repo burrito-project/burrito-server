@@ -5,12 +5,12 @@ use tokio::sync;
 use tokio::sync::broadcast;
 
 use crate::bus_stops::BusStopInfo;
-use crate::entities::BurritoStateRecord;
+use crate::entities::BurritoPosRecord;
 use crate::entities::WsClientMessage;
 
 pub struct AppState {
     pub pool: sqlx::Pool<sqlx::Postgres>,
-    pub records: sync::RwLock<Vec<BurritoStateRecord>>,
+    pub records: sync::RwLock<Vec<BurritoPosRecord>>,
     pub channel: Arc<broadcast::Sender<WsClientMessage>>,
     pub drivers_locks: Arc<sync::Mutex<HashMap<String, ()>>>,
     pub last_stop: sync::RwLock<Option<BusStopInfo>>,
