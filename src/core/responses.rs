@@ -10,6 +10,7 @@ pub struct RawResponse<'r> {
 }
 
 impl<'r> RawResponse<'r> {
+    #[allow(dead_code)]
     pub fn from(response: response::Response<'r>) -> RawResponse<'r> {
         RawResponse { response }
     }

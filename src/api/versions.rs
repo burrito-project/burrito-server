@@ -1,4 +1,9 @@
-use rocket::{http::Status, response::status, serde::json::Json, Route, State};
+use rocket::{
+    http::Status,
+    response::status,
+    serde::{self, json::Json},
+    Route, State,
+};
 use serde_json::{json, Value};
 
 use crate::{core::responses, entities::AppState, schemas};
@@ -30,7 +35,7 @@ async fn list_app_versions(state: &State<AppState>) -> Result<Value, status::Cus
 
 #[post("/", format = "json", data = "<payload>")]
 async fn post_app_versions(
-    payload: Result<Json<schemas::AppVersionPayload>, rocket::serde::json::Error<'_>>,
+    payload: Result<Json<schemas::AppVersionPayload>, serde::json::Error<'_>>,
     state: &State<AppState>,
 ) -> Result<Value, status::Custom<Value>> {
     if let Err(e) = payload {
@@ -74,7 +79,7 @@ async fn post_app_versions(
 #[patch("/<id>", format = "json", data = "<payload>")]
 async fn patch_app_version(
     id: i32,
-    payload: Result<Json<schemas::AppVersionPatchPayload>, rocket::serde::json::Error<'_>>,
+    payload: Result<Json<schemas::AppVersionPatchPayload>, serde::json::Error<'_>>,
     state: &State<AppState>,
 ) -> Result<Value, status::Custom<Value>> {
     if let Err(e) = payload {

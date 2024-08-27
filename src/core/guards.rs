@@ -4,9 +4,9 @@ use rocket::{http::Status, request::FromRequest};
 
 pub struct ForwardedIp(IpAddr);
 
-impl Into<IpAddr> for ForwardedIp {
-    fn into(self) -> IpAddr {
-        self.0
+impl From<ForwardedIp> for IpAddr {
+    fn from(value: ForwardedIp) -> Self {
+        value.0
     }
 }
 
@@ -31,6 +31,6 @@ impl<'r> FromRequest<'r> for ForwardedIp {
             }
         };
 
-        rocket::request::Outcome::Success(ForwardedIp { 0: ip_addr })
+        rocket::request::Outcome::Success(ForwardedIp(ip_addr))
     }
 }

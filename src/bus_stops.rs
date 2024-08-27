@@ -34,7 +34,7 @@ impl BusStopInfo {
         // If the last state is marked as reached, then we already passed it
         // and the bus is on its way to the next stop
         if self.has_reached {
-            get_next_bus_stop(&self, new_pos)
+            get_next_bus_stop(self, new_pos)
         }
         // And if not, we just update the distance to reach the bus stop
         else {
@@ -56,10 +56,7 @@ pub trait OptionalBuStopInfo {
 
 impl OptionalBuStopInfo for Option<BusStopInfo> {
     fn for_new_position(&self, new_pos: LatLng) -> Self {
-        match self {
-            Some(pos) => Some(pos.for_new_position(new_pos)),
-            None => None,
-        }
+        self.as_ref().map(|pos| pos.for_new_position(new_pos))
     }
 }
 
