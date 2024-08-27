@@ -1,6 +1,7 @@
 use rocket::Route;
 
 use crate::core::utils::with_base;
+pub use driver::driver_message_impl;
 
 mod driver;
 mod status;

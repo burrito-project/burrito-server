@@ -29,6 +29,27 @@ pub struct BusStopInfo {
     pub distance: f64,
 }
 
+impl BusStopInfo {
+    pub fn for_new_position(&self, new_pos: LatLng) -> Self {
+        // If the last state is marked as reached, then we already passed it
+        // and the bus is on its way to the next stop
+        if self.has_reached {
+            get_next_bus_stop(&self, new_pos)
+        }
+        // And if not, we just update the distance to reach the bus stop
+        else {
+            let new_distance = get_distance_to_bus_stop(self, new_pos);
+            BusStopInfo {
+                distance: new_distance,
+                has_reached: self.has_reached,
+                name: self.name.to_owned(),
+                number: self.number,
+                timestamp: std::time::SystemTime::now(),
+            }
+        }
+    }
+}
+
 fn feature_to_polygon(feature: &geojson::Feature) -> geo::Polygon {
     match feature.geometry.as_ref().map(|g| &g.value) {
         Some(geojson::Value::Polygon(p)) => {
@@ -62,20 +83,19 @@ pub fn get_bus_stop_for_point(lat: f64, lng: f64) -> Option<BusStopInfo> {
                 .unwrap()
                 .geodesic_distance(&geo::Point::new(lng, lat));
 
-            Some(BusStopInfo {
+            return Some(BusStopInfo {
                 name,
                 number,
                 has_reached: true,
                 timestamp: SystemTime::now(),
                 distance,
-            })
-        } else {
-            None
+            });
         }
+        None
     })
 }
 
-pub fn get_next_bus_stop(current: &BusStopInfo, current_post: LatLng) -> BusStopInfo {
+pub fn get_next_bus_stop(current: &BusStopInfo, current_pos: LatLng) -> BusStopInfo {
     let next_stop_num = match current.number {
         1..=8 => current.number + 1,
         9 => 1,
@@ -99,7 +119,7 @@ pub fn get_next_bus_stop(current: &BusStopInfo, current_post: LatLng) -> BusStop
     let distance = poly
         .centroid()
         .unwrap()
-        .geodesic_distance(&geo::Point::new(current_post.lng, current_post.lat));
+        .geodesic_distance(&geo::Point::new(current_pos.lng, current_pos.lat));
 
     BusStopInfo {
         name,
