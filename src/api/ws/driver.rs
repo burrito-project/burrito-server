@@ -1,6 +1,6 @@
 use crate::{
     auth::ExclusiveAuthDriver,
-    bus_stops::{get_bus_stop_for_point, LatLng},
+    bus_stops::{get_bus_stop_for_point, LatLng, OptionalBuStopInfo},
     core::utils,
     entities::{AppState, BurritoPosRecord, BurritoRecordPayload, WsClientMessage},
 };
@@ -58,25 +58,25 @@ pub async fn driver_message_impl(
 ) -> Result<usize, SendError<WsClientMessage>> {
     // 🚍 -- Handling the current bus stop
 
-    let bus_stop = get_bus_stop_for_point(payload.lt, payload.lg);
-
     // About to replace the latest last_stop:
     let mut last_stop = state.last_stop.write().await;
 
-    // If the bus is right on top of a bus stop, we update the last_stop
-    if bus_stop.is_some() {
-        *last_stop = bus_stop.clone();
-    }
+    // We check if the bus is currently in a bus stop
+    let mut bus_stop = get_bus_stop_for_point(payload.lt, payload.lg);
+
     // Otherwise, we can gather the next bus stop information by
     // reading the last_stop
     if bus_stop.is_none() && last_stop.is_some() {
-        let last_stop = last_stop.as_mut().unwrap();
-
-        *last_stop = last_stop.for_new_position(LatLng {
+        bus_stop = bus_stop.for_new_position(LatLng {
             lat: payload.lt,
             lng: payload.lg,
         });
     }
+
+    // This may be none and that's ok. At the start of the route, there's no
+    // previous bus stop
+    *last_stop = bus_stop.clone();
+    drop(last_stop);
 
     // 🚍 -- Handling the next record to append
 
@@ -96,12 +96,14 @@ pub async fn driver_message_impl(
         messages.remove(0); // Keep only the latest 1000 positions
     }
 
+    // 🚍 -- Sending the message to the clients
+
     let message_to_send = WsClientMessage {
         last_stop: bus_stop,
         record: messages.last().unwrap().clone(),
     };
+    drop(messages);
 
     let channel = state.channel.clone();
-
     channel.send(message_to_send)
 }
