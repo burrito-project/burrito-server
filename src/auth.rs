@@ -5,12 +5,12 @@ use rocket::{
 
 use crate::entities::AppState;
 
-pub struct AuthDriver {
+pub struct ExclusiveAuthDriver {
     pub bus_name: String,
 }
 
 #[rocket::async_trait]
-impl<'r> FromRequest<'r> for AuthDriver {
+impl<'r> FromRequest<'r> for ExclusiveAuthDriver {
     type Error = ();
 
     async fn from_request(request: &'r rocket::Request<'_>) -> request::Outcome<Self, ()> {
@@ -26,7 +26,7 @@ impl<'r> FromRequest<'r> for AuthDriver {
         }
 
         let bus_name = match request.headers().get_one("x-bus-id") {
-            Some(bus_name) => bus_name.to_string(),
+            Some(bus_name) => bus_name.to_string().to_lowercase(),
             None => {
                 return rocket::request::Outcome::Forward(Status::BadRequest);
             }
@@ -44,6 +44,6 @@ impl<'r> FromRequest<'r> for AuthDriver {
         }
 
         locks_map.insert(bus_name.clone(), ());
-        rocket::request::Outcome::Success(AuthDriver { bus_name })
+        rocket::request::Outcome::Success(ExclusiveAuthDriver { bus_name })
     }
 }
