@@ -2,9 +2,9 @@ use geo::GeodesicDistance;
 use rocket::Route;
 use std::{iter, time::Duration};
 
-use crate::entities::BurritoStateRecord;
+use crate::entities::BurritoPosRecord;
 
-pub fn calculate_velocity_kmph(positions: &[BurritoStateRecord]) -> f64 {
+pub fn calculate_velocity_kmph(positions: &[BurritoPosRecord]) -> f64 {
     if positions.len() < 2 {
         return 0.0;
     }

@@ -1,11 +1,11 @@
 use lazy_static::lazy_static;
 use std::time;
 
-use crate::entities::BurritoStateRecord;
+use crate::entities::BurritoPosRecord;
 
 lazy_static! {
-    static ref s_mock_records: Vec<BurritoStateRecord> =
-        serde_json::from_str::<Vec<BurritoStateRecord>>(include_str!(
+    static ref s_mock_records: Vec<BurritoPosRecord> =
+        serde_json::from_str::<Vec<BurritoPosRecord>>(include_str!(
             "../static/mocks/route1.json"
         ))
         .unwrap()

@@ -4,7 +4,7 @@ use std::time::SystemTime;
 use super::service_state::BusServiceState;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
-pub struct BurritoStateRecord {
+pub struct BurritoPosRecord {
     pub lt: f64,
     pub lg: f64,
     pub sts: BusServiceState,
