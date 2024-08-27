@@ -19,7 +19,7 @@ regex = "1.10.6"
 strum_macros = "0.26.4"
 strum = "0.26.3"
 ws = { package = "rocket_ws", version = "0.1.1" }
-parking_lot = { version = "0.12.3", features = ["send_guard"] }
+# parking_lot = { version = "0.12.3", features = ["send_guard"] }
 
 [profile.dev.package.sqlx-macros]
 opt-level = 3

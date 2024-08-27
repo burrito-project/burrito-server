@@ -5,7 +5,7 @@ use rocket::serde::json::{json, Value};
 use rocket::{Route, State};
 use std::time;
 
-use crate::auth::WithAuth;
+use crate::auth::AuthDriver;
 use crate::bus_stops::{
     get_bus_stop_for_point, get_distance_to_bus_stop, get_next_bus_stop, LatLng,
 };
@@ -20,10 +20,10 @@ pub fn routes() -> Vec<Route> {
 const DEFAULT_COUNT: usize = 100;
 
 #[get("/?<count>")]
-fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, Status> {
+async fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, Status> {
     let count = count.unwrap_or(DEFAULT_COUNT);
-    let messages = state.records.read();
-    let last_stop = state.last_stop.read();
+    let messages = state.records.read().await;
+    let last_stop = state.last_stop.read().await;
 
     let n = std::cmp::min(count, messages.len());
 
@@ -54,7 +54,7 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
                 drop(messages);
                 drop(last_stop);
 
-                *state.last_stop.write() = None;
+                *state.last_stop.write().await = None;
 
                 return Ok(json!({
                     "positions": messages_cpy.iter().rev().take(n).cloned().collect::<Vec<BurritoStateRecord>>(),
@@ -81,24 +81,24 @@ fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, St
 }
 
 #[post("/", format = "json", data = "<message_json>")]
-fn post_status(
+async fn post_status(
     message_json: Json<BurritoRecordPayload>,
     state: &State<AppState>,
-    _z: WithAuth,
+    _driver: AuthDriver,
 ) -> Status {
-    let mut messages = state.records.write();
+    let mut messages = state.records.write().await;
     let payload = message_json.into_inner();
 
     match get_bus_stop_for_point(payload.lt, payload.lg) {
         Some(this_stop) => {
-            let mut last_stop = state.last_stop.write();
+            let mut last_stop = state.last_stop.write().await;
             // If there's already last_stop we update it
             *last_stop = Some(this_stop);
         }
         None => {
             // If the burrito is not in a bus stop and we have a last_stop (has_reached=true),
             // we interpret as it has left that bus stop, so we choose the next one as has_reached=false
-            let mut last_stop = state.last_stop.write();
+            let mut last_stop = state.last_stop.write().await;
 
             if last_stop.is_some() {
                 if last_stop.as_ref().unwrap().has_reached {
