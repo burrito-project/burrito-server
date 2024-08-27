@@ -26,6 +26,10 @@ fn not_found() -> serde_json::Value {
 
 lazy_static! {
     pub static ref startup: std::time::SystemTime = std::time::SystemTime::now();
+    pub static ref startup_unix_timestamp: u64 = startup
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_secs();
 }
 
 pub const PORT: u16 = 6969;
@@ -52,6 +56,7 @@ async fn main() -> Result<(), rocket::Error> {
         .configure(config)
         .mount("/", api::index::routes())
         .mount("/help", routes![api::index::help_index])
+        .mount("/ping", api::ping::routes())
         .mount("/status", api::status::routes())
         .mount("/driver", api::driver::routes())
         .mount("/session", api::session::routes())

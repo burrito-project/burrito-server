@@ -49,8 +49,7 @@ pub fn calculate_velocity_kmph(positions: &[BurritoPosRecord]) -> f64 {
 
 #[allow(dead_code)]
 pub fn get_uptime() -> std::time::Duration {
-    let now = std::time::SystemTime::now();
-    now.duration_since(*crate::startup).unwrap()
+    crate::startup.elapsed().unwrap()
 }
 
 /// For prepending a base route to a Vec<Route>
