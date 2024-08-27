@@ -17,13 +17,6 @@ mod env;
 mod mock;
 mod schemas;
 
-#[catch(404)]
-fn not_found() -> serde_json::Value {
-    json!({
-        "message": "That's a certified 404 classic. Lost? Try /help",
-    })
-}
-
 lazy_static! {
     pub static ref startup: std::time::SystemTime = std::time::SystemTime::now();
     pub static ref startup_unix_timestamp: u64 = startup
@@ -57,6 +50,7 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/", api::index::routes())
         .mount("/help", routes![api::index::help_index])
         .mount("/ping", api::ping::routes())
+        .mount("/health", api::ping::routes())
         .mount("/status", api::status::routes())
         .mount("/driver", api::driver::routes())
         .mount("/session", api::session::routes())
@@ -71,4 +65,11 @@ async fn main() -> Result<(), rocket::Error> {
         .await?;
 
     Ok(())
+}
+
+#[catch(404)]
+fn not_found() -> serde_json::Value {
+    json!({
+        "message": "That's a certified 404 classic. Lost? Try /help",
+    })
 }
