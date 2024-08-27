@@ -50,6 +50,19 @@ impl BusStopInfo {
     }
 }
 
+pub trait OptionalBuStopInfo {
+    fn for_new_position(&self, new_pos: LatLng) -> Self;
+}
+
+impl OptionalBuStopInfo for Option<BusStopInfo> {
+    fn for_new_position(&self, new_pos: LatLng) -> Self {
+        match self {
+            Some(pos) => Some(pos.for_new_position(new_pos)),
+            None => None,
+        }
+    }
+}
+
 fn feature_to_polygon(feature: &geojson::Feature) -> geo::Polygon {
     match feature.geometry.as_ref().map(|g| &g.value) {
         Some(geojson::Value::Polygon(p)) => {

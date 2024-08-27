@@ -66,4 +66,4 @@ the env file. The mocked route will be read from `static/mocks/*.json`. See `moc
 details.
 
 Once you have set `IS_MOCKED=true`, you can start the server as usual. Mocking works by sending
-`POST /status` requests to ourselves, iterating over the mocked route records.
+`POST /driver` requests to ourselves, iterating over the mocked route records.

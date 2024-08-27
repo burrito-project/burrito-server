@@ -1,14 +1,12 @@
 use rocket::http::Status;
-use rocket::serde::json::Json;
 use rocket::serde::json::{json, Value};
 use rocket::{Route, State};
 use std::time;
 
-use crate::auth::ExclusiveAuthDriver;
-use crate::entities::{AppState, BurritoPosRecord, BurritoRecordPayload, BusServiceState};
+use crate::entities::{AppState, BurritoPosRecord, BusServiceState};
 
 pub fn routes() -> Vec<Route> {
-    routes![get_status, post_status]
+    routes![get_status,]
 }
 
 const DEFAULT_COUNT: usize = 100;
@@ -72,23 +70,4 @@ async fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Val
             "last_stop": last_stop.clone(),
         })),
     }
-}
-
-#[post("/", format = "json", data = "<message_json>")]
-async fn post_status(
-    message_json: Json<BurritoRecordPayload>,
-    driver: ExclusiveAuthDriver,
-    state: &State<AppState>,
-) -> Status {
-    let payload = message_json.into_inner();
-
-    // Payload is completely delegated to the websocket endpoint handler.
-    // Doing this also notifies the subscribers about the new position
-    let _ = crate::api::ws::driver_message_impl(payload, state).await;
-
-    // And of course, we must release the lock when the driver disconnects
-    // In this case that's inmediately.
-    state.drivers_locks.lock().await.remove(&driver.bus_name);
-
-    Status::Ok
 }
