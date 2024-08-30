@@ -9,6 +9,12 @@ pub struct LatLng {
     pub lng: f64,
 }
 
+impl LatLng {
+    pub const fn new(lat: f64, lng: f64) -> Self {
+        LatLng { lat, lng }
+    }
+}
+
 const BUS_STOPS_GEOJSON_STR: &str = include_str!("../static/geojson/bus_stops.json");
 
 // global variable to store the parsed geojson (read only)
