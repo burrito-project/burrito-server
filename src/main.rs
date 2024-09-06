@@ -17,6 +17,10 @@ mod env;
 mod mock;
 mod schemas;
 
+mod features {
+    pub mod bot;
+}
+
 lazy_static! {
     pub static ref startup: std::time::SystemTime = std::time::SystemTime::now();
     pub static ref startup_unix_timestamp: u64 = startup
@@ -27,6 +31,7 @@ lazy_static! {
 
 pub const PORT: u16 = 6969;
 pub const SELF_URL: &str = "http://localhost:6969";
+pub const HOST_URL: &str = "https://api.contigosanmarcos.com";
 
 #[rocket::main]
 async fn main() -> Result<(), rocket::Error> {
@@ -48,8 +53,10 @@ async fn main() -> Result<(), rocket::Error> {
     rocket::build()
         .configure(config)
         .mount("/", api::index::routes())
+        .mount("/map", api::map::routes())
         .mount("/help", routes![api::index::help_index])
         .mount("/ping", api::ping::routes())
+        .mount("/hooks", api::hooks::routes())
         .mount("/health", api::ping::routes())
         .mount("/status", api::status::routes())
         .mount("/driver", api::driver::routes())

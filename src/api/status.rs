@@ -1,19 +1,33 @@
 use rocket::http::Status;
-use rocket::serde::json::{json, Value};
+use rocket::serde::json::Value;
 use rocket::{Route, State};
+use serde::Serialize;
 use std::time;
 
+use crate::bus_stops::BusStopInfo;
 use crate::entities::{AppState, BurritoPosRecord, BusServiceState};
 
 pub fn routes() -> Vec<Route> {
-    routes![get_status,]
+    routes![get_status, options_status]
 }
 
 const DEFAULT_COUNT: usize = 100;
 
+#[derive(Serialize)]
+pub struct StatusResponse {
+    pub positions: Vec<BurritoPosRecord>,
+    pub last_stop: Option<BusStopInfo>,
+}
+
 #[get("/?<count>")]
 async fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, Status> {
     let count = count.unwrap_or(DEFAULT_COUNT);
+    let status = get_burrito_status_impl(count, state).await;
+
+    Ok(serde_json::json!(status))
+}
+
+pub async fn get_burrito_status_impl(count: usize, state: &AppState) -> StatusResponse {
     let messages = state.records.read().await;
     let last_stop = state.last_stop.read().await;
 
@@ -48,26 +62,41 @@ async fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Val
 
                 *state.last_stop.write().await = None;
 
-                return Ok(json!({
-                    "positions": messages_cpy.iter().rev().take(n).cloned().collect::<Vec<BurritoPosRecord>>(),
-                    "last_stop": null,
-                }));
+                return StatusResponse {
+                    positions: messages_cpy
+                        .iter()
+                        .rev()
+                        .take(n)
+                        .cloned()
+                        .collect::<Vec<BurritoPosRecord>>(),
+                    last_stop: None,
+                };
             }
 
-            Ok(json!({
-                "positions": messages.iter().rev().take(n).cloned().collect::<Vec<BurritoPosRecord>>(),
-                "last_stop": last_stop.clone(),
-            }))
+            StatusResponse {
+                positions: messages
+                    .iter()
+                    .rev()
+                    .take(n)
+                    .cloned()
+                    .collect::<Vec<BurritoPosRecord>>(),
+                last_stop: last_stop.clone(),
+            }
         }
-        None => Ok(json!({
-            "positions": vec![BurritoPosRecord {
+        None => StatusResponse {
+            positions: vec![BurritoPosRecord {
                 lt: 0.0,
                 lg: 0.0,
                 sts: BusServiceState::Off,
                 timestamp: time::SystemTime::now(),
                 velocity: 0.0,
             }],
-            "last_stop": last_stop.clone(),
-        })),
+            last_stop: last_stop.clone(),
+        },
     }
+}
+
+#[options("/")]
+fn options_status() -> Status {
+    Status::Ok
 }
