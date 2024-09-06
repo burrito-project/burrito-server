@@ -2,15 +2,15 @@ use lazy_static::lazy_static;
 use std::env;
 
 lazy_static! {
-    // The passphrase to authenticate the bus driver POST requests
+    /// The passphrase to authenticate the bus driver POST requests
     pub static ref AUTH_DRIVER_PASSPHRASE: String =
         env::var("AUTH_DRIVER_PASSPHRASE").expect("AUTH_DRIVER_PASSPHRASE must be set");
 
-    // The postgresql database connection string
+    /// The postgresql database connection string
     pub static ref DATABASE_URL: String =
         env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
-    // The max bus state records that we should keep in memory
+    /// The max bus state records that we should keep in memory
     pub static ref MAX_MEMORY_RECORDS: usize = env::var("MAX_MEMORY_RECORDS")
         .unwrap_or("1000".into())
         .parse::<usize>()
@@ -18,4 +18,9 @@ lazy_static! {
 
     /// Whether we should use a mocked bus route to showcase the system. See mock.rs
     pub static ref IS_MOCKED: bool = env::var("IS_MOCKED").unwrap_or("false".into()) == "true";
+
+    /// Token used to interact with the WhatsApp API
+    pub static ref AUTH_WHATSAPP_ACCESS_TOKEN: String =
+    env::var("AUTH_WHATSAPP_ACCESS_TOKEN").expect("AUTH_WHATSAPP_ACCESS_TOKEN must be set");
+
 }

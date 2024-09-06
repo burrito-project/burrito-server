@@ -7,6 +7,12 @@ pub enum BusServiceState {
     Off,
 }
 
+impl BusServiceState {
+    pub fn is_locatable(&self) -> bool {
+        matches!(self, BusServiceState::OnRoute | BusServiceState::Accident)
+    }
+}
+
 impl<'de> serde::Deserialize<'de> for BusServiceState {
     fn deserialize<D>(deserializer: D) -> Result<BusServiceState, D::Error>
     where

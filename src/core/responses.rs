@@ -16,6 +16,12 @@ impl<'r> RawResponse<'r> {
     }
 }
 
+impl<'r> Into<RawResponse<'r>> for response::Response<'r> {
+    fn into(self) -> RawResponse<'r> {
+        RawResponse { response: self }
+    }
+}
+
 impl<'r> Responder<'r, 'r> for RawResponse<'r> {
     fn respond_to(self, _req: &Request) -> response::Result<'r> {
         Ok(self.response)
