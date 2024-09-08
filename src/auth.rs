@@ -9,6 +9,10 @@ pub struct ExclusiveAuthDriver {
     pub bus_name: String,
 }
 
+pub struct AuthDriver {
+    pub bus_name: String,
+}
+
 #[rocket::async_trait]
 impl<'r> FromRequest<'r> for ExclusiveAuthDriver {
     type Error = ();
@@ -45,5 +49,32 @@ impl<'r> FromRequest<'r> for ExclusiveAuthDriver {
 
         locks_map.insert(bus_name.clone(), ());
         rocket::request::Outcome::Success(ExclusiveAuthDriver { bus_name })
+    }
+}
+
+#[rocket::async_trait]
+impl<'r> FromRequest<'r> for AuthDriver {
+    type Error = ();
+
+    async fn from_request(request: &'r rocket::Request<'_>) -> request::Outcome<Self, ()> {
+        let auth = match request.headers().get("authorization").next() {
+            Some(auth) => auth,
+            None => {
+                return rocket::request::Outcome::Forward(Status::Unauthorized);
+            }
+        };
+
+        if auth != crate::env::AUTH_DRIVER_PASSPHRASE.as_str() {
+            return rocket::request::Outcome::Forward(Status::Unauthorized);
+        }
+
+        let bus_name = match request.headers().get_one("x-bus-id") {
+            Some(bus_name) => bus_name.to_string().to_lowercase(),
+            None => {
+                return rocket::request::Outcome::Forward(Status::BadRequest);
+            }
+        };
+
+        rocket::request::Outcome::Success(AuthDriver { bus_name })
     }
 }

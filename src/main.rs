@@ -18,6 +18,7 @@ mod mock;
 mod schemas;
 
 mod features {
+    pub mod analytics;
     pub mod bot;
 }
 
@@ -62,6 +63,7 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/driver", api::driver::routes())
         .mount("/session", api::session::routes())
         .mount("/versions", api::versions::routes())
+        .mount("/analytics", api::analytics::routes())
         .mount("/notifications", api::notifications::routes())
         .mount("/pending_updates", api::pending_updates::routes())
         .mount("/ws", api::ws::routes())

@@ -1,3 +1,4 @@
+pub mod analytics;
 pub mod driver;
 pub mod hooks;
 pub mod index;
