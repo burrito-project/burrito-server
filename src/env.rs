@@ -23,4 +23,15 @@ lazy_static! {
     pub static ref AUTH_WHATSAPP_ACCESS_TOKEN: String =
     env::var("AUTH_WHATSAPP_ACCESS_TOKEN").expect("AUTH_WHATSAPP_ACCESS_TOKEN must be set");
 
+    pub static ref CLOUDINARY_CLOUD_NAME: String =
+    env::var("CLOUDINARY_CLOUD_NAME").expect("CLOUDINARY_CLOUD_NAME must be set");
+
+    pub static ref CLOUDINARY_API_KEY: String =
+    env::var("CLOUDINARY_API_KEY").expect("CLOUDINARY_API_KEY must be set");
+
+    pub static ref CLOUDINARY_API_SECRET: String =
+    env::var("CLOUDINARY_API_SECRET").expect("CLOUDINARY_API_SECRET must be set");
+
+    pub static ref CLOUDINARY_URL: String =
+    env::var("CLOUDINARY_URL").expect("CLOUDINARY_URL must be set");
 }

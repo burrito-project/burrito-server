@@ -20,6 +20,7 @@ mod schemas;
 mod features {
     pub mod analytics;
     pub mod bot;
+    pub mod cdn;
 }
 
 lazy_static! {
