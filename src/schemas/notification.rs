@@ -39,7 +39,7 @@ pub struct NotificationPayload {
     pub ad_title: Option<String>,
     pub ad_type: AdType,
     pub priority: i32,
-    pub image_url: Option<String>,
+    pub image_base64: Option<String>,
     pub target_url: Option<String>,
     pub begin_at: Option<chrono::DateTime<chrono::Utc>>,
     pub end_at: Option<chrono::DateTime<chrono::Utc>>,

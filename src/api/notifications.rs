@@ -1,7 +1,15 @@
+use base64::prelude::*;
 use rocket::{http::Status, response::status, serde::json, serde::json::Json, Route, State};
 use serde_json::{json, Value};
 
-use crate::{core::responses, entities::AppState, schemas};
+use crate::{
+    core::responses,
+    entities::AppState,
+    features::cdn::{self, ProvideImageService},
+    schemas,
+};
+
+const NOTIFICATIONS_PATH: &str = "burrito/notifications/";
 
 pub fn routes() -> Vec<Route> {
     routes![list_notifications, post_notifications, delete_notification,]
@@ -39,6 +47,63 @@ async fn post_notifications(
 
     let payload = payload.unwrap().into_inner();
 
+    let image_url: Option<String> = match payload.image_base64 {
+        Some(base64_data) => {
+            if !base64_data.starts_with("data:image/") {
+                return Err(status::Custom(
+                    Status::BadRequest,
+                    responses::error_response("Invalid image data"),
+                ));
+            }
+
+            let is_png = base64_data.starts_with("data:image/png;base64,");
+            let mut base64_data = base64_data;
+
+            if is_png {
+                let decoded = BASE64_STANDARD
+                    .decode(base64_data.split(",").last().unwrap())
+                    .map_err(|e| {
+                        status::Custom(
+                            Status::BadRequest,
+                            responses::error_response(format!("Failed to decode image: {:?}", e)),
+                        )
+                    })?;
+
+                let result = oxipng::optimize_from_memory(
+                    decoded.as_slice(),
+                    &oxipng::Options {
+                        fix_errors: true,
+                        ..Default::default()
+                    },
+                )
+                .map_err(|e| {
+                    status::Custom(
+                        Status::BadRequest,
+                        responses::error_response(format!("Failed to optimize image: {:?}", e)),
+                    )
+                })?;
+
+                base64_data = format!(
+                    "data:image/png;base64,{}",
+                    BASE64_STANDARD.encode(result.as_slice())
+                );
+            }
+
+            // All notification types accept images so it's not necessary to check the ad_type
+            let uploaded_url = cdn::ImageService::upload_image(base64_data, NOTIFICATIONS_PATH)
+                .await
+                .map_err(|e| {
+                    status::Custom(
+                        Status::BadRequest,
+                        responses::error_response(format!("Failed to upload image: {:?}", e)),
+                    )
+                })?;
+
+            Some(uploaded_url)
+        }
+        None => None,
+    };
+
     let new_notification = sqlx::query_as!(
         schemas::Notification,
         "INSERT INTO notification_ads
@@ -49,7 +114,7 @@ async fn post_notifications(
         payload.ad_title,
         payload.ad_type.to_string(),
         payload.priority,
-        payload.image_url,
+        image_url,
         payload.target_url,
         payload.ad_content,
         payload.begin_at,
