@@ -1,4 +1,5 @@
 pub mod analytics;
+pub mod battery;
 pub mod driver;
 pub mod hooks;
 pub mod index;

@@ -62,6 +62,7 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/health", api::ping::routes())
         .mount("/status", api::status::routes())
         .mount("/driver", api::driver::routes())
+        .mount("/battery", api::battery::routes())
         .mount("/session", api::session::routes())
         .mount("/versions", api::versions::routes())
         .mount("/analytics", api::analytics::routes())

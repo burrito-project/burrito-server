@@ -85,6 +85,7 @@ pub async fn driver_message_impl(
     messages.push(BurritoPosRecord {
         lt: payload.lt,
         lg: payload.lg,
+        bat: payload.bat,
         sts: payload.sts,
         timestamp: std::time::SystemTime::now(), // Add the current timestamp,
         // pending to calculate

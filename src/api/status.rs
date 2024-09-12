@@ -49,6 +49,7 @@ pub async fn get_burrito_status_impl(count: usize, state: &AppState) -> StatusRe
                 let off_message = BurritoPosRecord {
                     lt: 0.0,
                     lg: 0.0,
+                    bat: last.bat,
                     sts: BusServiceState::inherit_from_inactive(last.sts),
                     timestamp: last.timestamp,
                     velocity: 0.0,
@@ -87,6 +88,7 @@ pub async fn get_burrito_status_impl(count: usize, state: &AppState) -> StatusRe
             positions: vec![BurritoPosRecord {
                 lt: 0.0,
                 lg: 0.0,
+                bat: None,
                 sts: BusServiceState::Off,
                 timestamp: time::SystemTime::now(),
                 velocity: 0.0,

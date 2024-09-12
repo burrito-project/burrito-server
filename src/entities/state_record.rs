@@ -8,6 +8,8 @@ pub struct BurritoPosRecord {
     pub lt: f64,
     pub lg: f64,
     pub sts: BusServiceState,
+    /// Device battery. None means off or not applicable
+    pub bat: Option<i32>,
     pub timestamp: SystemTime,
     pub velocity: f64,
 }
@@ -41,4 +43,5 @@ pub struct BurritoRecordPayload {
     pub lt: f64,
     pub lg: f64,
     pub sts: BusServiceState, // i32
+    pub bat: Option<i32>,     // Device battery. None means not applicable
 }
