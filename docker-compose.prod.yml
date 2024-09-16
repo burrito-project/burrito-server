@@ -32,9 +32,11 @@ services:
       dockerfile: ./docker/prod/nginx/Dockerfile
       args:
         - DOMAIN_NAME=api.contigosanmarcos.com
+        - WEB_DOMAIN_NAME=contigosanmarcos.com
     ports:
       - 80:80
       - 443:443
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /home/paoloose/www/burrito:/var/www/burrito:rw
     restart: always
