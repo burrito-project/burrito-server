@@ -8,7 +8,7 @@ use crate::bus_stops::BusStopInfo;
 use crate::entities::{AppState, BurritoPosRecord, BusServiceState};
 
 pub fn routes() -> Vec<Route> {
-    routes![get_status, options_status]
+    routes![get_status, options]
 }
 
 const DEFAULT_COUNT: usize = 100;
@@ -99,6 +99,6 @@ pub async fn get_burrito_status_impl(count: usize, state: &AppState) -> StatusRe
 }
 
 #[options("/")]
-fn options_status() -> Status {
+fn options() -> Status {
     Status::Ok
 }

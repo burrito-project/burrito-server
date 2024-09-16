@@ -8,7 +8,7 @@ use crate::entities::AppState;
 use crate::schemas;
 
 pub fn routes() -> Vec<rocket::Route> {
-    routes![pending_updates]
+    routes![pending_updates, options]
 }
 
 fn is_valid_semver<S: Into<String>>(semver: S) -> bool {
@@ -94,4 +94,9 @@ async fn pending_updates(
             })
         }).collect::<Vec<Value>>(),
     }))
+}
+
+#[options("/")]
+pub fn options() -> Status {
+    Status::Ok
 }

@@ -66,6 +66,6 @@ pub async fn post_notifications(
 }
 
 #[options("/")]
-pub fn options() -> status::NoContent {
-    status::NoContent
+pub fn options() -> Status {
+    Status::Ok
 }

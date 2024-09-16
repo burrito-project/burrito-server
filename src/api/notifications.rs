@@ -12,7 +12,12 @@ use crate::{
 const NOTIFICATIONS_PATH: &str = "burrito/notifications/";
 
 pub fn routes() -> Vec<Route> {
-    routes![list_notifications, post_notifications, delete_notification,]
+    routes![
+        list_notifications,
+        post_notifications,
+        delete_notification,
+        options,
+    ]
 }
 
 #[get("/")]
@@ -156,4 +161,9 @@ async fn delete_notification(
     })?;
 
     Ok(json!(deleted_notification))
+}
+
+#[options("/")]
+pub fn options() -> Status {
+    Status::Ok
 }
