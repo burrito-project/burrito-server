@@ -1,0 +1,23 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO flags (name, display_name, value, protected, internal)\n        VALUES ($1, $2, $3, $4, $5)\n        ON CONFLICT (name)\n        DO NOTHING;\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        {
+          "Custom": {
+            "name": "citext",
+            "kind": "Simple"
+          }
+        },
+        "Varchar",
+        "Bool",
+        "Bool",
+        "Bool"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "e04f4fe4b43e64729771fa0009d43af5a2b5cfb8715982e21ca50ec633797f8d"
+}
