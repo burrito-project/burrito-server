@@ -38,7 +38,7 @@ const NOT_PROTECTED: bool = false;
 pub async fn setup_base_flags(pool: &Pool<Postgres>) -> Result<(), sqlx::Error> {
     create_flag_if_not_exists(
         pool,
-        "random_ads",
+        "ads_random_order",
         "Anuncios en orden aleatorio",
         true,
         NOT_INTERNAL,

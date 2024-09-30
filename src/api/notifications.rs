@@ -25,7 +25,7 @@ pub fn routes() -> Vec<Route> {
 
 #[get("/")]
 async fn list_notifications(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
-    let random_order = flags::utils::get_flag(&state.pool, "random_ads", true).await;
+    let random_order = flags::utils::get_flag(&state.pool, "ads_random_order", true).await;
 
     return match random_order {
         true => {
