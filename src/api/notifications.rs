@@ -5,7 +5,10 @@ use serde_json::{json, Value};
 use crate::{
     core::responses,
     entities::AppState,
-    features::cdn::{self, ProvideImageService},
+    features::{
+        cdn::{self, ProvideImageService},
+        flags,
+    },
     schemas,
 };
 
@@ -22,20 +25,42 @@ pub fn routes() -> Vec<Route> {
 
 #[get("/")]
 async fn list_notifications(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
-    let notifications = sqlx::query_as!(
-        schemas::Notification,
-        "SELECT * FROM notification_ads ORDER BY priority ASC;",
-    )
-    .fetch_all(&state.pool)
-    .await
-    .map_err(|_| {
-        status::Custom(
-            Status::InternalServerError,
-            responses::error_response("No notifications found"),
-        )
-    })?;
+    let random_order = flags::utils::get_flag(&state.pool, "random_ads", true).await;
 
-    Ok(json!(notifications))
+    return match random_order {
+        true => {
+            let notifications = sqlx::query_as!(
+                schemas::Notification,
+                "SELECT * FROM notification_ads ORDER BY RANDOM();",
+            )
+            .fetch_all(&state.pool)
+            .await
+            .map_err(|_| {
+                status::Custom(
+                    Status::InternalServerError,
+                    responses::error_response("No notifications found"),
+                )
+            })?;
+
+            Ok(json!(notifications))
+        }
+        false => {
+            let notifications = sqlx::query_as!(
+                schemas::Notification,
+                "SELECT * FROM notification_ads ORDER BY priority ASC;",
+            )
+            .fetch_all(&state.pool)
+            .await
+            .map_err(|_| {
+                status::Custom(
+                    Status::InternalServerError,
+                    responses::error_response("No notifications found"),
+                )
+            })?;
+
+            Ok(json!(notifications))
+        }
+    };
 }
 
 #[post("/", format = "json", data = "<payload>")]
