@@ -25,6 +25,8 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     restart: always
+    volumes:
+      - burrito_db_data:/var/lib/postgresql/data
 
   burrito_nginx:
     build:
@@ -40,3 +42,6 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - /home/paoloose/www/burrito:/var/www/burrito:rw
     restart: always
+
+volumes:
+  burrito_db_data:
