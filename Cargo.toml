@@ -32,6 +32,3 @@ default-features = false
 
 [profile.dev.package.sqlx-macros]
 opt-level = 3
-
-[features]
-shuttle = []
