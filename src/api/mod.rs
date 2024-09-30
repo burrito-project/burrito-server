@@ -1,6 +1,7 @@
 pub mod analytics;
 pub mod battery;
 pub mod driver;
+pub mod flags;
 pub mod hooks;
 pub mod index;
 pub mod map;

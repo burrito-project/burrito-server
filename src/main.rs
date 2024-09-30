@@ -25,6 +25,7 @@ mod features {
     pub mod analytics;
     pub mod bot;
     pub mod cdn;
+    pub mod flags;
 }
 
 lazy_static! {
@@ -58,6 +59,9 @@ async fn main() -> Result<(), rocket::Error> {
     let pool = crate::db::create_pool().await.unwrap();
 
     crate::mock::initialize_mocks();
+    crate::features::flags::rc::setup_base_flags(&pool)
+        .await
+        .expect("Failed to setup base flags");
 
     rocket::build()
         .configure(config)
@@ -66,6 +70,7 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/help", routes![api::index::help_index])
         .mount("/ping", api::ping::routes())
         .mount("/hooks", api::hooks::routes())
+        .mount("/flags", api::flags::routes())
         .mount("/health", api::ping::routes())
         .mount("/status", api::status::routes())
         .mount("/driver", api::driver::routes())
