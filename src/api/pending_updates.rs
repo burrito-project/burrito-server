@@ -73,12 +73,7 @@ async fn pending_updates(
     )
     .fetch_all(&state.pool)
     .await
-    .map_err(|_| {
-        status::Custom(
-            Status::InternalServerError,
-            responses::error_response("Error retrieveing versions"),
-        )
-    })?;
+    .unwrap();
 
     let must_update = app_versions.iter().any(|version| version.is_mandatory);
 

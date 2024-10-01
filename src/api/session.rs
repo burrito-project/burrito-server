@@ -51,16 +51,7 @@ pub async fn post_notifications(
     )
     .fetch_one(&state.pool)
     .await
-    .map_err(|e| match e {
-        sqlx::Error::Database(db_err) => status::Custom(
-            Status::BadRequest,
-            responses::error_response(db_err.to_string()),
-        ),
-        e => status::Custom(
-            Status::InternalServerError,
-            responses::error_response(format!("Failed to create notification: {}", e)),
-        ),
-    })?;
+    .unwrap();
 
     Ok(json!(new_notification))
 }

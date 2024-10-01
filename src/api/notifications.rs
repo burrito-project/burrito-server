@@ -35,12 +35,7 @@ async fn list_notifications(state: &State<AppState>) -> Result<Value, status::Cu
             )
             .fetch_all(&state.pool)
             .await
-            .map_err(|_| {
-                status::Custom(
-                    Status::InternalServerError,
-                    responses::error_response("No notifications found"),
-                )
-            })?;
+            .unwrap();
 
             Ok(json!(notifications))
         }
@@ -51,12 +46,7 @@ async fn list_notifications(state: &State<AppState>) -> Result<Value, status::Cu
             )
             .fetch_all(&state.pool)
             .await
-            .map_err(|_| {
-                status::Custom(
-                    Status::InternalServerError,
-                    responses::error_response("No notifications found"),
-                )
-            })?;
+            .unwrap();
 
             Ok(json!(notifications))
         }
@@ -152,16 +142,7 @@ async fn post_notifications(
     )
     .fetch_one(&state.pool)
     .await
-    .map_err(|e| match e {
-        sqlx::Error::Database(db_err) => status::Custom(
-            Status::BadRequest,
-            responses::error_response(db_err.to_string()),
-        ),
-        e => status::Custom(
-            Status::InternalServerError,
-            responses::error_response(format!("Failed to create notification: {}", e)),
-        ),
-    })?;
+    .unwrap();
 
     Ok(json!(new_notification))
 }
@@ -178,12 +159,7 @@ async fn delete_notification(
     )
     .fetch_one(&state.pool)
     .await
-    .map_err(|_| {
-        status::Custom(
-            Status::InternalServerError,
-            responses::error_response("Failed to delete notification"),
-        )
-    })?;
+    .unwrap();
 
     Ok(json!(deleted_notification))
 }

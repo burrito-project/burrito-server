@@ -22,13 +22,7 @@ async fn list_app_versions(state: &State<AppState>) -> Result<Value, status::Cus
     let versions = sqlx::query_as!(schemas::AppVersion, "SELECT * FROM app_versions;")
         .fetch_all(&state.pool)
         .await
-        .map_err(|e| {
-            println!("{:#?}", e);
-            status::Custom(
-                Status::InternalServerError,
-                responses::error_response("Error retrieveing versions"),
-            )
-        })?;
+        .unwrap();
 
     Ok(json!(versions))
 }
@@ -62,16 +56,7 @@ async fn post_app_versions(
     )
     .fetch_one(&state.pool)
     .await
-    .map_err(|e| match e {
-        sqlx::Error::Database(db_err) => status::Custom(
-            Status::BadRequest,
-            responses::error_response(db_err.to_string()),
-        ),
-        e => status::Custom(
-            Status::InternalServerError,
-            responses::error_response(format!("Failed to create version: {e}")),
-        ),
-    })?;
+    .unwrap();
 
     Ok(json!(new_version))
 }
@@ -114,19 +99,7 @@ async fn patch_app_version(
         payload.release_notes,
     );
 
-    let updated_version = updated_version
-        .fetch_one(&state.pool)
-        .await
-        .map_err(|e| match e {
-            sqlx::Error::Database(db_err) => status::Custom(
-                Status::BadRequest,
-                responses::error_response(db_err.to_string()),
-            ),
-            e => status::Custom(
-                Status::InternalServerError,
-                responses::error_response(format!("Failed to update version: {e}")),
-            ),
-        })?;
+    let updated_version = updated_version.fetch_one(&state.pool).await.unwrap();
 
     Ok(json!(updated_version))
 }
@@ -143,16 +116,7 @@ async fn delete_app_version(
     )
     .fetch_one(&state.pool)
     .await
-    .map_err(|e| match e {
-        sqlx::Error::Database(db_err) => status::Custom(
-            Status::BadRequest,
-            responses::error_response(db_err.to_string()),
-        ),
-        e => status::Custom(
-            Status::InternalServerError,
-            responses::error_response(format!("Failed to delete version: {e}")),
-        ),
-    })?;
+    .unwrap();
 
     Ok(json!(deleted_version))
 }

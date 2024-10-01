@@ -15,12 +15,7 @@ async fn list_all_flags(state: &State<AppState>) -> Result<Value, status::Custom
     )
     .fetch_all(&state.pool)
     .await
-    .map_err(|_| {
-        status::Custom(
-            Status::InternalServerError,
-            responses::error_response("No notifications found"),
-        )
-    })?;
+    .unwrap();
 
     Ok(json!(flags))
 }
@@ -34,12 +29,7 @@ async fn get_flag(flag: &str, state: &State<AppState>) -> Result<Value, status::
     )
     .fetch_one(&state.pool)
     .await
-    .map_err(|_| {
-        status::Custom(
-            Status::InternalServerError,
-            responses::error_response("Failed to fetch flag"),
-        )
-    })?;
+    .unwrap();
 
     Ok(json!(flag.value))
 }
@@ -64,12 +54,7 @@ async fn modify_flag(
     // Flags are case insensitive
     let flag = flag.to_lowercase();
 
-    let mut tx = state.pool.begin().await.map_err(|_| {
-        status::Custom(
-            Status::InternalServerError,
-            responses::error_response("Failed to start transaction"),
-        )
-    })?;
+    let mut tx = state.pool.begin().await.unwrap();
 
     let app_flag = sqlx::query_as!(
         flags::schemas::Flag,
@@ -78,12 +63,7 @@ async fn modify_flag(
     )
     .fetch_optional(&mut *tx)
     .await
-    .map_err(|_| {
-        status::Custom(
-            Status::InternalServerError,
-            responses::error_response("Failed to fetch flag"),
-        )
-    })?;
+    .unwrap();
 
     if app_flag.is_none() {
         return Err(status::Custom(
@@ -120,23 +100,9 @@ async fn modify_flag(
     )
     .fetch_one(&mut *tx)
     .await
-    .map_err(|e| match e {
-        sqlx::Error::Database(db_err) => status::Custom(
-            Status::BadRequest,
-            responses::error_response(db_err.to_string()),
-        ),
-        e => status::Custom(
-            Status::InternalServerError,
-            responses::error_response(format!("Failed to create notification: {}", e)),
-        ),
-    })?;
+    .unwrap();
 
-    tx.commit().await.map_err(|_| {
-        status::Custom(
-            Status::InternalServerError,
-            responses::error_response("Failed to commit transaction"),
-        )
-    })?;
+    tx.commit().await.unwrap();
 
     Ok(json!(new_flag))
 }

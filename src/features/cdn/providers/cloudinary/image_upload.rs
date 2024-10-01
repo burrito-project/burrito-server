@@ -68,14 +68,12 @@ impl CloudinaryImageService {
 
         let result = res.text().await.map_err(|e| {
             eprintln!("Error reading Cloudinary response: {:?}", e);
-
             cdn::errors::UploadError::ProviderError
         })?;
 
         let cloudinary_response: CloudinaryResponse =
             serde_json::from_str(&result).map_err(|e| {
                 eprintln!("Error parsing Cloudinary response: {:?}", e);
-
                 cdn::errors::UploadError::ProviderError
             })?;
 
