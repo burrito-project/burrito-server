@@ -4,4 +4,4 @@ DROP INDEX IF EXISTS idx_flags_name;
 
 DROP TRIGGER IF EXISTS update_modified_time ON flags;
 
-DROP EXTENSION IF EXISTS citext;
+DROP EXTENSION IF EXISTS citext CASCADE;
