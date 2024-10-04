@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "SELECT * FROM crash_reports",
+  "query": "SELECT * FROM crash_reports;",
   "describe": {
     "columns": [
       {
@@ -46,5 +46,5 @@
       false
     ]
   },
-  "hash": "77b6bd82d72069d42b510f15a24505cf78a0d436bdb34883209b0f103391f2ea"
+  "hash": "70553f6794005fe09b6b242565dcef7bfd5464d92ceb8da64b4612012a092a07"
 }
