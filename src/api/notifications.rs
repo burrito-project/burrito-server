@@ -3,7 +3,7 @@ use rocket::{http::Status, response::status, serde::json, serde::json::Json, Rou
 use serde_json::{json, Value};
 
 use crate::{
-    core::responses,
+    core::{guards::IsMobileChecker, responses},
     entities::AppState,
     features::{
         cdn::{self, ProvideImageService},
@@ -16,7 +16,7 @@ const NOTIFICATIONS_PATH: &str = "burrito/notifications/";
 
 pub fn routes() -> Vec<Route> {
     routes![
-        list_notifications,
+        get_notifications,
         post_notifications,
         delete_notification,
         options,
@@ -24,7 +24,16 @@ pub fn routes() -> Vec<Route> {
 }
 
 #[get("/")]
-async fn list_notifications(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
+async fn get_notifications(
+    state: &State<AppState>,
+    is_mobile: IsMobileChecker,
+) -> Result<Value, status::Custom<Value>> {
+    if is_mobile.ask() {
+        // Empty notifications for mobile while we are on review
+        // TODO: remove
+        return Ok(json!([]));
+    }
+
     let random_order = flags::utils::get_flag(&state.pool, "ads_random_order", true).await;
 
     return match random_order {

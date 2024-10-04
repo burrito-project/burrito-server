@@ -14,11 +14,11 @@ use crate::{
 };
 
 pub fn routes() -> Vec<Route> {
-    routes![post_notifications, options]
+    routes![post_session, options]
 }
 
 #[post("/", format = "json", data = "<payload>")]
-pub async fn post_notifications(
+pub async fn post_session(
     remote_addr: ForwardedIp,
     payload: Result<Json<schemas::UserIdentityPayload>, json::Error<'_>>,
     state: &State<AppState>,
