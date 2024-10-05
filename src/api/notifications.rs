@@ -34,7 +34,7 @@ async fn get_notifications(
         return Ok(json!([]));
     }
 
-    let random_order = flags::utils::get_flag(&state.pool, "ads_random_order", true).await;
+    let random_order = flags::get_flag(&state.pool, "ads_random_order", true).await;
 
     return match random_order {
         true => {
