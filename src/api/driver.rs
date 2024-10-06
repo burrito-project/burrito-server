@@ -2,8 +2,8 @@ use rocket::http::Status;
 use rocket::serde::json::Json;
 use rocket::{Route, State};
 
-use crate::auth::ExclusiveAuthDriver;
 use crate::entities::{AppState, BurritoRecordPayload};
+use crate::features::auth::guards::ExclusiveAuthDriver;
 
 pub fn routes() -> Vec<Route> {
     routes![post_driver_status]

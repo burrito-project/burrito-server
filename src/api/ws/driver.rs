@@ -1,11 +1,10 @@
-use crate::{
-    auth::ExclusiveAuthDriver,
-    bus_stops::{get_bus_stop_for_point, LatLng, OptionalBuStopInfo},
-    core::utils,
-    entities::{AppState, BurritoPosRecord, BurritoRecordPayload, WsClientMessage},
-};
 use rocket::{Route, State};
 use tokio::sync::broadcast::error::SendError;
+
+use crate::bus_stops::{get_bus_stop_for_point, LatLng, OptionalBuStopInfo};
+use crate::core::utils;
+use crate::entities::{AppState, BurritoPosRecord, BurritoRecordPayload, WsClientMessage};
+use crate::features::auth::guards::ExclusiveAuthDriver;
 
 pub fn routes() -> Vec<Route> {
     routes![ws_driver_streaming]

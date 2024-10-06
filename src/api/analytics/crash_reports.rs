@@ -1,12 +1,10 @@
 use rocket::{http::Status, response::status, Route, State};
 
-use crate::auth::AuthDriver;
-use crate::core::{
-    responses,
-    types::{ApiResponse, JsonResult},
-};
+use crate::core::responses;
+use crate::core::types::{ApiResponse, JsonResult};
 use crate::entities::AppState;
 use crate::features::analytics;
+use crate::features::auth::guards::AuthDriver;
 
 pub fn routes() -> Vec<Route> {
     routes![

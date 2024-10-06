@@ -12,7 +12,6 @@ use serde_json::json;
 extern crate rocket;
 
 mod api;
-mod auth;
 mod bus_stops;
 mod core;
 mod cors;
