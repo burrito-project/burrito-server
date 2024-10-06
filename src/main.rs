@@ -20,7 +20,6 @@ mod db;
 mod entities;
 mod env;
 mod mock;
-mod schemas;
 
 mod features {
     pub mod analytics;
@@ -28,6 +27,7 @@ mod features {
     pub mod bot;
     pub mod cdn;
     pub mod flags;
+    pub mod identities;
     pub mod notifications;
     pub mod updates;
 }
