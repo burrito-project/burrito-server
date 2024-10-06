@@ -1,3 +1,4 @@
+#![allow(unreachable_patterns)]
 use dotenvy::dotenv;
 use lazy_static::lazy_static;
 use rocket::{
