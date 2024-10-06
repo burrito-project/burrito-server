@@ -27,6 +27,7 @@ mod features {
     pub mod bot;
     pub mod cdn;
     pub mod flags;
+    pub mod notifications;
 }
 
 lazy_static! {
@@ -38,7 +39,9 @@ lazy_static! {
 }
 
 pub const PORT: u16 = 6969;
+/// For making requests to our own endpoints
 pub const SELF_URL: &str = "http://localhost:6969";
+/// Production host url
 pub const HOST_URL: &str = "https://api.contigosanmarcos.com";
 
 #[rocket::main]
