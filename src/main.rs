@@ -29,6 +29,7 @@ mod features {
     pub mod cdn;
     pub mod flags;
     pub mod notifications;
+    pub mod updates;
 }
 
 lazy_static! {
