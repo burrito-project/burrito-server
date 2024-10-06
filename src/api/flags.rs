@@ -1,14 +1,18 @@
 use rocket::{http::Status, response::status, serde::json, serde::json::Json, Route, State};
-use serde_json::{json, Value};
+use serde_json::json;
 
-use crate::{core::responses, entities::AppState, features::flags};
+use crate::{
+    core::{responses, types::ApiResponse},
+    entities::AppState,
+    features::flags,
+};
 
 pub fn routes() -> Vec<Route> {
     routes![list_all_flags, get_flag, modify_flag, options,]
 }
 
 #[get("/")]
-async fn list_all_flags(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
+async fn list_all_flags(state: &State<AppState>) -> ApiResponse {
     let flags = sqlx::query_as!(
         flags::schemas::Flag,
         "SELECT * FROM flags WHERE internal = false ORDER BY name ASC;",
@@ -21,7 +25,7 @@ async fn list_all_flags(state: &State<AppState>) -> Result<Value, status::Custom
 }
 
 #[get("/<flag>")]
-async fn get_flag(flag: &str, state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
+async fn get_flag(flag: &str, state: &State<AppState>) -> ApiResponse {
     let flag = sqlx::query_as!(
         flags::schemas::Flag,
         "SELECT * FROM flags WHERE name = $1 AND internal = false LIMIT 1;",
@@ -41,7 +45,7 @@ async fn modify_flag(
     flag: &str,
     payload: Result<Json<flags::schemas::FlagPayload>, json::Error<'_>>,
     state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+) -> ApiResponse {
     if let Err(e) = payload {
         return Err(status::Custom(
             Status::BadRequest,

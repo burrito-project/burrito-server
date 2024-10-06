@@ -4,9 +4,13 @@ use rocket::{
     serde::{self, json::Json},
     Route, State,
 };
-use serde_json::{json, Value};
+use serde_json::json;
 
-use crate::{core::responses, entities::AppState, schemas};
+use crate::{
+    core::{responses, types::ApiResponse},
+    entities::AppState,
+    schemas,
+};
 
 pub fn routes() -> Vec<Route> {
     routes![
@@ -18,7 +22,7 @@ pub fn routes() -> Vec<Route> {
 }
 
 #[get("/")]
-async fn list_app_versions(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
+async fn list_app_versions(state: &State<AppState>) -> ApiResponse {
     let versions = sqlx::query_as!(schemas::AppVersion, "SELECT * FROM app_versions;")
         .fetch_all(&state.pool)
         .await
@@ -31,7 +35,7 @@ async fn list_app_versions(state: &State<AppState>) -> Result<Value, status::Cus
 async fn post_app_versions(
     payload: Result<Json<schemas::AppVersionPayload>, serde::json::Error<'_>>,
     state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+) -> ApiResponse {
     if let Err(e) = payload {
         return Err(status::Custom(
             Status::BadRequest,
@@ -66,7 +70,7 @@ async fn patch_app_version(
     id: i32,
     payload: Result<Json<schemas::AppVersionPatchPayload>, serde::json::Error<'_>>,
     state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+) -> ApiResponse {
     if let Err(e) = payload {
         return Err(status::Custom(
             Status::BadRequest,
@@ -105,10 +109,7 @@ async fn patch_app_version(
 }
 
 #[delete("/<id>")]
-async fn delete_app_version(
-    id: i32,
-    state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+async fn delete_app_version(id: i32, state: &State<AppState>) -> ApiResponse {
     let deleted_version = sqlx::query_as!(
         schemas::AppVersion,
         "DELETE FROM app_versions WHERE id = $1 RETURNING *;",

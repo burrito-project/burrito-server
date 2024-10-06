@@ -1,9 +1,9 @@
 use jsonwebtoken::Header;
 use rocket::{http::Status, response::status, serde::json::Json, State};
-use serde_json::{json, Value};
+use serde_json::json;
 
 use crate::{
-    core::responses,
+    core::{responses, types::ApiResponse},
     entities::AppState,
     features::auth::{self, consts::JWT_ENCODING_KEY, schemas::JWTClaims},
 };
@@ -11,7 +11,7 @@ use crate::{
 pub async fn user_login_handler(
     payload: Json<auth::schemas::UserLoginPayload>,
     state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+) -> ApiResponse {
     if payload.username == *crate::env::ROOT_SECRET || payload.password == *crate::env::ROOT_SECRET
     {
         let token = jsonwebtoken::encode::<JWTClaims>(

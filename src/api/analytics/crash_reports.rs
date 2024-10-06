@@ -4,9 +4,13 @@ use rocket::{
     serde::json::{self, Json},
     Route, State,
 };
-use serde_json::Value;
 
-use crate::{auth::AuthDriver, core::responses, entities::AppState, features::analytics};
+use crate::{
+    auth::AuthDriver,
+    core::{responses, types::ApiResponse},
+    entities::AppState,
+    features::analytics,
+};
 
 pub fn routes() -> Vec<Route> {
     routes![
@@ -17,7 +21,7 @@ pub fn routes() -> Vec<Route> {
 }
 
 #[get("/")]
-async fn get_crash_reports(state: &State<AppState>) -> Result<Value, status::Custom<Value>> {
+async fn get_crash_reports(state: &State<AppState>) -> ApiResponse {
     analytics::handlers::crash_reports::get_crash_reports_handler(state).await
 }
 
@@ -26,7 +30,7 @@ async fn post_driver_crash_reports(
     payload: Result<Json<analytics::entities::CrashReportPayload>, json::Error<'_>>,
     driver: AuthDriver,
     state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+) -> ApiResponse {
     if let Err(e) = payload {
         return Err(status::Custom(
             Status::BadRequest,
@@ -48,7 +52,7 @@ async fn post_driver_crash_reports(
 async fn post_users_crash_reports(
     payload: Result<Json<analytics::entities::CrashReportPayload>, json::Error<'_>>,
     state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+) -> ApiResponse {
     if let Err(e) = payload {
         return Err(status::Custom(
             Status::BadRequest,

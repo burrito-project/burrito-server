@@ -1,9 +1,9 @@
 use base64::prelude::*;
 use rocket::{http::Status, response::status, serde::json, serde::json::Json, Route, State};
-use serde_json::{json, Value};
+use serde_json::json;
 
 use crate::{
-    core::{guards::IsMobileChecker, responses},
+    core::{guards::IsMobileChecker, responses, types::ApiResponse},
     entities::AppState,
     features::{
         cdn::{self, ProvideImageService},
@@ -24,10 +24,7 @@ pub fn routes() -> Vec<Route> {
 }
 
 #[get("/")]
-async fn get_notifications(
-    state: &State<AppState>,
-    is_mobile: IsMobileChecker,
-) -> Result<Value, status::Custom<Value>> {
+async fn get_notifications(state: &State<AppState>, is_mobile: IsMobileChecker) -> ApiResponse {
     if is_mobile.ask() {
         // Empty notifications for mobile while we are on review
         // TODO: remove
@@ -66,7 +63,7 @@ async fn get_notifications(
 async fn post_notifications(
     payload: Result<Json<schemas::NotificationPayload>, json::Error<'_>>,
     state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+) -> ApiResponse {
     if let Err(e) = payload {
         return Err(status::Custom(
             Status::BadRequest,
@@ -157,10 +154,7 @@ async fn post_notifications(
 }
 
 #[delete("/<id>")]
-async fn delete_notification(
-    id: i32,
-    state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+async fn delete_notification(id: i32, state: &State<AppState>) -> ApiResponse {
     let deleted_notification = sqlx::query_as!(
         schemas::Notification,
         "DELETE FROM notification_ads WHERE id = $1 RETURNING *;",

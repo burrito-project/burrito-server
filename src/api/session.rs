@@ -4,11 +4,11 @@ use rocket::{
     serde::json::{self, Json},
     Route, State,
 };
-use serde_json::{json, Value};
+use serde_json::json;
 use sqlx::types::ipnetwork::IpNetwork;
 
 use crate::{
-    core::{guards::ForwardedIp, responses},
+    core::{guards::ForwardedIp, responses, types::ApiResponse},
     entities::AppState,
     schemas,
 };
@@ -22,7 +22,7 @@ pub async fn post_session(
     remote_addr: ForwardedIp,
     payload: Result<Json<schemas::UserIdentityPayload>, json::Error<'_>>,
     state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+) -> ApiResponse {
     if let Err(e) = payload {
         return Err(status::Custom(
             Status::BadRequest,

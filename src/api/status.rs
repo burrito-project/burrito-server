@@ -1,10 +1,10 @@
 use rocket::http::Status;
-use rocket::serde::json::Value;
 use rocket::{Route, State};
 use serde::Serialize;
 use std::time;
 
 use crate::bus_stops::BusStopInfo;
+use crate::core::types::ApiResponse;
 use crate::entities::{AppState, BurritoPosRecord, BusServiceState};
 
 pub fn routes() -> Vec<Route> {
@@ -20,7 +20,7 @@ pub struct StatusResponse {
 }
 
 #[get("/?<count>")]
-async fn get_status(count: Option<usize>, state: &State<AppState>) -> Result<Value, Status> {
+async fn get_status(count: Option<usize>, state: &State<AppState>) -> ApiResponse {
     let count = count.unwrap_or(DEFAULT_COUNT);
     let status = get_burrito_status_impl(count, state).await;
 

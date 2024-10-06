@@ -4,6 +4,7 @@ use rocket::{http::Status, State};
 use serde_json::json;
 
 use crate::core::responses;
+use crate::core::types::ApiResponse;
 use crate::entities::AppState;
 use crate::schemas;
 
@@ -21,7 +22,7 @@ async fn pending_updates(
     version: Option<String>,
     platform: Option<String>,
     state: &State<AppState>,
-) -> Result<Value, status::Custom<Value>> {
+) -> ApiResponse {
     let user_version = match version {
         Some(semver) => {
             if !is_valid_semver(&semver) {
