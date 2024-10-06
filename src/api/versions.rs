@@ -1,16 +1,12 @@
-use rocket::{
-    http::Status,
-    response::status,
-    serde::{self, json::Json},
-    Route, State,
-};
+use rocket::{http::Status, response::status, Route, State};
 use serde_json::json;
 
-use crate::{
-    core::{responses, types::ApiResponse},
-    entities::AppState,
-    schemas,
+use crate::core::{
+    responses,
+    types::{ApiResponse, JsonResult},
 };
+use crate::entities::AppState;
+use crate::schemas;
 
 pub fn routes() -> Vec<Route> {
     routes![
@@ -33,7 +29,7 @@ async fn list_app_versions(state: &State<AppState>) -> ApiResponse {
 
 #[post("/", format = "json", data = "<payload>")]
 async fn post_app_versions(
-    payload: Result<Json<schemas::AppVersionPayload>, serde::json::Error<'_>>,
+    payload: JsonResult<'_, schemas::AppVersionPayload>,
     state: &State<AppState>,
 ) -> ApiResponse {
     if let Err(e) = payload {
@@ -68,7 +64,7 @@ async fn post_app_versions(
 #[patch("/<id>", format = "json", data = "<payload>")]
 async fn patch_app_version(
     id: i32,
-    payload: Result<Json<schemas::AppVersionPatchPayload>, serde::json::Error<'_>>,
+    payload: JsonResult<'_, schemas::AppVersionPatchPayload>,
     state: &State<AppState>,
 ) -> ApiResponse {
     if let Err(e) = payload {

@@ -1,11 +1,12 @@
-use rocket::{http::Status, response::status, serde::json, serde::json::Json, Route, State};
+use rocket::{http::Status, response::status, Route, State};
 use serde_json::json;
 
-use crate::{
-    core::{responses, types::ApiResponse},
-    entities::AppState,
-    features::flags,
+use crate::core::{
+    responses,
+    types::{ApiResponse, JsonResult},
 };
+use crate::entities::AppState;
+use crate::features::flags;
 
 pub fn routes() -> Vec<Route> {
     routes![list_all_flags, get_flag, modify_flag, options,]
@@ -43,7 +44,7 @@ async fn get_flag(flag: &str, state: &State<AppState>) -> ApiResponse {
 #[put("/<flag>", format = "json", data = "<payload>")]
 async fn modify_flag(
     flag: &str,
-    payload: Result<Json<flags::schemas::FlagPayload>, json::Error<'_>>,
+    payload: JsonResult<'_, flags::schemas::FlagPayload>,
     state: &State<AppState>,
 ) -> ApiResponse {
     if let Err(e) = payload {

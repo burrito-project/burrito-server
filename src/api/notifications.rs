@@ -1,16 +1,13 @@
 use base64::prelude::*;
-use rocket::{http::Status, response::status, serde::json, serde::json::Json, Route, State};
+use rocket::{http::Status, response::status, Route, State};
 use serde_json::json;
 
-use crate::{
-    core::{guards::IsMobileChecker, responses, types::ApiResponse},
-    entities::AppState,
-    features::{
-        cdn::{self, ProvideImageService},
-        flags,
-    },
-    schemas,
-};
+use crate::core::types::{ApiResponse, JsonResult};
+use crate::core::{guards::IsMobileChecker, responses};
+use crate::entities::AppState;
+use crate::features::cdn::{self, ProvideImageService};
+use crate::features::flags;
+use crate::schemas;
 
 const NOTIFICATIONS_PATH: &str = "burrito/notifications/";
 
@@ -61,7 +58,7 @@ async fn get_notifications(state: &State<AppState>, is_mobile: IsMobileChecker) 
 
 #[post("/", format = "json", data = "<payload>")]
 async fn post_notifications(
-    payload: Result<Json<schemas::NotificationPayload>, json::Error<'_>>,
+    payload: JsonResult<'_, schemas::NotificationPayload>,
     state: &State<AppState>,
 ) -> ApiResponse {
     if let Err(e) = payload {

@@ -1,17 +1,11 @@
-use rocket::{
-    http::Status,
-    serde::json::{self, Json},
-    Response, Route, State,
-};
+use rocket::{http::Status, Response, Route, State};
 
-use crate::{
-    core::responses::RawResponse,
-    entities::AppState,
-    features::bot::{
-        self,
-        entities::{WhastappMessageType, WhatsappMessage},
-        handlers::verify::PubVerificationParams,
-    },
+use crate::core::{responses::RawResponse, types::JsonResult};
+use crate::entities::AppState;
+use crate::features::bot::{
+    self,
+    entities::{WhastappMessageType, WhatsappMessage},
+    handlers::verify::PubVerificationParams,
 };
 
 pub fn routes() -> Vec<Route> {
@@ -21,7 +15,7 @@ pub fn routes() -> Vec<Route> {
 #[post("/", data = "<message>")]
 async fn whatsapp_new_message(
     state: &State<AppState>,
-    message: Result<Json<WhatsappMessage>, json::Error<'_>>,
+    message: JsonResult<'_, WhatsappMessage>,
 ) -> RawResponse<'static> {
     if message.is_err() {
         // Send ok to avoid retries from WhatsApp

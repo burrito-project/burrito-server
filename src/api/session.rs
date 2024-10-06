@@ -1,17 +1,14 @@
-use rocket::{
-    http::Status,
-    response::status,
-    serde::json::{self, Json},
-    Route, State,
-};
+use rocket::{http::Status, response::status, Route, State};
 use serde_json::json;
 use sqlx::types::ipnetwork::IpNetwork;
 
-use crate::{
-    core::{guards::ForwardedIp, responses, types::ApiResponse},
-    entities::AppState,
-    schemas,
+use crate::core::{
+    guards::ForwardedIp,
+    responses,
+    types::{ApiResponse, JsonResult},
 };
+use crate::entities::AppState;
+use crate::schemas;
 
 pub fn routes() -> Vec<Route> {
     routes![post_session, options]
@@ -20,7 +17,7 @@ pub fn routes() -> Vec<Route> {
 #[post("/", format = "json", data = "<payload>")]
 pub async fn post_session(
     remote_addr: ForwardedIp,
-    payload: Result<Json<schemas::UserIdentityPayload>, json::Error<'_>>,
+    payload: JsonResult<'_, schemas::UserIdentityPayload>,
     state: &State<AppState>,
 ) -> ApiResponse {
     if let Err(e) = payload {
