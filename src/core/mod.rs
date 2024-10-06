@@ -1,3 +1,4 @@
+pub mod fairings;
 pub mod guards;
 pub mod responses;
 pub(crate) mod types;

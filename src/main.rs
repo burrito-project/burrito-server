@@ -14,7 +14,6 @@ extern crate rocket;
 mod api;
 mod bus_stops;
 mod core;
-mod cors;
 mod db;
 mod entities;
 mod env;
@@ -88,7 +87,7 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/pending_updates", api::pending_updates::routes())
         .mount("/ws", api::ws::routes())
         .register("/", catchers![not_found])
-        .attach(cors::Cors)
+        .attach(core::fairings::Cors)
         .manage(crate::entities::AppState::from_db(pool))
         .launch()
         .await?;
