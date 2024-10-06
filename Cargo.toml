@@ -24,6 +24,7 @@ hex = "0.4.3"
 sha1 = "0.10.6"
 oxipng = "9.1.2"
 base64 = "0.22.1"
+jsonwebtoken = "9.3.0"
 
 [dependencies.image]
 version = "0.25.2"
