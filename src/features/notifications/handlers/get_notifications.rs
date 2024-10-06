@@ -19,7 +19,7 @@ pub async fn get_notifications_handler(
 
     let random_order = flags::get_flag(&state.pool, "ads_random_order", true).await;
 
-    return match random_order {
+    match random_order {
         true => {
             let notifications = sqlx::query_as!(
                 schemas::Notification,
@@ -42,5 +42,5 @@ pub async fn get_notifications_handler(
 
             Ok(json!(notifications))
         }
-    };
+    }
 }

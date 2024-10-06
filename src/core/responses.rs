@@ -16,9 +16,9 @@ impl<'r> RawResponse<'r> {
     }
 }
 
-impl<'r> Into<RawResponse<'r>> for response::Response<'r> {
-    fn into(self) -> RawResponse<'r> {
-        RawResponse { response: self }
+impl<'r> From<response::Response<'r>> for RawResponse<'r> {
+    fn from(val: response::Response<'r>) -> Self {
+        RawResponse { response: val }
     }
 }
 

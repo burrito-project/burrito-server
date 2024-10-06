@@ -13,9 +13,9 @@ use crate::entities::AppState;
 /// root user is returned.
 pub struct StaffUser(super::schemas::AppUser);
 
-impl Into<super::schemas::AppUser> for StaffUser {
-    fn into(self) -> super::schemas::AppUser {
-        self.0
+impl From<StaffUser> for super::schemas::AppUser {
+    fn from(val: StaffUser) -> Self {
+        val.0
     }
 }
 
@@ -66,8 +66,8 @@ impl<'r> FromRequest<'r> for super::schemas::AppUser {
 
         let result = jsonwebtoken::decode::<super::schemas::JWTClaims>(
             jwt,
-            &*JWT_DECODING_KEY,
-            &*JWT_VALIDATION,
+            &JWT_DECODING_KEY,
+            &JWT_VALIDATION,
         );
 
         let claims = match result {
