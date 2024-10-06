@@ -14,6 +14,9 @@ macro_rules! env_var_or {
 }
 
 lazy_static! {
+    // Master passphrase. If someone gets this, we are doomed
+    pub static ref ROOT_SECRET: String = env_var!("ROOT_SECRET");
+
     /// The passphrase to authenticate the bus driver POST requests
     pub static ref AUTH_DRIVER_PASSPHRASE: String = env_var!("AUTH_DRIVER_PASSPHRASE");
 
