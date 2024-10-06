@@ -23,6 +23,7 @@ mod schemas;
 
 mod features {
     pub mod analytics;
+    pub mod auth;
     pub mod bot;
     pub mod cdn;
     pub mod flags;
@@ -68,6 +69,7 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/", api::index::routes())
         .mount("/map", api::map::routes())
         .mount("/help", routes![api::index::help_index])
+        .mount("/auth", api::auth::routes())
         .mount("/ping", api::ping::routes())
         .mount("/hooks", api::hooks::routes())
         .mount("/flags", api::flags::routes())
