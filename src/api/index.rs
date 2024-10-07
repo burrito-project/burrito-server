@@ -3,7 +3,7 @@ use serde::Serialize;
 use serde_json::{json, Value};
 
 pub fn routes() -> Vec<Route> {
-    routes![help_index]
+    routes![help_index, humans_txt]
 }
 
 #[derive(Serialize)]
@@ -19,6 +19,11 @@ struct RouteDocs<'a> {
     path: &'a str,
     description: &'a str,
     query_params: &'a [QueryParamDocs<'a, Value>],
+}
+
+#[get("/humans.txt")]
+pub fn humans_txt() -> &'static str {
+    include_str!("../../public/humans.txt")
 }
 
 #[get("/")]

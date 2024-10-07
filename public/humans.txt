@@ -1,0 +1,21 @@
+/* TEAM */
+    Developer: Calle Luis
+    Github: @luedu1103
+
+    Developer: Flores Paolo
+    Github: @paoloose
+
+    Developer: Sebastian Rojas
+    Github: @SebastianRojas6
+
+/* THANKS */
+    UNMSM bus maintainer: Mario Chura
+
+    Coordinator: Miguel Romero
+
+    Coordinator: Baltazar
+
+/* SITE */
+    Language: Spanish
+    App: https://flutter.dev/
+    Server: https://rocket.rs/
