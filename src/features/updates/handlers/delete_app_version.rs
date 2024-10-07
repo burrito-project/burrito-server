@@ -1,8 +1,10 @@
+use rocket::http::Status;
+use rocket::response::status;
 use rocket::State;
 use serde_json::json;
 
 use crate::core::types::ApiResponse;
-use crate::core::AppState;
+use crate::core::{responses, AppState};
 use crate::features::updates::schemas;
 
 pub async fn delete_app_version_handler(id: i32, state: &State<AppState>) -> ApiResponse {
@@ -11,9 +13,16 @@ pub async fn delete_app_version_handler(id: i32, state: &State<AppState>) -> Api
         "DELETE FROM app_versions WHERE id = $1 RETURNING *;",
         id,
     )
-    .fetch_one(&state.pool)
+    .fetch_optional(&state.pool)
     .await
     .unwrap();
 
-    Ok(json!(deleted_version))
+    if deleted_version.is_none() {
+        return Err(status::Custom(
+            Status::NotFound,
+            responses::error_response("Flag not found".to_string()),
+        ));
+    }
+
+    Ok(json!(deleted_version.unwrap()))
 }

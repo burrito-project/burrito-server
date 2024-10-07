@@ -1,8 +1,10 @@
+use rocket::http::Status;
+use rocket::response::status;
 use rocket::State;
 use serde_json::json;
 
 use crate::core::types::ApiResponse;
-use crate::core::AppState;
+use crate::core::{responses, AppState};
 use crate::features::updates::schemas;
 
 pub async fn patch_app_version_handler(
@@ -33,7 +35,14 @@ pub async fn patch_app_version_handler(
         payload.release_notes,
     );
 
-    let updated_version = updated_version.fetch_one(&state.pool).await.unwrap();
+    let updated_version = updated_version.fetch_optional(&state.pool).await.unwrap();
+
+    if updated_version.is_none() {
+        return Err(status::Custom(
+            Status::NotFound,
+            responses::error_response("App version does not exist!"),
+        ));
+    }
 
     Ok(json!(updated_version))
 }
