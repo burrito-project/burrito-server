@@ -1,11 +1,9 @@
 #![allow(unreachable_patterns)]
 use dotenvy::dotenv;
 use lazy_static::lazy_static;
-use rocket::{
-    config::Ident,
-    data::{Limits, ToByteUnit},
-    fs, Config,
-};
+use rocket::config::{Ident, LogLevel};
+use rocket::data::{Limits, ToByteUnit};
+use rocket::{fs, Config};
 use serde_json::json;
 
 #[macro_use]
@@ -55,6 +53,7 @@ async fn main() -> Result<(), rocket::Error> {
         port: PORT,
         address: [0, 0, 0, 0].into(),
         ident: Ident::none(),
+        log_level: LogLevel::Normal,
         limits: Limits::new()
             .limit("forms", 16.mebibytes())
             .limit("json", 32.mebibytes()),
