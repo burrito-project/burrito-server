@@ -15,7 +15,6 @@ mod api;
 mod core;
 mod db;
 mod env;
-mod mock;
 
 mod features {
     pub mod analytics;
@@ -27,6 +26,7 @@ mod features {
     pub mod cdn;
     pub mod flags;
     pub mod identities;
+    pub mod mock;
     pub mod notifications;
     pub mod updates;
 }
@@ -63,7 +63,7 @@ async fn main() -> Result<(), rocket::Error> {
 
     let pool = crate::db::create_pool().await.unwrap();
 
-    crate::mock::initialize_mocks();
+    crate::features::mock::rc::initialize_mocks();
     crate::features::flags::rc::setup_base_flags(&pool)
         .await
         .expect("Failed to setup base flags");

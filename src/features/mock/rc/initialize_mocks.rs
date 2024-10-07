@@ -6,7 +6,7 @@ use crate::features::bus_driver::schemas::BurritoPosRecord;
 lazy_static! {
     static ref s_mock_records: Vec<BurritoPosRecord> =
         serde_json::from_str::<Vec<BurritoPosRecord>>(include_str!(
-            "../public/mocks/route1.json"
+            "../assets/route1.json"
         ))
         .unwrap()
         .iter()
