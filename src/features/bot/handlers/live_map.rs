@@ -2,7 +2,9 @@ use image::DynamicImage;
 use include_bytes_plus::include_bytes;
 use lazy_static::lazy_static;
 
-use crate::{bus_stops::LatLng, entities::AppState};
+use crate::core::AppState;
+use crate::features::bus_status;
+use crate::features::bus_stops::schemas::LatLng;
 
 lazy_static! {
     pub static ref MAP_BASE_IMAGE_BYTES: &'static [u8] =
@@ -25,7 +27,7 @@ const MAP_TOP_LEFT_COORDS: LatLng = LatLng::new(-12.051563821207822, -77.0905039
 ///
 /// Returns none if the burrito is not locatable
 pub async fn live_map_handler(state: &AppState) -> Option<DynamicImage> {
-    let burrito_status = crate::api::status::get_burrito_status_impl(1, state).await;
+    let burrito_status = bus_status::handlers::get_burrito_status_handler(1, state).await;
     let pos = burrito_status.positions[0].clone();
 
     if !pos.sts.is_locatable() {

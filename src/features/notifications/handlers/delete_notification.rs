@@ -2,7 +2,7 @@ use rocket::State;
 use serde_json::json;
 
 use crate::core::types::ApiResponse;
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::notifications::schemas;
 
 pub async fn delete_notification_handler(id: i32, state: &State<AppState>) -> ApiResponse {

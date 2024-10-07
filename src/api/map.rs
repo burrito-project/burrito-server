@@ -2,9 +2,10 @@ use rocket::http::Status;
 use rocket::{Response, Route, State};
 use std::io;
 
+use crate::core::responses::RawResponse;
+use crate::core::AppState;
 use crate::features::bot;
 use crate::features::bot::handlers::live_map::MAP_BASE_IMAGE_BYTES;
-use crate::{core::responses::RawResponse, entities::AppState};
 
 pub fn routes() -> Vec<Route> {
     routes![live_map]

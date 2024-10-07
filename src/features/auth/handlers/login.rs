@@ -2,11 +2,9 @@ use jsonwebtoken::Header;
 use rocket::{http::Status, response::status, serde::json::Json, State};
 use serde_json::json;
 
-use crate::{
-    core::{responses, types::ApiResponse},
-    entities::AppState,
-    features::auth::{self, consts::JWT_ENCODING_KEY, schemas::JWTClaims},
-};
+use crate::core::AppState;
+use crate::core::{responses, types::ApiResponse};
+use crate::features::auth::{self, consts::JWT_ENCODING_KEY, schemas::JWTClaims};
 
 pub async fn user_login_handler(
     payload: Json<auth::schemas::UserLoginPayload>,

@@ -4,7 +4,7 @@ use lazy_static::lazy_static;
 use rocket::{
     config::Ident,
     data::{Limits, ToByteUnit},
-    Config,
+    fs, Config,
 };
 use serde_json::json;
 
@@ -12,10 +12,8 @@ use serde_json::json;
 extern crate rocket;
 
 mod api;
-mod bus_stops;
 mod core;
 mod db;
-mod entities;
 mod env;
 mod mock;
 
@@ -23,6 +21,9 @@ mod features {
     pub mod analytics;
     pub mod auth;
     pub mod bot;
+    pub mod bus_driver;
+    pub mod bus_status;
+    pub mod bus_stops;
     pub mod cdn;
     pub mod flags;
     pub mod identities;
@@ -70,6 +71,7 @@ async fn main() -> Result<(), rocket::Error> {
     rocket::build()
         .configure(config)
         .mount("/", api::index::routes())
+        .mount("/ws", api::ws::routes())
         .mount("/map", api::map::routes())
         .mount("/help", routes![api::index::help_index])
         .mount("/auth", api::auth::routes())
@@ -85,10 +87,10 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/analytics", api::analytics::routes())
         .mount("/notifications", api::notifications::routes())
         .mount("/pending_updates", api::pending_updates::routes())
-        .mount("/ws", api::ws::routes())
+        .mount("/public", fs::FileServer::from(fs::relative!("public")))
         .register("/", catchers![not_found])
         .attach(core::fairings::Cors)
-        .manage(crate::entities::AppState::from_db(pool))
+        .manage(crate::core::AppState::from_db(pool))
         .launch()
         .await?;
 

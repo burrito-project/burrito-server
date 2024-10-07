@@ -2,7 +2,7 @@ use rocket::{http::Status, response::status, Route, State};
 
 use crate::core::types::{ApiResponse, JsonResult};
 use crate::core::{guards::IsMobileChecker, responses};
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::notifications;
 
 pub fn routes() -> Vec<Route> {

@@ -2,7 +2,7 @@ use rocket::State;
 use serde_json::json;
 
 use crate::core::types::ApiResponse;
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::updates::schemas;
 
 pub async fn post_app_version_handler(

@@ -1,6 +1,6 @@
 use rocket::{futures::StreamExt, Route, State};
 
-use crate::entities::AppState;
+use crate::core::AppState;
 
 pub fn routes() -> Vec<Route> {
     routes![ws_status_streaming]
@@ -22,7 +22,9 @@ fn ws_status_streaming(ws: ws::WebSocket, state: &State<AppState>) -> ws::Channe
             loop {
                 tokio::select! {
                     Ok(driver_message) = tx.recv() => {
-                        let driver_message = ws::Message::Text(serde_json::to_string(&driver_message).unwrap());
+                        let driver_message = ws::Message::Text(
+                            serde_json::to_string(&driver_message).unwrap(),
+                        );
 
                         match stream.send(driver_message).await {
                             Ok(_) => {}

@@ -4,7 +4,7 @@ use serde_json::json;
 
 use crate::core::responses;
 use crate::core::types::ApiResponse;
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::cdn::{self, ProvideImageService};
 use crate::features::notifications::schemas;
 

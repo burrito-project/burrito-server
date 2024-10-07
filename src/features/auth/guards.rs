@@ -5,7 +5,7 @@ use rocket::{
 use serde::Deserialize;
 
 use super::consts::{JWT_DECODING_KEY, JWT_VALIDATION, ROOT_USER};
-use crate::entities::AppState;
+use crate::core::AppState;
 
 #[derive(Clone, Deserialize)]
 /// Request guard for routes that requires staff privilegies

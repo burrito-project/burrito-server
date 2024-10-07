@@ -1,23 +1,15 @@
 use geo::{Centroid, Contains, GeodesicDistance, Polygon};
 use geojson::{FeatureCollection, GeoJson};
 use lazy_static::lazy_static;
-use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 
-pub struct LatLng {
-    pub lat: f64,
-    pub lng: f64,
-}
+use crate::features::bus_stops::schemas::LatLng;
 
-impl LatLng {
-    pub const fn new(lat: f64, lng: f64) -> Self {
-        LatLng { lat, lng }
-    }
-}
+use super::schemas::BusStopInfo;
 
-const BUS_STOPS_GEOJSON_STR: &str = include_str!("../static/geojson/bus_stops.json");
+const BUS_STOPS_GEOJSON_STR: &str = include_str!("../../../public/geojson/bus_stops.json");
 
-// global variable to store the parsed geojson (read only)
+// global variable to store the parsed bus_stops geojson (read only)
 
 lazy_static! {
     static ref BUS_STOPS: FeatureCollection = {
@@ -26,36 +18,7 @@ lazy_static! {
     };
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
-pub struct BusStopInfo {
-    pub name: String,
-    pub number: i32,
-    pub has_reached: bool,
-    pub timestamp: SystemTime,
-    pub distance: f64,
-}
-
-impl BusStopInfo {
-    pub fn for_new_position(&self, new_pos: LatLng) -> Self {
-        // If the last state is marked as reached, then we already passed it
-        // and the bus is on its way to the next stop
-        if self.has_reached {
-            get_next_bus_stop(self, new_pos)
-        }
-        // And if not, we just update the distance to reach the bus stop
-        else {
-            let new_distance = get_distance_to_bus_stop(self, new_pos);
-            BusStopInfo {
-                distance: new_distance,
-                has_reached: self.has_reached,
-                name: self.name.to_owned(),
-                number: self.number,
-                timestamp: std::time::SystemTime::now(),
-            }
-        }
-    }
-}
-
+/// Useful trait to mainpulate nullable BusStopInfo
 pub trait OptionalBuStopInfo {
     fn for_new_position(&self, new_pos: LatLng) -> Self;
 }
@@ -66,6 +29,7 @@ impl OptionalBuStopInfo for Option<BusStopInfo> {
     }
 }
 
+/// Transforms a GeoJSON feature into a geo::Polygon for interop with geo crate
 fn feature_to_polygon(feature: &geojson::Feature) -> geo::Polygon {
     match feature.geometry.as_ref().map(|g| &g.value) {
         Some(geojson::Value::Polygon(p)) => {
@@ -84,7 +48,7 @@ fn feature_to_polygon(feature: &geojson::Feature) -> geo::Polygon {
     }
 }
 
-// Given a point, it returns the bus stop (paradero) located in that point, if some.
+/// Given a point, it returns the bus stop located in that point, if some
 pub fn get_bus_stop_for_point(lat: f64, lng: f64) -> Option<BusStopInfo> {
     BUS_STOPS.features.iter().find_map(|f| {
         let poly = feature_to_polygon(f);
@@ -111,6 +75,8 @@ pub fn get_bus_stop_for_point(lat: f64, lng: f64) -> Option<BusStopInfo> {
     })
 }
 
+/// Bus stops numbering allows us to know what's the next bus stop given the current one.
+/// Since a route is circular, there always exists a next bus stop
 pub fn get_next_bus_stop(current: &BusStopInfo, current_pos: LatLng) -> BusStopInfo {
     let next_stop_num = match current.number {
         1..=8 => current.number + 1,
@@ -146,6 +112,10 @@ pub fn get_next_bus_stop(current: &BusStopInfo, current_pos: LatLng) -> BusStopI
     }
 }
 
+/// Returns the distance to reach the bus stop, given the current position
+/// Since a bus stop is an area, we calculate the distance to its centroid
+///
+/// The result should only be meaningful if the bus stop is not reached yet
 pub fn get_distance_to_bus_stop(current: &BusStopInfo, current_post: LatLng) -> f64 {
     let poly = feature_to_polygon(
         BUS_STOPS

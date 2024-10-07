@@ -4,9 +4,8 @@ use std::sync::Arc;
 use tokio::sync;
 use tokio::sync::broadcast;
 
-use crate::bus_stops::BusStopInfo;
-use crate::entities::BurritoPosRecord;
-use crate::entities::WsClientMessage;
+use crate::features::bus_driver::schemas::{BurritoPosRecord, WsClientMessage};
+use crate::features::bus_stops::schemas::BusStopInfo;
 
 pub struct AppState {
     pub pool: sqlx::Pool<sqlx::Postgres>,

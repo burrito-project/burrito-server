@@ -5,7 +5,7 @@ use crate::core::{
     responses,
     types::{ApiResponse, JsonResult},
 };
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::flags;
 
 pub fn routes() -> Vec<Route> {

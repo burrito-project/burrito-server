@@ -1,7 +1,8 @@
 use rocket::{http::Status, serde::json::Json, Route, State};
 
+use crate::core::types::ApiResponse;
+use crate::core::AppState;
 use crate::features::auth;
-use crate::{core::types::ApiResponse, entities::AppState};
 
 pub fn routes() -> Vec<Route> {
     routes![user_login, options]

@@ -3,7 +3,7 @@ use serde_json::json;
 
 use crate::core::guards::IsMobileChecker;
 use crate::core::types::ApiResponse;
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::flags;
 use crate::features::notifications::schemas;
 

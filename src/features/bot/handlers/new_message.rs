@@ -1,10 +1,10 @@
 use rocket::{http::Status, Response, State};
 
-use crate::{
-    core::responses::RawResponse,
-    entities::{AppState, BusServiceState},
-    features::bot::entities::WhatsappMessage,
-};
+use crate::core::responses::RawResponse;
+use crate::core::AppState;
+use crate::features::bot::entities::WhatsappMessage;
+use crate::features::bus_driver::schemas::BusServiceState;
+use crate::features::bus_status;
 
 macro_rules! on_route_just_started_message_template {
     () => {
@@ -56,12 +56,10 @@ pub async fn whatsapp_new_text_message_handler(
     state: &State<AppState>,
     message: WhatsappMessage,
 ) -> RawResponse<'static> {
-    println!("{:#?}", &message);
-
     let number_id = &message.entry[0].changes[0].value.metadata.phone_number_id;
     let message = &message.entry[0].changes[0].value.messages[0];
 
-    let burrito_status = crate::api::status::get_burrito_status_impl(1, state).await;
+    let burrito_status = bus_status::handlers::get_burrito_status_handler(1, state).await;
     let last_stop = &burrito_status.last_stop;
     let pos = &burrito_status.positions[0];
     let updated_at = pos.formatted_time_ago();

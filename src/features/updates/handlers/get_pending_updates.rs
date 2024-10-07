@@ -5,7 +5,7 @@ use serde_json::json;
 
 use crate::core::responses;
 use crate::core::types::ApiResponse;
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::updates::{schemas, utils};
 
 pub async fn get_pending_updates_handler(

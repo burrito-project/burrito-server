@@ -1,7 +1,7 @@
 use rocket::{http::Status, State};
 
 use crate::core::types::ApiResponse;
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::updates;
 
 pub fn routes() -> Vec<rocket::Route> {

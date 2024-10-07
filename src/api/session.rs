@@ -1,6 +1,6 @@
 use rocket::{http::Status, response::status, Route, State};
 
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::identities::schemas;
 use crate::{
     core::{

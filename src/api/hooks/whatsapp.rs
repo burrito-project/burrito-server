@@ -1,7 +1,7 @@
 use rocket::{http::Status, Response, Route, State};
 
 use crate::core::{responses::RawResponse, types::JsonResult};
-use crate::entities::AppState;
+use crate::core::AppState;
 use crate::features::bot::{
     self,
     entities::{WhastappMessageType, WhatsappMessage},

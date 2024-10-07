@@ -1,3 +1,15 @@
+use rocket::serde::{Deserialize, Serialize};
+use std::time::SystemTime;
+
+use crate::features::bus_stops::schemas::BusStopInfo;
+
+#[allow(unused)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct WsClientMessage {
+    pub record: BurritoPosRecord,
+    pub last_stop: Option<BusStopInfo>,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum BusServiceState {
     OnRoute,
@@ -73,6 +85,49 @@ impl From<BusServiceState> for i32 {
             BusServiceState::Off => 4,
         }
     }
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct BurritoPosRecord {
+    pub lt: f64,
+    pub lg: f64,
+    pub sts: BusServiceState,
+    /// Device battery. None means off or not applicable
+    pub bat: Option<i32>,
+    pub timestamp: SystemTime,
+    pub velocity: f64,
+}
+
+impl BurritoPosRecord {
+    pub fn formatted_time_ago(&self) -> String {
+        let elapsed = self.timestamp.elapsed().unwrap();
+        let secs = elapsed.as_secs();
+        let mins = secs / 60;
+        let hours = mins / 60;
+        let days = hours / 24;
+
+        if days > 0 {
+            format!("hace {} días", days)
+        } else if hours > 0 {
+            format!("hace {} horas", hours)
+        } else if mins > 0 {
+            format!("hace {} minutos", mins)
+        } else if secs == 0 {
+            "justo ahora".to_string()
+        } else {
+            format!("hace {} segundos", secs)
+        }
+    }
+}
+
+/// The status payload received from the server, which contains the latitude, longitude
+/// and status of the burrito
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct BurritoRecordPayload {
+    pub lt: f64,
+    pub lg: f64,
+    pub sts: BusServiceState, // i32
+    pub bat: Option<i32>,     // Device battery. None means not applicable
 }
 
 #[cfg(test)]

@@ -2,8 +2,8 @@ use rocket::State;
 use serde_json::json;
 use sqlx::types::ipnetwork::IpNetwork;
 
+use crate::core::AppState;
 use crate::core::{guards::ForwardedIp, types::ApiResponse};
-use crate::entities::AppState;
 use crate::features::identities::schemas;
 
 pub async fn post_session_handler(
