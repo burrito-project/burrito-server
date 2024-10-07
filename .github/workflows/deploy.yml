@@ -20,8 +20,8 @@ jobs:
       - name: Pull and deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
+          host: ${{ vars.SSH_HOST }}
+          username: ${{ vars.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           debug: true
           envs: REPO_PATH,APP_ENV_FILE
@@ -34,6 +34,6 @@ jobs:
             echo "$APP_ENV_FILE" > .env
             docker compose -f docker-compose.prod.yml up -d --build
         env:
-          REPO_PATH: ${{ secrets.SSH_REPO_PATH }}
+          REPO_PATH: ${{ vars.SSH_REPO_PATH }}
           APP_ENV_FILE: |
             ${{ secrets.ENV_FILE }}
