@@ -7,7 +7,7 @@ use crate::features::bus_stops::schemas::LatLng;
 
 use super::schemas::BusStopInfo;
 
-const BUS_STOPS_GEOJSON_STR: &str = include_str!("../../../public/geojson/bus_stops.json");
+const BUS_STOPS_GEOJSON_STR: &str = include_str!("assets/bus_stops.json");
 
 // global variable to store the parsed bus_stops geojson (read only)
 
