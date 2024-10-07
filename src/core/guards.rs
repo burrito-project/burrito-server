@@ -56,6 +56,7 @@ impl<'r> FromRequest<'r> for IsMobileChecker {
 }
 
 impl IsMobileChecker {
+    #[allow(unused)]
     pub fn ask(&self) -> bool {
         self.0
     }

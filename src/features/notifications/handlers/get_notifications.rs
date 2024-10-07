@@ -1,22 +1,12 @@
 use rocket::State;
 use serde_json::json;
 
-use crate::core::guards::IsMobileChecker;
 use crate::core::types::ApiResponse;
 use crate::core::AppState;
 use crate::features::flags;
 use crate::features::notifications::schemas;
 
-pub async fn get_notifications_handler(
-    state: &State<AppState>,
-    is_mobile: IsMobileChecker,
-) -> ApiResponse {
-    if is_mobile.ask() {
-        // Empty notifications for mobile while we are on review
-        // TODO: remove
-        return Ok(json!([]));
-    }
-
+pub async fn get_notifications_handler(state: &State<AppState>) -> ApiResponse {
     let random_order = flags::get_flag(&state.pool, "ads_random_order", true).await;
 
     match random_order {

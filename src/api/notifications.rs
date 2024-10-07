@@ -1,7 +1,7 @@
 use rocket::{http::Status, response::status, Route, State};
 
+use crate::core::responses;
 use crate::core::types::{ApiResponse, JsonResult};
-use crate::core::{guards::IsMobileChecker, responses};
 use crate::core::AppState;
 use crate::features::notifications;
 
@@ -15,8 +15,8 @@ pub fn routes() -> Vec<Route> {
 }
 
 #[get("/")]
-async fn get_notifications(state: &State<AppState>, is_mobile: IsMobileChecker) -> ApiResponse {
-    notifications::handlers::get_notifications_handler(state, is_mobile).await
+async fn get_notifications(state: &State<AppState>) -> ApiResponse {
+    notifications::handlers::get_notifications_handler(state).await
 }
 
 #[post("/", format = "json", data = "<payload>")]
