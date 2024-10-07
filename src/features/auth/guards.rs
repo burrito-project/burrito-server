@@ -105,6 +105,40 @@ impl<'r> FromRequest<'r> for super::schemas::AppUser {
     }
 }
 
+pub struct RootUser(super::schemas::AppUser);
+
+impl From<RootUser> for super::schemas::AppUser {
+    fn from(val: RootUser) -> Self {
+        val.0
+    }
+}
+
+#[rocket::async_trait]
+impl<'r> FromRequest<'r> for RootUser {
+    type Error = ();
+
+    async fn from_request(request: &'r rocket::Request<'_>) -> request::Outcome<Self, ()> {
+        let user_outcome = request.guard::<super::schemas::AppUser>().await;
+
+        let super_user = match user_outcome {
+            rocket::outcome::Outcome::Success(app_user) => {
+                if !app_user.is_root() {
+                    return rocket::request::Outcome::Forward(Status::Unauthorized);
+                }
+                RootUser(app_user)
+            }
+            rocket::outcome::Outcome::Error(out) => {
+                return rocket::request::Outcome::Error(out);
+            }
+            rocket::outcome::Outcome::Forward(out) => {
+                return rocket::request::Outcome::Forward(out);
+            }
+        };
+
+        rocket::request::Outcome::Success(super_user)
+    }
+}
+
 pub struct ExclusiveAuthDriver {
     pub bus_name: String,
 }
