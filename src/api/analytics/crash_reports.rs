@@ -4,7 +4,7 @@ use crate::core::responses;
 use crate::core::types::{ApiResponse, JsonResult};
 use crate::core::AppState;
 use crate::features::analytics;
-use crate::features::auth::guards::AuthDriver;
+use crate::features::auth::guards::{AuthDriver, StaffUser};
 
 pub fn routes() -> Vec<Route> {
     routes![
@@ -15,7 +15,7 @@ pub fn routes() -> Vec<Route> {
 }
 
 #[get("/")]
-async fn get_crash_reports(state: &State<AppState>) -> ApiResponse {
+async fn get_crash_reports(_user: StaffUser, state: &State<AppState>) -> ApiResponse {
     analytics::handlers::crash_reports::get_crash_reports_handler(state).await
 }
 

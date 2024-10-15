@@ -1,10 +1,11 @@
 use rocket::{http::Status, response::status, Route, State};
 
+use crate::core::AppState;
 use crate::core::{
     responses,
     types::{ApiResponse, JsonResult},
 };
-use crate::core::AppState;
+use crate::features::auth::guards::StaffUser;
 use crate::features::updates::{self, schemas};
 
 pub fn routes() -> Vec<Route> {
@@ -23,6 +24,7 @@ async fn list_app_versions(state: &State<AppState>) -> ApiResponse {
 
 #[post("/", format = "json", data = "<payload>")]
 async fn post_app_versions(
+    _user: StaffUser,
     payload: JsonResult<'_, schemas::AppVersionPayload>,
     state: &State<AppState>,
 ) -> ApiResponse {
@@ -41,6 +43,7 @@ async fn post_app_versions(
 #[patch("/<id>", format = "json", data = "<payload>")]
 async fn patch_app_version(
     id: i32,
+    _user: StaffUser,
     payload: JsonResult<'_, schemas::AppVersionPatchPayload>,
     state: &State<AppState>,
 ) -> ApiResponse {
@@ -56,6 +59,6 @@ async fn patch_app_version(
 }
 
 #[delete("/<id>")]
-async fn delete_app_version(id: i32, state: &State<AppState>) -> ApiResponse {
+async fn delete_app_version(id: i32, _user: StaffUser, state: &State<AppState>) -> ApiResponse {
     updates::handlers::delete_app_version_handler(id, state).await
 }

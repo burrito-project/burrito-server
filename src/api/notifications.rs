@@ -3,6 +3,7 @@ use rocket::{http::Status, response::status, Route, State};
 use crate::core::responses;
 use crate::core::types::{ApiResponse, JsonResult};
 use crate::core::AppState;
+use crate::features::auth::guards::StaffUser;
 use crate::features::notifications;
 
 pub fn routes() -> Vec<Route> {
@@ -21,6 +22,7 @@ async fn get_notifications(state: &State<AppState>) -> ApiResponse {
 
 #[post("/", format = "json", data = "<payload>")]
 async fn post_notifications(
+    _user: StaffUser,
     payload: JsonResult<'_, notifications::schemas::NotificationPayload>,
     state: &State<AppState>,
 ) -> ApiResponse {
@@ -37,7 +39,7 @@ async fn post_notifications(
 }
 
 #[delete("/<id>")]
-async fn delete_notification(id: i32, state: &State<AppState>) -> ApiResponse {
+async fn delete_notification(_user: StaffUser, id: i32, state: &State<AppState>) -> ApiResponse {
     notifications::handlers::delete_notification_handler(id, state).await
 }
 
