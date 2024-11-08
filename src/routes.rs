@@ -7,7 +7,7 @@ use utoipa::{
 use utoipa_redoc::{Redoc, Servable as RedocServable};
 use utoipa_scalar::{Scalar, Servable as ScalarServable};
 
-use crate::api::{battery::BatteryRoutes, driver::DriverRoutes};
+use crate::api::{battery::BatteryRouter, driver::DriverRouter};
 
 pub struct ApiRouterInternal {
     base: String,
@@ -29,8 +29,8 @@ fn mount_router<R: ApiRouter + OpenApi>(mount: &'static str) -> ApiRouterInterna
 
 pub fn routers() -> Vec<ApiRouterInternal> {
     vec![
-        mount_router::<BatteryRoutes>("/battery"),
-        mount_router::<DriverRoutes>("/driver"),
+        mount_router::<BatteryRouter>("/battery"),
+        mount_router::<DriverRouter>("/driver"),
     ]
 }
 
