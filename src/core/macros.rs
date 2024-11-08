@@ -5,8 +5,8 @@ macro_rules! router {
         #[openapi(paths($($route),*))]
         pub struct $name;
 
-        impl ApiRouter for $name {
-            fn routes() -> Vec<Route> {
+        impl $crate::routes::ApiRouter for $name {
+            fn routes() -> Vec<rocket::Route> {
                 routes![$($route),*]
             }
         }

@@ -1,9 +1,9 @@
-use rocket::{Route, State};
+use rocket::serde::json::Json;
+use rocket::State;
 
 use crate::core::AppState;
 use crate::features::bus_status;
 use crate::router;
-use crate::{core::types::Json, routes::ApiRouter};
 
 router!(BatteryRouter, [get_current_battery]);
 

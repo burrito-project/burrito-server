@@ -7,7 +7,7 @@ use utoipa::{
 use utoipa_redoc::{Redoc, Servable as RedocServable};
 use utoipa_scalar::{Scalar, Servable as ScalarServable};
 
-use crate::api::{battery::BatteryRouter, driver::DriverRouter};
+use crate::api::{battery::BatteryRouter, driver::DriverRouter, flags::FlagsRouter};
 
 pub struct ApiRouterInternal {
     base: String,
@@ -31,6 +31,7 @@ pub fn routers() -> Vec<ApiRouterInternal> {
     vec![
         mount_router::<BatteryRouter>("/battery"),
         mount_router::<DriverRouter>("/driver"),
+        mount_router::<FlagsRouter>("/flags"),
     ]
 }
 
@@ -83,9 +84,24 @@ impl Modify for SecurityAddon {
         let components = openapi.components.as_mut().unwrap();
 
         components.add_security_scheme(
-            "api_key",
+            "staff_user_auth",
             SecurityScheme::ApiKey(ApiKey::Header(ApiKeyValue::new("Authorization"))),
-        )
+        );
+
+        components.add_security_scheme(
+            "app_user_auth",
+            SecurityScheme::ApiKey(ApiKey::Header(ApiKeyValue::new("Authorization"))),
+        );
+
+        components.add_security_scheme(
+            "super_user_auth",
+            SecurityScheme::ApiKey(ApiKey::Header(ApiKeyValue::new("Authorization"))),
+        );
+
+        components.add_security_scheme(
+            "driver_auth",
+            SecurityScheme::ApiKey(ApiKey::Header(ApiKeyValue::new("Authorization"))),
+        );
     }
 }
 

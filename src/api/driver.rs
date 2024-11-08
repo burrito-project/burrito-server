@@ -1,22 +1,21 @@
 use rocket::http::Status;
 use rocket::serde::json::Json;
-use rocket::{Route, State};
+use rocket::State;
 
 use crate::core::AppState;
 use crate::features::auth::guards::ExclusiveAuthDriver;
 use crate::features::bus_driver;
 use crate::features::bus_driver::schemas::BurritoRecordPayload;
 use crate::router;
-use crate::routes::ApiRouter;
 
 router!(DriverRouter, [post_driver_status]);
 
 #[utoipa::path(
     request_body(content = BurritoRecordPayload),
     params(
-        ("x-bus-id" = String, Header, description = "Unique bus driver identifier"),
+        ("x-bus-id" = String, Header, description = "Unique bus driver identifier", example = "burrito-001"),
     ),
-    security(("api_key" = [])),
+    security(("driver_auth" = [])),
     responses(
         (status = 200, description = "Driver status updated successfully"),
         (status = 401, description = "Unauthorized"),
