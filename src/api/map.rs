@@ -1,17 +1,21 @@
 use rocket::http::Status;
-use rocket::{Response, Route, State};
+use rocket::{Response, State};
 use std::io;
 
 use crate::core::responses::RawResponse;
 use crate::core::AppState;
 use crate::features::bot;
 use crate::features::bot::handlers::live_map::MAP_BASE_IMAGE_BYTES;
+use crate::router;
 
-pub fn routes() -> Vec<Route> {
-    routes![live_map]
-}
+router!(MapsRouter, [live_map]);
 
-#[get("/")]
+#[utoipa::path(
+    responses(
+        (status = 200, description = "Renders a map image with the current bus position.", content_type = "image/png"),
+    )
+)]
+#[get("/live")]
 async fn live_map(state: &State<AppState>) -> RawResponse<'_> {
     let map_image = bot::handlers::live_map::live_map_handler(state).await;
 
