@@ -1,5 +1,6 @@
 use rocket::serde::{Deserialize, Serialize};
 use std::time::SystemTime;
+use utoipa::ToSchema;
 
 use crate::features::bus_stops::schemas::BusStopInfo;
 
@@ -10,13 +11,15 @@ pub struct WsClientMessage {
     pub last_stop: Option<BusStopInfo>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, ToSchema)]
+#[repr(i32)]
+#[schema(description = "An integer representing the bus status", example = 0)]
 pub enum BusServiceState {
-    OnRoute,
-    OutOfService,
-    Resting,
-    Accident,
-    Off,
+    OnRoute = 0,
+    OutOfService = 1,
+    Resting = 2,
+    Accident = 3,
+    Off = 4,
 }
 
 impl BusServiceState {
@@ -42,7 +45,7 @@ impl serde::Serialize for BusServiceState {
     where
         S: serde::Serializer,
     {
-        i32::from(*self).serialize(serializer)
+        (*self as i32).serialize(serializer)
     }
 }
 
@@ -71,18 +74,6 @@ impl TryFrom<i32> for BusServiceState {
             3 => Ok(BusServiceState::Accident),
             4 => Ok(BusServiceState::Off),
             _ => Err(()),
-        }
-    }
-}
-
-impl From<BusServiceState> for i32 {
-    fn from(status: BusServiceState) -> Self {
-        match status {
-            BusServiceState::OnRoute => 0,
-            BusServiceState::OutOfService => 1,
-            BusServiceState::Resting => 2,
-            BusServiceState::Accident => 3,
-            BusServiceState::Off => 4,
         }
     }
 }
@@ -122,30 +113,25 @@ impl BurritoPosRecord {
 
 /// The status payload received from the server, which contains the latitude, longitude
 /// and status of the burrito
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, ToSchema)]
 pub struct BurritoRecordPayload {
+    /// Bus latitude
+    #[schema(example = -12.052855)]
     pub lt: f64,
+    /// Bus longitude
+    #[schema(example = -77.085971)]
     pub lg: f64,
-    pub sts: BusServiceState, // i32
-    pub bat: Option<i32>,     // Device battery. None means not applicable
+    /// An integer representing the bus status
+    #[schema(value_type = i32)]
+    pub sts: BusServiceState,
+    /// Device battery. A null value means battery is not applicable for this device
+    #[schema(example = 69)]
+    pub bat: Option<i32>,
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn test_try_from() {
-        assert_eq!(BusServiceState::try_from(0), Ok(BusServiceState::OnRoute));
-        assert_eq!(
-            BusServiceState::try_from(1),
-            Ok(BusServiceState::OutOfService)
-        );
-        assert_eq!(BusServiceState::try_from(2), Ok(BusServiceState::Resting));
-        assert_eq!(BusServiceState::try_from(3), Ok(BusServiceState::Accident));
-        assert_eq!(BusServiceState::try_from(4), Ok(BusServiceState::Off));
-        assert_eq!(BusServiceState::try_from(5), Err(()));
-    }
 
     #[test]
     fn test_from_json() {
