@@ -2,6 +2,7 @@ use rocket::serde::json::Json;
 use rocket::State;
 
 use crate::core::AppState;
+use crate::docs;
 use crate::features::bus_status;
 use crate::router;
 
@@ -14,7 +15,7 @@ struct BatteryResponse {
 }
 
 #[utoipa::path(
-    tag = "Bus information",
+    tag = docs::tags::BUS_INFO_TAG,
     responses(
         (status = 200, description = "Returns the bus driver app battery", body = BatteryResponse),
     )

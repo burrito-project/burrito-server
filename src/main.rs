@@ -3,7 +3,6 @@ use lazy_static::lazy_static;
 use rocket::config::{Ident, LogLevel};
 use rocket::data::{Limits, ToByteUnit};
 use rocket::{fs, Config};
-use routes::mount_routers;
 
 #[macro_use]
 extern crate rocket;
@@ -11,6 +10,7 @@ extern crate rocket;
 mod api;
 mod core;
 mod db;
+mod docs;
 mod env;
 mod routes;
 
@@ -93,7 +93,7 @@ async fn main() -> Result<(), rocket::Error> {
         .attach(core::fairings::Cors)
         .manage(crate::core::AppState::from_db(pool));
 
-    rocket = mount_routers(rocket);
+    rocket = routes::mount_routers(rocket);
     rocket.launch().await?;
 
     Ok(())

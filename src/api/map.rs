@@ -4,6 +4,7 @@ use std::io;
 
 use crate::core::responses::RawResponse;
 use crate::core::AppState;
+use crate::docs;
 use crate::features::bot;
 use crate::features::bot::handlers::live_map::MAP_BASE_IMAGE_BYTES;
 use crate::router;
@@ -11,7 +12,7 @@ use crate::router;
 router!(MapsRouter, [live_map]);
 
 #[utoipa::path(
-    tag = "Map rendering",
+    tag = docs::tags::MAP_RENDERING_TAG,
     responses(
         (status = 200, description = "Renders a map image with the current bus position.", content_type = "image/png"),
     )
