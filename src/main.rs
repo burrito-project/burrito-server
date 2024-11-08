@@ -1,10 +1,9 @@
 #![allow(unreachable_patterns)]
-use dotenvy::dotenv;
 use lazy_static::lazy_static;
 use rocket::config::{Ident, LogLevel};
 use rocket::data::{Limits, ToByteUnit};
 use rocket::{fs, Config};
-use serde_json::json;
+use routes::mount_routers;
 
 #[macro_use]
 extern crate rocket;
@@ -13,6 +12,7 @@ mod api;
 mod core;
 mod db;
 mod env;
+mod routes;
 
 mod features {
     pub mod analytics;
@@ -47,9 +47,16 @@ pub const HOST_URL: &str = "https://api.contigosanmarcos.com";
 async fn main() -> Result<(), rocket::Error> {
     let _ = *startup; // forcing evaluation
 
-    dotenv().expect("No .env file");
+    crate::env::dotenv().expect("No .env file");
 
-    let config = Config {
+    let pool = crate::db::create_pool().await.unwrap();
+
+    crate::features::mock::rc::initialize_mocks();
+    crate::features::flags::rc::setup_base_flags(&pool)
+        .await
+        .expect("Failed to setup base flags");
+
+    let rocket_config = Config {
         port: PORT,
         address: [0, 0, 0, 0].into(),
         ident: Ident::none(),
@@ -60,15 +67,8 @@ async fn main() -> Result<(), rocket::Error> {
         ..Config::default()
     };
 
-    let pool = crate::db::create_pool().await.unwrap();
-
-    crate::features::mock::rc::initialize_mocks();
-    crate::features::flags::rc::setup_base_flags(&pool)
-        .await
-        .expect("Failed to setup base flags");
-
-    rocket::build()
-        .configure(config)
+    let mut rocket = rocket::build()
+        .configure(rocket_config)
         .mount("/", api::index::routes())
         .mount("/ws", api::ws::routes())
         .mount("/map", api::map::routes())
@@ -79,8 +79,8 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/flags", api::flags::routes())
         .mount("/health", api::ping::routes())
         .mount("/status", api::status::routes())
-        .mount("/driver", api::driver::routes())
-        .mount("/battery", api::battery::routes())
+        // .mount("/driver", api::driver::routes())
+        // .mount("/battery", api::battery::BatteryRoutes::routes())
         .mount("/session", api::session::routes())
         .mount("/versions", api::versions::routes())
         .mount("/analytics", api::analytics::routes())
@@ -90,18 +90,11 @@ async fn main() -> Result<(), rocket::Error> {
         .mount("/panel/analytics", api::analytics::routes())
         .mount("/panel/notifications", api::notifications::routes())
         .mount("/public", fs::FileServer::from(fs::relative!("public")))
-        .register("/", catchers![not_found])
         .attach(core::fairings::Cors)
-        .manage(crate::core::AppState::from_db(pool))
-        .launch()
-        .await?;
+        .manage(crate::core::AppState::from_db(pool));
+
+    rocket = mount_routers(rocket);
+    rocket.launch().await?;
 
     Ok(())
-}
-
-#[catch(404)]
-fn not_found() -> serde_json::Value {
-    json!({
-        "message": "That's a certified 404 classic. Lost? Try /help",
-    })
 }

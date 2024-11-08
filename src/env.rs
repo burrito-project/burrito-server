@@ -1,3 +1,4 @@
+pub use dotenvy::dotenv;
 use lazy_static::lazy_static;
 use std::env;
 
