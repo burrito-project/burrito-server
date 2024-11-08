@@ -12,6 +12,7 @@ use crate::router;
 router!(FlagsRouter, [list_all_flags, get_flag, update_flag]);
 
 #[utoipa::path(
+    tag = "Feature flags",
     responses(
         (status = 200, description = "Lists all the feature flags defined."),
     )
@@ -24,6 +25,7 @@ async fn list_all_flags(state: &State<AppState>) -> Json<Vec<flags::schemas::Fla
 }
 
 #[utoipa::path(
+    tag = "Feature flags",
     responses(
         (status = 200, description = "Get a single feature flag by name.", body = flags::schemas::Flag),
     )
@@ -43,6 +45,7 @@ async fn get_flag(flag: &str, state: &State<AppState>) -> ApiResponse {
 }
 
 #[utoipa::path(
+    tag = "Feature flags",
     request_body(content = flags::schemas::FlagPayload),
     security(("staff_user_auth" = [])),
     responses(
