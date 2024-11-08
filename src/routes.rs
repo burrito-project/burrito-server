@@ -53,6 +53,6 @@ mod internal {
 #[catch(404)]
 fn not_found() -> serde_json::Value {
     json!({
-        "message": "That's a certified 404 classic. Lost? Try /help",
+        "message": "That's a certified 404 classic. Lost? Try /docs",
     })
 }
