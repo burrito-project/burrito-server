@@ -7,7 +7,7 @@ use crate::{routes::api_routers, HOST_URL, SELF_URL};
 
 pub mod tags {
     pub const BUS_INFO_TAG: &'static str = "Bus information";
-    pub const BUS_DRIVER_TAG: &'static str = "Bus driver";
+    pub const BUS_DRIVER_TAG: &'static str = "Bus driver communication";
     pub const FEATURE_FLAGS_TAG: &'static str = "Feature flags";
     pub const MAP_RENDERING_TAG: &'static str = "Map rendering";
 }
@@ -45,19 +45,19 @@ impl OpenApi for ApiDocs {
             .tags(Some(vec![
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::BUS_INFO_TAG)
-                    .description(Some("Battery related endpoints"))
+                    .description(Some("Endpoints related to real-time bus information. This includes bus status, bus stops, device battery and more."))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::BUS_DRIVER_TAG)
-                    .description(Some("Driver related endpoints"))
+                    .description(Some("Endpoints related to bus driver app communication. This includes bus driver status, location and more."))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::FEATURE_FLAGS_TAG)
-                    .description(Some("Feature flags related endpoints"))
+                    .description(Some("Endpoints related to Feature flags. Feature flags are meant to be used in both client and server side to enable/disable features without deploying new code."))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::MAP_RENDERING_TAG)
-                    .description(Some("Maps related endpoints"))
+                    .description(Some("Endpoints related to map image rendering. This feature is still in development."))
                     .build(),
             ]))
             .components(Some(utoipa::openapi::Components::new()))
