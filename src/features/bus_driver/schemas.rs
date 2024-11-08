@@ -137,7 +137,7 @@ mod tests {
     fn test_from_json() {
         let raw_json = r#"[0,1,2,3,4]"#;
 
-        let states: Vec<BusServiceState> = serde_json::from_str(&raw_json).unwrap();
+        let states: Vec<BusServiceState> = serde_json::from_str(raw_json).unwrap();
         assert_eq!(
             states,
             vec![

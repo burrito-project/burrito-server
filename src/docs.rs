@@ -6,10 +6,10 @@ use utoipa::{
 use crate::{routes::api_routers, HOST_URL, SELF_URL};
 
 pub mod tags {
-    pub const BUS_INFO_TAG: &'static str = "Bus information";
-    pub const BUS_DRIVER_TAG: &'static str = "Bus driver communication";
-    pub const FEATURE_FLAGS_TAG: &'static str = "Feature flags";
-    pub const MAP_RENDERING_TAG: &'static str = "Map rendering";
+    pub const BUS_INFO_TAG: &str = "Bus information";
+    pub const BUS_DRIVER_TAG: &str = "Bus driver communication";
+    pub const FEATURE_FLAGS_TAG: &str = "Feature flags";
+    pub const MAP_RENDERING_TAG: &str = "Map rendering";
 }
 
 pub struct ApiDocs;
