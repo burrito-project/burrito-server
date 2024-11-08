@@ -11,6 +11,7 @@ use crate::router;
 router!(DriverRouter, [post_driver_status]);
 
 #[utoipa::path(
+    tag = "Bus driver",
     request_body(content = BurritoRecordPayload),
     params(
         ("x-bus-id" = String, Header, description = "Unique bus driver identifier", example = "burrito-001"),

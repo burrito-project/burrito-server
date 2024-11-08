@@ -7,8 +7,9 @@ use utoipa::{
 use utoipa_redoc::{Redoc, Servable as RedocServable};
 use utoipa_scalar::{Scalar, Servable as ScalarServable};
 
-use crate::api::{
-    battery::BatteryRouter, driver::DriverRouter, flags::FlagsRouter, map::MapsRouter,
+use crate::{
+    api::{battery::BatteryRouter, driver::DriverRouter, flags::FlagsRouter, map::MapsRouter},
+    HOST_URL, SELF_URL,
 };
 
 pub struct ApiRouterInternal {
@@ -69,6 +70,16 @@ impl OpenApi for ApiDoc {
                     ))
                     .build(),
             )
+            .servers(Some(vec![
+                utoipa::openapi::ServerBuilder::new()
+                    .url(SELF_URL)
+                    .description(Some("Local testing server"))
+                    .build(),
+                utoipa::openapi::ServerBuilder::new()
+                    .url(HOST_URL)
+                    .description(Some("Production server"))
+                    .build(),
+            ]))
             .components(Some(utoipa::openapi::Components::new()))
             .build();
 

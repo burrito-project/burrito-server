@@ -11,6 +11,7 @@ use crate::router;
 router!(MapsRouter, [live_map]);
 
 #[utoipa::path(
+    tag = "Map rendering",
     responses(
         (status = 200, description = "Renders a map image with the current bus position.", content_type = "image/png"),
     )

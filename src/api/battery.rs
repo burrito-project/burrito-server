@@ -14,6 +14,7 @@ struct BatteryResponse {
 }
 
 #[utoipa::path(
+    tag = "Bus information",
     responses(
         (status = 200, description = "Returns the bus driver app battery", body = BatteryResponse),
     )
