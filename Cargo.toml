@@ -1,5 +1,6 @@
 [package]
 name = "burrito-server"
+description = "The Burrito API is the backbone of all the Contigo Burrito services, from app features to bus driver tracking."
 version = "0.1.0"
 edition = "2021"
 
