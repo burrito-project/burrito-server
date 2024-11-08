@@ -4,7 +4,10 @@ use utoipa::OpenApi;
 use utoipa_scalar::{Scalar, Servable as ScalarServable};
 
 use crate::{
-    api::{battery::BatteryRouter, driver::DriverRouter, flags::FlagsRouter, map::MapsRouter},
+    api::{
+        battery::BatteryRouter, driver::DriverRouter, flags::FlagsRouter, health::PingRouter,
+        map::MapsRouter,
+    },
     docs::ApiDocs,
 };
 pub(crate) use internal::ApiRouter;
@@ -17,6 +20,8 @@ pub(crate) fn api_routers() -> Vec<internal::ApiRouterInternal> {
         mount_router::<DriverRouter>("/driver"),
         mount_router::<FlagsRouter>("/flags"),
         mount_router::<MapsRouter>("/maps"),
+        mount_router::<PingRouter>("/health"),
+        mount_router::<PingRouter>("/ping"),
     ]
 }
 
