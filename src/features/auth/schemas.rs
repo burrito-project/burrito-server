@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use utoipa::ToSchema;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[allow(unused)]
@@ -58,7 +59,7 @@ impl TryFrom<OptAppUser> for AppUser {
     }
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, ToSchema)]
 pub struct UserLoginPayload {
     pub username: String,
     pub password: String,

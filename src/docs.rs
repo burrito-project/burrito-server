@@ -11,6 +11,7 @@ pub mod tags {
     pub const BUS_DRIVER_TAG: &str = "Bus driver communication";
     pub const FEATURE_FLAGS_TAG: &str = "Feature flags";
     pub const MAP_RENDERING_TAG: &str = "Map rendering";
+    pub const AUTH_TAG: &str = "Authentication";
 }
 
 pub struct ApiDocs;
@@ -59,6 +60,10 @@ impl OpenApi for ApiDocs {
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::MAP_RENDERING_TAG)
                     .description(Some("Endpoints related to map image rendering. This feature is still in development."))
+                    .build(),
+                utoipa::openapi::tag::TagBuilder::new()
+                    .name(tags::AUTH_TAG)
+                    .description(Some("Authentication related endpoints, including user auth, driver auth, admin auth and more."))
                     .build(),
             ]))
             .components(Some(utoipa::openapi::Components::new()))

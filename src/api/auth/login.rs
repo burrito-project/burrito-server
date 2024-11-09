@@ -1,13 +1,21 @@
-use rocket::{http::Status, serde::json::Json, Route, State};
+use rocket::{http::Status, serde::json::Json, State};
 
 use crate::core::types::ApiResponse;
 use crate::core::AppState;
 use crate::features::auth;
+use crate::{docs, router};
 
-pub fn routes() -> Vec<Route> {
-    routes![user_login, options]
-}
+router!(AuthLoginRouter, [user_login, options]);
 
+#[utoipa::path(
+    tag = docs::tags::AUTH_TAG,
+    description = "Login a user",
+    request_body(content = auth::schemas::UserLoginPayload),
+    responses(
+        (status = 200, description = "Driver status updated successfully"),
+        (status = 401, description = "Unauthorized"),
+    )
+)]
 #[post("/", format = "json", data = "<payload>")]
 pub async fn user_login(
     payload: Json<auth::schemas::UserLoginPayload>,
@@ -16,6 +24,9 @@ pub async fn user_login(
     auth::handlers::user_login_handler(payload, state).await
 }
 
+#[utoipa::path(
+    tag = docs::tags::AUTH_TAG,
+)]
 #[options("/")]
 pub fn options() -> Status {
     Status::Ok
