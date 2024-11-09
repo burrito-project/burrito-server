@@ -1,7 +1,8 @@
 use serde::{Deserialize, Serialize};
 use strum_macros::{Display, EnumString};
+use utoipa::ToSchema;
 
-#[derive(Debug, sqlx::Type, Default, Deserialize, Serialize, EnumString, Display)]
+#[derive(Debug, sqlx::Type, Default, Deserialize, Serialize, EnumString, ToSchema, Display)]
 #[serde(rename_all = "snake_case")]
 #[strum(serialize_all = "snake_case")]
 pub enum AdType {
@@ -17,7 +18,7 @@ impl From<String> for AdType {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, ToSchema)]
 pub struct Notification {
     pub id: i32,
     pub is_active: bool,

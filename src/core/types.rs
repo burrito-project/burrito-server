@@ -33,16 +33,20 @@ impl BurritoAPIError {
             user_message: Some(msg.into()),
         })
     }
-
     pub fn unauthorized<S: Into<String>, T>(msg: S) -> ApiResponse<T> {
         Err(BurritoAPIError::Unauthorized {
             user_message: Some(msg.into()),
         })
     }
-
     pub fn forbbiden<S: Into<String>, T>(msg: S) -> ApiResponse<T> {
         Err(BurritoAPIError::Forbbiden {
             user_message: Some(msg.into()),
+        })
+    }
+    pub fn bad_request<S: Into<String>, T>(msg: Option<S>, error: Option<S>) -> ApiResponse<T> {
+        Err(BurritoAPIError::BadRequest {
+            user_message: msg.map(|e| e.into()),
+            error: error.map(|e| e.into()),
         })
     }
 }

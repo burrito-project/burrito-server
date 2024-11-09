@@ -10,6 +10,7 @@ pub mod tags {
     pub const BUS_INFO_TAG: &str = "Bus information";
     pub const BUS_DRIVER_TAG: &str = "Bus driver communication";
     pub const FEATURE_FLAGS_TAG: &str = "Feature flags";
+    pub const NOTIFICATIONS_TAG: &str = "App notifications";
     pub const MAP_RENDERING_TAG: &str = "Map rendering";
     pub const AUTH_TAG: &str = "Authentication";
 }

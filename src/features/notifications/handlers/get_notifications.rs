@@ -1,12 +1,10 @@
 use rocket::State;
-use serde_json::json;
 
-use crate::core::types::ApiResponse;
 use crate::core::AppState;
 use crate::features::flags;
 use crate::features::notifications::schemas;
 
-pub async fn get_notifications_handler(state: &State<AppState>) -> ApiResponse {
+pub async fn get_notifications_handler(state: &State<AppState>) -> Vec<schemas::Notification> {
     let random_order = flags::get_flag(&state.pool, "ads_random_order", true).await;
 
     match random_order {
@@ -19,7 +17,7 @@ pub async fn get_notifications_handler(state: &State<AppState>) -> ApiResponse {
             .await
             .unwrap();
 
-            Ok(json!(notifications))
+            notifications
         }
         false => {
             let notifications = sqlx::query_as!(
@@ -30,7 +28,7 @@ pub async fn get_notifications_handler(state: &State<AppState>) -> ApiResponse {
             .await
             .unwrap();
 
-            Ok(json!(notifications))
+            notifications
         }
     }
 }
