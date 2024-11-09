@@ -1,23 +1,21 @@
-use rocket::{http::Status, response::status, State};
-use serde_json::json;
+use rocket::serde::json::Json;
+use rocket::State;
 
+use crate::core::types::BurritoAPIError;
+use crate::core::types::{ApiResponse, JsonResult};
 use crate::core::AppState;
-use crate::core::{
-    responses,
-    types::{ApiResponse, JsonResult},
-};
 use crate::features::flags;
 
 pub async fn update_flag_handler(
     flag: &str,
     payload: JsonResult<'_, flags::schemas::FlagPayload>,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> ApiResponse<Json<flags::schemas::Flag>> {
     if let Err(e) = payload {
-        return Err(status::Custom(
-            Status::BadRequest,
-            responses::error_response(e.to_string()),
-        ));
+        return Err(BurritoAPIError::BadRequest {
+            user_message: None,
+            error: Some(e.to_string()),
+        });
     }
 
     let payload = payload.unwrap().into_inner();
@@ -37,30 +35,21 @@ pub async fn update_flag_handler(
     .unwrap();
 
     if app_flag.is_none() {
-        return Err(status::Custom(
-            Status::NotFound,
-            responses::error_response("Flag does not exist!"),
-        ));
+        return BurritoAPIError::not_found("Flag doesn't exist");
     }
 
     let app_flag = app_flag.unwrap();
 
     if app_flag.protected {
-        return Err(status::Custom(
-            Status::Forbidden,
-            responses::error_response("Flag is protected!"),
-        ));
+        return BurritoAPIError::unauthorized("Flag is protected!");
     }
 
     if app_flag.internal {
-        return Err(status::Custom(
-            Status::Forbidden,
-            responses::error_response("Internal flags are only modifiable by admins"),
-        ));
+        return BurritoAPIError::unauthorized("Internal flags are only modifiable by admins");
     }
 
     if app_flag.value == payload.value {
-        return Ok(json!(app_flag));
+        return Ok(Json(app_flag));
     }
 
     let new_flag = sqlx::query_as!(
@@ -75,5 +64,5 @@ pub async fn update_flag_handler(
 
     tx.commit().await.unwrap();
 
-    Ok(json!(new_flag))
+    Ok(Json(new_flag))
 }

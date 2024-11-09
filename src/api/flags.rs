@@ -1,11 +1,8 @@
-use rocket::http::Status;
-use rocket::response::status;
 use rocket::serde::json::Json;
 use rocket::State;
-use serde_json::json;
 
-use crate::core::types::{ApiResponse, JsonResult};
-use crate::core::{responses, AppState};
+use crate::core::types::{ApiResponse, BurritoAPIError, JsonResult};
+use crate::core::AppState;
 use crate::docs;
 use crate::features::{auth, flags};
 use crate::router;
@@ -15,7 +12,7 @@ router!(FlagsRouter, [list_all_flags, get_flag, update_flag]);
 #[utoipa::path(
     tag = docs::tags::FEATURE_FLAGS_TAG,
     responses(
-        (status = 200, description = "Lists all the feature flags defined."),
+        (status = 200, description = "Lists all the feature flags defined.", body = Vec<flags::schemas::Flag>),
     )
 )]
 #[get("/")]
@@ -32,17 +29,14 @@ async fn list_all_flags(state: &State<AppState>) -> Json<Vec<flags::schemas::Fla
     )
 )]
 #[get("/<flag>")]
-async fn get_flag(flag: &str, state: &State<AppState>) -> ApiResponse {
+async fn get_flag(flag: &str, state: &State<AppState>) -> ApiResponse<Json<flags::schemas::Flag>> {
     let flag = flags::handlers::get_flag_handler(flag, state).await;
 
     if flag.is_none() {
-        return Err(status::Custom(
-            Status::NotFound,
-            responses::error_response("Flag not found".to_string()),
-        ));
+        return BurritoAPIError::not_found("Flag not found");
     }
 
-    Ok(json!(flag.unwrap()))
+    Ok(Json(flag.unwrap()))
 }
 
 #[utoipa::path(
@@ -50,7 +44,7 @@ async fn get_flag(flag: &str, state: &State<AppState>) -> ApiResponse {
     request_body(content = flags::schemas::FlagPayload),
     security(("staff_user_auth" = [])),
     responses(
-        (status = 200, description = "Update a feature flag by name."),
+        (status = 200, description = "Update a feature flag by name.", body = flags::schemas::FlagPayload),
     )
 )]
 #[put("/<flag>", format = "json", data = "<payload>")]
@@ -59,6 +53,6 @@ async fn update_flag(
     _staff: auth::guards::StaffUser,
     payload: JsonResult<'_, flags::schemas::FlagPayload>,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> ApiResponse<Json<flags::schemas::Flag>> {
     flags::handlers::update_flag_handler(flag, payload, state).await
 }
