@@ -1,3 +1,5 @@
+use rocket::serde::json::Json;
+
 use crate::core::types::ApiResponse;
 use crate::features::auth;
 use crate::{docs, router};
@@ -8,6 +10,8 @@ router!(AuthProfileRouter, [get_user_profile]);
     tag = docs::tags::AUTH_TAG,
 )]
 #[get("/")]
-pub async fn get_user_profile(app_user: auth::schemas::AppUser) -> ApiResponse {
+pub async fn get_user_profile(
+    app_user: auth::schemas::AppUser,
+) -> ApiResponse<Json<auth::schemas::AppUser>> {
     auth::handlers::get_user_profile_handler(app_user).await
 }

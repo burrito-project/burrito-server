@@ -1,15 +1,15 @@
 use jsonwebtoken::Header;
-use rocket::{http::Status, response::status, serde::json::Json, State};
-use serde_json::json;
+use rocket::{serde::json::Json, State};
 
+use crate::core::types::ApiResponse;
+use crate::core::types::BurritoAPIError;
 use crate::core::AppState;
-use crate::core::{responses, types::ApiResponse};
 use crate::features::auth::{self, consts::JWT_ENCODING_KEY, schemas::JWTClaims};
 
 pub async fn user_login_handler(
     payload: Json<auth::schemas::UserLoginPayload>,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> ApiResponse<Json<auth::schemas::UserLoginResponse>> {
     if payload.username == *crate::env::ROOT_SECRET || payload.password == *crate::env::ROOT_SECRET
     {
         let token = jsonwebtoken::encode::<JWTClaims>(
@@ -19,9 +19,9 @@ pub async fn user_login_handler(
         )
         .unwrap();
 
-        return Ok(json!({
-            "token": token,
-            "user": *auth::consts::ROOT_USER,
+        return Ok(Json(auth::schemas::UserLoginResponse {
+            token,
+            user: auth::consts::ROOT_USER.clone(),
         }));
     }
 
@@ -38,10 +38,9 @@ pub async fn user_login_handler(
     let user: auth::schemas::AppUser = match maybe_user.try_into() {
         Ok(user) => user,
         Err(_) => {
-            return Err(status::Custom(
-                Status::Unauthorized,
-                responses::error_response("Invalid credentials".to_string()),
-            ))
+            return Err(BurritoAPIError::Unauthorized {
+                user_message: "Invalid credentials".to_string(),
+            })
         }
     };
 
@@ -52,8 +51,5 @@ pub async fn user_login_handler(
     )
     .unwrap();
 
-    Ok(json!({
-        "token": token,
-        "user": user,
-    }))
+    Ok(Json(auth::schemas::UserLoginResponse { token, user }))
 }

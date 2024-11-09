@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, ToSchema)]
 #[allow(unused)]
 pub struct AppUser {
     pub id: i32,
@@ -59,10 +59,16 @@ impl TryFrom<OptAppUser> for AppUser {
     }
 }
 
-#[derive(Debug, Deserialize, ToSchema)]
+#[derive(Debug, Deserialize, ToSchema, Serialize)]
 pub struct UserLoginPayload {
     pub username: String,
     pub password: String,
+}
+
+#[derive(Debug, Serialize, ToSchema)]
+pub struct UserLoginResponse {
+    pub token: String,
+    pub user: AppUser,
 }
 
 // JWT claims

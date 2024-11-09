@@ -12,15 +12,15 @@ router!(AuthLoginRouter, [user_login, options]);
     description = "Login a user",
     request_body(content = auth::schemas::UserLoginPayload),
     responses(
-        (status = 200, description = "Driver status updated successfully"),
-        (status = 401, description = "Unauthorized"),
+        (status = 200, description = "Driver status updated successfully", body = auth::schemas::UserLoginResponse),
+        (status = 401, description = "Bad credentials"),
     )
 )]
 #[post("/", format = "json", data = "<payload>")]
 pub async fn user_login(
     payload: Json<auth::schemas::UserLoginPayload>,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> ApiResponse<Json<auth::schemas::UserLoginResponse>> {
     auth::handlers::user_login_handler(payload, state).await
 }
 

@@ -28,6 +28,7 @@ base64 = "0.22.1"
 jsonwebtoken = "9.3.0"
 utoipa = { version = "5.2.0", features = ["macros", "rocket_extras", "chrono"]}
 utoipa-scalar = { version = "0.2.0", features = ["rocket"]}
+thiserror = "2.0.1"
 
 [dependencies.image]
 version = "0.25.5"
