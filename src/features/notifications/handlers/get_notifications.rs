@@ -8,27 +8,19 @@ pub async fn get_notifications_handler(state: &State<AppState>) -> Vec<schemas::
     let random_order = flags::get_flag(&state.pool, "ads_random_order", true).await;
 
     match random_order {
-        true => {
-            let notifications = sqlx::query_as!(
-                schemas::Notification,
-                "SELECT * FROM notification_ads ORDER BY RANDOM();",
-            )
-            .fetch_all(&state.pool)
-            .await
-            .unwrap();
-
-            notifications
-        }
-        false => {
-            let notifications = sqlx::query_as!(
-                schemas::Notification,
-                "SELECT * FROM notification_ads ORDER BY priority ASC;",
-            )
-            .fetch_all(&state.pool)
-            .await
-            .unwrap();
-
-            notifications
-        }
+        true => sqlx::query_as!(
+            schemas::Notification,
+            "SELECT * FROM notification_ads ORDER BY RANDOM();",
+        )
+        .fetch_all(&state.pool)
+        .await
+        .unwrap(),
+        false => sqlx::query_as!(
+            schemas::Notification,
+            "SELECT * FROM notification_ads ORDER BY priority ASC;",
+        )
+        .fetch_all(&state.pool)
+        .await
+        .unwrap(),
     }
 }

@@ -1,13 +1,14 @@
-use rocket::http::Status;
-use rocket::response::status;
+use rocket::serde::json::Json;
 use rocket::State;
-use serde_json::json;
 
-use crate::core::types::ApiResponse;
-use crate::core::{responses, AppState};
+use crate::core::types::{ApiResponse, BurritoAPIError};
+use crate::core::AppState;
 use crate::features::notifications::schemas;
 
-pub async fn delete_notification_handler(id: i32, state: &State<AppState>) -> ApiResponse {
+pub async fn delete_notification_handler(
+    id: i32,
+    state: &State<AppState>,
+) -> ApiResponse<Json<schemas::Notification>> {
     let deleted_notification = sqlx::query_as!(
         schemas::Notification,
         "DELETE FROM notification_ads WHERE id = $1 RETURNING *;",
@@ -18,11 +19,8 @@ pub async fn delete_notification_handler(id: i32, state: &State<AppState>) -> Ap
     .unwrap();
 
     if deleted_notification.is_none() {
-        return Err(status::Custom(
-            Status::NotFound,
-            responses::error_response("Notification not found".to_string()),
-        ));
+        return BurritoAPIError::not_found("Notification not found");
     }
 
-    Ok(json!(deleted_notification))
+    Ok(Json(deleted_notification.unwrap()))
 }

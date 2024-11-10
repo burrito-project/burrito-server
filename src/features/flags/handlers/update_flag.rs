@@ -41,11 +41,11 @@ pub async fn update_flag_handler(
     let app_flag = app_flag.unwrap();
 
     if app_flag.protected {
-        return BurritoAPIError::unauthorized("Flag is protected!");
+        return BurritoAPIError::forbbiden("Flag is protected!");
     }
 
     if app_flag.internal {
-        return BurritoAPIError::unauthorized("Internal flags are only modifiable by admins");
+        return BurritoAPIError::forbbiden("Internal flags are only modifiable by admins");
     }
 
     if app_flag.value == payload.value {

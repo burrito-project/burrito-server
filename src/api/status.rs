@@ -1,4 +1,5 @@
 use rocket::http::Status;
+use rocket::serde::json::Json;
 use rocket::{Route, State};
 
 use crate::core::types::ApiResponse;
@@ -12,11 +13,14 @@ pub fn routes() -> Vec<Route> {
 const DEFAULT_COUNT: usize = 100;
 
 #[get("/?<count>")]
-async fn get_status(count: Option<usize>, state: &State<AppState>) -> ApiResponse {
+async fn get_status(
+    count: Option<usize>,
+    state: &State<AppState>,
+) -> ApiResponse<Json<bus_status::schemas::BurritoStatusResponse>> {
     let count = count.unwrap_or(DEFAULT_COUNT);
     let status = bus_status::handlers::get_burrito_status_handler(count, state).await;
 
-    Ok(serde_json::json!(status))
+    Ok(Json(status))
 }
 
 #[options("/")]

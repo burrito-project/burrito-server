@@ -4,10 +4,9 @@ use strum_macros::Display;
 
 pub type JsonResult<'a, T> = Result<rocket_serde::json::Json<T>, rocket_serde::json::Error<'a>>;
 
-pub type ApiResponse<T: for<'a> rocket::response::Responder<'a, 'a>> = Result<T, BurritoAPIError>;
+pub type ApiResponse<T> = Result<T, BurritoAPIError>;
 
-pub struct UserMessage(pub String);
-
+#[allow(unused)]
 #[derive(thiserror::Error, Debug, Display)]
 pub enum BurritoAPIError {
     BadRequest {
@@ -27,6 +26,7 @@ pub enum BurritoAPIError {
     Internal,
 }
 
+#[allow(unused)]
 impl BurritoAPIError {
     pub fn not_found<S: Into<String>, T>(msg: S) -> ApiResponse<T> {
         Err(BurritoAPIError::NotFound {
@@ -95,10 +95,3 @@ impl<'r> rocket::response::Responder<'r, 'r> for BurritoAPIError {
         Ok(res.finalize())
     }
 }
-
-/*
-return Err(status::Custom(
-    Status::Unauthorized,
-    responses::error_response("Invalid credentials".to_string()),
-))
-*/

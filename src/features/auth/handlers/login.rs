@@ -39,7 +39,7 @@ pub async fn user_login_handler(
         Ok(user) => user,
         Err(_) => {
             return Err(BurritoAPIError::Unauthorized {
-                user_message: "Invalid credentials".to_string(),
+                user_message: Some("Invalid credentials".into()),
             })
         }
     };

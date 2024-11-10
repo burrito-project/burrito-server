@@ -1,8 +1,7 @@
 use base64::prelude::*;
 use rocket::serde::json::Json;
-use rocket::{http::Status, response::status, State};
+use rocket::State;
 
-use crate::core::responses;
 use crate::core::types::{ApiResponse, BurritoAPIError};
 use crate::core::AppState;
 use crate::features::cdn::{self, ProvideImageService};
@@ -26,12 +25,9 @@ pub async fn post_notification_handler(
             if is_png {
                 let decoded = BASE64_STANDARD
                     .decode(base64_data.split(",").last().unwrap())
-                    .map_err(|e| {
-                        BurritoAPIError::bad_request(
-                            Some(format!("Failed to decode image: {:?}", e)),
-                            None,
-                        )
-                        .unwrap_err::<BurritoAPIError>()
+                    .map_err(|e| BurritoAPIError::BadRequest {
+                        user_message: format!("Failed to decode image: {:?}", e).into(),
+                        error: None,
                     })?;
 
                 let result = oxipng::optimize_from_memory(
@@ -41,12 +37,9 @@ pub async fn post_notification_handler(
                         ..Default::default()
                     },
                 )
-                .map_err(|e| {
-                    BurritoAPIError::bad_request(
-                        Some(format!("Failed to optimize image: {:?}", e)),
-                        None,
-                    )
-                    .unwrap_err()
+                .map_err(|e| BurritoAPIError::BadRequest {
+                    user_message: format!("Failed to decode image: {:?}", e).into(),
+                    error: None,
                 })?;
 
                 base64_data = format!(
@@ -58,12 +51,9 @@ pub async fn post_notification_handler(
             // All notification types accept images so it's not necessary to check the ad_type
             let uploaded_url = cdn::ImageService::upload_image(base64_data, NOTIFICATIONS_PATH)
                 .await
-                .map_err(|e| {
-                    BurritoAPIError::bad_request(
-                        Some(format!("Failed to upload image: {:?}", e)),
-                        None,
-                    )
-                    .unwrap_err()
+                .map_err(|e| BurritoAPIError::BadRequest {
+                    user_message: format!("Failed to decode image: {:?}", e).into(),
+                    error: Some(e.to_string()),
                 })?;
 
             Some(uploaded_url)

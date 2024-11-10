@@ -2,9 +2,9 @@ use std::time;
 
 use crate::core::AppState;
 use crate::features::bus_driver::schemas::{BurritoPosRecord, BusServiceState};
-use crate::features::bus_status::schemas::StatusResponse;
+use crate::features::bus_status::schemas::BurritoStatusResponse;
 
-pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> StatusResponse {
+pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> BurritoStatusResponse {
     let messages = state.records.read().await;
     let last_stop = state.last_stop.read().await;
 
@@ -40,7 +40,7 @@ pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> Statu
 
                 *state.last_stop.write().await = None;
 
-                return StatusResponse {
+                return BurritoStatusResponse {
                     positions: messages_cpy
                         .iter()
                         .rev()
@@ -51,7 +51,7 @@ pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> Statu
                 };
             }
 
-            StatusResponse {
+            BurritoStatusResponse {
                 positions: messages
                     .iter()
                     .rev()
@@ -61,7 +61,7 @@ pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> Statu
                 last_stop: last_stop.clone(),
             }
         }
-        None => StatusResponse {
+        None => BurritoStatusResponse {
             positions: vec![BurritoPosRecord {
                 lt: 0.0,
                 lg: 0.0,

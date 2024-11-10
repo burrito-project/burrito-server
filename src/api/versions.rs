@@ -33,7 +33,9 @@ async fn post_app_versions(
 
     let payload = payload.unwrap().into_inner();
 
-    updates::handlers::post_app_version_handler(payload, state).await
+    let new_version = updates::handlers::post_app_version_handler(payload, state).await;
+
+    Ok(Json(new_version))
 }
 
 #[patch("/<id>", format = "json", data = "<payload>")]
