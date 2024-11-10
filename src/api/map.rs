@@ -14,7 +14,8 @@ router!(MapsRouter, [live_map]);
 #[utoipa::path(
     tag = docs::tags::MAP_RENDERING_TAG,
     responses(
-        (status = 200, description = "Renders a map image with the current bus position.", content_type = "image/png"),
+        (status = 200, description = "Renders a map PNG image with the current bus position.", content_type = "image/png"),
+        (status = 500, description = "Image failed to render")
     )
 )]
 #[get("/live")]
