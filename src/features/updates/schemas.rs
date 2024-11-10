@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use strum_macros::{Display, EnumString};
+use utoipa::ToSchema;
 
 #[derive(Debug, sqlx::Type, Default, Deserialize, Serialize, EnumString, Display)]
 #[serde(rename_all = "snake_case")]
@@ -55,4 +56,19 @@ pub struct AppVersionPatchPayload {
     pub banner_url: Option<String>,
     pub release_notes: Option<String>,
     pub release_date: Option<chrono::DateTime<chrono::Utc>>,
+}
+
+#[derive(Serialize, ToSchema)]
+pub struct PendingUpdate {
+    pub semver: String,
+    pub banner_url: String,
+    pub is_mandatory: bool,
+    pub release_date: String,
+    pub release_notes: String,
+}
+
+#[derive(Serialize, ToSchema)]
+pub struct PendingUpdatesResponse {
+    pub must_update: bool,
+    pub versions: Vec<PendingUpdate>,
 }

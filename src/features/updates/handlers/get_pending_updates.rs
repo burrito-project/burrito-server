@@ -1,33 +1,31 @@
-use rocket::response::status;
-use rocket::serde::json::Value;
-use rocket::{http::Status, State};
-use serde_json::json;
+use rocket::serde::json::Json;
+use rocket::State;
 
-use crate::core::responses;
-use crate::core::types::ApiResponse;
+use crate::core::types::{ApiResponse, BurritoAPIError};
 use crate::core::AppState;
+use crate::features::updates::schemas::PendingUpdatesResponse;
 use crate::features::updates::{schemas, utils};
 
 pub async fn get_pending_updates_handler(
     version: Option<String>,
     platform: Option<String>,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> ApiResponse<Json<PendingUpdatesResponse>> {
     let user_version = match version {
         Some(semver) => {
             if !utils::is_valid_semver(&semver) {
-                return Err(status::Custom(
-                    Status::BadRequest,
-                    responses::error_response("Invalid version format. Use x.y.z"),
-                ));
+                return BurritoAPIError::bad_request(
+                    "Invalid version format. Use x.y.z".into(),
+                    None,
+                );
             }
             semver
         }
         None => {
-            return Err(status::Custom(
-                Status::BadRequest,
-                responses::error_response("No version param provided. Use ?version=<x.y.z>"),
-            ));
+            return BurritoAPIError::bad_request(
+                "No version param provided. Use ?version=<x.y.z>".into(),
+                None,
+            );
         }
     };
 
@@ -35,21 +33,17 @@ pub async fn get_pending_updates_handler(
         Some(p) => match schemas::PlatformType::try_from(p.as_str()) {
             Ok(p) => p,
             Err(_) => {
-                return Err(status::Custom(
-                    Status::BadRequest,
-                    responses::error_response(
-                        "Invalid platform. Use ?platform=<android|ios|web|all>",
-                    ),
-                ));
+                return BurritoAPIError::bad_request(
+                    "Invalid platform. Use ?platform=<android|ios|web|all>".into(),
+                    None,
+                );
             }
         },
         None => {
-            return Err(status::Custom(
-                Status::BadRequest,
-                responses::error_response(
-                    "No platform param provided. Use ?platform=<android|ios|web>",
-                ),
-            ));
+            return BurritoAPIError::bad_request(
+                "No platform param provided. Use ?platform=<android|ios|web>".into(),
+                None,
+            );
         }
     };
 
@@ -68,16 +62,17 @@ pub async fn get_pending_updates_handler(
 
     let must_update = app_versions.iter().any(|version| version.is_mandatory);
 
-    Ok(json!({
-        "must_update": must_update,
-        "versions": app_versions.iter().map(|version| {
-            json!({
-                "semver": version.semver,
-                "banner_url": version.banner_url,
-                "is_mandatory": version.is_mandatory,
-                "release_date": version.release_date,
-                "release_notes": version.release_notes,
+    Ok(Json(PendingUpdatesResponse {
+        must_update,
+        versions: app_versions
+            .iter()
+            .map(|v| schemas::PendingUpdate {
+                semver: v.semver.clone(),
+                banner_url: v.banner_url.clone().unwrap_or_default(),
+                is_mandatory: v.is_mandatory,
+                release_date: v.release_date.to_string(),
+                release_notes: v.release_notes.clone().unwrap_or_default(),
             })
-        }).collect::<Vec<Value>>(),
+            .collect(),
     }))
 }

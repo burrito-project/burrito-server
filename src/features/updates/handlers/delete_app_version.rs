@@ -1,13 +1,14 @@
-use rocket::http::Status;
-use rocket::response::status;
+use rocket::serde::json::Json;
 use rocket::State;
-use serde_json::json;
 
-use crate::core::types::ApiResponse;
-use crate::core::{responses, AppState};
+use crate::core::types::{ApiResponse, BurritoAPIError};
+use crate::core::AppState;
 use crate::features::updates::schemas;
 
-pub async fn delete_app_version_handler(id: i32, state: &State<AppState>) -> ApiResponse {
+pub async fn delete_app_version_handler(
+    id: i32,
+    state: &State<AppState>,
+) -> ApiResponse<Json<schemas::AppVersion>> {
     let deleted_version = sqlx::query_as!(
         schemas::AppVersion,
         "DELETE FROM app_versions WHERE id = $1 RETURNING *;",
@@ -18,11 +19,8 @@ pub async fn delete_app_version_handler(id: i32, state: &State<AppState>) -> Api
     .unwrap();
 
     if deleted_version.is_none() {
-        return Err(status::Custom(
-            Status::NotFound,
-            responses::error_response("Flag not found".to_string()),
-        ));
+        return BurritoAPIError::not_found("Flag not found");
     }
 
-    Ok(json!(deleted_version.unwrap()))
+    Ok(Json(deleted_version.unwrap()))
 }

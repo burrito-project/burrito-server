@@ -1,10 +1,9 @@
-use rocket::{http::Status, response::status, Route, State};
+use rocket::serde::json::Json;
+use rocket::{Route, State};
 
+use crate::core::types::BurritoAPIError;
+use crate::core::types::{ApiResponse, JsonResult};
 use crate::core::AppState;
-use crate::core::{
-    responses,
-    types::{ApiResponse, JsonResult},
-};
 use crate::features::auth::guards::StaffUser;
 use crate::features::updates::{self, schemas};
 
@@ -18,8 +17,8 @@ pub fn routes() -> Vec<Route> {
 }
 
 #[get("/")]
-async fn list_app_versions(state: &State<AppState>) -> ApiResponse {
-    updates::handlers::list_app_versions_handler(state).await
+async fn list_app_versions(state: &State<AppState>) -> Json<Vec<schemas::AppVersion>> {
+    Json(updates::handlers::list_app_versions_handler(state).await)
 }
 
 #[post("/", format = "json", data = "<payload>")]
@@ -27,12 +26,9 @@ async fn post_app_versions(
     _user: StaffUser,
     payload: JsonResult<'_, schemas::AppVersionPayload>,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> ApiResponse<Json<schemas::AppVersion>> {
     if let Err(e) = payload {
-        return Err(status::Custom(
-            Status::BadRequest,
-            responses::error_response(e.to_string()),
-        ));
+        return BurritoAPIError::bad_request(None, e.to_string().into());
     }
 
     let payload = payload.unwrap().into_inner();
@@ -46,12 +42,9 @@ async fn patch_app_version(
     _user: StaffUser,
     payload: JsonResult<'_, schemas::AppVersionPatchPayload>,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> ApiResponse<Json<schemas::AppVersion>> {
     if let Err(e) = payload {
-        return Err(status::Custom(
-            Status::BadRequest,
-            responses::error_response(e.to_string()),
-        ));
+        return BurritoAPIError::bad_request(None, e.to_string().into());
     }
     let payload = payload.unwrap().into_inner();
 
@@ -59,6 +52,10 @@ async fn patch_app_version(
 }
 
 #[delete("/<id>")]
-async fn delete_app_version(id: i32, _user: StaffUser, state: &State<AppState>) -> ApiResponse {
+async fn delete_app_version(
+    id: i32,
+    _user: StaffUser,
+    state: &State<AppState>,
+) -> ApiResponse<Json<schemas::AppVersion>> {
     updates::handlers::delete_app_version_handler(id, state).await
 }
