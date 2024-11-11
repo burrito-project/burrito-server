@@ -1,7 +1,9 @@
 use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
+use utoipa::ToSchema;
 
 use super::utils::{get_distance_to_bus_stop, get_next_bus_stop};
+use crate::features::bus_driver::schemas::RecordTimestamp;
 
 /// Latitude and longitude coordinates
 pub struct LatLng {
@@ -17,7 +19,7 @@ impl LatLng {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, ToSchema)]
 /// Represents a UNMSM bus stop
 pub struct BusStopInfo {
     /// The stop popular name
@@ -27,6 +29,7 @@ pub struct BusStopInfo {
     /// Whether the driver has reached this stop
     pub has_reached: bool,
     /// The time when this information was last updated
+    #[schema(value_type = RecordTimestamp)]
     pub timestamp: SystemTime,
     /// The distance, in meters, to reach this stop. Meaningless if has_reached is true
     pub distance: f64,

@@ -13,9 +13,21 @@ pub struct WsClientMessage {
 
 #[derive(Debug, Clone, Copy, PartialEq, ToSchema)]
 #[repr(i32)]
-#[schema(description = "An integer representing the bus status", example = 0)]
+#[schema(title = "BusServiceState", example = 0)]
+/// Represents the status of the bus service, as reported by the driver device.
+///
+/// 0 - **On route**: service is OK
+///
+/// 1 - **Out of service**: the bus is not receiving passengers. Not locatable.
+///
+/// 2 - **Resting**: bus will be on route soon. Not locatable.
+///
+/// 3 - **Accident**: an event has interrupted the service. Still locatable.
+///
+/// 4 - **Off**: device is off. Not locatable.
 pub enum BusServiceState {
     OnRoute = 0,
+    /// Bus is not receiving passengers, and not locatable.
     OutOfService = 1,
     Resting = 2,
     Accident = 3,
@@ -78,13 +90,29 @@ impl TryFrom<i32> for BusServiceState {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(ToSchema)]
+#[allow(dead_code)]
+pub struct RecordTimestamp {
+    #[schema(example = 294697553)]
+    pub nanos_since_epoch: u64,
+    #[schema(example = 1731161763)]
+    pub secs_since_epoch: u64,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone, ToSchema)]
 pub struct BurritoPosRecord {
+    /// Bus latitude
+    #[schema(example = -12.057691210491626)]
     pub lt: f64,
+    /// Bus longitude
+    #[schema(example = -77.08006219985396)]
     pub lg: f64,
+    /// Bus service status.
     pub sts: BusServiceState,
-    /// Device battery. None means off or not applicable
+    /// Device battery. A null value means the device is off or not applicable.
+    #[schema(example = 69)]
     pub bat: Option<i32>,
+    #[schema(value_type = RecordTimestamp)]
     pub timestamp: SystemTime,
     pub velocity: f64,
 }
@@ -111,20 +139,17 @@ impl BurritoPosRecord {
     }
 }
 
-/// The status payload received from the server, which contains the latitude, longitude
-/// and status of the burrito
+/// The payload that the bus driver sends to the server, representing its current state.
 #[derive(Debug, Deserialize, Serialize, Clone, ToSchema)]
 pub struct BurritoRecordPayload {
-    /// Bus latitude
+    /// Bus latitude.
     #[schema(example = -12.052855)]
     pub lt: f64,
-    /// Bus longitude
+    /// Bus longitude.
     #[schema(example = -77.085971)]
     pub lg: f64,
-    /// An integer representing the bus status
-    #[schema(value_type = i32)]
     pub sts: BusServiceState,
-    /// Device battery. A null value means battery is not applicable for this device
+    /// Device battery. A null value means battery is not applicable for this device or the information is not available.
     #[schema(example = 69)]
     pub bat: Option<i32>,
 }

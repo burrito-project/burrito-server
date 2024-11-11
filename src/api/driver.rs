@@ -15,7 +15,11 @@ router!(DriverRouter, [post_driver_status]);
     tag = docs::tags::BUS_DRIVER_TAG,
     request_body(content = BurritoRecordPayload),
     params(
-        ("x-bus-id" = String, Header, description = "Unique bus driver identifier", example = "burrito-001"),
+        (
+            "x-bus-id" = String, Header,
+            description = "Unique bus driver identifier. Aims to support multiple bus drivers at the same time.",
+            example = "burrito-001",
+        ),
     ),
     security(("driver_auth" = [])),
     responses(
