@@ -26,9 +26,9 @@ sha1 = "0.10.6"
 oxipng = "9.1.2"
 base64 = "0.22.1"
 jsonwebtoken = "9.3.0"
-utoipa = { version = "5.2.0", features = ["macros", "rocket_extras", "chrono"]}
+utoipa = { version = "5.2.0", features = ["macros", "rocket_extras", "chrono", "repr"] }
 utoipa-scalar = { version = "0.2.0", features = ["rocket"]}
-thiserror = "2.0.1"
+thiserror = "2.0.3"
 
 [dependencies.image]
 version = "0.25.5"
