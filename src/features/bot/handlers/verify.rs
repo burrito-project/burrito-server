@@ -1,8 +1,9 @@
 use rocket::{http::Status, Response};
+use utoipa::ToSchema;
 
 use crate::core::responses::RawResponse;
 
-#[derive(FromForm)]
+#[derive(FromForm, ToSchema)]
 pub struct PubVerificationParams {
     mode: String,
     verify_token: String,

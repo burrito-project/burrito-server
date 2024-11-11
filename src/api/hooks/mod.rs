@@ -4,8 +4,18 @@ use crate::core::utils::with_base;
 
 mod whatsapp;
 
-pub fn routes() -> Vec<Route> {
-    let driver_routes = with_base(whatsapp::routes(), "/whatsapp");
+#[derive(utoipa::OpenApi)]
+#[openapi(
+    nest(
+        (path = "/whatsapp", api = whatsapp::HooksWhatsappRouter),
+    )
+)]
+pub struct HooksRouter;
 
-    driver_routes.collect::<Vec<Route>>()
+impl crate::routes::ApiRouter for HooksRouter {
+    fn routes() -> Vec<rocket::Route> {
+        let driver_routes = with_base(whatsapp::HooksWhatsappRouter::routes(), "/whatsapp");
+
+        driver_routes.collect::<Vec<Route>>()
+    }
 }

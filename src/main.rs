@@ -74,7 +74,7 @@ async fn main() -> Result<(), rocket::Error> {
         // .mount("/map", api::map::routes())
         // .mount("/auth", api::auth::routes())
         // .mount("/ping", api::ping::routes())
-        .mount("/hooks", api::hooks::routes())
+        // .mount("/hooks", api::hooks::routes())
         // .mount("/flags", api::flags::routes())
         // .mount("/health", api::ping::routes())
         .mount("/status", api::status::routes())

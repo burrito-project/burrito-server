@@ -14,6 +14,7 @@ pub mod tags {
     pub const NOTIFICATIONS_TAG: &str = "App notifications";
     pub const MAP_RENDERING_TAG: &str = "Map rendering";
     pub const AUTH_TAG: &str = "Authentication";
+    pub const WEBHOOKS_TAG: &str = "Webhooks";
 }
 
 pub struct ApiDocs;

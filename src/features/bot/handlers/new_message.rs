@@ -59,11 +59,13 @@ pub async fn whatsapp_new_text_message_handler(
     let number_id = &message.entry[0].changes[0].value.metadata.phone_number_id;
     let message = &message.entry[0].changes[0].value.messages[0];
 
+    // The status that we will use to generate the message
     let burrito_status = bus_status::handlers::get_burrito_status_handler(1, state).await;
     let last_stop = &burrito_status.last_stop;
     let pos = &burrito_status.positions[0];
     let updated_at = pos.formatted_time_ago();
 
+    // The WhatsApp message the bot will sent as a reply
     let formatted_message = match pos.sts {
         BusServiceState::OnRoute => {
             if last_stop.is_none() {
