@@ -108,6 +108,13 @@ impl OpenApi for ApiDocs {
                         events for bot testing.",
                     ))
                     .build(),
+                utoipa::openapi::tag::TagBuilder::new()
+                    .name(tags::MISC_TAG)
+                    .description(Some(
+                        "Miscellaneous endpoints that don't fit in any other category.
+                        This includes app versioning and other stuff.",
+                    ))
+                    .build(),
             ]))
             .components(Some(utoipa::openapi::Components::new()))
             .build();
