@@ -100,6 +100,14 @@ impl OpenApi for ApiDocs {
                         server version and more.",
                     ))
                     .build(),
+                utoipa::openapi::tag::TagBuilder::new()
+                    .name(tags::WEBHOOKS_TAG)
+                    .description(Some(
+                        "Webhook endpoints used to notify the server of certain events.
+                        Currently we have only registered a bunch of WhatsApp message webhooks
+                        events for bot testing.",
+                    ))
+                    .build(),
             ]))
             .components(Some(utoipa::openapi::Components::new()))
             .build();
