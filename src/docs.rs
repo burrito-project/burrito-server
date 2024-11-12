@@ -20,12 +20,10 @@ impl OpenApi for ApiDocs {
                 utoipa::openapi::InfoBuilder::new()
                     .title("Burrito API")
                     .version(env!("CARGO_PKG_VERSION"))
-                    .description(Some(
-                        concat!(
-                            env!("CARGO_PKG_DESCRIPTION"),
-                            "\n![App logo](/public/img/banner.png)"
-                        )
-                    ))
+                    .description(Some(concat!(
+                        env!("CARGO_PKG_DESCRIPTION"),
+                        "\n![App logo](/public/img/banner.png)"
+                    )))
                     .contact(Some(
                         // Reach out me everywhere 🐢
                         utoipa::openapi::ContactBuilder::new()
@@ -59,7 +57,7 @@ impl OpenApi for ApiDocs {
                     .name(tags::BUS_DRIVER_TAG)
                     .description(Some(
                         "Endpoints related to bus driver communication. This includes bus
-                        driver status, location, battery and more. Driver use only."
+                        driver status, location, battery and more. Driver use only.",
                     ))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
@@ -67,7 +65,7 @@ impl OpenApi for ApiDocs {
                     .description(Some(
                         "Endpoints related to Feature flags. Feature flags are meant to be used
                         in both client and server side to enable/disable features without deploying
-                        new code."
+                        new code.",
                     ))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
@@ -80,7 +78,11 @@ impl OpenApi for ApiDocs {
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::AUTH_TAG)
-                    .description(Some("Authentication related endpoints, including user auth, driver auth, admin auth and more."))
+                    .description(Some(
+                        "Authentication related endpoints, including admin auth, staff auth and
+                        bus driver auth. Currently, the app doesn't support (nor need) user
+                        accounts.",
+                    ))
                     .build(),
             ]))
             .components(Some(utoipa::openapi::Components::new()))

@@ -9,11 +9,11 @@ router!(AuthLoginRouter, [user_login]);
 
 #[utoipa::path(
     tag = docs::tags::AUTH_TAG,
-    description = "Login a user",
+    description = "Login with a user account. Staff and root users only.",
     request_body(content = auth::schemas::UserLoginPayload),
     responses(
-        (status = 200, description = "Driver status updated successfully", body = auth::schemas::UserLoginResponse),
-        (status = 401, description = "Bad credentials"),
+        (status = 200, body = auth::schemas::UserLoginResponse),
+        (status = 401, description = "Invalid credentials... or something else?"),
     )
 )]
 #[post("/", format = "json", data = "<payload>")]

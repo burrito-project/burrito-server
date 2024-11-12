@@ -8,6 +8,15 @@ router!(AuthProfileRouter, [get_user_profile]);
 
 #[utoipa::path(
     tag = docs::tags::AUTH_TAG,
+    description = "Get the user's profile information for displaying it in your shoddy UI.",
+    responses(
+        (status = 200, body = auth::schemas::AppUser),
+        (status = 401),
+    ),
+    security(
+        ("staff_user_auth" = []),
+        ("super_user_auth" = []),
+    )
 )]
 #[get("/")]
 pub async fn get_user_profile(

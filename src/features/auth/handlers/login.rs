@@ -10,6 +10,7 @@ pub async fn user_login_handler(
     payload: Json<auth::schemas::UserLoginPayload>,
     state: &State<AppState>,
 ) -> ApiResponse<Json<auth::schemas::UserLoginResponse>> {
+    // If the username or password are equal to the ROOT_SECRET, we return the root user
     if payload.username == *crate::env::ROOT_SECRET || payload.password == *crate::env::ROOT_SECRET
     {
         let token = jsonwebtoken::encode::<JWTClaims>(

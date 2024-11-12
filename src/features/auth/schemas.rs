@@ -5,14 +5,22 @@ use utoipa::ToSchema;
 #[allow(unused)]
 pub struct AppUser {
     pub id: i32,
+    /// The user's unique username. Allways lowercase
+    #[schema(example = "burritoadmin")]
     pub username: String,
+    /// The user's display name
+    #[schema(example = "Burrito Admin")]
     pub display_name: String,
+    /// The stored hash of the password
     #[serde(skip_serializing)]
     pub password_hash: String,
+    /// Whether the user is active. Setting a user to inactive is a soft delete.
     #[serde(skip_serializing)]
     pub is_active: bool,
+    /// The last time the user logged in
     #[serde(skip_serializing)]
     pub last_login: Option<chrono::DateTime<chrono::Utc>>,
+    /// Whether the user is a staff member
     pub is_staff: bool,
     #[serde(skip_serializing)]
     pub created_at: chrono::DateTime<chrono::Utc>,
@@ -61,7 +69,9 @@ impl TryFrom<OptAppUser> for AppUser {
 
 #[derive(Debug, Deserialize, ToSchema, Serialize)]
 pub struct UserLoginPayload {
+    #[schema(example = "burritoadmin")]
     pub username: String,
+    #[schema(example = "lorem passwordum")]
     pub password: String,
 }
 
