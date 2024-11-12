@@ -115,6 +115,13 @@ impl OpenApi for ApiDocs {
                         This includes app versioning and other stuff.",
                     ))
                     .build(),
+                utoipa::openapi::tag::TagBuilder::new()
+                    .name(tags::NOTIFICATIONS_TAG)
+                    .description(Some(
+                        "Endpoints related to in-app notifications. No push notifications are
+                        supported at the moment.",
+                    ))
+                    .build(),
             ]))
             .components(Some(utoipa::openapi::Components::new()))
             .build();
