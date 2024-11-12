@@ -28,7 +28,7 @@ const MAX_SIZE: u32 = 600;
 #[get("/live?<size>")]
 async fn live_map(size: Option<u32>, state: &State<AppState>) -> RawResponse<'_> {
     let mut map_image = bot::handlers::live_map::live_map_handler(state).await;
-    let size = size.map(|size| size.min(MAX_SIZE).max(1));
+    let size = size.map(|size| size.clamp(1, MAX_SIZE));
 
     let mut buffer = Vec::new();
 
