@@ -5,8 +5,6 @@ use crate::core::utils::with_base;
 pub mod login;
 pub mod profile;
 
-// nested_router!(AuthRouter, [AuthLoginRouter]);
-
 #[derive(utoipa::OpenApi)]
 #[openapi(
     nest(

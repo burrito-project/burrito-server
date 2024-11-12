@@ -1,19 +1,30 @@
 use rocket::serde::json::Json;
-use rocket::{Route, State};
+use rocket::State;
 
 use crate::core::types::{ApiResponse, BurritoAPIError, JsonResult};
 use crate::core::AppState;
 use crate::features::analytics;
 use crate::features::auth::guards::{AuthDriver, StaffUser};
+use crate::{docs, router};
 
-pub fn routes() -> Vec<Route> {
-    routes![
+router!(
+    AnalyticsCrashReportsRouter,
+    [
         get_crash_reports,
         post_driver_crash_reports,
         post_users_crash_reports
     ]
-}
+);
 
+#[utoipa::path(
+    tag = docs::tags::ANALYTICS_TAG,
+    description =
+        "Get all crash reports that application clients have submitted. This endpoint is only
+        available for staff users, as it may contain sensitive information.",
+    security(
+        ("staff_user_auth" = [])
+    )
+)]
 #[get("/")]
 async fn get_crash_reports(
     _user: StaffUser,
@@ -24,6 +35,21 @@ async fn get_crash_reports(
     Ok(Json(reports))
 }
 
+#[utoipa::path(
+    tag = docs::tags::ANALYTICS_TAG,
+    description =
+        "Submit a bus driver application crash report. Driver app crashes are important to
+        monitor because they can affect the bus tracking service.",
+    security(
+        ("driver_auth" = [])
+    ),
+    request_body = analytics::entities::CrashReportPayload,
+    responses(
+        (status = 200, body = analytics::entities::CrashReport),
+        (status = 400),
+        (status = 401),
+    )
+)]
 #[post("/", rank = 0, format = "json", data = "<payload>")]
 async fn post_driver_crash_reports(
     payload: JsonResult<'_, analytics::entities::CrashReportPayload>,
@@ -46,6 +72,20 @@ async fn post_driver_crash_reports(
     Ok(Json(new_report))
 }
 
+#[utoipa::path(
+    tag = docs::tags::ANALYTICS_TAG,
+    description =
+        "Submit a client application crash report. Is up to the client to decide what
+        errors should be reported to the server for analytics purposes.
+
+        Clients are strongly advised to verify that no sensitive information is sent in the report.
+        They may add additional context to the error message.",
+    request_body = analytics::entities::CrashReportPayload,
+    responses(
+        (status = 200, body = analytics::entities::CrashReport),
+        (status = 400),
+    )
+)]
 #[post("/", rank = 1, format = "json", data = "<payload>")]
 async fn post_users_crash_reports(
     payload: JsonResult<'_, analytics::entities::CrashReportPayload>,
