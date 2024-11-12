@@ -1,5 +1,5 @@
 use rocket::serde::json::Json;
-use rocket::{http::Status, Route, State};
+use rocket::{http::Status, State};
 
 use crate::core::types::BurritoAPIError;
 use crate::core::AppState;
@@ -11,11 +11,21 @@ use crate::{
     },
     features::identities,
 };
+use crate::{docs, router};
 
-pub fn routes() -> Vec<Route> {
-    routes![post_session, options]
-}
+router!(SessionRouter, [post_session, options]);
 
+#[utoipa::path(
+    description =
+        "Registers a new app user session. Clients should call this endpoint every time the
+        app is opened. To find out how this data is used, please refer to our
+        [privacy policy](https://github.com/burrito-project/public/blob/main/PRIVACY_POLICY.md).",
+    request_body = schemas::UserIdentityPayload,
+    tag = docs::tags::ANALYTICS_TAG,
+    responses(
+        (status = 200, body = schemas::UserIdentity),
+    )
+)]
 #[post("/", format = "json", data = "<payload>")]
 pub async fn post_session(
     remote_addr: ForwardedIp,
@@ -33,6 +43,7 @@ pub async fn post_session(
     ))
 }
 
+#[utoipa::path(tag = docs::tags::ANALYTICS_TAG)]
 #[options("/")]
 pub fn options() -> Status {
     Status::Ok
