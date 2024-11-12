@@ -18,21 +18,21 @@ pub(crate) fn api_routers() -> Vec<internal::ApiRouterInternal> {
     use internal::mount_router;
 
     vec![
-        mount_router::<IndexRouter>("/"),
         mount_router::<WsRouter>("/ws"),
-        mount_router::<BatteryRouter>("/battery"),
-        mount_router::<DriverRouter>("/driver"),
-        mount_router::<FlagsRouter>("/flags"),
+        mount_router::<IndexRouter>("/"),
         mount_router::<MapsRouter>("/maps"),
-        mount_router::<HealthRouter>("/health"),
         mount_router::<AuthRouter>("/auth"),
-        mount_router::<VersionsRouter>("/versions"),
-        mount_router::<PendingUpdatesRouter>("/pending_updates"),
         mount_router::<HooksRouter>("/hooks"),
+        mount_router::<FlagsRouter>("/flags"),
         mount_router::<StatusRouter>("/status"),
+        mount_router::<DriverRouter>("/driver"),
+        mount_router::<HealthRouter>("/health"),
+        mount_router::<BatteryRouter>("/battery"),
         mount_router::<SessionRouter>("/session"),
+        mount_router::<VersionsRouter>("/versions"),
         mount_router::<AnalyticsRouter>("/analytics"),
         mount_router::<NotificationsRouter>("/notifications"),
+        mount_router::<PendingUpdatesRouter>("/pending_updates"),
     ]
 }
 
@@ -42,7 +42,7 @@ pub(crate) fn mount_routers(mut rocket: Rocket<Build>) -> Rocket<Build> {
     }
 
     rocket
-        .mount("/docs", Scalar::with_url("/scalar", ApiDocs::openapi()))
+        .mount("/docs", Scalar::with_url("/", ApiDocs::openapi()))
         .mount("/public", fs::FileServer::from(fs::relative!("public")))
         .register("/", catchers![not_found])
 }
