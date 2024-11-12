@@ -122,6 +122,14 @@ impl OpenApi for ApiDocs {
                         supported at the moment.",
                     ))
                     .build(),
+                utoipa::openapi::tag::TagBuilder::new()
+                    .name(tags::APP_VERSIONS_TAG)
+                    .description(Some(
+                        "Endpoints related to app versioning, from versions history, release
+                        notes, checking for updates, or even forcing the users to update their
+                        apps.",
+                    ))
+                    .build(),
             ]))
             .components(Some(utoipa::openapi::Components::new()))
             .build();
