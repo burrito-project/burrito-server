@@ -3,7 +3,7 @@ use utoipa::{
     Modify, OpenApi,
 };
 
-use crate::{routes::api_routers, HOST_URL, SELF_URL};
+use crate::routes::api_routers;
 
 /// We provide and host our own OpenAPI documentation using
 /// [utoipa](https://github.com/juhaku/utoipa), a compile-time OpenAPI generator.
@@ -36,11 +36,11 @@ impl OpenApi for ApiDocs {
             )
             .servers(Some(vec![
                 utoipa::openapi::ServerBuilder::new()
-                    .url(HOST_URL)
+                    .url(crate::env::HOST_URL.clone())
                     .description(Some("Production server"))
                     .build(),
                 utoipa::openapi::ServerBuilder::new()
-                    .url(SELF_URL)
+                    .url(crate::env::SELF_URL.clone())
                     .description(Some("Local testing server"))
                     .build(),
             ]))

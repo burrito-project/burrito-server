@@ -69,7 +69,7 @@ pub fn initialize_mocks() {
 
             if elapsed > fake_elapsed {
                 let _ = client
-                    .post(format!("{}/driver", crate::SELF_URL))
+                    .post(format!("{}/driver", *crate::env::SELF_URL))
                     .body(
                         serde_json::json!({
                             "lt": current_record.lt,

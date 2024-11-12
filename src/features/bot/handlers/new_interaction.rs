@@ -20,7 +20,7 @@ pub async fn whatsapp_new_interaction_handler(message: WhatsappMessage) -> RawRe
         "to": message.from,
         "type": "image",
         "image": {
-            "link": format!("{}/map", crate::HOST_URL),
+            "link": format!("{}/map", *crate::env::HOST_URL),
         },
     });
     let client = reqwest::Client::new();

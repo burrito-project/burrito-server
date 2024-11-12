@@ -37,12 +37,6 @@ lazy_static! {
         .as_secs();
 }
 
-pub const PORT: u16 = 6969;
-/// For making requests to our own endpoints
-pub const SELF_URL: &str = "http://localhost:6969";
-/// Production host url
-pub const HOST_URL: &str = "https://api.contigosanmarcos.com";
-
 #[rocket::main]
 async fn main() -> Result<(), rocket::Error> {
     let _ = *startup; // forcing evaluation
@@ -57,7 +51,7 @@ async fn main() -> Result<(), rocket::Error> {
         .expect("Failed to setup base flags");
 
     let rocket_config = Config {
-        port: PORT,
+        port: *crate::env::PORT,
         address: [0, 0, 0, 0].into(),
         ident: Ident::none(),
         log_level: LogLevel::Normal,
