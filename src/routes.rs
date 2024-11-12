@@ -20,7 +20,7 @@ pub(crate) fn api_routers() -> Vec<internal::ApiRouterInternal> {
     vec![
         mount_router::<WsRouter>("/ws"),
         mount_router::<IndexRouter>("/"),
-        mount_router::<MapsRouter>("/maps"),
+        mount_router::<MapsRouter>("/map"),
         mount_router::<AuthRouter>("/auth"),
         mount_router::<HooksRouter>("/hooks"),
         mount_router::<FlagsRouter>("/flags"),

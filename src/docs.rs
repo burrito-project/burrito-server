@@ -71,9 +71,7 @@ impl OpenApi for ApiDocs {
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::MAP_RENDERING_TAG)
                     .description(Some(
-                        "Endpoints related to map image rendering.\n\nThanks to these endpoints you
-                        don't even need to build a client to display the bus location on a map.
-                        This feature is **still in development**.",
+                        "Endpoints related to help clients rendering the application in a map.",
                     ))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
