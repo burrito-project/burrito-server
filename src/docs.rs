@@ -64,7 +64,11 @@ impl OpenApi for ApiDocs {
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::FEATURE_FLAGS_TAG)
-                    .description(Some("Endpoints related to Feature flags. Feature flags are meant to be used in both client and server side to enable/disable features without deploying new code."))
+                    .description(Some(
+                        "Endpoints related to Feature flags. Feature flags are meant to be used
+                        in both client and server side to enable/disable features without deploying
+                        new code."
+                    ))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::MAP_RENDERING_TAG)
