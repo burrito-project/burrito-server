@@ -58,8 +58,8 @@ impl OpenApi for ApiDocs {
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::BUS_DRIVER_TAG)
                     .description(Some(
-                        "Endpoints related to bus driver app communication. This includes bus
-                        driver status, location and more."
+                        "Endpoints related to bus driver communication. This includes bus
+                        driver status, location, battery and more. Driver use only."
                     ))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()

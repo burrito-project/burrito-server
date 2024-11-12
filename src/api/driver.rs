@@ -13,6 +13,10 @@ router!(DriverRouter, [post_driver_status]);
 
 #[utoipa::path(
     tag = docs::tags::BUS_DRIVER_TAG,
+    description =
+        "Endpoint for bus drivers to send their location and status data.
+        \nThis data is stored in the form of \"records\" that can be later queried using the
+        `/status` endpoint. In the case of WebSocket clients, the data is instantly broadcasted.",
     request_body(content = BurritoRecordPayload),
     params(
         (
@@ -23,8 +27,9 @@ router!(DriverRouter, [post_driver_status]);
     ),
     security(("driver_auth" = [])),
     responses(
-        (status = 200, description = "Driver status updated successfully"),
-        (status = 401, description = "Unauthorized"),
+        (status = 200),
+        (status = 401),
+        (status = 429, description = "There is a driver with the same `x-bus-id` already connected"),
     )
 )]
 #[post("/", format = "json", data = "<message_json>")]

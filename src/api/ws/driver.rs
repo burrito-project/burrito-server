@@ -10,6 +10,26 @@ router!(WsDriverRouter, [ws_driver_message_streaming]);
 
 #[utoipa::path(
     tag = docs::tags::BUS_DRIVER_TAG,
+    description =
+        "WebSocket equivalent of the `/driver` endpoint. Actually, they share the same code,
+        and thus the same functionality.
+        \nThe messages share the same [BurritoRecordPayload](#model/burritorecordpayload)
+        schema and notify the clients in the same way.
+        \nThe communication is one-way, from the driver to the server.",
+    params(
+        (
+            "x-bus-id" = String, Header,
+            description = "Unique bus driver identifier. Aims to support multiple bus drivers at the same time.",
+            example = "burrito-001",
+        ),
+    ),
+    security(("driver_auth" = [])),
+    responses(
+        (status = 101, description = "Switching protocols"),
+        (status = 200),
+        (status = 401),
+        (status = 429, description = "There is a driver with the same `x-bus-id` already connected"),
+    ),
 )]
 #[get("/")]
 async fn ws_driver_message_streaming(
