@@ -1,3 +1,4 @@
+pub use dotenvy::dotenv;
 use lazy_static::lazy_static;
 use std::env;
 
@@ -14,6 +15,15 @@ macro_rules! env_var_or {
 }
 
 lazy_static! {
+    pub static ref PORT: u16 = env_var_or!("PORT", "6969")
+        .parse::<u16>().expect("PORT must be a number");
+
+    /// Production host url
+    pub static ref HOST_URL: String = env_var_or!("HOST_URL", "https://api.contigosanmarcos.com");
+
+    /// For making requests to our own endpoints (concat localhost+PORT)
+    pub static ref SELF_URL: String = format!("http://localhost:{}", *PORT);
+
     // Master passphrase. If someone gets this, we are doomed
     pub static ref ROOT_SECRET: String = env_var!("ROOT_SECRET");
 
@@ -25,8 +35,7 @@ lazy_static! {
 
     /// The max bus state records that we should keep in memory
     pub static ref MAX_MEMORY_RECORDS: usize = env_var_or!("MAX_MEMORY_RECORDS", "1000")
-        .parse::<usize>()
-        .expect("MAX_MEMORY_RECORDS must be a number");
+        .parse::<usize>().expect("MAX_MEMORY_RECORDS must be a number");
 
     /// Whether we should use a mocked bus route to showcase the system. See mock.rs
     pub static ref IS_MOCKED: bool = env_var_or!("IS_MOCKED", "false") == "true";

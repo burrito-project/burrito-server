@@ -2,9 +2,9 @@ use std::time;
 
 use crate::core::AppState;
 use crate::features::bus_driver::schemas::{BurritoPosRecord, BusServiceState};
-use crate::features::bus_status::schemas::StatusResponse;
+use crate::features::bus_status::schemas::BurritoStatusResponse;
 
-pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> StatusResponse {
+pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> BurritoStatusResponse {
     let messages = state.records.read().await;
     let last_stop = state.last_stop.read().await;
 
@@ -12,21 +12,12 @@ pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> Statu
 
     match messages.last() {
         Some(last) => {
-            let is_off = matches!(
-                last.sts,
-                BusServiceState::OutOfService
-                    | BusServiceState::Resting
-                    | BusServiceState::Accident
-            );
-
-            // If the burrito didn't report itself as 1, 2 or 3 and it hasn't reported in the last 60 seconds,
-            // then we consider it as off
-            if !is_off && last.timestamp.elapsed().unwrap() > std::time::Duration::from_secs(60) {
+            if last.stopped_reporting() {
                 // We create an 'off' message on the fly
                 let off_message = BurritoPosRecord {
                     lt: 0.0,
                     lg: 0.0,
-                    bat: last.bat,
+                    bat: None,
                     sts: BusServiceState::inherit_from_inactive(last.sts),
                     timestamp: last.timestamp,
                     velocity: 0.0,
@@ -40,7 +31,7 @@ pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> Statu
 
                 *state.last_stop.write().await = None;
 
-                return StatusResponse {
+                return BurritoStatusResponse {
                     positions: messages_cpy
                         .iter()
                         .rev()
@@ -51,7 +42,7 @@ pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> Statu
                 };
             }
 
-            StatusResponse {
+            BurritoStatusResponse {
                 positions: messages
                     .iter()
                     .rev()
@@ -61,7 +52,7 @@ pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> Statu
                 last_stop: last_stop.clone(),
             }
         }
-        None => StatusResponse {
+        None => BurritoStatusResponse {
             positions: vec![BurritoPosRecord {
                 lt: 0.0,
                 lg: 0.0,

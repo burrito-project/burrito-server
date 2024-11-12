@@ -1,17 +1,15 @@
-use rocket::http::Status;
-use rocket::response::status;
+use rocket::serde::json::Json;
 use rocket::State;
-use serde_json::json;
 
-use crate::core::types::ApiResponse;
-use crate::core::{responses, AppState};
+use crate::core::types::{ApiResponse, BurritoAPIError};
+use crate::core::AppState;
 use crate::features::updates::schemas;
 
 pub async fn patch_app_version_handler(
     id: i32,
     payload: schemas::AppVersionPatchPayload,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> ApiResponse<Json<schemas::AppVersion>> {
     // we only set the fields that are not None
     let updated_version = sqlx::query_as!(
         schemas::AppVersion,
@@ -38,11 +36,8 @@ pub async fn patch_app_version_handler(
     let updated_version = updated_version.fetch_optional(&state.pool).await.unwrap();
 
     if updated_version.is_none() {
-        return Err(status::Custom(
-            Status::NotFound,
-            responses::error_response("App version does not exist!"),
-        ));
+        return BurritoAPIError::not_found("App version not found");
     }
 
-    Ok(json!(updated_version))
+    Ok(Json(updated_version.unwrap()))
 }

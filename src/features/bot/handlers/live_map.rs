@@ -9,7 +9,7 @@ use crate::features::bus_stops::schemas::LatLng;
 lazy_static! {
     pub static ref MAP_BASE_IMAGE_BYTES: &'static [u8] =
         include_bytes!("src/features/bot/assets/map_base.jpg").as_slice();
-    static ref MAP_BASE_IMAGE: image::DynamicImage =
+    pub static ref MAP_BASE_IMAGE: image::DynamicImage =
         image::load_from_memory(*MAP_BASE_IMAGE_BYTES).unwrap();
     static ref MAP_MARKER_IMAGE: image::DynamicImage = {
         let bytes = include_bytes!("src/features/bot/assets/burrito_marker.png");
@@ -23,18 +23,22 @@ const MAP_BOTTOM_LEFT_COORDS: LatLng = LatLng::new(-12.063045246181971, -77.0885
 const MAP_TOP_RIGHT_COORDS: LatLng = LatLng::new(-12.049784581812744, -77.07985106789113);
 const MAP_TOP_LEFT_COORDS: LatLng = LatLng::new(-12.051563821207822, -77.09050397949446);
 
+// ⚠️ NOTE: This code doesn't work, but it's pretty close.
+//         I recommend you to give it a brief read and then rewrite the whole algorithm
+
 /// Returns a live map image with the burrito's location
 ///
 /// Returns none if the burrito is not locatable
-pub async fn live_map_handler(state: &AppState) -> Option<DynamicImage> {
+pub async fn live_map_handler(state: &AppState) -> DynamicImage {
     let burrito_status = bus_status::handlers::get_burrito_status_handler(1, state).await;
     let pos = burrito_status.positions[0].clone();
 
+    let mut base_image: image::DynamicImage = MAP_BASE_IMAGE.clone();
+
     if !pos.sts.is_locatable() {
-        return None;
+        return base_image;
     }
 
-    let mut base_image: image::DynamicImage = MAP_BASE_IMAGE.clone();
     let marker: image::DynamicImage = MAP_MARKER_IMAGE.clone();
 
     let a = MAP_BOTTOM_LEFT_COORDS.lng - MAP_TOP_LEFT_COORDS.lng;
@@ -58,5 +62,5 @@ pub async fn live_map_handler(state: &AppState) -> Option<DynamicImage> {
         marker_pos_y as i64,
     );
 
-    Some(base_image)
+    base_image
 }

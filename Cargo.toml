@@ -1,5 +1,6 @@
 [package]
 name = "burrito-server"
+description = "The Burrito API is the backbone of all the Contigo Burrito services, from app features to bus driver tracking."
 version = "0.1.0"
 edition = "2021"
 
@@ -25,6 +26,10 @@ sha1 = "0.10.6"
 oxipng = "9.1.2"
 base64 = "0.22.1"
 jsonwebtoken = "9.3.0"
+utoipa = { version = "5.2.0", features = ["macros", "rocket_extras", "chrono", "repr"] }
+utoipa-scalar = { version = "0.2.0", features = ["rocket"]}
+thiserror = "2.0.3"
+sha2 = "0.10.8"
 
 [dependencies.image]
 version = "0.25.5"

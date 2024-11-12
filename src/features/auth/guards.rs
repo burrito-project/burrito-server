@@ -57,6 +57,8 @@ impl<'r> FromRequest<'r> for super::schemas::AppUser {
             }
         };
 
+        // The ROOT user doesn't actually exists in the database. It's a special user
+        // that can do anything
         if authorization == crate::env::ROOT_SECRET.as_str() {
             return rocket::request::Outcome::Success(ROOT_USER.clone());
         }
