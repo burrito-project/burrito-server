@@ -2,8 +2,8 @@ use rocket::Route;
 
 use crate::core::utils::with_base;
 
-pub mod login;
-pub mod profile;
+mod login;
+mod profile;
 
 #[derive(utoipa::OpenApi)]
 #[openapi(

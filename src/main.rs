@@ -2,7 +2,7 @@
 use lazy_static::lazy_static;
 use rocket::config::{Ident, LogLevel};
 use rocket::data::{Limits, ToByteUnit};
-use rocket::{fs, Config};
+use rocket::Config;
 
 #[macro_use]
 extern crate rocket;
@@ -69,8 +69,8 @@ async fn main() -> Result<(), rocket::Error> {
 
     let mut rocket = rocket::build()
         .configure(rocket_config)
-        .mount("/", api::index::routes())
-        .mount("/ws", api::ws::routes())
+        // .mount("/", api::index::routes())
+        // .mount("/ws", api::ws::routes())
         // .mount("/map", api::map::routes())
         // .mount("/auth", api::auth::routes())
         // .mount("/ping", api::ping::routes())
@@ -88,7 +88,7 @@ async fn main() -> Result<(), rocket::Error> {
         // .mount("/panel/versions", api::versions::routes())
         // .mount("/panel/analytics", api::analytics::routes())
         // .mount("/panel/notifications", api::notifications::routes())
-        .mount("/public", fs::FileServer::from(fs::relative!("public")))
+        // .mount("/public", fs::FileServer::from(fs::relative!("public")))
         .attach(core::fairings::Cors)
         .manage(crate::core::AppState::from_db(pool));
 

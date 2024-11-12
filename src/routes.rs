@@ -1,4 +1,4 @@
-use rocket::{Build, Rocket};
+use rocket::{fs, Build, Rocket};
 use serde_json::json;
 use utoipa::OpenApi;
 use utoipa_scalar::{Scalar, Servable as ScalarServable};
@@ -6,9 +6,9 @@ use utoipa_scalar::{Scalar, Servable as ScalarServable};
 use crate::{
     api::{
         analytics::AnalyticsRouter, auth::AuthRouter, battery::BatteryRouter, driver::DriverRouter,
-        flags::FlagsRouter, health::PingRouter, hooks::HooksRouter, map::MapsRouter,
-        notifications::NotificationsRouter, pending_updates::PendingUpdatesRouter,
-        session::SessionRouter, status::StatusRouter, versions::VersionsRouter,
+        flags::FlagsRouter, health::PingRouter, hooks::HooksRouter, index::IndexRouter,
+        map::MapsRouter, notifications::NotificationsRouter, pending_updates::PendingUpdatesRouter,
+        session::SessionRouter, status::StatusRouter, versions::VersionsRouter, ws::WsRouter,
     },
     docs::ApiDocs,
 };
@@ -18,6 +18,8 @@ pub(crate) fn api_routers() -> Vec<internal::ApiRouterInternal> {
     use internal::mount_router;
 
     vec![
+        mount_router::<IndexRouter>("/"),
+        mount_router::<WsRouter>("/ws"),
         mount_router::<BatteryRouter>("/battery"),
         mount_router::<DriverRouter>("/driver"),
         mount_router::<FlagsRouter>("/flags"),
@@ -42,6 +44,7 @@ pub(crate) fn mount_routers(mut rocket: Rocket<Build>) -> Rocket<Build> {
 
     rocket
         .mount("/docs", Scalar::with_url("/scalar", ApiDocs::openapi()))
+        .mount("/public", fs::FileServer::from(fs::relative!("public")))
         .register("/", catchers![not_found])
 }
 

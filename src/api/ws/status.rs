@@ -1,11 +1,12 @@
-use rocket::{futures::StreamExt, Route, State};
+use rocket::{futures::StreamExt, State};
 
-use crate::core::AppState;
+use crate::{core::AppState, docs, router};
 
-pub fn routes() -> Vec<Route> {
-    routes![ws_status_streaming]
-}
+router!(WsStatusRouter, [ws_status_streaming]);
 
+#[utoipa::path(
+    tag = docs::tags::BUS_INFO_TAG,
+)]
 #[get("/")]
 fn ws_status_streaming(ws: ws::WebSocket, state: &State<AppState>) -> ws::Channel<'_> {
     use rocket::futures::SinkExt;

@@ -16,6 +16,7 @@ pub mod tags {
     pub const AUTH_TAG: &str = "Authentication";
     pub const WEBHOOKS_TAG: &str = "Webhooks";
     pub const ANALYTICS_TAG: &str = "Analytics";
+    pub const MISC_TAG: &str = "Miscellaneous";
 }
 
 pub struct ApiDocs;

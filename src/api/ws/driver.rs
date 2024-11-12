@@ -1,14 +1,16 @@
-use rocket::{Route, State};
+use rocket::State;
 
 use crate::core::AppState;
 use crate::features::auth::guards::ExclusiveAuthDriver;
 use crate::features::bus_driver;
 use crate::features::bus_driver::schemas::BurritoRecordPayload;
+use crate::{docs, router};
 
-pub fn routes() -> Vec<Route> {
-    routes![ws_driver_message_streaming]
-}
+router!(WsDriverRouter, [ws_driver_message_streaming]);
 
+#[utoipa::path(
+    tag = docs::tags::BUS_DRIVER_TAG,
+)]
 #[get("/")]
 async fn ws_driver_message_streaming(
     driver: ExclusiveAuthDriver,
