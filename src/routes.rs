@@ -6,7 +6,7 @@ use utoipa_scalar::{Scalar, Servable as ScalarServable};
 use crate::{
     api::{
         analytics::AnalyticsRouter, auth::AuthRouter, battery::BatteryRouter, driver::DriverRouter,
-        flags::FlagsRouter, health::PingRouter, hooks::HooksRouter, index::IndexRouter,
+        flags::FlagsRouter, health::HealthRouter, hooks::HooksRouter, index::IndexRouter,
         map::MapsRouter, notifications::NotificationsRouter, pending_updates::PendingUpdatesRouter,
         session::SessionRouter, status::StatusRouter, versions::VersionsRouter, ws::WsRouter,
     },
@@ -24,8 +24,7 @@ pub(crate) fn api_routers() -> Vec<internal::ApiRouterInternal> {
         mount_router::<DriverRouter>("/driver"),
         mount_router::<FlagsRouter>("/flags"),
         mount_router::<MapsRouter>("/maps"),
-        mount_router::<PingRouter>("/health"),
-        mount_router::<PingRouter>("/ping"),
+        mount_router::<HealthRouter>("/health"),
         mount_router::<AuthRouter>("/auth"),
         mount_router::<VersionsRouter>("/versions"),
         mount_router::<PendingUpdatesRouter>("/pending_updates"),

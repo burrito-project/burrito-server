@@ -4,7 +4,7 @@ use utoipa::ToSchema;
 
 use crate::{core::utils::get_uptime, docs, router};
 
-router!(PingRouter, [ping]);
+router!(HealthRouter, [ping]);
 
 #[derive(Serialize, ToSchema)]
 struct PingResponse {
@@ -20,8 +20,9 @@ struct PingResponse {
 
 #[utoipa::path(
     tag = docs::tags::SERVER_TAG,
+    description = "Pongs with server information such as `version`, `startup` and `uptime`.",
     responses(
-        (status = 200, description = "Pongs with server information", body = PingResponse),
+        (status = 200, body = PingResponse),
     )
 )]
 #[get("/")]

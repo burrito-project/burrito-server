@@ -93,6 +93,13 @@ impl OpenApi for ApiDocs {
                         [privacy policy](https://github.com/burrito-project/public/blob/main/PRIVACY_POLICY.md).",
                     ))
                     .build(),
+                utoipa::openapi::tag::TagBuilder::new()
+                    .name(tags::SERVER_TAG)
+                    .description(Some(
+                        "Endpoints related to server status and health. This includes uptime,
+                        server version and more.",
+                    ))
+                    .build(),
             ]))
             .components(Some(utoipa::openapi::Components::new()))
             .build();
