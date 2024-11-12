@@ -84,6 +84,15 @@ impl OpenApi for ApiDocs {
                         accounts.",
                     ))
                     .build(),
+                utoipa::openapi::tag::TagBuilder::new()
+                    .name(tags::ANALYTICS_TAG)
+                    .description(Some(
+                        "Endpoints related to app analytics. Currently, this limited to
+                        usage sesions and crash reports.
+                        \nTo understand how we use this data, refer to our
+                        [privacy policy](https://github.com/burrito-project/public/blob/main/PRIVACY_POLICY.md).",
+                    ))
+                    .build(),
             ]))
             .components(Some(utoipa::openapi::Components::new()))
             .build();
@@ -98,17 +107,17 @@ impl OpenApi for ApiDocs {
 }
 
 pub mod tags {
-    pub const SERVER_TAG: &str = "Server status";
     pub const BUS_INFO_TAG: &str = "Bus information";
     pub const BUS_DRIVER_TAG: &str = "Bus driver communication";
     pub const FEATURE_FLAGS_TAG: &str = "Feature flags";
-    pub const APP_VERSIONS_TAG: &str = "App versions";
-    pub const NOTIFICATIONS_TAG: &str = "App notifications";
     pub const MAP_RENDERING_TAG: &str = "Map rendering";
     pub const AUTH_TAG: &str = "Authentication";
-    pub const WEBHOOKS_TAG: &str = "Webhooks";
     pub const ANALYTICS_TAG: &str = "Analytics";
+    pub const SERVER_TAG: &str = "Server status";
+    pub const WEBHOOKS_TAG: &str = "Webhooks";
     pub const MISC_TAG: &str = "Miscellaneous";
+    pub const NOTIFICATIONS_TAG: &str = "App notifications";
+    pub const APP_VERSIONS_TAG: &str = "App versions";
 }
 
 struct SecurityAddon;
@@ -119,11 +128,6 @@ impl Modify for SecurityAddon {
 
         components.add_security_scheme(
             "staff_user_auth",
-            SecurityScheme::ApiKey(ApiKey::Header(ApiKeyValue::new("Authorization"))),
-        );
-
-        components.add_security_scheme(
-            "app_user_auth",
             SecurityScheme::ApiKey(ApiKey::Header(ApiKeyValue::new("Authorization"))),
         );
 
