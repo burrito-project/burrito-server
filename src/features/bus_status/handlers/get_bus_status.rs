@@ -12,21 +12,12 @@ pub async fn get_burrito_status_handler(count: usize, state: &AppState) -> Burri
 
     match messages.last() {
         Some(last) => {
-            let is_off = matches!(
-                last.sts,
-                BusServiceState::OutOfService
-                    | BusServiceState::Resting
-                    | BusServiceState::Accident
-            );
-
-            // If the burrito didn't report itself as 1, 2 or 3 and it hasn't reported in the last 60 seconds,
-            // then we consider it as off
-            if !is_off && last.timestamp.elapsed().unwrap() > std::time::Duration::from_secs(60) {
+            if last.stopped_reporting() {
                 // We create an 'off' message on the fly
                 let off_message = BurritoPosRecord {
                     lt: 0.0,
                     lg: 0.0,
-                    bat: last.bat,
+                    bat: None,
                     sts: BusServiceState::inherit_from_inactive(last.sts),
                     timestamp: last.timestamp,
                     velocity: 0.0,

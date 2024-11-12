@@ -137,6 +137,21 @@ impl BurritoPosRecord {
             format!("hace {} segundos", secs)
         }
     }
+
+    /// If the burrito hasn't reported in a while, we consider it to be off.
+    /// The time it takes for a burrito to be considered off depends on its
+    /// last reported status.
+    pub fn stopped_reporting(&self) -> bool {
+        let idle_time_minutes = match self.sts {
+            BusServiceState::OnRoute => 1,
+            BusServiceState::OutOfService => 60,
+            BusServiceState::Resting => 120,
+            BusServiceState::Accident => 120,
+            BusServiceState::Off => 1,
+        };
+
+        self.timestamp.elapsed().unwrap() > std::time::Duration::from_secs(idle_time_minutes * 60)
+    }
 }
 
 /// The payload that the bus driver sends to the server, representing its current state.
