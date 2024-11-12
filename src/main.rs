@@ -83,11 +83,11 @@ async fn main() -> Result<(), rocket::Error> {
         // .mount("/session", api::session::routes())
         // .mount("/versions", api::versions::routes())
         // .mount("/analytics", api::analytics::routes())
-        .mount("/notifications", api::notifications::routes())
+        // .mount("/notifications", api::notifications::routes())
         // .mount("/pending_updates", api::pending_updates::routes())
         // .mount("/panel/versions", api::versions::routes())
         // .mount("/panel/analytics", api::analytics::routes())
-        .mount("/panel/notifications", api::notifications::routes())
+        // .mount("/panel/notifications", api::notifications::routes())
         .mount("/public", fs::FileServer::from(fs::relative!("public")))
         .attach(core::fairings::Cors)
         .manage(crate::core::AppState::from_db(pool));

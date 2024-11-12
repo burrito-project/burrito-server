@@ -7,8 +7,8 @@ use crate::{
     api::{
         analytics::AnalyticsRouter, auth::AuthRouter, battery::BatteryRouter, driver::DriverRouter,
         flags::FlagsRouter, health::PingRouter, hooks::HooksRouter, map::MapsRouter,
-        pending_updates::PendingUpdatesRouter, session::SessionRouter, status::StatusRouter,
-        versions::VersionsRouter,
+        notifications::NotificationsRouter, pending_updates::PendingUpdatesRouter,
+        session::SessionRouter, status::StatusRouter, versions::VersionsRouter,
     },
     docs::ApiDocs,
 };
@@ -31,6 +31,7 @@ pub(crate) fn api_routers() -> Vec<internal::ApiRouterInternal> {
         mount_router::<StatusRouter>("/status"),
         mount_router::<SessionRouter>("/session"),
         mount_router::<AnalyticsRouter>("/analytics"),
+        mount_router::<NotificationsRouter>("/notifications"),
     ]
 }
 
