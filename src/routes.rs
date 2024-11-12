@@ -36,6 +36,7 @@ pub(crate) fn api_routers() -> Vec<internal::ApiRouterInternal> {
     ]
 }
 
+/// Mounts all the API routers and the API documentation.
 pub(crate) fn mount_routers(mut rocket: Rocket<Build>) -> Rocket<Build> {
     for router in api_routers() {
         rocket = rocket.mount(router.base, router.routes);

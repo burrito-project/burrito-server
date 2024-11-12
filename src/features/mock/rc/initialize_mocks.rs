@@ -30,6 +30,10 @@ lazy_static! {
     };
 }
 
+/// If the app is running in mock mode, a fake bus route is loaded from the `route1.json` file
+/// and start sending requests to the driver endpoint to simulate the bus route.
+///
+/// This is also a great example of how easy a driver client could be implemented.
 pub fn initialize_mocks() {
     if !*crate::env::IS_MOCKED {
         return;
