@@ -50,8 +50,8 @@ impl<'r> FromRequest<'r> for super::schemas::AppUser {
     type Error = ();
 
     async fn from_request(request: &'r rocket::Request<'_>) -> request::Outcome<Self, ()> {
-        let authorization = match request.headers().get("authorization").next() {
-            Some(auth) => auth,
+        let auth = match request.headers().get("authorization").next() {
+            Some(auth) => auth.split_whitespace().last().unwrap_or(auth),
             None => {
                 return rocket::request::Outcome::Forward(Status::Unauthorized);
             }
@@ -59,12 +59,12 @@ impl<'r> FromRequest<'r> for super::schemas::AppUser {
 
         // The ROOT user doesn't actually exists in the database. It's a special user
         // that can do anything
-        if authorization == crate::env::ROOT_SECRET.as_str() {
+        if auth == crate::env::ROOT_SECRET.as_str() {
             return rocket::request::Outcome::Success(ROOT_USER.clone());
         }
 
         // If it's not the root secret, we try to decode it as JWT
-        let jwt = authorization;
+        let jwt = auth;
 
         let result = jsonwebtoken::decode::<super::schemas::JWTClaims>(
             jwt,
@@ -154,21 +154,15 @@ impl<'r> FromRequest<'r> for ExclusiveAuthDriver {
     type Error = ();
 
     async fn from_request(request: &'r rocket::Request<'_>) -> request::Outcome<Self, ()> {
-        let auth = match request.headers().get("authorization").next() {
-            Some(auth) => auth,
-            None => {
-                return rocket::request::Outcome::Forward(Status::Unauthorized);
+        let driver_outcome = request.guard::<AuthDriver>().await;
+
+        let bus_name = match driver_outcome {
+            rocket::outcome::Outcome::Success(driver) => driver.bus_name,
+            rocket::outcome::Outcome::Error(out) => {
+                return rocket::request::Outcome::Error(out);
             }
-        };
-
-        if auth != crate::env::AUTH_DRIVER_PASSPHRASE.as_str() {
-            return rocket::request::Outcome::Forward(Status::Unauthorized);
-        }
-
-        let bus_name = match request.headers().get_one("x-bus-id") {
-            Some(bus_name) => bus_name.to_string().to_lowercase(),
-            None => {
-                return rocket::request::Outcome::Forward(Status::BadRequest);
+            rocket::outcome::Outcome::Forward(out) => {
+                return rocket::request::Outcome::Forward(out);
             }
         };
 
@@ -194,7 +188,7 @@ impl<'r> FromRequest<'r> for AuthDriver {
 
     async fn from_request(request: &'r rocket::Request<'_>) -> request::Outcome<Self, ()> {
         let auth = match request.headers().get("authorization").next() {
-            Some(auth) => auth,
+            Some(auth) => auth.split_whitespace().last().unwrap_or(auth),
             None => {
                 return rocket::request::Outcome::Forward(Status::Unauthorized);
             }
