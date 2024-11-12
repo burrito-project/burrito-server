@@ -72,7 +72,11 @@ impl OpenApi for ApiDocs {
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::MAP_RENDERING_TAG)
-                    .description(Some("Endpoints related to map image rendering. This feature is still in development."))
+                    .description(Some(
+                        "Endpoints related to map image rendering.\n\nThanks to these endpoints you
+                        don't even need to build a client to display the bus location on a map.
+                        This feature is **still in development**.",
+                    ))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::AUTH_TAG)
