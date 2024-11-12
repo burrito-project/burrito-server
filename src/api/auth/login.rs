@@ -1,11 +1,11 @@
-use rocket::{http::Status, serde::json::Json, State};
+use rocket::{serde::json::Json, State};
 
 use crate::core::types::ApiResponse;
 use crate::core::AppState;
 use crate::features::auth;
 use crate::{docs, router};
 
-router!(AuthLoginRouter, [user_login, options]);
+router!(AuthLoginRouter, [user_login]);
 
 #[utoipa::path(
     tag = docs::tags::AUTH_TAG,
@@ -22,12 +22,4 @@ pub async fn user_login(
     state: &State<AppState>,
 ) -> ApiResponse<Json<auth::schemas::UserLoginResponse>> {
     auth::handlers::user_login_handler(payload, state).await
-}
-
-#[utoipa::path(
-    tag = docs::tags::AUTH_TAG,
-)]
-#[options("/")]
-pub fn options() -> Status {
-    Status::Ok
 }

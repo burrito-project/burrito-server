@@ -1,5 +1,5 @@
 use rocket::serde::json::Json;
-use rocket::{http::Status, State};
+use rocket::State;
 
 use crate::core::types::BurritoAPIError;
 use crate::core::AppState;
@@ -13,7 +13,7 @@ use crate::{
 };
 use crate::{docs, router};
 
-router!(SessionRouter, [post_session, options]);
+router!(SessionRouter, [post_session]);
 
 #[utoipa::path(
     description =
@@ -41,10 +41,4 @@ pub async fn post_session(
     Ok(Json(
         identities::handlers::post_session_handler(remote_addr, payload, state).await,
     ))
-}
-
-#[utoipa::path(tag = docs::tags::ANALYTICS_TAG)]
-#[options("/")]
-pub fn options() -> Status {
-    Status::Ok
 }

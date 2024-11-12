@@ -1,5 +1,5 @@
 use rocket::serde::json::Json;
-use rocket::{http::Status, State};
+use rocket::State;
 
 use crate::core::types::{ApiResponse, BurritoAPIError, JsonResult};
 use crate::core::AppState;
@@ -9,12 +9,7 @@ use crate::{docs, router};
 
 router!(
     NotificationsRouter,
-    [
-        get_notifications,
-        post_notifications,
-        delete_notification,
-        options
-    ]
+    [get_notifications, post_notifications, delete_notification]
 );
 
 #[utoipa::path(
@@ -73,12 +68,4 @@ async fn delete_notification(
     state: &State<AppState>,
 ) -> ApiResponse<Json<notifications::schemas::Notification>> {
     notifications::handlers::delete_notification_handler(id, state).await
-}
-
-#[utoipa::path(
-    tag = docs::tags::NOTIFICATIONS_TAG,
-)]
-#[options("/")]
-pub fn options() -> Status {
-    Status::Ok
 }
