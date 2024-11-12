@@ -5,7 +5,7 @@ use utoipa::ToSchema;
 use crate::features::bus_stops::schemas::BusStopInfo;
 
 #[allow(unused)]
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, ToSchema)]
 pub struct WsClientMessage {
     pub record: BurritoPosRecord,
     pub last_stop: Option<BusStopInfo>,

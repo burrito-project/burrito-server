@@ -1,11 +1,20 @@
 use rocket::{futures::StreamExt, State};
 
-use crate::{core::AppState, docs, router};
+use crate::{core::AppState, docs, features::bus_driver, router};
 
 router!(WsStatusRouter, [ws_status_streaming]);
 
 #[utoipa::path(
     tag = docs::tags::BUS_INFO_TAG,
+    description =
+        "WebSocket endpoint for clients to receive the latest bus status updates.
+        The message schema is defined in the body of the `200` response.
+        \nFor every bus update, a message is broadcasted to all the clients connected.
+        \nAlthough the official client does not use this endpoint, it is considered production ready.",
+    responses(
+        (status = 101, description = "Switching protocols"),
+        (status = 200, description = "", body = bus_driver::schemas::WsClientMessage),
+    ),
 )]
 #[get("/")]
 fn ws_status_streaming(ws: ws::WebSocket, state: &State<AppState>) -> ws::Channel<'_> {

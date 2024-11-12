@@ -5,32 +5,29 @@ use utoipa::{
 
 use crate::{routes::api_routers, HOST_URL, SELF_URL};
 
-pub mod tags {
-    pub const SERVER_TAG: &str = "Server status";
-    pub const BUS_INFO_TAG: &str = "Bus information";
-    pub const BUS_DRIVER_TAG: &str = "Bus driver communication";
-    pub const FEATURE_FLAGS_TAG: &str = "Feature flags";
-    pub const APP_VERSIONS_TAG: &str = "App versions";
-    pub const NOTIFICATIONS_TAG: &str = "App notifications";
-    pub const MAP_RENDERING_TAG: &str = "Map rendering";
-    pub const AUTH_TAG: &str = "Authentication";
-    pub const WEBHOOKS_TAG: &str = "Webhooks";
-    pub const ANALYTICS_TAG: &str = "Analytics";
-    pub const MISC_TAG: &str = "Miscellaneous";
-}
-
+/// We provide and host our own OpenAPI documentation using
+/// [utoipa](https://github.com/juhaku/utoipa), a compile-time OpenAPI generator.
+///
+/// This class directly consumes the routes defined in crate::routes::api_routers
+/// and nests them into a single OpenAPI document.
 pub struct ApiDocs;
 
 impl OpenApi for ApiDocs {
+    /// See <https://docs.rs/utoipa/latest/utoipa/derive.OpenApi.html>
     fn openapi() -> utoipa::openapi::OpenApi {
-        // See <https://docs.rs/utoipa/latest/utoipa/derive.OpenApi.html>
         let mut open_api = utoipa::openapi::OpenApiBuilder::new()
             .info(
                 utoipa::openapi::InfoBuilder::new()
                     .title("Burrito API")
                     .version(env!("CARGO_PKG_VERSION"))
-                    .description(Some(env!("CARGO_PKG_DESCRIPTION")))
+                    .description(Some(
+                        concat!(
+                            env!("CARGO_PKG_DESCRIPTION"),
+                            "\n![App logo](/public/img/banner.png)"
+                        )
+                    ))
                     .contact(Some(
+                        // Reach out me everywhere 🐢
                         utoipa::openapi::ContactBuilder::new()
                             .name(Some("@paoloose"))
                             .url(Some("https://paoloose.site"))
@@ -41,22 +38,29 @@ impl OpenApi for ApiDocs {
             )
             .servers(Some(vec![
                 utoipa::openapi::ServerBuilder::new()
-                    .url(SELF_URL)
-                    .description(Some("Local testing server"))
-                    .build(),
-                utoipa::openapi::ServerBuilder::new()
                     .url(HOST_URL)
                     .description(Some("Production server"))
+                    .build(),
+                utoipa::openapi::ServerBuilder::new()
+                    .url(SELF_URL)
+                    .description(Some("Local testing server"))
                     .build(),
             ]))
             .tags(Some(vec![
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::BUS_INFO_TAG)
-                    .description(Some("Endpoints related to real-time bus information. This includes bus status, bus stops, device battery and more."))
+                    .description(Some(
+                        "Endpoints related to real-time bus information. This includes bus status,
+                        bus stops, device battery and more.\n\nThese are the only endpoints that
+                        simple clients would probably ever need.",
+                    ))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::BUS_DRIVER_TAG)
-                    .description(Some("Endpoints related to bus driver app communication. This includes bus driver status, location and more."))
+                    .description(Some(
+                        "Endpoints related to bus driver app communication. This includes bus
+                        driver status, location and more."
+                    ))
                     .build(),
                 utoipa::openapi::tag::TagBuilder::new()
                     .name(tags::FEATURE_FLAGS_TAG)
@@ -81,6 +85,20 @@ impl OpenApi for ApiDocs {
         SecurityAddon.modify(&mut open_api);
         open_api
     }
+}
+
+pub mod tags {
+    pub const SERVER_TAG: &str = "Server status";
+    pub const BUS_INFO_TAG: &str = "Bus information";
+    pub const BUS_DRIVER_TAG: &str = "Bus driver communication";
+    pub const FEATURE_FLAGS_TAG: &str = "Feature flags";
+    pub const APP_VERSIONS_TAG: &str = "App versions";
+    pub const NOTIFICATIONS_TAG: &str = "App notifications";
+    pub const MAP_RENDERING_TAG: &str = "Map rendering";
+    pub const AUTH_TAG: &str = "Authentication";
+    pub const WEBHOOKS_TAG: &str = "Webhooks";
+    pub const ANALYTICS_TAG: &str = "Analytics";
+    pub const MISC_TAG: &str = "Miscellaneous";
 }
 
 struct SecurityAddon;

@@ -16,8 +16,12 @@ struct BatteryResponse {
 
 #[utoipa::path(
     tag = docs::tags::BUS_INFO_TAG,
+    description =
+        "Returns the last known bus driver app battery. If the bus has been idle for a while, a
+        `null` value is returned.
+        \n\nTo see the full battery history, use the `/status` endpoint instead.",
     responses(
-        (status = 200, description = "Returns the bus driver app battery", body = BatteryResponse),
+        (status = 200, body = BatteryResponse),
     )
 )]
 #[get("/")]
