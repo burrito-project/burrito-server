@@ -13,4 +13,4 @@ iterating over the mocked route records.
 ## Why would I use this?
 
 This feature is useful for showcasing the app without having to rely on
-a real bus driver, or testing purposes.
+a real bus driver, or testing purposes and MUST NOT be used in production.
