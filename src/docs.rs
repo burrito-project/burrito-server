@@ -19,10 +19,11 @@ impl OpenApi for ApiDocs {
             .info(
                 utoipa::openapi::InfoBuilder::new()
                     .title("Burrito API")
+                    .terms_of_service("https://github.com/burrito-project/public/blob/main/TERMS_OF_SERVICE.md".into())
                     .version(env!("CARGO_PKG_VERSION"))
                     .description(Some(concat!(
                         env!("CARGO_PKG_DESCRIPTION"),
-                        "\n![App logo](/public/img/banner.png)"
+                        "\n![App logo](/public/img/banner.jpg)"
                     )))
                     .contact(Some(
                         // Reach out me everywhere 🐢
