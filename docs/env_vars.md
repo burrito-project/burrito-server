@@ -14,8 +14,8 @@ defined in the `src/env.rs` file, so you can use them in your code like this:
 
 ```rust
 fn main() {
-    let port: u16 = *crate::env::PORT;
-    println!("Server running on port {}", port);
+  let port: u16 = *crate::env::PORT;
+  println!("Server running on port {}", port);
 }
 ```
 
@@ -58,8 +58,8 @@ CLOUDINARY_API_SECRET="mJd3bbkWa5mPVKuNBgCLxjY5FSM"
 ```
 
 <div class="warning">
-The above examples does not contain any valid credentials and are just
-examples of how a real .env file would look like in both cases.
+The above files does not contain any valid credentials and just
+demonstrate how a real .env file would look like in both cases.
 </div>
 
 ## Uploading the production variables to GitHub
