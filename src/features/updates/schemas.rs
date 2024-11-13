@@ -93,17 +93,20 @@ pub struct PendingUpdate {
     pub semver: String,
     #[schema(example = "https://picsum.photos/id/866/400")]
     pub banner_url: String,
-    #[schema(example = false)]
+    #[schema(example = true)]
     pub is_mandatory: bool,
     #[schema(example = "2019-10-12T07:20:50.52Z")]
     pub release_date: String,
-    #[schema(example = "2019-10-12T07:20:50.52Z")]
+    #[schema(
+        example = "This is a LONG summary of the changes that are introduced in the new version that can even include breaklines."
+    )]
     pub release_notes: String,
 }
 
 #[derive(Serialize, ToSchema)]
 pub struct PendingUpdatesResponse {
     /// Whether, based on the versions available, the user must update the app to continue using it.
+    #[schema(example = true)]
     pub must_update: bool,
     /// List of pending updates. This list is sorted by version number in descending order.
     pub versions: Vec<PendingUpdate>,
