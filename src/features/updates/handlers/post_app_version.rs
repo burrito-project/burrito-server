@@ -1,15 +1,13 @@
 use rocket::State;
-use serde_json::json;
 
-use crate::core::types::ApiResponse;
 use crate::core::AppState;
 use crate::features::updates::schemas;
 
 pub async fn post_app_version_handler(
     payload: schemas::AppVersionPayload,
     state: &State<AppState>,
-) -> ApiResponse {
-    let new_version = sqlx::query_as!(
+) -> schemas::AppVersion {
+    sqlx::query_as!(
         schemas::AppVersion,
         "INSERT INTO app_versions
         (semver, banner_url, is_mandatory, platform, release_date, release_notes)
@@ -24,7 +22,5 @@ pub async fn post_app_version_handler(
     )
     .fetch_one(&state.pool)
     .await
-    .unwrap();
-
-    Ok(json!(new_version))
+    .unwrap()
 }

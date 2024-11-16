@@ -35,6 +35,13 @@ const NOT_INTERNAL: bool = false;
 const PROTECTED: bool = true;
 const NOT_PROTECTED: bool = false;
 
+/// Setup the list of must-have flags for the app to work.
+///
+/// Define a new "base flag" here if there is some functionality you want to tweak
+/// without having to redeploy the app.
+///
+/// Before creating an env variable to conditionally enable/disable some logic, first
+/// consider using a flag instead.
 pub async fn setup_base_flags(pool: &Pool<Postgres>) -> Result<(), sqlx::Error> {
     create_flag_if_not_exists(
         pool,

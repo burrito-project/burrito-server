@@ -1,9 +1,8 @@
 use base64::prelude::*;
-use rocket::{http::Status, response::status, State};
-use serde_json::json;
+use rocket::serde::json::Json;
+use rocket::State;
 
-use crate::core::responses;
-use crate::core::types::ApiResponse;
+use crate::core::types::{ApiResponse, BurritoAPIError};
 use crate::core::AppState;
 use crate::features::cdn::{self, ProvideImageService};
 use crate::features::notifications::schemas;
@@ -13,14 +12,11 @@ const NOTIFICATIONS_PATH: &str = "burrito/notifications/";
 pub async fn post_notification_handler(
     payload: schemas::NotificationPayload,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> ApiResponse<Json<schemas::Notification>> {
     let image_url: Option<String> = match payload.image_base64 {
         Some(base64_data) => {
             if !base64_data.starts_with("data:image/") {
-                return Err(status::Custom(
-                    Status::BadRequest,
-                    responses::error_response("Invalid image data"),
-                ));
+                return BurritoAPIError::bad_request(Some("Invalid image data"), None);
             }
 
             let is_png = base64_data.starts_with("data:image/png;base64,");
@@ -29,11 +25,9 @@ pub async fn post_notification_handler(
             if is_png {
                 let decoded = BASE64_STANDARD
                     .decode(base64_data.split(",").last().unwrap())
-                    .map_err(|e| {
-                        status::Custom(
-                            Status::BadRequest,
-                            responses::error_response(format!("Failed to decode image: {:?}", e)),
-                        )
+                    .map_err(|e| BurritoAPIError::BadRequest {
+                        user_message: format!("Failed to decode image: {:?}", e).into(),
+                        error: None,
                     })?;
 
                 let result = oxipng::optimize_from_memory(
@@ -43,11 +37,9 @@ pub async fn post_notification_handler(
                         ..Default::default()
                     },
                 )
-                .map_err(|e| {
-                    status::Custom(
-                        Status::BadRequest,
-                        responses::error_response(format!("Failed to optimize image: {:?}", e)),
-                    )
+                .map_err(|e| BurritoAPIError::BadRequest {
+                    user_message: format!("Failed to decode image: {:?}", e).into(),
+                    error: None,
                 })?;
 
                 base64_data = format!(
@@ -59,11 +51,9 @@ pub async fn post_notification_handler(
             // All notification types accept images so it's not necessary to check the ad_type
             let uploaded_url = cdn::ImageService::upload_image(base64_data, NOTIFICATIONS_PATH)
                 .await
-                .map_err(|e| {
-                    status::Custom(
-                        Status::BadRequest,
-                        responses::error_response(format!("Failed to upload image: {:?}", e)),
-                    )
+                .map_err(|e| BurritoAPIError::BadRequest {
+                    user_message: format!("Failed to decode image: {:?}", e).into(),
+                    error: Some(e.to_string()),
                 })?;
 
             Some(uploaded_url)
@@ -91,5 +81,5 @@ pub async fn post_notification_handler(
     .await
     .unwrap();
 
-    Ok(json!(new_notification))
+    Ok(Json(new_notification))
 }

@@ -1,24 +1,21 @@
 use rocket::State;
-use serde_json::json;
 
-use crate::core::{types::ApiResponse, AppState};
+use crate::core::AppState;
 use crate::features::analytics::entities;
 
-pub async fn get_crash_reports_handler(state: &State<AppState>) -> ApiResponse {
-    let crash_reports = sqlx::query_as!(entities::CrashReport, "SELECT * FROM crash_reports;")
+pub async fn get_crash_reports_handler(state: &State<AppState>) -> Vec<entities::CrashReport> {
+    sqlx::query_as!(entities::CrashReport, "SELECT * FROM crash_reports;")
         .fetch_all(&state.pool)
         .await
-        .unwrap();
-
-    Ok(json!(crash_reports))
+        .unwrap()
 }
 
 pub async fn create_crash_reports_handler(
     issuer: String,
     payload: entities::CrashReportPayload,
     state: &State<AppState>,
-) -> ApiResponse {
-    let crash_report = sqlx::query_as!(
+) -> entities::CrashReport {
+    sqlx::query_as!(
         entities::CrashReport,
         "INSERT INTO crash_reports
         (issuer, error, stacktrace)
@@ -30,7 +27,5 @@ pub async fn create_crash_reports_handler(
     )
     .fetch_one(&state.pool)
     .await
-    .unwrap();
-
-    Ok(json!(crash_report))
+    .unwrap()
 }

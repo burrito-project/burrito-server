@@ -1,4 +1,4 @@
-use geo::{Centroid, Contains, GeodesicDistance, Polygon};
+use geo::{Centroid, Contains, Distance, Geodesic, Polygon};
 use geojson::{FeatureCollection, GeoJson};
 use lazy_static::lazy_static;
 use std::time::SystemTime;
@@ -58,10 +58,7 @@ pub fn get_bus_stop_for_point(lat: f64, lng: f64) -> Option<BusStopInfo> {
         let number = props.get("num").unwrap().as_i64().unwrap() as i32;
 
         if poly.contains(&geo::Point::new(lng, lat)) {
-            let distance = poly
-                .centroid()
-                .unwrap()
-                .geodesic_distance(&geo::Point::new(lng, lat));
+            let distance = Geodesic::distance(poly.centroid().unwrap(), geo::Point::new(lng, lat));
 
             return Some(BusStopInfo {
                 name,
@@ -98,10 +95,10 @@ pub fn get_next_bus_stop(current: &BusStopInfo, current_pos: LatLng) -> BusStopI
     let number = props.get("num").unwrap().as_i64().unwrap() as i32;
 
     let poly = feature_to_polygon(next_stop);
-    let distance = poly
-        .centroid()
-        .unwrap()
-        .geodesic_distance(&geo::Point::new(current_pos.lng, current_pos.lat));
+    let distance = Geodesic::distance(
+        poly.centroid().unwrap(),
+        geo::Point::new(current_pos.lng, current_pos.lat),
+    );
 
     BusStopInfo {
         name,
@@ -130,5 +127,8 @@ pub fn get_distance_to_bus_stop(current: &BusStopInfo, current_post: LatLng) -> 
 
     let centroid = poly.centroid().unwrap();
 
-    centroid.geodesic_distance(&geo::Point::new(current_post.lng, current_post.lat))
+    Geodesic::distance(
+        centroid,
+        geo::Point::new(current_post.lng, current_post.lat),
+    )
 }

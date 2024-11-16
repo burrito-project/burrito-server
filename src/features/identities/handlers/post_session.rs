@@ -1,19 +1,28 @@
 use rocket::State;
-use serde_json::json;
+use sha2::{Digest, Sha256};
 use sqlx::types::ipnetwork::IpNetwork;
 
+use crate::core::guards::ForwardedIp;
 use crate::core::AppState;
-use crate::core::{guards::ForwardedIp, types::ApiResponse};
 use crate::features::identities::schemas;
 
 pub async fn post_session_handler(
     remote_addr: ForwardedIp,
     payload: schemas::UserIdentityPayload,
     state: &State<AppState>,
-) -> ApiResponse {
+) -> schemas::UserIdentity {
+    let mut payload = payload;
     let user_ip = IpNetwork::new(remote_addr.into(), 32).unwrap();
 
-    let new_notification = sqlx::query_as!(
+    // In old versions, we just accepted the fingerprint as is, giving the hashing
+    // responsibility to the client. Now we hash it server-side even if it's already hashed.
+    if payload.fingerprint.len() != 64 || hex::decode(&payload.fingerprint).is_err() {
+        let mut hasher = Sha256::new();
+        hasher.update(payload.fingerprint.as_bytes());
+        payload.fingerprint = hex::encode(&hasher.finalize()[..]);
+    }
+
+    sqlx::query_as!(
         schemas::UserIdentity,
         "INSERT INTO user_identities (fingerprint, last_ip, last_version, platform, session_count)
         VALUES ($1, $2, $3, $4, 1)
@@ -31,7 +40,5 @@ pub async fn post_session_handler(
     )
     .fetch_one(&state.pool)
     .await
-    .unwrap();
-
-    Ok(json!(new_notification))
+    .unwrap()
 }

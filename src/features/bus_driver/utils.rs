@@ -1,4 +1,4 @@
-use geo::GeodesicDistance;
+use geo::{Distance, Geodesic};
 use std::time::Duration;
 
 use crate::features::bus_driver::schemas::BurritoPosRecord;
@@ -25,7 +25,7 @@ pub fn calculate_velocity_kmph(positions: &[BurritoPosRecord]) -> f64 {
         let lon2 = pos2.lg;
 
         // meters
-        let distance = geo::Point::new(lat1, lon1).geodesic_distance(&geo::Point::new(lat2, lon2));
+        let distance = Geodesic::distance(geo::Point::new(lat1, lon1), geo::Point::new(lat2, lon2));
 
         total_distance += distance;
 

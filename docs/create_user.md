@@ -5,8 +5,6 @@
 Currently there is no way to create a new user from the API, you'll need direct database access to
 the `internal` schema.
 
-![Alt text](https://cdn.discordapp.com/emojis/1184175117840961606.webp?size=96&quality=lossless)
-
 There is a DB **procedure** `internal.create_user` exactly for this purpose.
 
 ```sql
@@ -69,4 +67,5 @@ This functions is used under the hood on app routes that require authentication.
 
 ### Why this even exists?
 
-So Postgres is responsible of hashing the password and storing it securely.
+So Postgres is responsible of hashing the password and storing it securely. The server
+is not responsible for hashing or verifying anything.
