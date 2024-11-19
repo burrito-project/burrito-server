@@ -1,17 +1,25 @@
-<!-- markdownlint-disable MD041 -->
+<!-- markdownlint-disable MD033 MD041 -->
 
-## Creating a new app user
+# Creando un nuevo usuario de la aplicación
 
-Currently there is no way to create a new user from the API, you'll need direct database access to
-the `internal` schema.
+Actualmente no hay forma de crear un nuevo usuario desde la API, necesitarás
+acceso directo a la base de datos al esquema `internal`.
 
-There is a DB **procedure** `internal.create_user` exactly for this purpose.
+<div class="warning">
+Todas las funciones y procedimientos mostrados en este capítulo fueron
+definidos en la migración "migrations/0006_users.up.sql"
+
+Recordar que la aplicación no depende de usuarios para funcionar. Actualmente
+los usuarios son solo usados para propósitos administrativos.
+</div>
+
+Existe un **procedure** llamado `internal.create_user` específicamente para este propósito.
 
 ```sql
 \df internal.create_user
 ```
 
-Its (current) definition is as follows:
+Su definición (actual) es la siguiente:
 
 ```sql
 CREATE OR REPLACE PROCEDURE internal.create_user(
@@ -23,7 +31,7 @@ CREATE OR REPLACE PROCEDURE internal.create_user(
 )
 ```
 
-For example, in the local dev container you would do the following:
+Por ejemplo, en el contenedor de desarrollo local harías lo siguiente:
 
 ```console
 $ psql 'postgres://admin:dontship@localhost/burrito_app'
@@ -31,15 +39,16 @@ $ psql 'postgres://admin:dontship@localhost/burrito_app'
 burrito_app=# CALL internal.create_user('username', 'Display Name', 'pass123', true, true);
 ```
 
-### Changing the user password
+## Cambiando la contraseña del usuario
 
-There is a DB **procedure** `internal.change_password` for changing a user's password.
+Existe un **procedure** llamado `internal.change_password` para cambiar la
+contraseña de un usuario.
 
 ```sql
 \df internal.change_password
 ```
 
-For example, to change the password of the user created in the previous step:
+Por ejemplo, para cambiar la contraseña del usuario creado en el paso anterior:
 
 ```console
 $ psql 'postgres://admin:dontship@localhost/burrito_app'
@@ -47,15 +56,16 @@ $ psql 'postgres://admin:dontship@localhost/burrito_app'
 burrito_app=# CALL internal.change_password('username', 'newpass123');
 ```
 
-### Verifying the user
+## Verifying the user
 
-Similarly, there is a DB **function** `internal.get_auth_user` for querying a user by its username and password.
+De manera similar, existe una **function** llamada `internal.get_auth_user`
+para consultar un usuario por su nombre de usuario y contraseña.
 
 ```sql
 \df internal.get_auth_user
 ```
 
-For example, to verify the user created in the previous step:
+Por ejemplo, para verificar el usuario creado en el paso anterior:
 
 ```console
 $ psql 'postgres://admin:dontship@localhost/burrito_app'
@@ -63,9 +73,14 @@ $ psql 'postgres://admin:dontship@localhost/burrito_app'
 burrito_app=# SELECT * FROM internal.get_auth_user('username', 'pass123');
 ```
 
-This functions is used under the hood on app routes that require authentication.
+Esta función se utiliza internamente en las rutas de la aplicación que
+requieren autenticación.
 
-### Why this even exists?
+## ¿Por qué hacerlo de esta forma?
 
-So Postgres is responsible of hashing the password and storing it securely. The server
-is not responsible for hashing or verifying anything.
+De esta forma, Postgres es responsable de hashear la contraseña y almacenarla
+de forma segura. El servidor no es responsable de hashear ni verificar nada.
+
+Si se desean exponer endpoints de registro/login de usuarios, se tendrían
+que llamar estas funciones desde el backend. Puedes ver un ejemplo de esto en
+`src/features/auth/handlers/login.rs`.

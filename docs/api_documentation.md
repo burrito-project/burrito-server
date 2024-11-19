@@ -1,22 +1,22 @@
-# API documentation
+# Documentación de la API
 
-For the API documentation we followed a code-first approach. The documentation
-is generated from the source code using [`utoipa`](https://github.com/juhaku/utoipa),
-which generates an OpenAPI 3.1 specification file at compile time.
+Para la documentación de la API seguimos un enfoque de código primero. La documentación
+se genera a partir del código fuente utilizando [`utoipa`](https://github.com/juhaku/utoipa),
+que genera un archivo de especificación OpenAPI 3.1 en tiempo de compilación.
 
-This specification is then consumed and rendered by
-[Scalar](https://github.com/scalar/scalar). The final document result is served
-by the API itself, and can be publicly accessed at `/docs`.
+Esta especificación es luego consumida y renderizada por
+[Scalar](https://github.com/scalar/scalar). El resultado final del documento es servido
+por la propia API y puede ser accedido públicamente en `/docs`.
 
-![API Documentation](./static/api_docs.png)
+![Documentación de la API](./static/api_docs.png)
 
-Live documentation is hosted in <https://api.contigosanmarcos.com/docs>.
+Puedes consultar la documentación online en <https://api.contigosanmarcos.com/docs>.
 
-## Documenting API endpoints
+## Documentar los endpoints de la API
 
-To document a route you use the `path` attribute macro from `utoipa`. This
-macro takes several arguments to document the endpoint. The most important
-are shown in this `PATCH /flag/id` example:
+Para documentar una ruta se utiliza la macro `path` del atributo de `utoipa`.
+Esta macro toma varios argumentos para documentar el endpoint. Los más
+importantes se muestran en este ejemplo de `PATCH /flag/id`:
 
 ```rust,no_run,noplayground
 #[utoipa::path(
@@ -41,5 +41,5 @@ async fn patch_app_version(
 }
 ```
 
-Refer to the [utoipa::path](https://docs.rs/utoipa/latest/utoipa/attr.path.html)
-documentation for more details.
+Consulta la documentación de [utoipa::path](https://docs.rs/utoipa/latest/utoipa/attr.path.html)
+para más detalles.
