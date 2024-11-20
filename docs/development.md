@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD033 MD045 -->
 
-# Desarrollo en el proyecto Burrito
+# Cómo desarrollar en el proyecto
 
 ## Ejecutando el servidor para desarrollo
 
@@ -61,6 +61,6 @@ Consulta [database management](./database_management.md) para aprender cómo ges
 
 ## Simulación de rutas para propósitos de demostración
 
-¿No hay conductor trabajando hoy? ¡No hay problema! Puedes simular las rutas configurando `IS_MOCKED=true` en el archivo `.env`. Las rutas simuladas serán leídas desde `static/mocks/*.json`. Consulta `mock.rs` para más detalles.
+¿No hay conductor trabajando hoy y quieres testear la aplicación? ¡No hay problema! Puedes simular las rutas configurando `IS_MOCKED=true` en el archivo `.env`. Las rutas simuladas serán leídas desde `static/mocks/*.json`. Consulta `mock.rs` para más detalles.
 
 Una vez que configures `IS_MOCKED=true`, puedes iniciar el servidor como de costumbre. La simulación funciona enviando solicitudes `POST /driver` a nosotros mismos, iterando sobre los registros de rutas simuladas.
