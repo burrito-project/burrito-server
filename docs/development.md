@@ -1,40 +1,42 @@
 <!-- markdownlint-disable MD033 MD045 -->
 
-# Desarrollo en el proyecto Burrito
+# Development in the burrito project
 
-## Ejecutando el servidor para desarrollo
+## Running the server for development
 
-Debido a que [sqlx](https://github.com/launchbadge/sqlx) verifica las consultas en tiempo de compilación, la base de datos de desarrollo debe estar en funcionamiento.  
-La forma más sencilla es ejecutar el contenedor de la base de datos de desarrollo con:
+Because [sqlx](https://github.com/launchbadge/sqlx) checks the queries at
+compile time, the development databse must be running.
+The easiest way is to run the development db container with.
 
 ```bash
-# Ver docker-compose.yml
+# See docker-compose.yml
 docker compose up --build
 ```
 
-Una vez que tengas la base de datos en funcionamiento, inicia el servidor con:
+Once you have the database running, then you start the server with
 
 ```bash
 cargo run
 ```
 
 <div class="warning">
-El flujo de trabajo de producción es completamente diferente de este. Por favor, consulta la
-sección de despliegue para más información.
+The production workflow is completely different from this. Please refer to the
+deployment section for more information.
 </div>
 
-Asegúrate de verificar que las variables de tu archivo `.env` y las variables de Docker estén configuradas correctamente.
+Please make sure to double check that your .env variables and Docker variables are set
+correctly.
 
-## Configuración de VSCode
+## VSCode configuration
 
-Es posible que desees agregar las siguientes extensiones:
+You may want to add the following extensions:
 
 - Rust
 - rust-analyzer
 - Dependi
 - PostgreSQL Language Server
 
-Y estas configuraciones pueden ser útiles:
+And the following configurations may be useful to add:
 
 ```json
 {
@@ -55,12 +57,16 @@ Y estas configuraciones pueden ser útiles:
 }
 ```
 
-## Gestión local de la base de datos
+## Local database management
 
-Consulta [database management](./database_management.md) para aprender cómo gestionar tu base de datos localmente, crear y revertir migraciones.
+Read the [database management](./database_management.md) to know how to
+locally manage your database, create and revert migrations.
 
-## Simulación de rutas para propósitos de demostración
+## Mocking routes for showcasing purposes
 
-¿No hay conductor trabajando hoy? ¡No hay problema! Puedes simular las rutas configurando `IS_MOCKED=true` en el archivo `.env`. Las rutas simuladas serán leídas desde `static/mocks/*.json`. Consulta `mock.rs` para más detalles.
+No bus driver working today? No problem! You can mock the routes by setting `IS_MOCKED=true` in
+the env file. The mocked route will be read from `static/mocks/*.json`. See `mock.rs` for more
+details.
 
-Una vez que configures `IS_MOCKED=true`, puedes iniciar el servidor como de costumbre. La simulación funciona enviando solicitudes `POST /driver` a nosotros mismos, iterando sobre los registros de rutas simuladas.
+Once you have set `IS_MOCKED=true`, you can start the server as usual. Mocking works by sending
+`POST /driver` requests to ourselves, iterating over the mocked route records.
