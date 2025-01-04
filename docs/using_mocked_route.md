@@ -1,6 +1,6 @@
 # Usando una ruta de autobús simulada
 
-¿No hay conductor del burrito? ¡No hay problema! Puedes iniciar la aplicación con una ruta simulada
+¿No hay conductor de autobús? ¡No hay problema! Puedes iniciar la aplicación con una ruta simulada
 configurando `IS_MOCKED=true` en el archivo .env.
 
 La ruta simulada se leerá desde `static/mocks/*.json`. Consulta `mock.rs` para más
