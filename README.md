@@ -2,8 +2,7 @@
 
 Status: Production ready
 
-La API de Burrito sirve todos los datos del servidor (versiones de la app, 
-notificaciones, flags, sesiones) y actúa como puente de comunicación entre 
-la aplicación del conductor del autobús y la aplicación del usuario.
+The Burrito API serves all the server data (app versions, notifications, flags, sessions)
+and is the communication bridge between the bus driver application and user application.
 
-El servidor está escrito en Rust y utiliza el framework web Rocket.
+The server is written in Rust and uses the Rocket web framework.
