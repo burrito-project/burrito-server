@@ -1,14 +1,16 @@
 <!-- markdownlint-disable MD033 MD045 -->
 
-# Variables de entorno
+# Environment variables
 
-El archivo `.env.example` muestra una lista actualizada de todas las variables de entorno que utiliza el servidor. Comienza copiando el archivo de ejemplo a `.env`:
+The `.env.example` shows an up-to-date list of all environment variables that
+the server uses. Start by copying the example file to `.env`:
 
 ```bash
 cp .env.example .env
 ```
 
-Todas las variables definidas aquí se corresponden directamente con una variable global estática de Rust definida en el archivo `src/env.rs`, por lo que puedes utilizarlas en tu código de esta forma:
+All the variables defined here directly map an static, global Rust variable
+defined in the `src/env.rs` file, so you can use them in your code like this:
 
 ```rust
 fn main() {
@@ -17,9 +19,9 @@ fn main() {
 }
 ```
 
-## Ejemplos
+## Examples
 
-Un archivo .env listo para usar en desarrollo se vería así:
+A ready-to-go .env file for development would look like this:
 
 ```bash
 IS_MOCKED=false
@@ -36,7 +38,7 @@ CLOUDINARY_CLOUD_NAME="sea1jk51z"
 CLOUDINARY_API_SECRET="mJd3bbkWa5mPVKuNBgCLxjY5FSM"
 ```
 
-Un archivo .env para producción se vería así:
+A .env file for production would look like this:
 
 ```bash
 IS_MOCKED=false
@@ -56,28 +58,28 @@ CLOUDINARY_API_SECRET="mJd3bbkWa5mPVKuNBgCLxjY5FSM"
 ```
 
 <div class="warning">
-Los archivos anteriores no contienen credenciales válidas y solo
-demuestran cómo se vería un archivo .env real en ambos casos.
+The above files does not contain any valid credentials and just
+demonstrate how a real .env file would look like in both cases.
 </div>
 
-## Subiendo las variables de producción a GitHub
+## Uploading the production variables to GitHub
 
-Si estás utilizando el pipeline de GitHub CI, asegúrate de configurar las variables en
-la configuración del repositorio de GitHub. Puedes encontrarlas en la pestaña `Settings`, bajo
-`Secrets and Variables > Actions`.
+If you are using the GitHub CI pipeline, make sure to set the variables in the
+GitHub repository settings. You can find them in the `Settings` tab, under
+`Secrets and Variables > Actions` section.
 
 <img src="./static/repo_secrets.png"></img>
 
 <img src="./static/repo_variables.png"></img>
 
-Descripción de los secretos:
+Secrets description:
 
-- `ENV_FILE`: Una copia exacta del contenido del archivo .env de producción.
-- `SSH_KEY`: La clave SSH privada que se utilizará para conectarse al servidor.
-  Esto asume que la clave pública ya está en el archivo `authorized_keys` del servidor.
+- `ENV_FILE`: An exact copy of the production .env file content.
+- `SSH_KEY`: The private SSH key that will be used to connect to the server.
+  This assumes the public key is already in the server's `authorized_keys` file.
 
-Descripción de las variables:
+Variables description:
 
-- `SSH_HOST`: El host donde se ejecuta el servidor.
-- `SSH_USERNAME`: El usuario que se utilizará para conectarse al servidor.
-- `SSH_REPO_PATH`: La ruta donde ya está clonado el repositorio en el servidor.
+- `SSH_HOST`: The host where the server is running.
+- `SSH_USERNAME`: The user that will be used to connect to the server.
+- `SSH_REPO_PATH`: The path where the repository is already cloned in the server.
