@@ -1,16 +1,16 @@
-# Usando una ruta de autobús simulada
+# Using a mocked bus route
 
-¿No hay conductor de autobús? ¡No hay problema! Puedes iniciar la aplicación con una ruta simulada
-configurando `IS_MOCKED=true` en el archivo .env.
+No bus driver? No problem! You can start the app with a mocked route
+by setting `IS_MOCKED=true` in the env file.
 
-La ruta simulada se leerá desde `static/mocks/*.json`. Consulta `mock.rs` para más
-detalles.
+The mocked route will be read from `static/mocks/*.json`. See `mock.rs` for more
+details.
 
-Una vez que configures `IS_MOCKED=true`, puedes iniciar el servidor como de costumbre.
-La simulación funciona enviando solicitudes `POST /driver` a nosotros mismos,
-iterando sobre los registros de la ruta simulada.
+Once you have set `IS_MOCKED=true`, you can start the server as usual.
+Mocking works by sending `POST /driver` requests to ourselves,
+iterating over the mocked route records.
 
-## ¿Por qué debería usar esto?
+## Why would I use this?
 
-Esta función es útil para mostrar la aplicación sin tener que depender de
-un conductor de autobús real, o para fines de prueba y NO DEBE usarse en producción.
+This feature is useful for showcasing the app without having to rely on
+a real bus driver, or testing purposes and MUST NOT be used in production.
