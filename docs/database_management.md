@@ -1,84 +1,85 @@
-# Gestión de la base de datos
+# Database managment
 
-Nuestro driver de base de datos, [sqlx](https://github.com/launchbadge/sqlx),
-resuelve la mayoría de los problemas relacionados con la gestión de bases de datos.
+Our database driver, [sqlx](https://github.com/launchbadge/sqlx), already solves
+the majority of the database management issues.
 
-Si no estás familiarizado con sqlx,
-[este video](https://www.youtube.com/watch?v=TCERYbgvbq0)
-es un buen punto de partida.
+If you are not familiar with sqlx,
+[this video](https://www.youtube.com/watch?v=TCERYbgvbq0)
+is a good starting point:
 
-Primero, asegúrate de tener instalado el cliente
-[sqlx](https://github.com/launchbadge/sqlx/blob/main/sqlx-cli/README.md#enable-building-in-offline-mode-with-query).
+First, make sure you have the
+[sqlx client](https://github.com/launchbadge/sqlx/blob/main/sqlx-cli/README.md#enable-building-in-offline-mode-with-query)
+installed.
 
 ```bash
 cargo install sqlx-cli
 ```
 
-## Creación de migraciones de base de datos
+## Creating database migrations
 
-Las migraciones de base de datos se encuentran en el directorio `migrations/`.
-Crea una nueva migración para cada cambio que quieras hacer en el esquema de
-la base de datos.
+Database migrations live in the `migrations/` directory. Create one for each
+change you want to make to the database schema.
 
-Por ejemplo, si necesitas añadir una nueva columna `profile_image` a la tabla
-`users`, puedes crear una migración con el siguiente comando:
+For example, let's say you want to add a new `profile_image` column to
+the `users` table, you can create a new migration like this:
 
 ```bash
 sqlx migrate add -rs add_users_profile_image
 ```
 
-Esto generará dos archivos en el directorio `migrations/`:
+Two files will be created in the `migrations/` directory:
 
 - `migrations/000x_add_users_profile_image.up.sql`
 - `migrations/000x_add_users_profile_image.down.sql`
 
-Edita el archivo `up.sql` para añadir la nueva columna:
+Edit the `up.sql` file to add the new column:
 
 ```sql
 ALTER TABLE users
 ADD COLUMN profile_image TEXT;
 ```
 
-Luego, edita el archivo `down.sql` para revertir la migración:
+Edit the `down.sql` file to remove the column:
 
 ```sql
 ALTER TABLE users
 DROP COLUMN profile_image;
 ```
 
-La idea es que el archivo `down.sql` revierta los cambios realizados en `up.sql`,
-dejando la base de datos exactamente en el mismo estado que antes de aplicar
-la migración.
+The idea is that the `down.sql` file should revert the changes made in the
+`up.sql`, letting the database in exactly the same state as before the
+migration.
 
-Después de eso, puedes ejecutar o revertir las migraciones con:
+Then you can run or revert the migrations with:
 
 ```bash
 sqlx migrate run
 sqlx migrate revert
 ```
 
-O reiniciar completamente la base de datos con:
+Or completely reset the database with:
 
 ```bash
 sqlx database reset --force
 ```
 
-Una vez que hagas commit a tus migraciones, no necesitas hacer nada más
-para aplicarlas en producción, ya que siempre se verifican y ejecutan
-automáticamente al iniciar el servidor.
+Once you commit your migrations, you do not need to do anything more to
+apply them to production, because they are always checked and executed on
+each server start.
 
-## Compilación de consultas en "offline mode"
+## Compiling the queries for offline mode
 
-La idea de sqlx es que las consultas SQL planas se verifican en tiempo de
-compilación y se traducen a tipos primitivos de Rust. Sin embargo, esto requiere
-una conexión a la base de datos para verificar las consultas.
+The idea of sqlx is that plain SQL queries are checked at compile time and
+translated into Rust primitives. However, this requires a connection to the
+database to check the queries.
 
-Por esta razón existe la compilación en "offline mode". Lo único que necesitas
-tener en cuenta aquí es que cada vez que hagas un commit ejecutes lo siguiente:
+This is why offline mode compilation exists. The only thing you need to make
+sure is to always run the following before committing your changes:
 
 ```bash
 cargo sqlx prepare
 ```
 
-Las consultas compiladas se guardarán en el directorio `.sqlx/` y deben incluirse en el repositorio. Para más detalles, consulta la
-[documentación sobre el offline mode de sqlx](https://github.com/launchbadge/sqlx/blob/main/sqlx-cli/README.md#enable-building-in-offline-mode-with-query).
+The compiled queries will be saved in the `.sqlx/` directory and should be
+committed to the repository. For more details, check the
+[Offline mode docs](https://github.com/launchbadge/sqlx/blob/main/sqlx-cli/README.md#enable-building-in-offline-mode-with-query).

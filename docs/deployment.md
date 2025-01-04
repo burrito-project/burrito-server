@@ -1,106 +1,99 @@
 <!-- markdownlint-disable MD033 MD045 MD014 -->
 
-# Despliegue del servidor
+# Server deployment
 
-El repositorio del servidor contiene todos los componentes necesarios para
-configurar fácilmente la integración y el despliegue continuos utilizando
-solo un VPS y GitHub Actions.
+The server repository contains all the necessary components to easily set up
+continuous integration and continuous deployment with just a VPS and GitHub
+Actions.
 
-## Configuración del VPS
+## Setting up the VPS
 
-La configuración inicial del VPS debería ser sencilla.
-Asumiendo que estás en un servidor Debian bookworm con privilegios de root:
+The initial VPS setup should be straightforward to follow.
+Assuming you are in a Debian bookworm server with root privileges:
 
-### Dependencias
+### Dependencies
 
-- Instala Docker y Docker Compose siguiendo la guía oficial:
-  <https://docs.docker.com/engine/install/debian/>.
+- Install Docker and Docker Compose following the official guide <https://docs.docker.com/engine/install/debian/>.
 
-### Autenticación SSH
+### SSH authentication
 
-- Crea un nuevo usuario que utilizarás para desplegar el servidor. Nómbralo
-  como desees.
+- Create a new user that you would use to deploy the server. Name it however you like
 
   ```console
   # adduser burrito
   # usermod -aG sudo burrito
   ```
 
-- Genera un par de claves SSH (o sube una existente) para el nuevo usuario
+- Generate a SSH key pair (or upload an existing one) for the new user
 
   ```console
   # su burrito
   $ ssh-keygen -t ed25519 -C "admin@burrito" -f ~/.ssh/id_ed25519
   ```
 
-- Copia la clave pública en el archivo `authorized_keys` del servidor
+- Copy the public key to the server's `authorized_keys` file
 
   ```console
   $ cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
   ```
 
-- Prueba la conexión al servidor
+- Test the connection to the server
 
   ```console
   $ ssh burrito@localhost
   ```
 
-### Configuración del repositorio
+### Repository setup
 
-- Ahora clona el repositorio del servidor
+- Now clone the server repository
 
   ```console
   $ sudo mkdir -p /opt/burrito/repo
   $ git clone git@github.com:burrito/server.git /opt/burrito/repo
   ```
 
-- Si estás utilizando el pipeline de CI de GitHub, configura las variables
-  en los ajustes del repositorio de GitHub y estarás listo. Consulta
-  [Subiendo las variables de producción a GitHub]((./env_vars.md#uploading-the-production-variables-to-github)).
+- If you are using the GitHub CI pipeline, set the variables in the GitHub
+  repository settings and you are ready to go. See
+  [Uploading the production variables to GitHub](./env_vars.md#uploading-the-production-variables-to-github).
 
-  De lo contrario, rellena manualmente un archivo `.env`.
+  Otherwise, manually populate an `.env` file.
 
-### Certificados TLS
+### TLS certificates
 
-- Lee cuidadosamente el archivo `docker/prod/nginx/nginx.conf`, que contiene la
-  configuración del servidor y las rutas a los certificados TLS.
+- Carefully read the `docker/prod/nginx/nginx.conf`. It contains the server
+  configuration and the paths to the TLS certificates.
 
-- Sigue las instrucciones de tu CA (por ejemplo, Let's Encrypt) para generar
-  los certificados. Probablemente necesitarás crear un nuevo registro DNS
-  apuntando a la dirección IP del servidor o un registro TXT de desafío.
+- Follow the instructions of your CA (Let's Encrypt, for example) to generate
+  the certificates. You'll probably need to create a new DNS record pointing to
+  the server's IP address or a challenge TXT record.
 
-- Genera un par de certificados TLS usando Let's Encrypt u otra CA.
-  Por ejemplo, utilizando Certbot:
+- Generate a pair of TLS certificates using Let's Encrypt or any other CA.
+  For example, using Certbot:
 
   ```console
   # certbot certonly --standalone -d api.contigosanmarcos.com
   ```
 
-- Cualquiera que sea el dominio que hayas utilizado, asegúrate de actualizar
-  la variable `DOMAIN_NAME` en el archivo `docker-compose.prod.yml`.
+- Wherever domain you have used, make sure to update the `DOMAIN_NAME`
+  variable in the `docker-compose.prod.yml` file.
 
-- Si deseas guardar los certificados en una ruta personalizada
-  (como /opt/burrito/certs), asegúrate de actualizar el archivo
-  `docker/prod/nginx/nginx.conf`.
+- If you want to save the certs in a custom path (such as /opt/burrito/certs)
+  make sure to update the `docker/prod/nginx/nginx.conf` file.
 
-- Usa un verificador de [propagación DNS](https://www.whatsmydns.net/) para
-  comprobar si tu dominio apunta
-  correctamente a la dirección IP del servidor.
+- Use a [DNS propagation checker](https://www.whatsmydns.net/) to check if
+  your domain is correctly pointing to the server's IP address.
 
-### Iniciar el contenedor
+### Starting the container
 
-Si estás utilizando GH Actions, no necesitas correr estos comandos.
-En su lugar, inicia el action de deploy.
-
-- Puedes levantar el servidor utilizando Docker Compose
+- Start the server using Docker Compose
 
   ```console
   $ cd /opt/burrito/repo
   $ docker compose -f docker-compose.prod.yml up --build
   ```
 
-- Cada vez que desees actualizar el servidor, simplemente descarga los cambios
-  y reinicia el servidor.
+- Every time you want to update the server, just pull the changes and restart
+  the server
 
   ```console
   $ cd /opt/burrito/repo
@@ -108,20 +101,19 @@ En su lugar, inicia el action de deploy.
   $ docker compose -f docker-compose.prod.yml up --build
   ```
 
-  Aunque se recomienda usar el pipeline de GitHub Actions en lugar de
-  lanzar comandos manuales.
+  Altough, it is **strongly** recommended to use GitHub Actions pipeline instead.
 
 ## Production checks
 
-Antes de desplegar en producción, asegúrate de cumplir con las siguientes verificaciones:
+Before deploying to production, make sure you have the following checks in place:
 
-- [ ] Has configurado correctamente las [variables de entorno requeridas](./env_vars.md).
-- [ ] Has [compilado las consultas para modo offline](./database_management.md#compiling-the-queries-for-offline-mode) ejecutando
+- [ ] You have properly set up the required [environment variables](./env_vars.md).
+- [ ] You have [compiled the queries for offline mode](./database_management.md#compiling-the-queries-for-offline-mode) by running
 
   ```console
   cargo sqlx prepare
   ```
 
-- [ ] Las [database migrations](./database_management.md#creating-database-migrations)
-  están actualizadas y han sido probadas localmente.
-- [ ] Te has asegurado de que el servidor compila y se ejecuta sin errores localmente.
+- [ ] The [database migrations](./database_management.md#creating-database-migrations)
+  are up-to-date and have been tested locally
+- [ ] You have make sure the server compiles and runs without any errors
