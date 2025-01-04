@@ -10,7 +10,7 @@ Una vez que configures `IS_MOCKED=true`, puedes iniciar el servidor como de cost
 La simulación funciona enviando solicitudes `POST /driver` a nosotros mismos,
 iterando sobre los registros de la ruta simulada.
 
-## ¿Para qué se podría utilizar esta simulación de ruta?
+## ¿Por qué debería usar esto?
 
 Esta función es útil para mostrar la aplicación sin tener que depender de
 un conductor de autobús real, o para fines de prueba y NO DEBE usarse en producción.
