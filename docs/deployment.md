@@ -71,7 +71,7 @@ Assuming you are in a Debian bookworm server with root privileges:
   For example, using Certbot:
 
   ```console
-  # certbot certonly --standalone -d api.contigosanmarcos.com
+  # certbot certonly --standalone -d api.burritosanmarcos.com
   ```
 
 - Wherever domain you have used, make sure to update the `DOMAIN_NAME`

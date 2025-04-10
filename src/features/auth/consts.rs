@@ -12,7 +12,7 @@ lazy_static! {
     pub static ref ROOT_USER: super::schemas::AppUser = super::schemas::AppUser {
         id: 0,
         username: "root".into(),
-        display_name: "root@contigosanmarcos.com".into(),
+        display_name: "root@burritosanmarcos.com".into(),
         password_hash: "".into(),
         is_active: true,
         is_staff: true,

@@ -10,7 +10,7 @@ by the API itself, and can be publicly accessed at `/docs`.
 
 ![API Documentation](./static/api_docs.png)
 
-Live documentation is hosted in <https://api.contigosanmarcos.com/docs>.
+Live documentation is hosted in <https://api.burritosanmarcos.com/docs>.
 
 ## Documenting API endpoints
 

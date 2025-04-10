@@ -19,7 +19,7 @@ lazy_static! {
         .parse::<u16>().expect("PORT must be a number");
 
     /// Production host url
-    pub static ref HOST_URL: String = env_var_or!("HOST_URL", "https://api.contigosanmarcos.com");
+    pub static ref HOST_URL: String = env_var_or!("HOST_URL", "https://api.burritosanmarcos.com");
 
     /// For making requests to our own endpoints (concat localhost+PORT)
     pub static ref SELF_URL: String = format!("http://localhost:{}", *PORT);
